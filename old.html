@@ -23,33 +23,21 @@ Todo:   Make mobile happy signature overlay.
 				font-weight: bold;
 				background-color: #000000;
 				margin: 0px;
-				overflow: visible;
+				overflow: hidden;
                                 z-index: 0;
-                                width: 100%;
-                                height: 1000px;
 			}
                         #signature{
-/*                                position: absolute;
+                                position: absolute;
                                 padding-top: auto;
                                 padding-bottom: auto;
                                 padding-left: auto;
                                 padding-right: auto;
-                                margin: auto;*/
+                                margin: auto;
                                 z-index: 1;
-                                height: 1000px;
-                                overflow: visible;
                         }
                         #container{
                                 position: static;
                                 z-index: 1;
-                        }
-                        #iframec{
-                            width: 100%;
-                            height: 1000px;
-                            overflow: hidden;
-                            overflow-y: no-display;
-                            height: 1080px;
-                            overflow-style: move;
                         }
 		</style>
 	</head>
@@ -57,8 +45,8 @@ Todo:   Make mobile happy signature overlay.
         <body onresize=mesizer()>
         <div id="signature">
             <center>
-<!--                    <img src="./signature.png" alt="d74g0n signature" id="overlayc">-->
-                     <iframe name="iframer" id="iframec" scrolling="yes" frameborder="yes" src="http://d74g0n.com" allowfullscreen=""></iframe>
+                    <img src="./signature.png" alt="d74g0n signature" id="overlayc">
+                    
             </center>
         </div>
         <div id="container">               
@@ -207,7 +195,7 @@ void main(void)
             
         function mesizer() {
             var canvas = null;
-            canvas = document.getElementById("iframec");
+            canvas = document.getElementById("overlayc");
             canvas.height = window.innerHeight;
             canvas.width = window.innerWidth;
         }
