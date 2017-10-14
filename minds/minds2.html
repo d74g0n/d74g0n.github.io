@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+
+
+                                          `-.`'.-'
+                                       `-.        .-'.
+                                    `-.    -./\.-    .-'
+                                        -.  /_|\  .-
+                                    `-.   `/____\'   .-'.
+                                 `-.    -./.-""-.\.-      '
+                                    `-.  /< (()) >\  .-'
+                                  -   .`/__`-..-'__\'   .-
+                                ,...`-./___|____|___\.-'.,.
+                                   ,-'   ,` . . ',   `-,
+                                ,-'   ________________  `-,
+                                   ,'/____|_____|_____\
+                                  / /__|_____|_____|___\
+                                 / /|_____|_____|_____|_\
+                                ' /____|_____|_____|_____\
+                              .' /__|_____|_____|_____|___\
+                             ,' /|_____|_____|_____|_____|_\
+,,---''--...___...--'''--.. /../____|_____|_____|_____|_____\ ..--```--...___...--``---,,
+                           '../__|_____|_____|_____|_____|___\
+      \    )              '.:/|_____|_____|_____|_____|_____|_\               (    /
+      )\  / )           ,':./____|_____|_____|_____|_____|_____\             ( \  /(
+     / / ( (           /:../__|_____|_____|_____|_____|_____|___\             ) ) \ \
+    | |   \ \         /.../|_____|_____|_____|_____|_____|_____|_\           / /   | |
+ .-.\ \    \ \       '..:/____|_____|_____|_____|_____|_____|_____\         / /    / /.-.
+(=  )\ `._.' |       \:./ _  _ ___  ____ ____ _    _ _ _ _ _  _ ___\        | `._.' /(  =)
+ \ (_)       )       \./  |\/| |__) |___ |___ |___ _X_ _X_  \/  _|_ \       (       (_) /
+  \    `----'         """"""""""""""""""""""""""""""""""""""""""""""""       `----'    /
+   \   ____\__                                                              __/____   /
+    \ (=\     \            ::::::\:::::/:| :|  :::::\,::::,::\ ::|         /     /-) /
+     \_)_\     \           ::| ::|  ::/ :::::|::>  ==: -- |::::::|        /     /_(_/
+          \     \          ::::::/ ::/     :|  :::::/`::::'::| \:|       /     /
+           )     )  _                                                _  (     (
+          (     (,-' `-..__                                    __..-' `-,)     )
+           \_.-''          ``-..____                  ____..-''          ``-._/
+            `-._                    ``--...____...--''                    _.-'
+                `-.._                                                _..-'
+                     `-..__             RiP.ed.ART             __..-'
+                           ``-..____                  ____..-''
+                                    ``--...____...--''
+
+                                        |       |
+                                       <|74<|0|\|
+                                           <| 
+
+
+make your tools.
+-->
+<html>
+    <head>
+        <title>timeleft</title>
+
+        <link rel="stylesheet" type="text/css" href="minds2.css" />
+
+        <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+        <link rel="shortcut icon" href="favicon.ico"> 
+    </head>
+    <body onresize=fullsizer()>
+     <div id="horznav" class="horznav">
+        <nav>
+            <ul>
+                <li class="enders">-=-</li>
+                <li><a target="iframer" href="https://www.minds.com/newsfeed">newsfeed</a></li>
+				<li class="enders">-=-</li>
+				<li><a target="iframer" href="https://www.minds.com/d74g0n">d74g0n</a></li>
+                <li class="enders">-=-</li>
+            </ul>
+        </nav>
+    </div>
+
+    <iframe name="iframer" id="iframec" scrolling="yes" frameborder="yes" src="https://www.minds.com/newsfeed" allowfullscreen=""></iframe>
+
+        <script>
+            
+        function fullsizer() {
+            var canvas = null;
+            canvas = document.getElementById("iframec");
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+        }
+        
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.title = minutes + ":" + seconds;
+		
+        if (--timer < 0) {
+            window.location.reload(true);
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var fiveMinutes = 60 * 33,
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+};
+        
+            fullsizer();
+            
+        </script>
+</body>
+</html>
