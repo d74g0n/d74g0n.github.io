@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>timeleft</title>
+        
+<!--        My Links Make Sure To Remove Unused systems!-->
+        <link rel="stylesheet" type="text/css" href="widget.css" />
+
+        <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css' />
+        <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Anonymous+Pro' rel='stylesheet' type='text/css'>
+        
+         <link rel="shortcut icon" href="favicon.ico"> 
+        
+    </head>
+    
+    <!-- <body onresize=fullsizer()> -->
+     
+	 <div id="widgetpanel">
+		 <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
+		 <div class="coinmarketcap-currency-widget" data-currency="bitcoin" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="ethereum" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="bitcoin-cash" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="litecoin" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="dash" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="ethereum-classic" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="dogecoin" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="verge" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="einsteinium" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="blackcoin" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="unobtanium" data-base="USD"  data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="applebyte" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="linda" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="dotcoin" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="linx" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="trollcoin" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		 <div class="coinmarketcap-currency-widget" data-currency="emerald" data-base="USD" data-secondary="BTC" data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-stats="USD" data-statsticker="true"></div>
+		
+		 
+	 </div>
+	 
+	 
+	 <div id="horznav">
+	 <center>
+        <nav>
+            <ul>
+                <li class="enders">-=[</li>
+                <!-- <li><a target="iframer" href="https://hash-to-coins.com/index.php">TOP</a></li> -->
+				<!-- <li><a target="iframeb" href="https://hash-to-coins.com/index.php?page=account&action=funds">BOT</a></li> -->
+                <li class="enders">]=-</li>
+            </ul>
+        </nav>
+	 </center>
+    </div>
+
+        <script>
+            
+       
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.title = "widgets:" + minutes + ":" + seconds;
+//        console.log(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            window.location.reload(true);
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    
+	var fiveMinutes = 60 * 1,
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+};
+        
+      
+            
+        </script>
+        <!-- https://www.youporn.com/watch/14042495/tlbc-hot-sexy-teen-fucked-by-masseur/ -->
+			<!-- https://www.youporn.com/watch/12883847/blacked-first-interracial-for-model-marley-brinx/ -->
+    <!-- https://www.youporn.com/watch/12124089/blacked-daughter-sydney-coles-first-bbc/ -->
+</body>
+
+</html>
