@@ -13,8 +13,7 @@
 	
 	/* my hacks */
 	position: absolute;
-	/* top:3em; */
-	top: 24px;
+	top:10px;
 	bottom:0;
 	left:0;
 	right:0;
@@ -484,62 +483,3 @@ list-style: none;
 	transition: 1s;
 }
 
-/* coins images -=-=-=-=-=- */
-
-.dogeimg {
-height: 18px;
-width: 18px;
-display: inline-block;
-float: left;
-opacity: 0.5;
-}
-
-.btcimg {
-height: 18px;
-width: 18px;
-display: inline-block;
-float: left;
-opacity: 0.5;
-}
-
-
-/* pricehub shit -=-=-=-=-=- -=-=-=-=-=- */
-
-.pricehub {
-position: absolute;
-top: 530px;
-left: 0;
-right: 0;
-margin: auto;
-padding: auto;
-/* margin: 0 center; */
-width: 80%;
-list-style: none;
-	/* display: block; */
-	/* background: black; */
-}
-
-.pricehub ul {
-	/* width: 100%; */
-	display: block;
-	display: red;
-}
-
-.pricehub li {
-list-style: none;
-/* float: left;	 */
-	
-	width: 350px;
-	width: 290px;
-	height: 200px;
-	display: inline-block;
-}
-
-
-.pricehub div {
-width: 100%;
-/* background: green; */
-/* display: block; */
-
-	
-}

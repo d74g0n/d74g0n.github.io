@@ -1,66 +1,73 @@
-.accordion {
+
+
+body {
+	
+background: black;
+	
+}
+
+hr {
+color: skyblue;	
+	
+}
+
+
+
+/* START IVORYWALLET */
+
+
+.accordion.bluebox {
     -webkit-box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6);
     -moz-box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6);
     box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6);
     font-family: Arial, Helvetica, sans-serif;
     border-color: #393a50;
     border-style: solid;
-    border-width: 2px;
+    border-width: 0px;
     border-radius: 8px;
     margin: 0 auto;
-    height: 500px;
-    width: 1100px;
-	
-	/* my hacks */
-	position: absolute;
-	/* top:3em; */
-	top: 24px;
-	bottom:0;
-	left:0;
-	right:0;
-	
-	
+    height: 400px;
+    width: 864px;
 }
 
-.accordion > ul > li,
-.accordion-title,
-.accordion-content,
-.accordion-separator {
+.accordion.bluebox > ul > li,
+.bluebox .accordion-title,
+.bluebox .accordion-content,
+.bluebox .accordion-separator {
     float: left;
 }
 
-.accordion > ul > li {
+.accordion.bluebox > ul > li {
     background-color: #0f151e;
-    margin-right: -800px;
+    margin-right: -700px;
     margin-bottom: -0px;
 }
 
-.accordion-select:checked ~ .accordion-separator {
-    margin-right: 800px;
+.bluebox .accordion-select:checked ~ .accordion-separator {
+    margin-right: 700px;
     margin-bottom: 0px;
 }
 
-.accordion-title,
-.accordion-select  {
+.bluebox .accordion-title,
+.bluebox .accordion-select  {
     background-color: #1c2939;
     color: #ffffff;
-    width: 30px;
-    height: 500px;
-    font-size: 14px;
+    width: 40px;
+    height: 400px;
+    font-size: 15px;
 }
 
-.accordion-title span {
-    margin-bottom: 15px; 
+.bluebox .accordion-title span {
+    margin-bottom: 20px; 
     margin-left: 20px;
-	
 }
 
-.accordion-select:hover ~ .accordion-title,
-.accordion-select:checked ~ .accordion-title {
+.bluebox .accordion-select:hover ~ .accordion-title,
+.bluebox .accordion-select:checked ~ .accordion-title {
     background-color: #121922;
 }
 
-.accordion-title span  {	
+.bluebox .accordion-title span  {	
     transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -68,22 +75,21 @@
     -ms-writing-mode: lr-bt;
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
     margin-left: 0px;
-    line-height: 30px;
-	
+    line-height: 40px;
 }
 
-.accordion-content {
+.bluebox .accordion-content {
     background-color: #253447;
     color: #f5f2f0;
-    height: 436px;
-    width: 736px;
-    padding: 32px;
+    height: 344px;
+    width: 644px;
+    padding: 28px;
 }
 
-.accordion-title,
-.accordion-select:checked ~ .accordion-content {
-    margin-right: 0px;
-    margin-bottom: 0px;
+.bluebox .accordion-title,
+.bluebox .accordion-select:checked ~ .accordion-content {
+    margin-right: 1px;
+    margin-bottom: 1px;
 }
 
 /* Do not change following properties, they aren't 
@@ -102,7 +108,6 @@ generated automatically and are common for each slider. */
 .accordion > ul > li,
 .accordion-title {
     position: relative;
-	
 }
 
 .accordion-select {
@@ -135,37 +140,19 @@ generated automatically and are common for each slider. */
     -webkit-transition: margin 0.3s ease 0.1s;
 }
 
-/* -=-=-=-=-=-=---------------------------- */
+/* CORE CODE ABOVE */
 
-
-*{
-font-family: "terminal dosis";	
-	
-}
-
-body {
-	background-image: url('/img/bg1.jpg');
-	background-attachment: fixed;
-	background-size: cover;
-	background-position: center top;
-	/*-=-=-=-=-=-=-= Insert Animations Here For Test Purposes: =-=-=-=-=-=-=-*/
-
-
-	/*-=-=-=-=-=-=-= Insert Animations Here For Test Purposes: =-=-=-=-=-=-=-*/
-}
 
 
 
 .listA {
 
-
+font-family: 'audiowide';
 	
-	    /* -webkit-box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6); */
-    /* -moz-box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6); */
-    /* box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6); */
+	    -webkit-box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6);
+    -moz-box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6);
+    box-shadow: 0px 75px 35px -55px rgba(10, 30, 65, 0.6);
     font-family: Arial, Helvetica, sans-serif;
-	
-	font-family: 'audiowide';
     border-color: #393a50;
     border-style: solid;
     border-width: 0px;
@@ -201,7 +188,12 @@ padding: 2px;
 	border-top-right-radius: 2px;
 	
 transition: 2s;
-font-family: "anonymous pro";
+	
+}
+
+.listA a:hover {
+	
+
 	
 }
 
@@ -213,7 +205,7 @@ font-weight: bolder;
 text-shadow: 0px 2px 5px gold, 0px -2px 5px black;
 
 background: #CC8414;
-/* text-shadow: 0px 2px 1px #000, 0px -2px 1px #000; */
+text-shadow: 0px 2px 1px #000, 0px -2px 1px #000;
 
 
 transition: 1s;
@@ -235,22 +227,13 @@ border-color: gold;
 transition: 0.2s;
 
 	
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;	
+	border-bottom-left-radius: 15px;
+	border-top-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	border-top-right-radius: 15px;	
 	
 	
 	
-}
-
-#altcoins li {
-display: inline-block;
-float: left;	
-}
-#altcoins li a {
-padding-left: 1em;
-padding-right: 1em;
 }
 
 
@@ -271,13 +254,8 @@ color: gold;
 }
 
 .accordion-content h3 {
-	font-family: 'VT323';
 	
-	text-shadow: 0px 2px 5px gold, 0px -2px 5px black;
-	
-	color: skyblue:
-	
-	
+	color: red;
 	
 }
 
@@ -301,12 +279,11 @@ color: gold;
 	
 	div .coinmarketcap-currency-widget {
 		
-		/* width: 300px; */
-		width: 33.3%;
+		width: 300px;
 		/* float: left; */
 		color: white;
 		background: black;
-		/* height: 200px; */
+		height: 200px;
 		border-bottom-left-radius: 10px;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
@@ -315,7 +292,6 @@ color: gold;
 		float: left;
 		
 		width: 50%;
-		margin: 0px;
 	}
 
 	
@@ -325,8 +301,6 @@ hr {
 
 background-color: transparent;
 border-style: dashed;
-border-color: skyblue;
-border-color: yellow;
 border-bottom: none;
 border-left: none;
 border-right: none;
@@ -335,9 +309,9 @@ border-right: none;
 }	
 	
 	
-		
 	
-#style-11::-webkit-scrollbar-track
+	
+	#style-11::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
@@ -367,179 +341,4 @@ border-right: none;
 											  rgba(255, 255, 255, 0.5) 75%,
 											  transparent 75%,
 											  transparent)
-}
-
-
-
-
-/* adding help and advice here */
-
-p {
-	
-	
-}
-
-h1 {
-color: white;
-font-family: 'Audiowide';
-font-size: 18px;	
-	
-	text-shadow: 0px 2px 5px gold, 0px -2px 5px gold;
-}
-
-.notesonit{
-
-font-size: 14px;
-font-style: italic;
-	
-	
-}
-
-
-
-.cryptlink:hover {
-	background: #09B245;
-	background: #F4FF00;
-	
-	color: #F4FF00;
-	color: #09B245;
-	transition: 1s;
-}
-
-.keyexample {
-display: block;
-background: white;
-color: black;
-font-style: bolder;
-
-}
-
-.helpme {
-
-color: red;
-font-weight: bolder;
-
-	
-}
-
-.moon {
-color: silver;	
-	
-}
-
-.about {
-color: skyblue;	
-}
-
-.prices{
-color: lightgreen;	
-}
-
-.emd {
-color: white;
-
-}
-
-h2 {
-color: white;
-text-shadow: 0px 2px 5px gold, 0px -2px 5px gold;
-/* font-family: 'VT323'; */
-font-size: 14px;
-font-style: italic;	
-}
-
-
-footer{
-position: fixed;
-bottom: 0px;
-left: 0;
-right: 0;
-margin: 0;
-font-family: 'VT323';
-font-size: 8px;
-font-style: italic;
-color: gold;	
-
-z-index: -2;
-	
-}
-
-.listB {
-list-style: none;	
-}
-
-
-.cryptlink {
-	
-	display: block;
-	color: #F4FF00;
-	background: #14CC56;
-	background: #09B245;
-
-	width: 80%;
-	border-bottom-left-radius: 10px;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	border-top-right-radius: 10px;
-	transition: 1s;
-}
-
-/* coins images -=-=-=-=-=- */
-
-.dogeimg {
-height: 18px;
-width: 18px;
-display: inline-block;
-float: left;
-opacity: 0.5;
-}
-
-.btcimg {
-height: 18px;
-width: 18px;
-display: inline-block;
-float: left;
-opacity: 0.5;
-}
-
-
-/* pricehub shit -=-=-=-=-=- -=-=-=-=-=- */
-
-.pricehub {
-position: absolute;
-top: 530px;
-left: 0;
-right: 0;
-margin: auto;
-padding: auto;
-/* margin: 0 center; */
-width: 80%;
-list-style: none;
-	/* display: block; */
-	/* background: black; */
-}
-
-.pricehub ul {
-	/* width: 100%; */
-	display: block;
-	display: red;
-}
-
-.pricehub li {
-list-style: none;
-/* float: left;	 */
-	
-	width: 350px;
-	width: 290px;
-	height: 200px;
-	display: inline-block;
-}
-
-
-.pricehub div {
-width: 100%;
-/* background: green; */
-/* display: block; */
-
-	
 }
