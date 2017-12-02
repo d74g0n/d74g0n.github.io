@@ -1,0 +1,186 @@
+* {
+	   font-family: 'Amatic SC', cursive;
+	font-family: "Permanent Marker";
+	font-family: "VT323";
+
+    font-family: 'Anonymous Pro'; 
+    font-family: 'Fascinate+Inline';
+ 	font-family: 'Audiowide';     
+	font-family: 'Terminal Dosis';
+	
+
+	
+}
+
+body{ background-color: #000;}
+
+.div1{
+    background-color: #000;
+    width:600px; 
+    height: 50px; line-height: 50px;
+    position: absolute;
+    top: 50%; margin-top:-300px;
+    left: 50%; margin-left:-550px;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: green; text-align:center; vertical-align:middle;
+	color: blue;
+	hidden: true;
+	display: none;
+}
+.div2{
+    background-color: #000;
+    width:600px; 
+    height: 50px; line-height: 50px;
+    position: absolute;
+    top: 50%; margin-top:-300px;
+    left: 50%; margin-left:-25px;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #ccc; text-align:center; vertical-align:middle;
+	color: red;
+	color: blue;
+		display: none;
+}
+div{
+    background-color: #000;
+    width:800px; 
+    height: 200px; line-height: 200px;
+    position: absolute;
+    top: 50%; margin-top: -200px;
+    left: 50%; margin-left:-700px;
+    font-weight: bold;
+    font-size: 400px;
+    text-transform: uppercase;
+    color: skyblue; text-align:center; vertical-align:middle;
+	
+	text-shadow: 0px 3px 1px rgba(255, 21, 50, 1);
+	
+	-webkit-animation: shifter 30s linear infinite;
+     -moz-animation: shifter 30s linear infinite;
+      -ms-animation: shifter 30s linear infinite;
+          animation: shifter 30s linear infinite;
+
+	
+}
+
+#price {
+	
+	
+			  -webkit-animation: throbber 30s linear infinite;
+     -moz-animation: throbber 30s linear infinite;
+      -ms-animation: throbber 30s linear infinite;
+          animation: throbber 30s linear infinite;
+	
+	
+/*         -webkit-transform: perspective(200px) skewX(.5deg);
+           -moz-transform: perspective(200px) skewX(.5deg); */
+		  
+			  
+/*   -webkit-animation: shifter 3s linear infinite;
+     -moz-animation: shifter 3s linear infinite;
+      -ms-animation: shifter 3s linear infinite;
+          animation: shifter 3s linear infinite;
+ */	
+	
+	
+/* 	 		  -webkit-animation: glitch 3s linear infinite;
+     -moz-animation: glitch 3s linear infinite;
+      -ms-animation: glitch 3s linear infinite;
+          animation: glitch 3s linear infinite; */
+	
+	
+/* 	
+		  -webkit-animation: throbber 30s linear infinite;
+     -moz-animation: throbber 30s linear infinite;
+      -ms-animation: throbber 30s linear infinite;
+          animation: throbber 30s linear infinite; */
+	
+}
+
+.div3{
+    background-color: #000;
+    width:600px; 
+    height: 50px; line-height: 50px;
+    position: absolute;
+    top: 50%; margin-top:100px;
+    left: 50%; margin-left:-560px;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #000; text-align:center; vertical-align:middle;
+	color: blue;
+		display: none;
+}
+.div4{
+    background-color: #000;
+    width:600px; 
+    height: 50px; line-height: 50px;
+    position: absolute;
+    top: 50%; margin-top:100px;
+    left: 50%; margin-left:-30px;
+    font-weight: bold;
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #000; text-align:center; vertical-align:middle;
+	color: blue;
+		display: none;
+}
+
+@-webkit-keyframes shifter {
+  0%   {-webkit-transform: perspective(10px) skewX(5.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
+  8%   {-webkit-transform: perspective(100px) skewX(6.0deg) scale(1.0001);  }
+  15%  {-webkit-transform: perspective(200px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 20px rgba(100, 0, 100, .5); }
+  30%  {-webkit-transform: perspective(300px) skewX(.6deg);  }
+  100% {-webkit-transform: perspective(100px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+}
+@-moz-keyframes shifter {
+  0%   {-moz-transform: perspective(200px) skewX(.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
+  8%   {-moz-transform: perspective(400px) skewX(1.0deg) scale(1.0001);  }
+  15%  {-moz-transform: perspective(800px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 2px rgba(100, 0, 100, .5); }
+  30%  {-moz-transform: perspective(900px) skewX(.6deg);  }
+  100% {-moz-transform: perspective(200px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+}
+@-ms-keyframes shifter {
+  0%   {-ms-transform: perspective(200px) skewX(.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
+  8%   {-ms-transform: perspective(400px) skewX(1.0deg) scale(1.0001);  }
+  15%  {-ms-transform: perspective(2000px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 2px rgba(100, 0, 100, .5); }
+  30%  {-ms-transform: perspective(200px) skewX(.6deg);  }
+  100% {-ms-transform: perspective(200px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+}
+
+@-webkit-keyframes glitch {
+  0%   {-webkit-transform: scale(1, 1.102); }
+  50%   {-webkit-transform: scale(1, 1.1001); }
+  100% {-webkit-transform: scale(1.101, 1); }
+}
+@-moz-keyframes glitch {
+  0%   {-moz-transform: scale(1, 1.102); }
+  50%   {-moz-transform: scale(1, 1.1001); }
+  100% {-moz-transform: scale(1.101, 1); }
+}
+@-ms-keyframes glitch {
+  0%   {-ms-transform: scale(1, 1.102); }
+  50%   {-ms-transform: scale(1, 1.1001); }
+  100% {-ms-transform: scale(1.101, 1); }
+}
+
+
+@-webkit-keyframes throbber {
+  0%   { color: skyblue; }
+  25% { color: blue; }
+  50% { color: rgba(0,0,0,1); }
+  100% { color: skyblue; }
+}
+@-moz-keyframes throbber {
+  0%   { color: #fff }
+   50% { color: rgba(0,0,0,1); }
+  100% { color: skyblue; }
+}
+@-ms-keyframes throbber {
+  0%   { color: #000; }
+  50% { color: rgba(0,0,0,1); }
+  100% { color: skyblue; }
+}
