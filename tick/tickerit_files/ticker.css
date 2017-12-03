@@ -7,8 +7,12 @@
     font-family: 'Fascinate+Inline';
  	font-family: 'Audiowide';     
 	font-family: 'Terminal Dosis';
+	font-family: 'Terminal';
 	
-
+			  -webkit-animation: outliner 15s linear infinite;
+	-moz-animation: outliner 15s linear infinite;
+      -ms-animation: outliner 15s linear infinite;
+          animation: outliner 15s linear infinite;
 	
 }
 
@@ -16,6 +20,7 @@ body{ background-color: #000;}
 
 .div1{
     background-color: #000;
+	background-color: transparent;
     width:600px; 
     height: 50px; line-height: 50px;
     position: absolute;
@@ -24,13 +29,13 @@ body{ background-color: #000;}
     font-weight: bold;
     font-size: 25px;
     text-transform: uppercase;
-    color: green; text-align:center; vertical-align:middle;
-	color: blue;
-	hidden: true;
-	display: none;
+    color: skyblue; text-align:center; vertical-align:middle;
+	opacity: 0.2;
+
 }
 .div2{
     background-color: #000;
+	background-color: transparent;
     width:600px; 
     height: 50px; line-height: 50px;
     position: absolute;
@@ -40,9 +45,8 @@ body{ background-color: #000;}
     font-size: 25px;
     text-transform: uppercase;
     color: #ccc; text-align:center; vertical-align:middle;
-	color: red;
-	color: blue;
-		display: none;
+	color: skyblue;
+	opacity: 0.2;
 }
 div{
     background-color: #000;
@@ -50,7 +54,7 @@ div{
     height: 200px; line-height: 200px;
     position: absolute;
     top: 50%; margin-top: -200px;
-    left: 50%; margin-left:-700px;
+    left: 50%; margin-left:-750px;
     font-weight: bold;
     font-size: 400px;
     text-transform: uppercase;
@@ -58,10 +62,10 @@ div{
 	
 	text-shadow: 0px 3px 1px rgba(255, 21, 50, 1);
 	
-	-webkit-animation: shifter 30s linear infinite;
-     -moz-animation: shifter 30s linear infinite;
-      -ms-animation: shifter 30s linear infinite;
-          animation: shifter 30s linear infinite;
+	-webkit-animation: shifter 10s linear infinite;
+     -moz-animation: shifter 10s linear infinite;
+      -ms-animation: shifter 10s linear infinite;
+          animation: shifter 10s linear infinite;
 
 	
 }
@@ -69,11 +73,10 @@ div{
 #price {
 	
 	
-			  -webkit-animation: throbber 30s linear infinite;
-     -moz-animation: throbber 30s linear infinite;
-      -ms-animation: throbber 30s linear infinite;
-          animation: throbber 30s linear infinite;
+
 	
+
+
 	
 /*         -webkit-transform: perspective(200px) skewX(.5deg);
            -moz-transform: perspective(200px) skewX(.5deg); */
@@ -92,16 +95,18 @@ div{
           animation: glitch 3s linear infinite; */
 	
 	
-/* 	
+
 		  -webkit-animation: throbber 30s linear infinite;
      -moz-animation: throbber 30s linear infinite;
       -ms-animation: throbber 30s linear infinite;
-          animation: throbber 30s linear infinite; */
+          animation: throbber 30s linear infinite; 
 	
 }
 
 .div3{
     background-color: #000;
+    background-color: transparent;
+	
     width:600px; 
     height: 50px; line-height: 50px;
     position: absolute;
@@ -111,11 +116,11 @@ div{
     font-size: 25px;
     text-transform: uppercase;
     color: #000; text-align:center; vertical-align:middle;
-	color: blue;
-		display: none;
+
 }
 .div4{
     background-color: #000;
+	background-color: transparent;
     width:600px; 
     height: 50px; line-height: 50px;
     position: absolute;
@@ -125,30 +130,42 @@ div{
     font-size: 25px;
     text-transform: uppercase;
     color: #000; text-align:center; vertical-align:middle;
-	color: blue;
-		display: none;
+
+}
+
+.moonpie {
+color: grey;	
+text-decoration: none;	
+
+transition: 1s;
+}
+
+.moonpie:hover {
+color: gold;	
+text-decoration: none;	
+transition: 1s;
 }
 
 @-webkit-keyframes shifter {
   0%   {-webkit-transform: perspective(10px) skewX(5.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
   8%   {-webkit-transform: perspective(100px) skewX(6.0deg) scale(1.0001);  }
   15%  {-webkit-transform: perspective(200px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 20px rgba(100, 0, 100, .5); }
-  30%  {-webkit-transform: perspective(300px) skewX(.6deg);  }
-  100% {-webkit-transform: perspective(100px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+  30%  {-webkit-transform: perspective(200px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+  100% {-webkit-transform: perspective(10px) skewX(5.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
 }
 @-moz-keyframes shifter {
-  0%   {-moz-transform: perspective(200px) skewX(.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
+  0%   {-moz-transform: perspective(10px) skewX(5.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
   8%   {-moz-transform: perspective(400px) skewX(1.0deg) scale(1.0001);  }
-  15%  {-moz-transform: perspective(800px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 2px rgba(100, 0, 100, .5); }
-  30%  {-moz-transform: perspective(900px) skewX(.6deg);  }
-  100% {-moz-transform: perspective(200px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+  15%  {-moz-transform: perspective(200px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 20px rgba(100, 0, 100, .5); }
+  30%  {-moz-transform: perspective(200px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+  100% {-moz-transform: perspective(10px) skewX(5.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
 }
 @-ms-keyframes shifter {
-  0%   {-ms-transform: perspective(200px) skewX(.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
+  0%   {-ms-transform:  perspective(10px) skewX(5.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
   8%   {-ms-transform: perspective(400px) skewX(1.0deg) scale(1.0001);  }
-  15%  {-ms-transform: perspective(2000px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 2px rgba(100, 0, 100, .5); }
-  30%  {-ms-transform: perspective(200px) skewX(.6deg);  }
-  100% {-ms-transform: perspective(200px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+  15%  {-ms-transform: perspective(200px) skewX(.6deg) skewY(-.05deg); text-shadow : 0px 0px 20px rgba(100, 0, 100, .5); }
+  30%  {-ms-transform: perspective(200px) skewX(.1deg); text-shadow : 1px 0px 2px rgba(100, 255, 100, 1); }
+  100% {-ms-transform: perspective(10px) skewX(5.5deg); text-shadow : 0px 0px 2px rgba(10, 255, 10, .8); }
 }
 
 @-webkit-keyframes glitch {
@@ -169,18 +186,41 @@ div{
 
 
 @-webkit-keyframes throbber {
-  0%   { color: skyblue; }
-  25% { color: blue; }
-  50% { color: rgba(0,0,0,1); }
+  0% { color: skyblue; }
+  25% { color: orangered; }
+  50% { color: rgba(200,10,100,.2); }
+  75% { color: rgba(255,0,255,.8); }
   100% { color: skyblue; }
 }
 @-moz-keyframes throbber {
   0%   { color: #fff }
-   50% { color: rgba(0,0,0,1); }
+   50% { color: rgba(200,100,10,1); }
   100% { color: skyblue; }
 }
 @-ms-keyframes throbber {
   0%   { color: #000; }
-  50% { color: rgba(0,0,0,1); }
+  50% { color: rgba(200,100,10,1); }
   100% { color: skyblue; }
+}
+
+
+
+@-webkit-keyframes outliner {
+  0%   { text-shadow : 0px 0px 15px rgba(255, 255, 10, .8); }
+  25% { text-shadow : 25px 0px 25px rgba(255, 10, 255, .8); }
+  50% { text-shadow : 0px 25px 25px rgba(10, 255, 255, .8); }
+  75% { text-shadow : 25px 25px 25px rgba(10, 255, 255, .8); }
+  100% { text-shadow : 0px 0px 15px rgba(255, 255, 10, .8); }
+}
+@-moz-keyframes outliner {
+  0%   { text-shadow : 0px 0px 5px rgba(255, 255, 10, .8); }
+  25% { text-shadow : 5px 0px 5px rgba(255, 10, 255, .8); }
+  50% { text-shadow : 0px 5px 5px rgba(10, 255, 255, .8); }
+  100% { text-shadow : 0px 0px 5px rgba(255, 255, 10, .8); }
+}
+@-ms-keyframes outliner {
+  0%   { text-shadow : 0px 0px 5px rgba(255, 255, 10, .8); }
+  25% { text-shadow : 5px 0px 5px rgba(255, 10, 255, .8); }
+  50% { text-shadow : 0px 5px 5px rgba(10, 255, 255, .8); }
+  100% { text-shadow : 0px 0px 5px rgba(255, 255, 10, .8); }
 }
