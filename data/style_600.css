@@ -1,0 +1,214 @@
+* {
+font-family: 'Share Tech Mono', monospace;
+background: #362240;	
+color: white;
+padding: 0px;
+margin: 0px;
+width: 90%;
+transition: 1s;	
+}
+
+body {
+width: 100%;
+}
+
+.wrapper {
+position: absolute;
+background: transparent;
+top: 0px;
+width: 100%;
+height: 100%;	 
+left: 0;
+right: 0;
+z-index: 2;
+}
+
+img {
+position: absolute;
+left: 25%;
+right: 50%;
+margin: auto;
+width: 50%;
+}
+
+.signature {
+
+background: transparent;
+width: 600px;
+left:0;
+right:0;
+  z-index: -2;
+
+  			  -webkit-animation: imgthrobber 4s linear infinite;
+  
+}
+
+.signature:hover {
+
+	
+  filter: hue-rotate(90deg);
+
+}
+
+
+.banner {
+
+  z-index: -3;	
+	
+}
+
+.menuul {
+position: relative;
+display: block;
+left: 0;
+right: 0;
+top: 50px;
+width: 100%;
+
+list-style: none;	
+
+/* 
+border: thin dashed rgba(193,191,233,0.5);
+ */
+/* background: rgba(193,191,233,0.5); */
+
+}
+
+
+.menuul li {
+	
+display: inline-block;	
+list-style: none;
+background: transparent;	
+padding: 2px;	
+
+
+}
+
+
+.menuul li a {
+position: relative;
+float: inline;
+margin: auto;
+display: inline-block;
+
+color: black;
+/* width: 200px; */
+
+display: flex; 
+justify-content: center;
+
+text-decoration: none;
+
+padding-top: 1px;
+padding-bottom: 1px;
+/* font-family: "VT323"; */
+font-size: 1.7em;
+text-transform: normal;
+
+background: gold;
+background: transparent;
+color: #E20BE9;
+color: #BD3AFF;
+border: thin solid purple;
+border-radius: 180px;
+transition: 0.1s;
+
+font-family: 'Share Tech Mono', monospace;
+font-size: 1.5em;
+
+width: 50%;
+
+}
+
+
+.menuul li a:hover {
+background: orangered;
+background: #E20BE9;
+background: #C10BE9;
+background: rgba(193,11,233,0.5);
+color: white;
+
+color: #BD3AFF;
+color: #E20BE9;
+transition: 0.1s;	
+width: 70%;
+
+    -webkit-animation: bgthrobber 5s linear infinite;
+color: black;
+}
+
+h1 {
+color: skyblue;
+
+}
+	
+	
+hr {
+height: 1em;
+color: white;
+background: transparent;
+border: none;
+border-bottom:border: thin solid purple;
+}
+
+span {
+
+color: gold;	
+	color: #E20BE9;
+}
+
+#price {
+font-size: 80px;	
+	color: #E20BE9;
+	transition: 1s;
+			  -webkit-animation: throbber 30s linear infinite;
+
+	
+}
+
+#unit {
+color: green;	
+	
+}
+
+#chartA {
+position: relative;
+width: 200px;
+height: 200px;
+width: 50%;
+height: 175px;
+
+  -webkit-animation: imgthrobber 5s linear infinite;
+transition: 1s;
+z-index: 10;
+}
+
+
+
+@-webkit-keyframes throbber {
+  0% { color: skyblue; }
+  25% { color: #E20BE9; }
+  50% { color: gold; }
+  75% { color: #BD3AFF; }
+  100% { color: skyblue; }
+}
+
+
+
+@-webkit-keyframes imgthrobber {
+  0% { filter: hue-rotate(0deg); }
+  25% { filter: hue-rotate(90deg); }
+  50% { filter: hue-rotate(180deg); }
+  75% { filter: hue-rotate(270deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+
+@-webkit-keyframes bgthrobber {
+  0% { background: skyblue; }
+  25% { background: #E20BE9; }
+  50% { background: gold; }
+  75% { background: #BD3AFF; }
+  100% { background: skyblue; }
+}
