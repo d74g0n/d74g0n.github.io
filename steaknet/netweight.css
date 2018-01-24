@@ -1,18 +1,18 @@
 @font-face{
  font-family:'digital-clock-font';
- src: url('/DIGITALDREAM.ttf');
+ src: url('DIGITALDREAM.ttf');
 }
 
 
 body {
 background: black;	
  font-family:'digital-clock-font';
- src: url('/DIGITALDREAM.ttf');
+ src: url('DIGITALDREAM.ttf');
 }
 
 
 .wrapper {
-background: url(/img/tbone.jpg);
+background: url(img/tbone.jpg);
 height: 585px;
 width: 390px;
 	border: solid;
