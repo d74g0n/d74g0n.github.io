@@ -1,0 +1,108 @@
+@font-face{
+	font-family:'digital-clock-font';
+	src: url('DIGITALDREAM.ttf');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	background: transparent;
+
+}
+
+body {
+	background: black;
+	width: 100%;
+}
+
+div {
+	width: 100%;
+}
+
+#clockface {
+	position: absolute;
+	top: 30%;
+	left: 2%;
+	padding: 0;
+	margin: 0;
+	
+	align: center;
+	text-align: center;
+	font-family: 'Terminal Dosis';
+	font-family: 'VT323';
+
+	font-size: 100%;
+	font-style: bold;
+	background: red;
+	background: transparent;
+	overflow: hidden;
+	width: 94%;
+	
+    z-index: 9;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+
+}
+
+#numbers {
+	text-shadow : 4px 5px 25px orangered;
+
+	color: red;
+	font-family: 'digital-clock-font';
+	z-index: 10;
+	position: inline;
+	padding: 10px;
+    cursor: move;
+    z-index: 10;
+	  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+
+}
+
+h3 {
+
+		font-size: 8em;
+	
+}
+
+
+@-webkit-keyframes outliner {
+  0%   { text-shadow : 4px 5px 15px rgba(255, 69, 0, .8); }
+  1% { color: red; }
+  25% { text-shadow : 4px 5px 25px rgba(255, 69, 0, 1); }
+  96% { color: red; }
+  97% { text-shadow : 4px 5px 25px rgba(255, 21, 0, .7); }
+  98% { color: transparent; }
+  99% { text-shadow : 4px 2px 0px rgba(255, 21, 0, .9); }
+  100% { text-shadow : 4px 5px 15px rgba(255, 69, 0, .7); }
+}
+@-moz-keyframes outliner {
+  0%   { text-shadow : 4px 5px 15px rgba(255, 69, 10, .8); }
+  25% { text-shadow : 4px 5px 25px rgba(255, 69, 0, .8); }
+  50% { text-shadow : 4px 5px 25px rgba(255, 255, 0, .8); }
+  100% { text-shadow : 4px 5px 15px rgba(255, 69, 0, .8); }
+}
+@-ms-keyframes outliner {
+  0%   { text-shadow : 4px 5px 5px rgba(255, 255, 0, .8); }
+  25% { text-shadow : 4px 5px 25px rgba(255, 10, 0, .8); }
+  50% { text-shadow : 4px 5px 25px rgba(255, 255, 0, .8); }
+  100% { text-shadow : 4px 5px 5px rgba(255, 255, 0, .8); }
+}
+
+
+#clockface {
+
+}
+
+#numbers {
+
+}
