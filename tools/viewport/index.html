@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>d74g0n Measures</title>
+	<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+	<meta name="description" content= "Viewport Size Tool">
+	<meta name="keywords" content="devtool">
+	<meta name="author" content="d74g0n">
+	<link rel="stylesheet" type="text/css" href="viewport.css" />
+	<link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+  $(document).ready(function(e) {
+		showViewportSize();    
+	});
+	$(window).resize(function(e) {
+		showViewportSize();
+	});
+	function showViewportSize() {
+		var the_width = $(window).width();
+		var the_height = $(window).height();                   
+		$('#width').text(the_width);
+		$('#height').text(the_height);
+		document.title = the_width + 'x' + the_height;
+	}
+</script>
+<center>	
+<h1>What size is my viewport page?</h1>
+<h2>Viewport Width:</h2>
+<p id="width">Resize to find out!</p>
+<h2>Viewport Height:</h2>
+<p id="height">Resize to find out!</p>
+</center>
+</body>
+</html>

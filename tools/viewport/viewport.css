@@ -1,0 +1,16 @@
+* {
+	background: black;
+	color: skyblue;
+ 	font-family: 'Audiowide';   
+	padding: 0;
+	margin: 0;
+}
+
+p {
+	font-size: 600%;
+	color: red;
+}
+
+h1 {
+	padding: 1em;
+}
