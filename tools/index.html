@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- 
+
+	The Most Simple Clock Possible
+	Version 1.0 - Clean
+
+-->
+<html>
 <head>
-<meta charset="utf-8" />
-<title>d74g0n Measures</title>
-	<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
-	<meta name="description" content= "Viewport Size Tool">
-	<meta name="keywords" content="devtool">
+
+<title>d74g0n_Toolbox</title>
+	<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0"> 
+	<meta name="description" content= "Tool Menu">
+	<meta name="keywords" content="Tool menu">
 	<meta name="author" content="d74g0n">
-	<link rel="stylesheet" type="text/css" href="viewport.css" />
-	<link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/toolmenu.css" />
 <link href="data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAABMLAAATCwAAAAAA
 AAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A
 ////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD/
@@ -85,30 +90,92 @@ AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A
 ///////////////////////////////P//+AB///gAH//4AAP//AAB///4AH//+Dh///g8P//8PB
 ///Dw///w4P//8MD///AB8f/gAeAfAAfgAAAP8AAAf/gAAP////D////9///////////////////
 //////////////8=" rel="icon" type="image/x-icon" />
-</head>
-<body>
-	<script src="https://code.jquery.com/jquery-latest.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
 <script>
-  $(document).ready(function(e) {
-		showViewportSize();    
-	});
-	$(window).resize(function(e) {
-		showViewportSize();
-	});
-	function showViewportSize() {
-		var the_width = $(window).width();
-		var the_height = $(window).height();                   
-		$('#width').text(the_width);
-		$('#height').text(the_height);
-		document.title = the_width + 'x' + the_height;
-	}
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+	
+	if (h > 12) { h-=12 };
+	if (h == 0) { 
+	h=12;
+	ntime=false;
+	};
+	
+    document.getElementById('numbers').innerHTML =
+    h + ":" + m + ":" + s;
+	document.title = h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
 </script>
-<center>	
-<h1>What size is my viewport page?</h1>
-<h2>Viewport Width:</h2>
-<p id="width">Resize to find out!</p>
-<h2>Viewport Height:</h2>
-<p id="height">Resize to find out!</p>
+</head>
+
+<body>
+<div id="screenwrap">
+<center>
+	<div id="menu" >
+		<h1> d74g0n_Toolbox </h1>
+		<ul id="">
+			<li><a target="_blank" href="viewport/"> Browser Viewport Dimensions </a></li>
+			<li><a target="_blank" href="viewport/standalone"> Browser Viewport Dimensions (Standalone) </a></li>
+			<li><img id="police", style="visibility: visible", src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif"></li>
+		</ul>
+	</div>
 </center>
+<script>
+//Make the DIV element draggagle:
+dragElement(document.getElementById(("clockface")));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "clockface")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "numbers").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+		//  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>	
+</div> <!-- screenwrap -->
+
+
 </body>
 </html>

@@ -1,0 +1,49 @@
+* {
+background: black;
+color: red;
+list-style: none;
+
+padding: 0;
+transition: 0.5s;
+ 	font-family: 'Audiowide';
+	/* background: black url("https://media.giphy.com/media/d2Z1uF2QgFFYSJtm/giphy.gif") no-repeat center center fixed; */
+}
+li {
+margin: 1em;
+  height: 108px;
+  line-height: 108px;
+  text-align: center;
+
+
+}
+
+a {
+	display: block;
+	text-decoration: none;
+	margin: 0;
+  border: 2px dashed #f69c55;
+	border-radius: 15px;
+}
+
+
+a:hover{
+	display: block;
+	text-decoration: none;
+	margin: 0;
+  border: 2px dashed #f69c55;
+	border-radius: 15px;
+	background: red;
+	color: gold;
+
+}
+
+#police {
+background: black url("https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif") no-repeat center center fixed;
+	background-size: contain;
+	margin: 0;
+  border: 2px dashed #f69c55;
+	border-radius: 15px;
+	padding: 0;
+	width: 108px;
+ height: 108px;
+}
