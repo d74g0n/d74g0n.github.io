@@ -1,20 +1,39 @@
+@font-face { 
+	 font-family: "Audiowide-Regular"; 
+	 src: url("Audiowide-Regular.ttf") format("truetype");
+} 
+#webpreviewlogo {
+position: absolute;
+top: 0px;
+left: 0px;
+z-index: 15;
+width: 32px;
+height: 32px;
+background: transparent;
+}
+
 * {
 background: black;
 color: red;
 list-style: none;
-
 padding: 0;
 transition: 0.5s;
- 	font-family: 'Audiowide';
+font-family: "Audiowide-Regular"; 
 	/* background: black url("https://media.giphy.com/media/d2Z1uF2QgFFYSJtm/giphy.gif") no-repeat center center fixed; */
 }
+#linkul {
+position: absolute;
+top: 50px;
+left: 0;
+right: 0;
+
+
+}
+
 li {
-margin: 1em;
-  height: 108px;
-  line-height: 108px;
-  text-align: center;
-
-
+text-align: center;
+width: 400px;
+padding: 8px;
 }
 
 a {
@@ -23,8 +42,42 @@ a {
 	margin: 0;
   border: 2px dashed #f69c55;
 	border-radius: 15px;
+	font-size: 18px;
+color: orangered;
 }
 
+.d74g0n_Toolbox {
+position: absolute;
+justify: center;
+top: 10px;
+left: 0;
+right: 0;
+margin: 0;
+padding: 0;
+text-decoration: none;
+border:none;
+font-size: 34px;
+color: red;
+background: transparent;
+transition: 10s;
+}
+
+
+.d74g0n_Toolbox:hover {
+position: absolute;
+justify: center;
+top: 10px;
+left: 0;
+right: 0;
+margin: 0;
+padding: 0;
+text-decoration: none;
+border:none;
+font-size: 34px;
+color: gold;
+background: transparent;
+transition: 10s;
+}
 
 a:hover{
 	display: block;
@@ -39,11 +92,16 @@ a:hover{
 
 #police {
 background: black url("https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif") no-repeat center center fixed;
-	background-size: contain;
-	margin: 0;
-  border: 2px dashed #f69c55;
-	border-radius: 15px;
-	padding: 0;
-	width: 108px;
- height: 108px;
+background-size: contain;
+margin: 0;
+border: 2px dashed #f69c55;
+border-radius: 15px;
+padding: 0;
+width: 108px;
+height: 108px;
+}
+.notes {
+font-size: 8px;
+color: orangered;
+
 }

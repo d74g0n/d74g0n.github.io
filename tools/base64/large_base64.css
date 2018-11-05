@@ -1,0 +1,96 @@
+@font-face { 
+	 font-family: "Audiowide-Regular"; 
+	 src: url("../Audiowide-Regular.ttf") format("truetype");
+} 
+#webpreviewlogo {
+position: absolute;
+top: 0px;
+left: 0px;
+z-index: 15;
+width: 32px;
+height: 32px;
+}
+* {
+background: black;
+color: blue;
+color: gold; 
+word-wrap: break-word;
+margin: 0;
+padding: 0;
+border-radius: 5px;
+font-family: 'Audiowide-Regular';   
+margin-top:  1em;
+}
+.d74g0n_Toolbox {
+position: absolute;
+justify: center;
+top: 10px;
+left: 0;
+right: 0;
+margin: 0;
+padding: 0;
+text-decoration: none;
+border:none;
+font-size: 34px;
+color: red;
+background: transparent;
+}
+button:hover {
+background: black;
+color: gold;
+transition: 1s;
+}
+button {
+background: gold;
+color: red;
+color: black;
+transition: 1s;
+}
+#wrapper {
+width: 85%;
+word-wrap: break-word;
+height: 80%;
+padding: 4px;
+background: black; 
+width: 98%;
+height: 98%;
+}
+#title {
+font-size: 2em;
+margin-bottom: 1em;
+}
+#inputFileToLoad {
+border: 2px solid gold;
+}
+.wordwrapWITHWidth
+{   
+font-size: 8px;    
+width: 400px;
+word-wrap: break-word;
+padding-top: 1em;
+padding-bottom: 1em;
+}
+legend {
+color: white;
+padding-left: 1em;
+padding-right: 1em;
+border: 1px solid gold;
+border-bottom: none;
+}
+fieldset {
+color: white;
+border-color: gold;
+width: 412px;
+}
+#divDynamic {
+overflow-y: scroll;
+max-height: 4rem;
+max-height: 400px;
+scroll: hidden;
+}
+#copybutton {
+padding: .5em;
+}
+#faviconbutton {
+padding: .5em;
+}

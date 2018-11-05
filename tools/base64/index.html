@@ -1,0 +1,100 @@
+<html>
+<center>
+<head>
+	<meta charset="utf-8" />
+	<title>d74g0n's BASE64</title>
+	<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+	<meta name="description" content= "Base64 image converter">
+	<meta name="keywords" content="dev tool educational toolbox">
+	<meta name="author" content="d74g0n">
+	<link rel="stylesheet" type="text/css" href="mobile_base64.css" />  
+	<link rel="stylesheet" type="text/css" media="only screen and (min-width:420px)" href="large_base64.css" />
+	<link rel="stylesheet" type="text/css" media="only screen and (min-width:600px)" href="large_base64.css" />
+</head>
+<body>
+<img id="webpreviewlogo" src="../../favicon.png" />
+<div id='wrapper'>
+<h1><a class="d74g0n_Toolbox" href="" target="_blank"> d74g0n_Toolbox </a></h1>
+	<div id='title'><span> Convert images to base64<br>Encoding </span></div>
+	<input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" /><br>
+	<span><i class='notes'> files can be dragged into container above <i></span>
+	<fieldset id="imgfield" >
+		<legend>Preview</legend>
+		<div id="imgTest"></div>
+	</fieldset>
+	<button id='copybutton' onclick="selectText('divDynamic')">Copy Base64 Data</button>
+	<button id='copybutton' onclick="clearText('divDynamic')">Clear Base64 Data</button>
+	<button id='faviconbutton' onclick="selectfavText('divDynamic')">Copy favicon.ico String</button>
+	<fieldset>
+		<legend>BASE64 Data</legend><br>
+		<div id="divDynamic" class="wordwrapWITHWidth"></div>
+	</fieldset>
+</div>
+<script> // -=-=-=-[ button logic block:
+<!-- https://stackoverflow.com/questions/1173194/select-all-div-text-with-single-mouse-click -->
+function selectText(containerid) { // regular copy selection
+    if (document.selection) { // IE
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById(containerid));
+        range.select();
+    } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(document.getElementById(containerid));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+    }
+	document.execCommand("copy");
+}
+function selectfavText(containerid) { // create favicon link
+	var pre = '<link href="';
+	var post = '" rel="icon" type="image/x-icon" />';
+	var mycopystring = document.getElementById(containerid).textContent;
+	var linkstring = pre+mycopystring+post;
+	<!-- alert(linkstring); -->
+	copyStringToClipboard(linkstring);
+}
+function copyStringToClipboard (str) {
+<!-- https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/ -->
+ // Create new element
+ var el = document.createElement('textarea');
+ // Set value (string to be copied)
+ el.value = str;
+ // Set non-editable to avoid focus and move outside of view
+ el.setAttribute('readonly', '');
+ el.style = {position: 'absolute', left: '-9999px'};
+ document.body.appendChild(el);
+ // Select text inside element
+ el.select();
+ // Copy text to clipboard
+ document.execCommand('copy');
+ // Remove temporary element
+ document.body.removeChild(el);
+}
+function clearText(containerid) {
+	document.getElementById(containerid).textContent = '';
+}
+</script>
+<script>
+<!-- cited from: https://jsfiddle.net/vibs2006/ed9j7epr/ -->
+function encodeImageFileAsURL() { // convert image to base64
+	var filesSelected = document.getElementById("inputFileToLoad").files;
+	if (filesSelected.length > 0) {
+		var fileToLoad = filesSelected[0];
+		var fileReader = new FileReader();
+		fileReader.onload = function(fileLoadedEvent) {
+			var srcData = fileLoadedEvent.target.result; // <--- data: base64
+			var newImage = document.createElement('img');
+			newImage.src = srcData;
+			document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+			document.getElementById("divDynamic").innerHTML = newImage.src;
+			<!-- copypaster = document.getElementById("imgTest").innerHTML); -->
+			<!-- console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML); -->
+		} //End of fileReader.onload      
+		fileReader.readAsDataURL(fileToLoad);
+	} //End of If Loop if (filesSelected....)
+}//End of Function encodeImageFileAsUrl
+</script>
+</center>
+</body>
+</html>
+
