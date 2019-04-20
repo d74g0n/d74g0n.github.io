@@ -1,0 +1,104 @@
+@font-face { 
+	 font-family: "Audiowide-Regular"; 
+	 src: url("../Audiowide-Regular.ttf") format("truetype");
+} 
+#webpreviewlogo {
+position: absolute;
+top: 0px;
+left: 0px;
+z-index: 15;
+width: 32px;
+height: 32px;
+}
+* {
+background: black;
+color: gold; 
+word-wrap: break-word;
+margin: 0;
+padding: 0;
+border-radius: 5px;
+font-family: 'Audiowide-Regular';    
+margin-top:  1em;
+font-size: 12px;
+scroll: hidden;
+}
+.d74g0n_Toolbox {
+position: absolute;
+justify: center;
+top: 10px;
+left: 0;
+right: 0;
+margin: 0;
+padding: 0;
+color: red;
+font-size: 1.5em;
+}
+button:hover {
+background: black;
+color: gold;
+transition: .5s;
+}
+button {
+background: gold;
+font-size: 12px;
+color: black;
+transition: .5s;
+padding-left: 2px;
+padding-right: 2px;
+padding: 2em;
+}
+
+#wrapper {
+padding: 0;
+margin: 0;
+width: 412px;
+height: auto;
+word-wrap: break-word;
+background: black; 
+}
+#title {
+font-size: 2em;
+margin-bottom: 1em;
+}
+#inputFileToLoad {
+border: 2px solid gold;
+width: 200px;
+}
+#imgfield {
+width: 128px;
+height: 100px;
+}
+img {
+margin: 0px;
+width: 64px;
+height: 64px;
+}
+.wordwrapWITHWidth {   
+font-size: 8px;    
+width: 300px;
+word-wrap: break-word;
+padding-top: 1em;
+padding-bottom: 1em;
+}
+legend {
+color: white;
+padding-left: 1em;
+padding-right: 1em;
+border: 1px solid gold;
+border-bottom: none;
+}
+fieldset {
+color: white;
+border-color: gold;
+width: 312px;
+}
+
+#divDynamic {
+overflow-y: scroll;
+max-height: 100px;
+scroll: hidden;
+}
+
+.notes {
+font-size: 8px;
+}
