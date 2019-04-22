@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>the_shrug</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <div id="wrapper">
+
+        </div>
+    </center>
+</body>
+
+<script src="Artwindow.js"></script>
+<script src="d74g0n_draws.js"></script>
+
+<script>
+    console.log('make uh click to copy to clipboard shrugger');
+
+
+    //    legend:(parentelm = 'wrapper', bg = 'orange', width = undefined, height = undefined, id = 'artwindow', border = 'none')
+//    let a = new Artwindow("wrapper", "orange", 128, 128).init(); // using width
+    let a = new Artwindow("wrapper", "transparent").init(); // using width
+//    let a = new Artwindow().init(); // using defaults
+    //    let a = new Artwindow("wrapper").init(); // using parentnode
+
+//setAlpha(a, 0.5);
+
+    //  writeText(a, string = 'd74g0n_draws.js', scaleX = a.width / 2, scaleY = a.height / 2, font = '98px serif', fillStyle = 'red', strokeStyle = 'black', textBaseline = 'bottom', textAlign = 'center')
+
+    
+    
+    
+    let timer = [];
+let frame = 0;
+
+    let shruggerA = function(a) {
+        
+
+        timer.push(setInterval(function() {
+            //            resettransform(a);
+            if (frame % 115 == 1) {
+                clear(a);
+                //                writeText(a, `¯\\_(ツ)_/¯`, a.width / 2, a.height / 2, '98px serif', 'white', 'black');
+                writeText(a, `¯\\_(    )_/¯`, a.width / 2, a.height / 2, '98px serif', 'white', 'black');
+            } else {
+                clear(a);
+                //                writeText(a, ` _(ツ)_ `, a.width / 2, a.height / 2, '98px serif', 'white', 'black');
+                writeText(a, ` _(    )_ `, a.width / 2, a.height / 2, '98px serif', 'white', 'black');
+                writeText(a, `_/           \\_`, a.width / 2, a.height / 2, '98px serif', 'white', 'black', 'top');
+            }
+
+            //            tranny(a, frame);
+            a.ctx.translate(a.width / 2, a.height / 2);
+            a.ctx.rotate(Math.PI / -frame);
+            writeText(a, `ツ`, 0, 0, '98px serif', 'white', 'black', 'bottom');
+            //            a.ctx.rotate(Math.PI / -frame);
+            a.ctx.translate(-a.width / 2, -a.height / 2);
+            //            a.ctx.translate(-100, -100);
+            //            resettransform(a);
+            frame++;
+//            console.log(frame);
+
+//            if (frame == 31) {
+            if (frame == 1670) {
+                frame = 0;
+                // end on arms up::
+                clear(a);
+                writeText(a, `¯\\_(    )_/¯`, a.width / 2, a.height / 2, '98px serif', 'white', 'black');
+                a.ctx.translate(a.width / 2, a.height / 2);
+                a.ctx.rotate(Math.PI / -frame);
+                writeText(a, `ツ`, 0, 0, '98px serif', 'white', 'black', 'bottom');
+                a.ctx.translate(-a.width / 2, -a.height / 2);
+                console.log('stopped');
+                timer.forEach(function(ding) {
+                    clearInterval(ding);
+                });
+            }
+
+        }, 1000 / 120));
+
+    };
+
+    function copyStringToClipboard(str) {
+        <!-- https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/ -->
+        // Create new element
+        var el = document.createElement('textarea');
+        // Set value (string to be copied)
+        el.value = str;
+        // Set non-editable to avoid focus and move outside of view
+        el.setAttribute('readonly', '');
+        el.style = {
+            position: 'absolute',
+            left: '-9999px'
+        };
+        document.body.appendChild(el);
+        // Select text inside element
+        el.select();
+        // Copy text to clipboard
+        document.execCommand('copy');
+        // Remove temporary element
+        document.body.removeChild(el);
+    }
+
+    document.body.onclick = function() {
+        console.log('[CLIPBOARD+][¯\\_(ツ)_/¯]');
+        copyStringToClipboard('¯\\_(ツ)_/¯');
+
+        timer.forEach(function(ding) {
+            clearInterval(ding);
+        });
+        
+        a.ctx.transform(1,0,0,1,0,0);
+//        a.ctx.rotate(Math.PI / 180);
+//         writeText(a, `COPIED!`, a.width / 2, a.height / 2, '98px serif', 'white', 'black');
+         writeText(a, `Ha Gottem!`, a.width / 2, a.height / 2 - 98, '98px serif', 'white', 'black');
+        
+        
+//        a.setBackground(a.bg);
+    }
+
+
+    shruggerA(a);
+
+    //    a.setBackground('black').setwidth(400).setheight(400).setBorder('1px dotted green');
+    //    a.setBorder('2px solid red');
+
+</script>
+
+
+
+
+
+
+
+
+
+<!--<script src="g_engine.js"></script>-->
+<!--<script src="g_masterTimer.js"></script>-->
+<!--<script src="g_animate.js"></script>-->
+<!--<script src="g_inputs.js"></script>-->
+<!--<script src="g_player.js"></script>-->
+
+
+<!--<script src="sketch.js"></script>-->
+
+</html>
