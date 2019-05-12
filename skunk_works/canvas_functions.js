@@ -1,4 +1,4 @@
-function loadSpriteSheet(path = '/SpriteStrip.png') {
+function loadSpriteSheet(path = 'SpriteStrip.png') {
 
     function setspritesheet() {
         //  global.ctx.drawImage(this, 0, 32, 32, 32, 0, 0, 128, 64);
