@@ -1,3 +1,6 @@
+<!--THIS IS FOX AT THE TOP VERSION-->
+
+
 <html class="style-11">
 	<head>
 	<title>Datafag</title>
@@ -14,6 +17,26 @@
 																						<!-- <script src="./debugkeypress.js"></script>	 -->
 <!-- <script src="./humanreadabletime.js"></script>	 -->
 <style>
+    #tv {
+        
+        margin-top: 20px;
+        margin-bottom: -16px;
+/*
+        
+        position: fixed;
+        top: 490px;
+        width: 100%;
+        height: calc(100% - 490px);
+        
+        overflow-y: scroll;
+        border-radius: 20px;
+        
+        border: 2px solid gold;
+        
+*/
+    }    
+    
+    
 .navbar {
 	position: fixed;
 	top: 0px;
@@ -138,6 +161,9 @@ div#datarecord {
 
 	</head>
 	<body>
+        <center>
+        <iframe id="tv" class="center" width="853" height="480" src="//www.ok.ru/videoembed/1440366141167?nochat=1&amp;autoplay=1" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
+        </center>
 		<div id="screenwrap">
 			<div id="topnav", class="navbar">
 				<ul id="navbarul", class="navbarul">
@@ -261,8 +287,6 @@ var socket = io.connect('http://159.203.4.98:5001');
 	};
 
 	if (!msg.media_url ) { // missing media icon.
-        <!-- mediaurl = "http://www.assfaultjunkies.com/images/medals/drama.png"; -->
-        <!-- mediaurl = "https://i.imgur.com/dNv22n9.png"; -->
         mediaurl = "https://i.imgur.com/Ewjo1lg.png";
 	};
 
