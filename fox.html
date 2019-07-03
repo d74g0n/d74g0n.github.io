@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>FOX</title>
 
@@ -11,14 +12,14 @@
         iframe {
             margin: 0;
             padding: 0;
-                        border-radius: 25px;
+            border-radius: 25px;
         }
 
         .container {
             margin-top: 5vh;
             height: 90vh;
             position: relative;
-/*            border: 2px solid gold;*/
+            /*            border: 2px solid gold;*/
             border-radius: 15px;
         }
 
@@ -30,17 +31,24 @@
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
+        
+        #grabber {
+            visibility: hidden;
+        }
+        
     </style>
 </head>
 
 <body>
     <center>
-        
 
-        
+
+
         <div class="container">
-            <iframe class="center" width="853" width="1280" height="480" height="720" src="https://ok.ru/videoembed/1235131768361?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
+            <iframe id="tv" class="center" width="853" width="1280" height="480" height="720" src="https://ok.ru/videoembed/1235131768361?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
         </div>
+
+
 
     </center>
 
