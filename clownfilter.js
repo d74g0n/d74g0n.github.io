@@ -4,3 +4,8 @@ let clownfilter = ["http://pbs.twimg.com/media/D-cQSmnW4AAzDUB.jpg:large", "http
 let pornfilter = ["http://pbs.twimg.com/media/D-chLHZUYAARUGP.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/1145909414001434624/pu/img/QG7rD968GRxEBQrj.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/1141105252176924672/pu/img/ZWx7-WCZT8dWbT0r.jpg:large","http://pbs.twimg.com/media/D8tiae1UEAAO3Qu.jpg:large","http://pbs.twimg.com/media/DfgoF8DWAAI5rJk.jpg:large"];
 
 let bigotry = ["http://pbs.twimg.com/media/D-UXVf5XkAEwEUO.jpg:large"];
+
+
+let version = 1;
+console.log(`filter Version${version}`);
+timeelm.innerHTML = `filter Version${version}`;
