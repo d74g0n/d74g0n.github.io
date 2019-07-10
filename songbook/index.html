@@ -18,12 +18,28 @@
 
         }
 
+        html {
+            /*            scroll-behavior: smooth;*/
+        }
 
         body {
 
             /*            text-justify: left;*/
             background: black;
 
+        }
+
+        .scissorHalf {
+            offset-path: path('M900,190  L993,245 V201  A11,11 0 0,1 1004,190  H1075  A11,11 0 0,1 1086,201  V300  L1294,423 H1216  A11,11 0 0,0 1205,434  V789  A11,11 0 0,1 1194,800  H606  A11,11 0 0,1 595,789  V434  A11,11 0 0,0 584,423  H506 L900,190');
+/*            offset-path: path('m 0 0, m 0 2000');*/
+            animation: followpath 400s linear infinite;
+        }
+
+        @keyframes followpath {
+            to {
+                motion-offset: 100%;
+                offset-distance: 100%;
+            }
         }
 
 
@@ -43,9 +59,13 @@
 
             /*debugging*/
             background: linear-gradient(90deg, rgba(2, 0, 36, 0) 0%, rgba(17, 16, 18, 1) 50%, rgba(205, 0, 255, 0) 100%);
+
+
+
+
         }
 
-        .songtitle {
+        .lyrics {
 
             padding: 0;
             margin: 0;
@@ -57,7 +77,7 @@
             color: cyan;
             color: white;
             background: linear-gradient(90deg, rgba(2, 0, 36, 0) 0%, rgba(17, 16, 18, 1) 50%, rgba(205, 0, 255, 0) 100%);
-/*background: radial-gradient(circle, rgba(29,24,147,1) 0%, rgba(16,78,77,1) 20%, rgba(0,0,0,0) 52%);*/
+            /*background: radial-gradient(circle, rgba(29,24,147,1) 0%, rgba(16,78,77,1) 20%, rgba(0,0,0,0) 52%);*/
         }
 
         .offsetter {
@@ -79,10 +99,10 @@
             right: 0;
             margin: 0;
             padding: 0;
-            
-/*            position: relative;*/
-/*            display: inline-block;*/
-            
+
+            /*            position: relative;*/
+            /*            display: inline-block;*/
+
             font-size: 18px;
             color: orangered;
             /*            background: red;*/
@@ -90,12 +110,25 @@
         }
     </style>
 </head>
+    <script>
+    
+        function readout() {
+            console.log('readout');
+            console.log(`H:${document.innerHeight}W:${document.innerWidth}`);
+        }
+        
+        
+        window.onload = readout;
+        
+        setInterval(readout,2000);
+    
+    </script>
 
 <body>
 
-    <div id="main">
+    <div id="main" class="scissorHalf">
         <code>
-            <pre class="songtitle"><center><span class='title'>Homegrown by Zac Brown Band</span></center><span class="offsetter">[Intro]</span><span class="chordcss" >C+9</span> <span class="chordcss" >G</span> <span class="chordcss" >Em7</span> <span class="chordcss" >D</span> <span class="chordcss" >C+9</span> <span class="chordcss" >G</span> <span class="chordcss" >D</span> x2
+            <pre class="lyrics"><center><span class='title'>Homegrown by Zac Brown Band</span></center><span class="offsetter">[Intro]</span><span class="chordcss" >C+9</span> <span class="chordcss" >G</span> <span class="chordcss" >Em7</span> <span class="chordcss" >D</span> <span class="chordcss" >C+9</span> <span class="chordcss" >G</span> <span class="chordcss" >D</span> x2
 
 <span class="offsetter">[Verse]</span><span class="chordcss" >C+9</span>            <span class="chordcss" >G</span>           <span class="chordcss" >Em7</span>           <span class="chordcss" >D</span>
 I got a piece of land out in the country side
@@ -182,4 +215,126 @@ Everything I need, nothin’ that I don’t (homegrown)
 Ooh everything I need, and nothin’ that I don’t (homegrown)</pre></code>
     </div>
 
-</body>></html> 
+</body>
+
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<script>
+//    const elm = document.getElementById('main');
+//
+//    let x = 0;
+//
+//
+//
+//    function budge() {
+//        //  window.moveBy(0, -100);
+//
+//
+//        //    elm.style.marginTop = x-=14;
+//        elm.offsetTop = --x;
+//        console.log(`budged${x}`);
+//    }
+//
+//    setInterval(budge, 1000 / 4);
+
+
+
+
+    //    function origin(y) {
+    ////        window.moveTo(0, y);
+    //        window.moveBy(0, y);
+    //        console.log('origin');
+    //    }
+    //
+    //
+    //
+    //    let interval = 60000 * 3;
+    //
+    //    let x = 1;
+    //
+    //    setInterval(function() {
+    //
+    //        origin(x-=10);
+    //
+    //        console.log(x);
+    //
+    //    }, 1000/13);
+
+
+    //    let interval = 4000;
+
+    //    $("html, body").animate({ scrollTop: $(document).height() }, interval);
+    //
+    //setTimeout(function() {
+    //   $('html, body').animate({scrollTop:0}, interval); 
+    //},interval);
+    //
+    //
+    //setInterval(function(){
+    //     // interval - it will take 4 secound in total from the top of the page to the bottom
+    //$("html, body").animate({ scrollTop: $(document).height() }, interval);
+    //setTimeout(function() {
+    //   $('html, body').animate({scrollTop:0}, interval); 
+    //},interval);
+    //    
+    //},8000);
+    //
+    //
+    //$('html, body').mouseover(function(e) {
+    //$(this).stop(true);
+    //      
+    //    }).mouseout(function() {
+    //         $(this).stop(false);
+    //    });
+    //    
+    //    
+
+
+
+
+
+
+
+    //     $("html, body").animate({ scrollTop: $(document).height() }, interval);
+    //    setTimeout(function() {
+    //       $('html, body').animate({scrollTop:0}, interval); 
+    //    },interval);
+    //  var scrolltopbottom =  setInterval(function(){
+    //         // interval - it will take 4 secound in total from the top of the page to the bottom
+    //    $("html, body").animate({ scrollTop: $(document).height() }, interval);
+    //    setTimeout(function() {
+    //       $('html, body').animate({scrollTop:0}, interval); 
+    //    },interval);
+    //
+    //    },8000);
+
+
+
+
+    //    $(document).ready(function() {
+    //        console.log('readied');
+    //        // Add smooth scrolling to all links
+    //        $("chordcss").on('click', function(event) {
+    //
+    //            console.log('lyrics');
+    //            // Make sure this.hash has a value before overriding default behavior
+    //            if (this.hash !== "") {
+    //                // Prevent default anchor click behavior
+    ////                event.preventDefault();
+    //
+    //                // Store hash
+    //                var hash = this.hash;
+    //
+    //                // Using jQuery's animate() method to add smooth page scroll
+    //                // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+    //                $('html, body').animate({
+    ////                    scrollTop: $(hash).offset().top;
+    //                    scrollBotTop: $(hash).offset().top
+    //                }, 1800, function() {
+    //
+    //                    // Add hash (#) to URL when done scrolling (default click behavior)
+    //                    window.location.hash = hash;
+    //                });
+    //            } // End if
+    //        });
+    //    });
+</script></html>
