@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>R6</title>
+
+    <style>
+        body {
+            background: black;
+        }
+
+        iframe {
+            margin: 4px;
+            padding: 4px;
+            border-radius: 25px;
+
+            border: 2px solid grey;
+            /*            float: left;*/
+        }
+
+        .container {
+            margin-top: 5vh;
+            height: 90vh;
+            position: relative;
+            /*            border: 2px solid gold;*/
+            border-radius: 15px;
+
+            width: 720px;
+        }
+
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        #grabber {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+
+
+
+        <div class="container">
+            <iframe src="https://player.twitch.tv/?channel=rainbow6" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><br>
+            <center id='anchorpoint'>
+
+                <!-- <iframe id="tchat" src="https://www.twitch.tv/embed/rainbow6/chat" frameborder="0" scrolling="no" height="500" width="350"></iframe>-->
+
+            </center>
+            <button onclick="twitch_create.createChannel('shroud')">make me</button>
+            <script>
+                const twitch_create = {
+                    stream_url: 'https://player.twitch.tv/?channel=',
+                    anchor: document.getElementById('anchorpoint'),
+                    createdElements: [],
+                    createChannel: function(channelname) {
+                        let new_embed = document.createElement("IFRAME");
+                        new_embed.id = channelname.toString();
+                        new_embed.src = twitch_create.stream_url + channelname.toString();
+                        new_embed.frameborder = "0";
+                        new_embed.allowfullscreen = "true";
+                        new_embed.scrolling = "no";
+                        new_embed.height = "378";
+                        new_embed.width = "620";
+                        //stick it to anchor::
+                        twitch_create.anchor.appendChild(new_embed);
+                        //track elements in list::
+                        twitch_create.createdElements.push(new_embed);
+                        return twitch_create;
+                    },
+                }
+
+//                twitch_create.createChannel('shroud');
+//                twitch_create.createChannel('shroud');
+
+
+
+
+
+                //                let elm = document.getElementById('tchat');
+                //
+                //                function maketwitchembed(channelname = 'd74g0n') {
+                //
+                //                    let new_embed = document.createElement("IFRAME");
+                //                    new_embed.id = channelname.toString();
+                //                    new_embed.src = `https://player.twitch.tv/?channel=${channelname.toString()}`;
+                //                    new_embed.frameborder = "10";
+                //                    new_embed.allowfullscreen = "true";
+                //                    new_embed.scrolling = "no";
+                //                    new_embed.height = "378";
+                //                    new_embed.width = "620";
+                //
+                //                    let mynode = document.getElementById('anchorpoint');
+                //                    mynode.appendChild(new_embed);
+                //
+                //                }
+                console.log(`loaded`);
+            </script>
+
+
+            <!--            <iframe id="tv" class="center" width="853" width="1280" height="480" height="720" src="https://ok.ru/videoembed/1235131768361?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>-->
+        </div>
+
+
+
+    </center>
+
+</body></html>

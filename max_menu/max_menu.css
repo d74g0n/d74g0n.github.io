@@ -1,0 +1,101 @@
+body{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f3c5bd+0,e86c57+50,ea2803+51,ff6600+75,c72200+100;Red+Gloss */
+background: #f3c5bd; /* Old browsers */
+background: -moz-linear-gradient(top,  #f3c5bd 0%, #e86c57 50%, #ea2803 51%, #ff6600 75%, #c72200 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #f3c5bd 0%,#e86c57 50%,#ea2803 51%,#ff6600 75%,#c72200 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #f3c5bd 0%,#e86c57 50%,#ea2803 51%,#ff6600 75%,#c72200 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', endColorstr='#c72200',GradientType=0 ); /* IE6-9 */
+
+}
+
+#Menu {
+     background: rgba(156,0,0,.5);
+     
+     
+     border-radius: 10px;
+     height: 100px;
+     width: 100px;
+     position: fixed;
+
+     top: 10px;
+     left: 10px;
+
+     border: 2px solid black;
+     overflow: hidden;
+     user-select: none;
+     
+     transition: unset;
+ }
+
+#menu_header {
+/*    background: white;*/
+    width: 100px;
+    height: 10px;
+    z-index: 20;
+/*    border: 4px dashed gold;*/
+}
+
+#btnBank {
+/*    background: blue;*/
+    width: 100px;
+    
+}
+
+.tinybtn {
+    position: relative;
+    top: 0px;
+    display: inline-block;
+    width: 23px;
+/*    margin: 0.5px;*/
+    display: block;
+    float: left;
+    height: auto;
+    background: orange;
+    border: 1px solid black;
+    border-top: none;
+/*    float: left;*/
+    
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-decoration: none;
+    color: darkgoldenrod;
+}
+
+.tinybtn:hover {
+ 
+    background: white;
+    color: blue;
+    height: 50px;
+    transition: height 2s;
+}
+
+
+ input {
+     width: 100px;
+ }
+
+ #menu_action {
+     width: 100px;
+     color: black;
+     background: white;
+     position: absolute;
+    
+     bottom: 0;
+     z-index: 10;
+     border-top: 1px solid black;
+     border-radius: 5px;
+ }
+
+ #menu_action:hover {
+     background: black;
+     background: orangered;
+     color: white;
+     color: white;
+     transition: background 1s;
+ }
+
+ hr {
+     padding: 0;
+     margin: 0;
+     border: 1px solid blue
+ }
