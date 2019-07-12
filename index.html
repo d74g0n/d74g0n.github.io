@@ -12,40 +12,23 @@
     <!-- <link rel="stylesheet" type="text/css" href="testpage.css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="tickertop.css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="titlemain.css"> -->
-    <link rel="stylesheet" type="text/css" href="http://159.203.4.98:5001/mobiledatafag.css" />
+<!--    <link rel="stylesheet" type="text/css" href="http://159.203.4.98:5001/mobiledatafag.css" />-->
+    <link rel="stylesheet" type="text/css" href="/mobiledatafag.css" />
 
     <link rel="shortcut icon" href="./favicon.png" />
     <!-- <script src="./debugkeypress.js"></script>	 -->
     <!-- <script src="./humanreadabletime.js"></script>	 -->
     <style>
-        #tv {
-
-            margin-top: 20px;
-            margin-bottom: -16px;
-            /*
-        
-        position: fixed;
-        top: 490px;
-        width: 100%;
-        height: calc(100% - 490px);
-        
-        overflow-y: scroll;
-        border-radius: 20px;
-        
-        border: 2px solid gold;
-        
-*/
-        }
-
 
         .navbar {
             position: fixed;
             top: 0px;
             left: 0px;
             width: 100%;
-            height: 18px;
+            height: 24px;
             background: black;
             background: transparent;
+            background: rgba(156,17,17,0.3);
             margin: 0px;
             padding: 0px;
             border-bottom: skyblue solid 1px;
@@ -100,7 +83,7 @@
 
         #messages {
             postion: fixed;
-            top: 20px;
+            top: 24px;
             left: 0px;
             font-family: monospace;
             width: 100%;
@@ -179,22 +162,24 @@
 </head>
 
 <body>
-<!--
-    <center>
-        <iframe id="tv" class="center" width="853" height="480" src="https://ok.ru/videoembed/1234408513065?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
-    </center>
--->
+
     <div id='time_readout'>
         <h3 id='time_data'>Average Chatter Rate</h3>
         <script>
+        const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large",];
         const timeelm = document.getElementById('time_data');
+            
         </script>
     </div>
     <div id="screenwrap">
         <div id="topnav" , class="navbar">
             <ul id="navbarul" , class="navbarul">
+
+                <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>
+                <!--
                 <li><a href="http://datafag.tk/" , class="toplinks" , target="_blank"> datafag.tk </a></li>
                 <li><a href="http://datafg.tk/" , class="toplinks" , target="_blank"> datafg.tk </a></li>
+-->
                 <li><a href="http://dragonwalls.tk/" , class="toplinks" , target="_blank"> dragonwalls.tk </a></li>
             </ul>
         </div> <!-- topnav -->
@@ -281,7 +266,9 @@
 
             if (!msg.media_url) { // missing media icon.
 //                mediaurl = "https://i.imgur.com/Ewjo1lg.png";
-                mediaurl = "/favicon.ico";
+                mediaurl = "https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif";
+                mediaurl = "http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large";
+//                mediaurl = "/favicon.ico";
             };
 
             // ******************** BUILDING THINGS SECTION **************************

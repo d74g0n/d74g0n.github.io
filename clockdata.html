@@ -1,0 +1,174 @@
+<!doctype html>
+<!--    
+    Nothing to see here folks.
+-->
+
+<html>
+<head>
+
+<title>Clockwall</title>
+	<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+	<meta name="description" content= "Simple Clock">
+	<meta name="keywords" content="simple clock">
+	<meta name="author" content="d74g0n">
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="clockdata.css">
+	<link rel="shortcut icon" href="favicon.png"> 
+
+<script>
+
+var safe = true;
+
+function startTime() {
+	
+	var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+	
+	if (h > 12) { h-=12 };
+	if (h == 0) { 
+	h=12;
+	};
+	
+	if (s == 0) { 
+		if (safe) { // window.location.reload(true); 
+			safe=false;
+		};
+	};
+	if (s == 1) { safe=true; };
+	
+	
+    document.getElementById('numbers').innerHTML =
+    h + ":" + m + ":" + s;
+	document.title = h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+	
+	
+	
+	
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+
+
+
+</script>
+</head>
+
+<body onload="startTime()">
+
+<div id="screenwrap">
+
+<center>
+	<div id="clockface" >
+	<h3 id="numbers"></h3>
+
+<!-- 	<span id="price_usd">loading</span> -->
+	<br><br>
+
+<!-- 	<span id="percent_change_1h">loading</span><span>%   </span><span id="percent_change_24h">loading</span><span>%   </span><span id="percent_change_7d">loading</span><span>%</span><br><br>
+	<span id="label">1hr</span><span> -=- </span><span id="label">24hr</span><span> -=- </span><span id="label">7d</span><span></span><br> -->
+	
+	</div>
+</center>
+
+<script>
+//Make the DIV element draggagle:
+dragElement(document.getElementById(("clockface")));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "clockface")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "numbers").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+  //  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>	
+
+
+
+  
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+    
+    
+    var mycounter = 0
+	var socket = io();
+    $('form').submit(function(){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('');
+    return false;
+    });
+    socket.on('chat message', function(msg){ //tweet recieved from .js in msg dataform.
+    
+
+	mediaurl = msg.media_url;
+
+        
+
+
+
+
+	if (!msg.media_url ) { // missing media icon.
+        <!-- mediaurl = "http://www.assfaultjunkies.com/images/medals/drama.png"; -->
+        <!-- mediaurl = "https://i.imgur.com/dNv22n9.png"; -->
+        mediaurl = "https://i.imgur.com/Ewjo1lg.png";
+	};
+
+        // ******************** BUILDING THINGS SECTION **************************
+
+	document.body.style.backgroundImage = "url("+ mediaurl +")";
+	
+	
+	
+	
+	
+    });
+</script>
+</div> <!-- screenwrap -->
+
+
+</body>
+</html>

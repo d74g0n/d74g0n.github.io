@@ -1,0 +1,110 @@
+@font-face{
+	font-family:'digital-clock-font';
+	src: url('DIGITALDREAM.ttf');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+
+
+}
+html {
+
+background: transparent;	
+	
+}
+
+body {
+	background: black;
+transition: 10s;
+	background: url("http://pbs.twimg.com/media/Ddw0aOAUwAAplTe.jpg:large") no-repeat center center fixed;
+    -webkit-background-size: cover; /* For WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+    background-size: cover;         /* Generic*/
+	    z-index: 5;
+}
+
+div {
+	width: 100%;
+}
+
+#clockface {
+	position: absolute;
+	top: 30%;
+	left: 2%;
+	padding: 0;
+	margin: 0;
+	
+	align: center;
+	text-align: center;
+	font-family: 'Terminal Dosis';
+	font-family: 'VT323';
+
+	font-size: 100%;
+	font-style: bold;
+	background: red;
+	background: transparent;
+	overflow: hidden;
+	width: 94%;
+	
+    z-index: 9;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+			
+			
+		/* background: rgba(0,0,0,0.4); */
+
+}
+
+#numbers {
+	text-shadow : 4px 5px 25px black;
+	text-shadow : 4px 5px 25px blue;
+
+	color: gold;
+	color: black;
+	color: red;
+	font-family: 'digital-clock-font';
+	z-index: 10;
+	position: inline;
+	padding: 10px;
+    cursor: move;
+    z-index: 10;
+	  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+
+}
+
+h3 {
+
+		font-size: 8em;
+	
+}
+
+
+
+
+span {
+ 
+ font-family:'digital-clock-font';
+ color: red;	
+	white-space:true;
+	
+	font-size: 2em;
+}
+
+#screenwrap {
+
+background: black;	
+	
+}
