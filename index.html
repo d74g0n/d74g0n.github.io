@@ -235,7 +235,10 @@
 
         //-=-=-=-=-=-=-=-
 
-        var socket = io.connect('http://159.203.4.98:5001');
+//        var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
+        var socket = io.connect('http://159.203.4.98:5000'); //dragoneye2
+        
+//        var socket = io.connect('http://159.203.4.98:3333');
 
         socket.on('chat message', function(msg) { //tweet recieved from .js in msg dataform.
 
@@ -273,7 +276,8 @@
             };
 
             if (!msg.media_url) { // missing media icon.
-                mediaurl = "https://i.imgur.com/Ewjo1lg.png";
+//                mediaurl = "https://i.imgur.com/Ewjo1lg.png";
+                mediaurl = "/favicon.ico";
             };
 
             // ******************** BUILDING THINGS SECTION **************************
@@ -290,8 +294,8 @@
 
                 $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:#' + colorpass + '"><li>\n\
                             <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
-                            <div id="media"><img src="' + mediaurl + '" download></div>\n\
-                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
+                            <div id="media"><center><img src="' + mediaurl + '" download></center></div>\n\
+                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"><h1> ' + textpass + ' </h1></a></div>\n\
                             </li></div>'));
 
 
