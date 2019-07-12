@@ -88,11 +88,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3c5bd', end
 
  #menu_action:hover {
      background: black;
-     background: orangered;
-     color: white;
+/*     background: orangered;*/
+     
      color: white;
      transition: background 1s;
  }
+
+#infowindow {
+    background: blue;
+    width: 92px;
+    height: 40px;
+    margin: auto;
+    position: absolute;
+    top:30px;
+    left: 2px;
+    border: 2px solid black;
+    
+}
 
  hr {
      padding: 0;
