@@ -240,6 +240,10 @@
         
 //        var socket = io.connect('http://159.203.4.98:3333');
 
+        socket.on('connect', function() {
+            console.log('connected');
+        });
+        
         socket.on('chat message', function(msg) { //tweet recieved from .js in msg dataform.
 
             colorpass = msg.textcolor;
