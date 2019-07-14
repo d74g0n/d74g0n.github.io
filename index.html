@@ -1,6 +1,8 @@
 <!--THIS IS FOX AT THE TOP VERSION-->
 <!--
 TADO LIST:
+HEAD:
+METADATA! - keywords list.
 
 -remove styling from list item generation.
 
@@ -17,11 +19,12 @@ TADO LIST:
     <title>Datafag</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
     <meta name="description" content="datafag">
-    <meta name="keywords" content="datafag">
+    <meta name="keywords" content="datafag"> 
     <meta name="author" content="d74g0n">
-
     <!--FINALS-->
 
+    <link rel="stylesheet" type="text/css" href="/datafag/css/css_topmenu.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/css/css_scrollbars.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/github_datafag.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
     <link rel="shortcut icon" href="./common/img/favicon.png" />
@@ -32,14 +35,7 @@ TADO LIST:
 
 <body>
 
-    <div id='time_wrapper'>
-        <h3 id='time_text'>Average Chatter Rate</h3>
-        <script>
-            const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large", "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large"];
-            const timeelm = document.getElementById('time_text');
 
-        </script>
-    </div>
     <div id="screenwrap">
         <div id="topnav" , class="navbar">
             <ul id="navbarul" , class="navbarul">
@@ -55,19 +51,18 @@ TADO LIST:
             </ul>
         </div> <!-- topnav -->
         <ul id="messages">
-            <div id="datarecord" , style="background:#002018">
+            <div id="datarecord_splash" , style="background:#002018 padding:0;">
                 <li style="list-style:none">
-                    <div id="picbox" style="padding-bottom:14px" , "padding-right:2em" , "visibility:visible" , "width:15px">
+                    <div id="picbox" class="sunburst" style="padding-bottom:14px" , "padding-right:2em" , "visibility:visible" , "width:15px">
                         <center>
                             <h2 id="argtit" style="color:white" , "font-size:24px"> Once a d74g0n made an Argus </h2>
-                            <!--                            <br><img id="argus" , style="visibility: visible" , "width:50%" , src="http://159.203.4.98:5001/Argus-Panoptes.jpg">-->
                             <br><img id="argus" , style="visibility: visible" , "width:50%" , src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
                     </div>
                     </center>
 
                     <center>
-                        <div id="maintext">
-                            <h2 id="argtit" style="color:white" , "padding-left:20%"> What Woke The ArgUs? </h2>
+                        <div id="maintext" class="sunburst" style="margin:0px,padding: 100px;">
+                            <h2 class="sunburst" id="argtit" style="color:white" , "padding-left:20%"> What Woke The ArgUs? </h2>
                             <h2><br> QAnon, TheGreatAwakening, ObamaGate, <br> WeThePeople, ReleaseTheCures, BigPharm, WWG1WGA,<br> DrainTheSwamp, DeepState, SethRich,<br> Pedofiles, SaveTheChildren </h2> <br>
                             <h3 style="color:skyblue"> Service Simply Monitors Twitter Chatter <br> * For Educational Purposes Only * </h3><br>
                             <p>Q</p>
@@ -80,7 +75,16 @@ TADO LIST:
         <input type="checkbox" id="RDCheck" />
         <span id="RDCheck_label">Filter</span>
 
+    <div id='time_wrapper'>
+        <h3 id='time_text'>Average Chatter Rate</h3>
+        <script>
+            const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large", "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large"];
+            const timeelm = document.getElementById('time_text');
 
+        </script>
+    </div>
+        
+        
 
     </div> <!-- screenwrap -->
 

@@ -22,7 +22,7 @@ text-shadow: 2px 2px 4px black;
     background: transparent;
     /*    background: black;*/
     text-align: center;
-    
+
 /*    font-family:'megamono';*/
     
 }
@@ -33,7 +33,7 @@ body {
     /*    background-color: transparent;*/
     overflow: auto;
     
-             
+
     
 }
 
@@ -42,10 +42,41 @@ li {
     margin-top: 10px;
     padding-bottom: 35px;
     float: none;
-      background: linear-gradient(90deg, rgba(9,36,0,0) 0%, rgba(156,36,57,1) 51%, rgba(0,212,255,0) 100%);
+/*      background: linear-gradient(90deg, rgba(9,36,0,0) 0%, rgba(156,36,57,1) 51%, rgba(0,212,255,0) 100%);*/
+              transition: 2s;      
+    
+    
+}
+
+.sunburst {
+     background: linear-gradient(90deg, rgba(9,36,0,0) 0%, rgba(156,36,57,1) 51%, rgba(0,212,255,0) 100%);
 }
 
 /*MAIN RECORD AREA*/
+div#datarecord {
+    
+        position: relative;
+    text-decoration: none;
+    display: block;
+    draggable: "true";
+
+
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+
+    border: 1px solid rgb(156,0,0);
+    
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+/*    top: 20px;*/
+    top: 10px;
+    height: auto;
+    background: linear-gradient(90deg, rgba(9,36,0,0) 0%, rgba(156,36,57,1) 51%, rgba(0,212,255,0) 100%);
+}
+
+
 div#media {
     position: relative;
     top: 16px;
@@ -76,28 +107,6 @@ div#media img {
 /*    text-shadow: */
 }
 
-div#datarecord {
-    position: relative;
-    text-decoration: none;
-    display: block;
-    draggable: "true";
-    background: black;
-    border: 1px solid skyblue;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
-
-    border: 1px solid rgb(156,0,0);
-    
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.4);
-    
-    
-
-    /*    transition: 5s;*/
-}
-
 div#maintext a {
     color: buttonface;
     background: transparent;
@@ -121,7 +130,7 @@ div#maintext a {
 #maintext {
 /*WIPWIPWIP WIP */
 /*        border: 1px solid rgb(156,0,156);*/
-    
+    color: lime;
 }
 
 
@@ -180,45 +189,6 @@ div#timestamp a:hover {
     text-shadow: 2px 2px 4px gold;
 }
 
-.style-11::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-/*
-    background-color: #F5F5F5;
-    background-color: #253447;
-*/
-    background-color: rgba(56,0,0,1);
-/*    color: #f5f2f0;*/
-    border-radius: 10px;
-}
-
-.style-11::-webkit-scrollbar {
-    width: 10px;
-/*
-    background-color: #F5F5F5;
-    background-color: transparent;
-    background-color: skyblue;
-*/
-    background-color: red;
-}
-
-.style-11::-webkit-scrollbar-thumb {
-    background-color: gold;
-    background-color: #3366FF;
-    
-    background-color: rgb(156,0,0);
-
-
-    border-radius: 10px;
-    background-image: -webkit-linear-gradient(0deg,
-            rgba(255, 255, 255, 0.5) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(255, 255, 255, 0.5) 50%,
-            rgba(255, 255, 255, 0.5) 75%,
-            transparent 75%,
-            transparent)
-}
-
 
 .navbar {
     position: fixed;
@@ -231,7 +201,7 @@ div#timestamp a:hover {
     background: rgba(156, 17, 17, 0.3);
     margin: 0px;
     padding: 0px;
-    border-bottom: skyblue solid 1px;
+    border-bottom: lime solid 1px;
     z-index: 156;
     user-select: none;
 }
@@ -309,29 +279,6 @@ div#timestamp a:hover {
 
 }
 
-div#datarecord {
-    position: relative;
-    top: 20px;
-    top: 10px;
-    text-decoration: none;
-    display: block;
-/*    draggable: true;*/
-    background: black;
-    border: 1px solid skyblue;
-    
-    border: 1px solid rgb(156,0,0);
-    
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.4);
-
-    background: transparent;
-
-    height: auto;
-}
 
 #RDCheck {
     /*            redundancy checkbox*/
@@ -434,7 +381,7 @@ color: bisque;
     -ms-animation: imgthrobber 5s linear infinite;
     animation: imgthrobber 5s linear infinite;
     
-    box-shadow: 0px 10px 40px lime
+    box-shadow: 0px 10px 40px lime;
 }
 
 #argtit {
