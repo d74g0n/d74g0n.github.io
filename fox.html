@@ -31,25 +31,79 @@
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
-        
+
         #grabber {
             visibility: hidden;
         }
-        
+
+        #wrapper {
+            background: transparent;
+            width: 700px;
+            height: 600px;
+
+        }
+
+        .topmenu {
+
+            background: transparent;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            margin: 0;
+            padding: 0;
+            width: 64px;
+            height: 64px;
+        }
+
+
+        #dlogo {
+            width: 64px;
+            height: 64px;
+            transition: 1s;
+            z-index: 100;
+            border-radius: 10px;
+            margin-left: -20px;
+        }
+
+        #dlogo:hover {
+            width: 75px;
+            height: 75px;
+            background: gold;
+            background: rgb(250, 244, 32);
+            background: radial-gradient(circle, rgba(250,244,32,1) 0%, rgba(78,65,16,0.19931722689075626) 63%, rgba(0,0,0,0) 95%);
+            20%, rgba(0, 0, 0, 0) 52%);
+        }
+
+        #dlogo {
+            -webkit-filter: drop-shadow(12px 12px 25px rgba(100, 100, 100, 0.9));
+            filter: url(#drop-shadow);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#AAA')";
+            filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#AAA')";
+        }
     </style>
 </head>
 
 <body>
+
     <center>
 
-
-
-        <div class="container">
-            <iframe width="640" height="360" src="//ok.ru/videoembed/1380934098516?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
-<!--            <iframe id="tv" class="center" width="853" width="1280" height="480" height="720" src="https://ok.ru/videoembed/1235131768361?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>-->
+        <div class='topmenu'>
+            <a href="/index.html" target="_blank" id='menulink'><img id="dlogo" src="/favicon.png" /></a>
         </div>
 
 
+        <div id="wrapper">
+
+            <br>
+            <a href="https://ok.ru/live/profile/572735641684" target="_blank">Borked? Try Source</a>
+
+
+            <div class="container">
+                <iframe width="640" height="360" src="//ok.ru/videoembed/1380934098516?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+                <!--            <iframe id="tv" class="center" width="853" width="1280" height="480" height="720" src="https://ok.ru/videoembed/1235131768361?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>-->
+            </div>
+
+        </div>
 
     </center>
 
