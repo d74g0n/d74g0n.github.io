@@ -9,17 +9,10 @@
     <meta name="description" content="datafag">
     <meta name="keywords" content="datafag">
     <meta name="author" content="d74g0n">
-    <!-- <link rel="stylesheet" type="text/css" href="testpage.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="tickertop.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="titlemain.css"> -->
-<!--    <link rel="stylesheet" type="text/css" href="http://159.203.4.98:5001/mobiledatafag.css" />-->
     <link rel="stylesheet" type="text/css" href="/mobiledatafag.css" />
-
     <link rel="shortcut icon" href="./favicon.png" />
-    <!-- <script src="./debugkeypress.js"></script>	 -->
-    <!-- <script src="./humanreadabletime.js"></script>	 -->
+    <!-- <script src="./reflinkzilch.js"></script>	 -->
     <style>
-
         .navbar {
             position: fixed;
             top: 0px;
@@ -28,7 +21,7 @@
             height: 24px;
             background: black;
             background: transparent;
-            background: rgba(156,17,17,0.3);
+            background: rgba(156, 17, 17, 0.3);
             margin: 0px;
             padding: 0px;
             border-bottom: skyblue solid 1px;
@@ -82,14 +75,13 @@
 
 
         #messages {
-            postion: fixed;
-            top: 24px;
+            position: absolute;
+            top: 16px;
             left: 0px;
             font-family: monospace;
             width: 100%;
             color: white;
             background: transparent;
-            width: 100%;
             height: auto;
             padding: 0px;
             margin: 0px;
@@ -115,6 +107,8 @@
         div#datarecord {
             position: relative;
             top: 20px;
+
+            top: 10px;
             text-decoration: none;
             display: block;
             draggable: "true";
@@ -136,26 +130,40 @@
             position: fixed;
             top: 2px;
             left: 2px;
+            width: 20px;
+            height: 20px;
             z-index: 300;
 
 
         }
 
-        #time_readout {
+        #time_wrapper {
             position: fixed;
             top: 0;
             left: 25;
-/*
-            width: 3em;
-            height: 3em;
-*/
-            background: transparent;
+            background: rgba(56, 0, 0, 0.5);
             display: block;
             color: white;
+            padding-left: 8px;
+            padding-right: 10px;
+            border-radius: 10px;
+            border-left: 2px dotted white;
+            border-right: 2px dotted white;
+            z-index: 101;
+
+            padding-top: 1px;
+            height: 24px;
         }
-        #time_data {
-            font-size: 14px;
+
+        #time_text {
+            font-size: 17px;
+            font-family: monospace;
+            font-style: italic;
             color: white;
+            padding-left: 2px;
+            padding-right: 4px;
+            z-index: 102;
+
         }
     </style>
 
@@ -163,12 +171,11 @@
 
 <body>
 
-    <div id='time_readout'>
-        <h3 id='time_data'>Average Chatter Rate</h3>
+    <div id='time_wrapper'>
+        <h3 id='time_text'>Average Chatter Rate</h3>
         <script>
-        const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large",];
-        const timeelm = document.getElementById('time_data');
-            
+            const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large", "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large"];
+            const timeelm = document.getElementById('time_text');
         </script>
     </div>
     <div id="screenwrap">
@@ -212,23 +219,22 @@
         <!-- <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>  -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-        
-    </div> <!-- screenwrap -->
- <script src="/clownfilter.js"></script>	 
- <script src="/redundancycheck.js"></script>
-    <script>
 
+    </div> <!-- screenwrap -->
+    <script src="/clownfilter.js"></script>
+    <script src="/redundancycheck.js"></script>
+    <script>
         //-=-=-=-=-=-=-=-
 
-//        var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
+        //        var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
         var socket = io.connect('http://159.203.4.98:5000'); //dragoneye2
-        
-//        var socket = io.connect('http://159.203.4.98:3333');
+
+        //        var socket = io.connect('http://159.203.4.98:3333');
 
         socket.on('connect', function() {
             console.log('connected');
         });
-        
+
         socket.on('chat message', function(msg) { //tweet recieved from .js in msg dataform.
 
             colorpass = msg.textcolor;
@@ -265,10 +271,11 @@
             };
 
             if (!msg.media_url) { // missing media icon.
-//                mediaurl = "https://i.imgur.com/Ewjo1lg.png";
-                mediaurl = "https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif";
-                mediaurl = "http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large";
-//                mediaurl = "/favicon.ico";
+                //                mediaurl = "https://i.imgur.com/Ewjo1lg.png";
+                //                mediaurl = "https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif";
+                //                mediaurl = "http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large";
+                mediaurl = "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large";
+                //                mediaurl = "/favicon.ico";
             };
 
             // ******************** BUILDING THINGS SECTION **************************
@@ -290,12 +297,6 @@
                             </li></div>'));
 
 
-
-
-
-
-
-
             } else if (!document.getElementById("RDCheck").checked) {
 
 
@@ -305,25 +306,10 @@
                             <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
                             </li></div>'));
 
-
-
             }
 
-
-
-
-
-
-
-
-
-            //            document.getElementById("messages").prepend("<span>" + (JSON.stringify(msg)) + "</span>");
-
         });
-
     </script>
 
     <!-- {name: "herlo11", id: "1025861989124460544", text: "This is not #MAGA you moron, @realDonaldTrump https://t.co/4zDkVZ61zM", textcolor: "000000", color: "000000", …} -->
-</body>
-
-</html>
+</body></html>
