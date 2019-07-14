@@ -1,5 +1,15 @@
 <!--THIS IS FOX AT THE TOP VERSION-->
+<!--
+TADO LIST:
 
+-remove styling from list item generation.
+
+
+
+- add display/ fontsize options etc.
+- break css up into parts
+
+-->
 
 <html class="style-11">
 
@@ -9,203 +19,14 @@
     <meta name="description" content="datafag">
     <meta name="keywords" content="datafag">
     <meta name="author" content="d74g0n">
-    <link rel="stylesheet" type="text/css" href="/mobiledatafag.css" />
-    <link rel="shortcut icon" href="./favicon.png" />
+
+    <!--FINALS-->
+
+    <link rel="stylesheet" type="text/css" href="/datafag/css/github_datafag.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
+    <link rel="shortcut icon" href="./common/img/favicon.png" />
     <!-- <script src="./reflinkzilch.js"></script>	 -->
-    <style>
-        .navbar {
-            position: fixed;
-            top: 0px;
-            left: 0px;
-            width: 100%;
-            height: 24px;
-            background: black;
-            background: transparent;
-            background: rgba(156, 17, 17, 0.3);
-            margin: 0px;
-            padding: 0px;
-            border-bottom: skyblue solid 1px;
-            z-index: 156;
-            user-select: none;
-        }
 
-        .navbarul {
-            postion: fixed;
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            text-align: center;
-            list-style: none;
-            margin: 0px;
-            padding: 0px;
-            background: red;
-            background: transparent;
-            color: white;
-            align-content: center;
-        }
-
-        #navbarul li {
-            display: inline-block;
-            margin: 0px;
-            padding: 0px;
-            background: transparent;
-            padding-left: 10px;
-            padding-right: 10px;
-            user-select: none;
-        }
-
-        .toplinks {
-            text-decoration: none;
-            font-family: monospace;
-            display: block;
-            padding-left: 6px;
-            padding-right: 6px;
-            color: white;
-            background: transparent;
-        }
-
-        .toplinks:hover {
-            display: block;
-            padding-left: 6px;
-            padding-right: 6px;
-            color: black;
-            background: white;
-            border-radius: 5px;
-        }
-
-
-        #messages {
-            position: absolute;
-            top: 16px;
-            left: 0px;
-            font-family: monospace;
-            width: 100%;
-            color: white;
-            background: transparent;
-            height: auto;
-            padding: 0px;
-            margin: 0px;
-            padding: 0px;
-            margin: 0px;
-            height: 50px;
-
-        }
-
-
-        .topmenu {
-            margin-top: -3px;
-            background: transparent;
-            height: 20px;
-            list-style: none;
-            display: block;
-            float: left;
-            overflow: hidden;
-            visibility: none;
-            margin: 0;
-
-        }
-
-        div#datarecord {
-            position: relative;
-            top: 20px;
-            top: 10px;
-            text-decoration: none;
-            display: block;
-            draggable: "true";
-            background: black;
-            border: 1px solid skyblue;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
-            border-bottom-left-radius: 6px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.4);
-            height: auto;
-        }
-
-        #RDCheck {
-            position: fixed;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            z-index: 300;
-        }
-
-        #RDCheck_label {
-            position: fixed;
-            top: 0px;
-            left: 26px;
-            z-index: 300;
-            color: darkorange;
-            font-family: monospace;
-        }
-
-        #time_wrapper {
-            position: fixed;
-            left: 5px;
-            bottom: 2px;
-            background: rgba(56, 0, 0, 0.5);
-            display: block;
-            color: white;
-            padding-left: 10px;
-            padding-right: 10px;
-            border-radius: 10px;
-            border-left: 2px dotted white;
-            border-right: 2px dotted white;
-            border: 1px dotted white;
-            z-index: 101;
-            padding-top: 1px;
-            height: 24px;
-            transition: 0.5s;
-        }
-
-        #time_text {
-            font-size: 17px;
-            font-family: monospace;
-            font-style: italic;
-            color: blanchedalmond;
-            padding-left: 4px;
-            padding-right: 4px;
-            z-index: 102;
-            transition: 0.5s;
-        }
-
-        #time_text:hover {
-            color: red;
-        }
-
-
-        /*WORKING ON SIDE MENU*/
-        .sidearm {
-            position: fixed;
-            /*            top: 40px;*/
-            top: 68px;
-            /*            top: 20vh;*/
-            left: -102px;
-            width: 118px;
-            height: 34px;
-
-            border: 2px double white;
-            background: rgba(156, 0, 140, 0.2);
-            z-index: 300;
-            border-radius: 25px;
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px;
-
-            color: white;
-            user-select: none;
-            transition: 0.5s;
-            
-              border-top-style: solid;
-  border-right-style: dotted;
-  border-bottom-style: solid;
-  border-left-style: dotted;
-            
-            visibility: hidden;
-        }
-
-    </style>
 
 </head>
 
@@ -223,13 +44,14 @@
         <div id="topnav" , class="navbar">
             <ul id="navbarul" , class="navbarul">
 
-                <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>
-                <li><a href="/fox.html" , class="toplinks" , target="_blank"> FOX? </a></li>
+                <!--                <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>-->
+                <li><a href="https://qmap.pub/" , class="toplinks" , target="_blank"> QMAP </a></li>
+                <li><a href="/fox.html" , class="toplinks" , target="_blank"> MSM </a></li>
                 <!--
                 <li><a href="http://datafag.tk/" , class="toplinks" , target="_blank"> datafag.tk </a></li>
                 <li><a href="http://datafg.tk/" , class="toplinks" , target="_blank"> datafg.tk </a></li>
 -->
-                <li><a href="http://dragonwalls.tk/" , class="toplinks" , target="_blank"> dragonwalls </a></li>
+                <li><a href="http://dragonwalls.tk/" , class="toplinks" , target="_blank"> dataClock </a></li>
             </ul>
         </div> <!-- topnav -->
         <ul id="messages">
@@ -238,7 +60,8 @@
                     <div id="picbox" style="padding-bottom:14px" , "padding-right:2em" , "visibility:visible" , "width:15px">
                         <center>
                             <h2 id="argtit" style="color:white" , "font-size:24px"> Once a d74g0n made an Argus </h2>
-                            <br><img id="argus" , style="visibility: visible" , "width:50%" , src="http://159.203.4.98:5001/Argus-Panoptes.jpg">
+                            <!--                            <br><img id="argus" , style="visibility: visible" , "width:50%" , src="http://159.203.4.98:5001/Argus-Panoptes.jpg">-->
+                            <br><img id="argus" , style="visibility: visible" , "width:50%" , src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
                     </div>
                     </center>
 
@@ -262,9 +85,10 @@
     </div> <!-- screenwrap -->
 
     <div class='sidearm' id='sidearm' onclick="sideactivate()" ondrop="">
-        <span>sidebar</span>
+        <span>QuickList</span>
         <hr>
         <script>
+            //            script building side menu system
             let sideisHidden = true;
 
             function sideactivate() {
@@ -281,39 +105,32 @@
 
                 sideisHidden = !sideisHidden;
 
-
-
                 console.log('sidetoggle!');
             }
 
-//
-//            function dragcheck(ev) {
-//                console.log(event.target.id);
-//                console.log(event.target.src);
-//                //                console.log('-------');
-//                //                console.log(JSON.stringify(event));
-//            }
-//
-//            function drop_handler(ev) {
-//                console.log("Drop");
-//                ev.currentTarget.style.background = "lightyellow";
-//
-//                ev.preventDefault();
-//                var data = ev.dataTransfer.getData("media_url");
-//                ev.target.appendChild(document.getElementById(data));
-//            }
-
         </script>
     </div>
+    <!--endsidearm-->
 
 
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="/clownfilter.js"></script>
-    <script src="/redundancycheck.js"></script>
+    <script src="./datafag/clownfilter.js"></script>
+    <script src="./datafag/redundancycheck.js"></script>
+
     <script>
+        let isDUMPING = false;
+
+        function STARTDUMP() {
+            return isDUMPING = true;
+        }
+
+        function STOPDUMP() {
+            return isDUMPING = false;
+        }
+
         //-=-=-=-=-=-=-=-
 
         //        var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
@@ -327,19 +144,28 @@
 
         socket.on('chat message', function(msg) { //tweet recieved from .js in msg dataform.
 
+            if (isDUMPING) {
+                return console.log(msg);
+            }
+
+
             colorpass = msg.textcolor;
             textpass = msg.text;
             profilepic = msg.profilepic;
             mediaurl = msg.media_url;
             realname = msg.realname;
             screenname = msg.name;
-            colorpass = 'yellowgreen';
+            //            colorpass = 'yellowgreen';
+
+            //            colorpass = 'red';
+
+
             locat = msg.locat;
             desc = msg.desc;
 
             rturl = msg.rt_url;
 
-            //console.log(msg);
+
 
 
             bgpass = msg.color;
@@ -349,23 +175,12 @@
                 rturl = "-=- ";
             };
 
-            mycounter++;
-            if (mycounter == 1) { // :? a: colour alternator
-                bgpass = 'ECC0ED';
-                //  bgpass = 'black'; //notice my hack
-            };
-            if (mycounter > 1) {
-                //bgpass='C0DEED';
-                mycounter = 0;
-                //  bgpass = '0E3561'; //notice my hack
-            };
 
             if (!msg.media_url) { // missing media icon.
-                //                mediaurl = "https://i.imgur.com/Ewjo1lg.png";
-                //                mediaurl = "https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif";
-                //                mediaurl = "http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large";
+                // mediaurl = "https://i.imgur.com/Ewjo1lg.png";
+                // mediaurl = "https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif";
+                // mediaurl = "http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large";
                 mediaurl = "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large";
-                //                mediaurl = "/favicon.ico";
             };
 
             // ******************** BUILDING THINGS SECTION **************************
@@ -378,22 +193,32 @@
 
             if (!isIteminArray(msg, msglist)) {
 
+                colorpass = '#' + colorpass;
+                colorpass = 'white';
+
                 addtoarray(msg);
 
-                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:#' + colorpass + '"><li>\n\
-                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
+                //                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:' + colorpass + '"><li>\n\
+                //                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
+                //                            <div id="media"><center><img src="' + mediaurl + '" download></center></div>\n\
+                //                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:' + bgpass + ', "text-decoration:none"><h1> ' + textpass + ' </h1></a></div>\n\
+                //                            </li></div>'));
+
+
+                $('#messages').prepend(('<div id="datarecord"><li>\n\
+                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
                             <div id="media"><center><img src="' + mediaurl + '" download></center></div>\n\
-                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"><h1> ' + textpass + ' </h1></a></div>\n\
+                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color: white' + '", "background:' + bgpass + ', "text-decoration:none"><h1> ' + textpass + ' </h1></a></div>\n\
                             </li></div>'));
 
 
             } else if (!document.getElementById("RDCheck").checked) {
 
 
-                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:#' + colorpass + '"><li>\n\
-                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
+                $('#messages').prepend(('<div id="datarecord", style="border-color: yellow", "color:' + colorpass + '"><li>\n\
+                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
                             <div id="media"><img src="' + mediaurl + '" download></div>\n\
-                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
+                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
                             </li></div>'));
 
             }
@@ -402,7 +227,6 @@
 
     </script>
 
-    <!-- {name: "herlo11", id: "1025861989124460544", text: "This is not #MAGA you moron, @realDonaldTrump https://t.co/4zDkVZ61zM", textcolor: "000000", color: "000000", …} -->
 </body>
 
 </html>

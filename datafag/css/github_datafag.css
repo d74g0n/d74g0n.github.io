@@ -1,0 +1,450 @@
+@font-face{
+	font-family:'megamono';
+	src: url('/monofonto.ttf');
+}
+
+
+/* DARK-RED THEME CSS
+common css: 
+
+text-shadow: 2px 2px 4px black;
+
+    font-family: 'Cuprum';
+    font-family: 'Verdana';
+    font-family: 'Anonymous Pro';
+    background-color: rgb(156,0,0);
+*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    background: transparent;
+    /*    background: black;*/
+    text-align: center;
+    
+/*    font-family:'megamono';*/
+    
+}
+
+body {
+    background-color: black;
+    /*DEBUGGING*/
+    /*    background-color: transparent;*/
+    overflow: auto;
+    
+             
+    
+}
+
+/*offsets the main list - crucial*/
+li {
+    margin-top: 10px;
+    padding-bottom: 35px;
+    float: none;
+}
+
+/*MAIN RECORD AREA*/
+div#media {
+    position: relative;
+    top: 16px;
+    margin: auto;
+    align-content: center;
+    padding-bottom: 12px;
+}
+
+div#media img {
+    align-content: center;
+    margin: auto;
+    padding: auto;
+    position: relative;
+    object-fit: contain;
+    
+    border: 1px solid skyblue;
+    border: 1px solid rgb(156,0,0);
+    
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    max-width: 99.2vw;
+    min-width: 60vw;
+    max-height: 80vw;
+
+/*    text-shadow: */
+}
+
+div#datarecord {
+    position: relative;
+    text-decoration: none;
+    display: block;
+    draggable: "true";
+    background: black;
+    border: 1px solid skyblue;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+
+    border: 1px solid rgb(156,0,0);
+    
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+
+    /*    transition: 5s;*/
+}
+
+div#maintext a {
+    color: buttonface;
+    background: transparent;
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    margin: 20px;
+    text-align: right;
+    float: right;
+    height: 100%;
+    display: block;
+
+    font-size: 10px;
+    
+
+    border-radius: 10px;
+    
+}
+
+#maintext {
+/*WIPWIPWIP WIP */
+/*        border: 1px solid rgb(156,0,156);*/
+    
+}
+
+
+div#userbox {
+    display: none;
+    text-decoration: none;
+    visibility: hidden;
+    position: absolute;
+}
+
+div#timestamp {
+    width: 98%;
+    margin: auto;
+    margin-top: -11px;
+    /*    text-align: center;*/
+    position: relative;
+    z-index: 200;
+    border: 1px solid skyblue;
+    
+    border: 1px solid rgb(156,0,0);
+    
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    transition: 0.2s;
+    background: transparent;
+    /*    background: rgba(0, 0, 156, 0.2);*/
+}
+
+div#timestamp a {
+    text-decoration: none;
+    font-size: 8px;
+    font-size: 18px;
+    transition: 0.2s;
+    color: skyblue;
+    color: lime;
+    /*    color: lightgray;*/
+
+    width: 100%;
+    display: block;
+    color: white;
+    text-shadow: 2px 2px 4px lime;
+
+}
+
+div#timestamp:hover {
+    display: block;
+    transition: 0.2s;
+    font-style: oblique;
+    color: white;
+}
+
+div#timestamp a:hover {
+    color: white;
+    text-shadow: 2px 2px 4px gold;
+}
+
+.style-11::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+/*
+    background-color: #F5F5F5;
+    background-color: #253447;
+*/
+    background-color: rgba(56,0,0,1);
+/*    color: #f5f2f0;*/
+    border-radius: 10px;
+}
+
+.style-11::-webkit-scrollbar {
+    width: 10px;
+/*
+    background-color: #F5F5F5;
+    background-color: transparent;
+    background-color: skyblue;
+*/
+    background-color: red;
+}
+
+.style-11::-webkit-scrollbar-thumb {
+    background-color: gold;
+    background-color: #3366FF;
+    
+    background-color: rgb(156,0,0);
+
+
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(0deg,
+            rgba(255, 255, 255, 0.5) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.5) 75%,
+            transparent 75%,
+            transparent)
+}
+
+
+.navbar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 24px;
+    background: black;
+    background: transparent;
+    background: rgba(156, 17, 17, 0.3);
+    margin: 0px;
+    padding: 0px;
+    border-bottom: skyblue solid 1px;
+    z-index: 156;
+    user-select: none;
+}
+
+.navbarul {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    background: red;
+    background: transparent;
+    color: white;
+    align-content: center;
+}
+
+#navbarul li {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    background: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    user-select: none;
+}
+
+.toplinks {
+    text-decoration: none;
+    font-family: monospace;
+    display: block;
+    padding-left: 6px;
+    padding-right: 6px;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+    background: transparent;
+    
+    border-radius: 5px;
+    border-left: 1px dotted white;
+    border-right: 1px dotted white;
+}
+
+.toplinks:hover {
+    display: block;
+    padding-left: 6px;
+    padding-right: 6px;
+    color: black;
+    background: white;
+    background: lime;
+    border-radius: 5px;
+    transition: 0.5s;
+    
+
+}
+
+
+#messages {
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    font-family: monospace;
+    width: 100%;
+    color: white;
+    background: transparent;
+    height: auto;
+    padding: 0px;
+    margin: 0px;
+    padding: 0px;
+    margin: 0px;
+    height: 50px;
+    
+/*    border: 1px solid rgb(156,0,0);*/
+
+}
+
+div#datarecord {
+    position: relative;
+    top: 20px;
+    top: 10px;
+    text-decoration: none;
+    display: block;
+/*    draggable: true;*/
+    background: black;
+    border: 1px solid skyblue;
+    
+    border: 1px solid rgb(156,0,0);
+    
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+
+    background: transparent;
+
+    height: auto;
+}
+
+#RDCheck {
+    /*            redundancy checkbox*/
+    position: fixed;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    z-index: 300;
+
+}
+
+#RDCheck_label {
+    position: fixed;
+    top: 0px;
+    left: 26px;
+    z-index: 300;
+    font-family: monospace;
+color: bisque;
+}
+
+#time_wrapper {
+    position: fixed;
+    left: 5px;
+    bottom: 2px;
+    background: rgba(56, 0, 0, 0.5);
+    display: block;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    border-left: 2px dotted white;
+    border-right: 2px dotted white;
+    border: 1px dotted white;
+    z-index: 101;
+    padding-top: 1px;
+    height: 24px;
+    transition: 0.5s;
+}
+
+#time_text {
+    font-size: 17px;
+    font-family: monospace;
+    font-style: italic;
+    color: blanchedalmond;
+    padding-left: 4px;
+    padding-right: 4px;
+    z-index: 102;
+    transition: 0.5s;
+}
+
+#time_text:hover {
+    color: red;
+}
+
+/*WORKING ON SIDE MENU*/
+.sidearm {
+    position: fixed;
+    /*            top: 40px;*/
+    top: 68px;
+    /*            top: 20vh;*/
+    left: -102px;
+    width: 118px;
+    height: 34px;
+
+    border: 2px double white;
+    background: rgba(156, 0, 140, 0.2);
+    z-index: 300;
+    border-radius: 25px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+
+    color: white;
+    user-select: none;
+    transition: 0.5s;
+
+
+    border-top-style: solid;
+    border-right-style: dotted;
+    border-bottom-style: solid;
+    border-left-style: dotted;
+
+                visibility: hidden;
+
+}
+
+/*WORKING ON SIDE MENU*/
+
+
+/*SPLASH SCREEN*/
+#argus {
+    width: 50%;
+    border: 2px solid lime;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 1px;
+    -webkit-animation: imgthrobber 5s linear infinite;
+    -moz-animation: imgthrobber 5s linear infinite;
+    -ms-animation: imgthrobber 5s linear infinite;
+    animation: imgthrobber 5s linear infinite;
+    
+    box-shadow: 0px 10px 40px lime
+}
+
+#argtit {
+    font-size: 1.5em;
+    font-size: 12px;
+/*    background: rgba(0, 0, 0, 0.2);*/
+    border-radius: 20px;
+    width: auto;
+    font-family: monospace;
+}
+
+/*DUNNO::*/
+.eyeon {
+    position: fixed;
+    padding-top: -1px;
+}
+

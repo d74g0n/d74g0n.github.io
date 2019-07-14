@@ -1,0 +1,137 @@
+
+
+@-webkit-keyframes bgthrobber {
+    0% {
+        background: rgba(255, 0, 250, 0.5);
+    }
+
+    25% {
+        background: rgba(55, 255, 250, 0.5);
+    }
+
+    50% {
+        background: rgba(55, 55, 200, 0.6);
+    }
+
+    75% {
+        background: rgba(55, 0, 250, 0.5);
+    }
+
+    100% {
+        background: rgba(255, 0, 250, 0.5);
+    }
+}
+
+@-webkit-keyframes outliner {
+    0% {
+        text-shadow: 4px 5px 15px rgba(255, 69, 0, .8);
+    }
+
+    1% {
+        color: red;
+    }
+
+    25% {
+        text-shadow: 4px 5px 25px rgba(255, 69, 0, 1);
+    }
+
+    96% {
+        color: red;
+    }
+
+    97% {
+        text-shadow: 4px 5px 25px rgba(255, 21, 0, .7);
+    }
+
+    98% {
+        color: transparent;
+    }
+
+    99% {
+        text-shadow: 4px 2px 0px rgba(255, 21, 0, .9);
+    }
+
+    100% {
+        text-shadow: 4px 5px 15px rgba(255, 69, 0, .7);
+    }
+}
+
+@-moz-keyframes outliner {
+    0% {
+        text-shadow: 4px 5px 15px rgba(255, 69, 10, .8);
+    }
+
+    25% {
+        text-shadow: 4px 5px 25px rgba(255, 69, 0, .8);
+    }
+
+    50% {
+        text-shadow: 4px 5px 25px rgba(255, 255, 0, .8);
+    }
+
+    100% {
+        text-shadow: 4px 5px 15px rgba(255, 69, 0, .8);
+    }
+}
+
+@-ms-keyframes outliner {
+    0% {
+        text-shadow: 4px 5px 5px rgba(255, 255, 0, .8);
+    }
+
+    25% {
+        text-shadow: 4px 5px 25px rgba(255, 10, 0, .8);
+    }
+
+    50% {
+        text-shadow: 4px 5px 25px rgba(255, 255, 0, .8);
+    }
+
+    100% {
+        text-shadow: 4px 5px 5px rgba(255, 255, 0, .8);
+    }
+}
+
+@-webkit-keyframes imgthrobber {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    25% {
+        filter: hue-rotate(90deg);
+    }
+
+    50% {
+        filter: hue-rotate(180deg);
+    }
+
+    75% {
+        filter: hue-rotate(270deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@-webkit-keyframes throbber {
+    0% {
+        color: red;
+    }
+
+    25% {
+        color: #E20BE9;
+    }
+
+    50% {
+        color: gold;
+    }
+
+    75% {
+        color: #BD3AFF;
+    }
+
+    100% {
+        color: red;
+    }
+}
