@@ -35,7 +35,6 @@
             width: 100%;
             text-align: center;
             list-style: none;
-
             margin: 0px;
             padding: 0px;
             background: red;
@@ -51,7 +50,6 @@
             background: transparent;
             padding-left: 10px;
             padding-right: 10px;
-
         }
 
         .toplinks {
@@ -107,7 +105,6 @@
         div#datarecord {
             position: relative;
             top: 20px;
-
             top: 10px;
             text-decoration: none;
             display: block;
@@ -118,53 +115,63 @@
             border-top-right-radius: 6px;
             border-bottom-right-radius: 6px;
             border-bottom-left-radius: 6px;
-
             overflow: hidden;
             background: rgba(0, 0, 0, 0.4);
             height: auto;
-
         }
 
         #RDCheck {
-
             position: fixed;
             top: 2px;
             left: 2px;
             width: 20px;
             height: 20px;
             z-index: 300;
+        }
 
-
+        #RDCheck_label {
+            position: fixed;
+            top: 0px;
+            left: 26px;
+            z-index: 300;
+            color: darkorange;
+            font-family: monospace;
         }
 
         #time_wrapper {
             position: fixed;
-            top: 0;
-            left: 25;
+            left: 5px;
+            bottom: 2px;
             background: rgba(56, 0, 0, 0.5);
             display: block;
             color: white;
-            padding-left: 8px;
+            padding-left: 10px;
             padding-right: 10px;
             border-radius: 10px;
             border-left: 2px dotted white;
             border-right: 2px dotted white;
+            border: 1px dotted white;
             z-index: 101;
-
             padding-top: 1px;
             height: 24px;
+            transition: 0.5s;
         }
 
         #time_text {
             font-size: 17px;
             font-family: monospace;
             font-style: italic;
-            color: white;
-            padding-left: 2px;
+            color: blanchedalmond;
+            padding-left: 4px;
             padding-right: 4px;
             z-index: 102;
-
+            transition: 0.5s;
         }
+
+        #time_text:hover {
+            color: red;
+        }
+
     </style>
 
 </head>
@@ -176,6 +183,7 @@
         <script>
             const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large", "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large"];
             const timeelm = document.getElementById('time_text');
+
         </script>
     </div>
     <div id="screenwrap">
@@ -183,11 +191,12 @@
             <ul id="navbarul" , class="navbarul">
 
                 <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>
+                <li><a href="/fox.html" , class="toplinks" , target="_blank"> FOX? </a></li>
                 <!--
                 <li><a href="http://datafag.tk/" , class="toplinks" , target="_blank"> datafag.tk </a></li>
                 <li><a href="http://datafg.tk/" , class="toplinks" , target="_blank"> datafg.tk </a></li>
 -->
-                <li><a href="http://dragonwalls.tk/" , class="toplinks" , target="_blank"> dragonwalls.tk </a></li>
+                <li><a href="http://dragonwalls.tk/" , class="toplinks" , target="_blank"> dragonwalls </a></li>
             </ul>
         </div> <!-- topnav -->
         <ul id="messages">
@@ -212,15 +221,15 @@
             </div>
         </ul>
 
-        <input type="checkbox" id="RDCheck">
+        <input type="checkbox" id="RDCheck" />
+        <span id="RDCheck_label">Filter</span>
 
 
-
-        <!-- <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>  -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 
     </div> <!-- screenwrap -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="/clownfilter.js"></script>
     <script src="/redundancycheck.js"></script>
     <script>
@@ -309,7 +318,10 @@
             }
 
         });
+
     </script>
 
     <!-- {name: "herlo11", id: "1025861989124460544", text: "This is not #MAGA you moron, @realDonaldTrump https://t.co/4zDkVZ61zM", textcolor: "000000", color: "000000", …} -->
-</body></html>
+</body>
+
+</html>

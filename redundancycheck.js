@@ -7,17 +7,16 @@ let deltalist = [];
 var messageul = document.getElementById("messages");
 var msglist = [];
 document.getElementById("RDCheck").checked = true;
-//addtoarray("hello world");
 
 var mycounter = 0
-var filteron = false;// USED?
+var filteron = false; // USED?
 let goodies = ["http://pbs.twimg.com/media/D-Zdr1AU0AAg309.png:large"];
 let DeltaA = new Date();
 
 
 function timeReadout(deltamean) {
-    
-     timeelm.innerHTML = `[ ${deltalist.length} ] @ Rate ${deltamean.toFixed(2)}sec`;
+
+    timeelm.innerHTML = `[${deltalist.length}]@[${deltamean.toFixed(2)}s]`;
 }
 
 
@@ -34,35 +33,35 @@ function isIteminArray(item, arrayData) {
     let matchtype = undefined;
     let testline = undefined;
     // mark time:
-    
-    
-    
+
+
+
     if (DeltaA) {
-        let delta = (new Date() - DeltaA)/1000;
+        let delta = (new Date() - DeltaA) / 1000;
         deltalist.push(delta);
-        
+
         let deltasum = 0;
-        deltalist.forEach(function(num){
+        deltalist.forEach(function (num) {
             deltasum += num;
         });
-        
+
         let deltamean = deltasum / deltalist.length;
-        
-          if (isDebugging) {
-        console.log(`[Last Post:][${delta}s]`);
-        console.log(`[PPS]=>[${deltamean.toFixed(2)}s]-of-[${deltalist.length}]`);
-          }
+
+        if (isDebugging) {
+            console.log(`[Last Post:][${delta}s]`);
+            console.log(`[PPS]=>[${deltamean.toFixed(2)}s]-of-[${deltalist.length}]`);
+        }
         // TIME CODE::
-        
+
         timeReadout(deltamean);
-        
-        
-//        timeelm.innerHTML = `[${deltalist.length}]-[${deltamean.toFixed(2)}sec]`;
-        
+
+
+        //        timeelm.innerHTML = `[${deltalist.length}]-[${deltamean.toFixed(2)}sec]`;
+
         DeltaA = new Date();
     }
-    
-    
+
+
 
     if (isDebugging) {
         console.log(`DEBUG->${item.media_url}`);
@@ -91,11 +90,11 @@ function isIteminArray(item, arrayData) {
             }
             matchtype = 'Flakk/GayPorn';
             matched = true;
-//            return true;
+            //            return true;
         }
 
     });
-    
+
     clownfilter.forEach(function (x) {
 
         if (x == item.media_url) {
@@ -104,7 +103,7 @@ function isIteminArray(item, arrayData) {
             }
             matchtype = 'Clown/Low IQ';
             matched = true;
-//            return true;
+            //            return true;
         }
 
     });
