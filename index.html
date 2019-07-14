@@ -26,6 +26,7 @@
             padding: 0px;
             border-bottom: skyblue solid 1px;
             z-index: 156;
+            user-select: none;
         }
 
         .navbarul {
@@ -50,6 +51,7 @@
             background: transparent;
             padding-left: 10px;
             padding-right: 10px;
+            user-select: none;
         }
 
         .toplinks {
@@ -86,6 +88,7 @@
             padding: 0px;
             margin: 0px;
             height: 50px;
+
         }
 
 
@@ -172,6 +175,36 @@
             color: red;
         }
 
+
+        /*WORKING ON SIDE MENU*/
+        .sidearm {
+            position: fixed;
+            /*            top: 40px;*/
+            top: 68px;
+            /*            top: 20vh;*/
+            left: -102px;
+            width: 118px;
+            height: 34px;
+
+            border: 2px double white;
+            background: rgba(156, 0, 140, 0.2);
+            z-index: 300;
+            border-radius: 25px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+
+            color: white;
+            user-select: none;
+            transition: 0.5s;
+            
+              border-top-style: solid;
+  border-right-style: dotted;
+  border-bottom-style: solid;
+  border-left-style: dotted;
+            
+            visibility: hidden;
+        }
+
     </style>
 
 </head>
@@ -227,6 +260,54 @@
 
 
     </div> <!-- screenwrap -->
+
+    <div class='sidearm' id='sidearm' onclick="sideactivate()" ondrop="">
+        <span>sidebar</span>
+        <hr>
+        <script>
+            let sideisHidden = true;
+
+            function sideactivate() {
+                let side = document.getElementById('sidearm');
+
+                if (sideisHidden) {
+                    side.style.left = '-2px';
+                    side.style.height = '124px';
+
+                } else {
+                    side.style.left = '-102px';
+                    side.style.height = '34px';
+                }
+
+                sideisHidden = !sideisHidden;
+
+
+
+                console.log('sidetoggle!');
+            }
+
+//
+//            function dragcheck(ev) {
+//                console.log(event.target.id);
+//                console.log(event.target.src);
+//                //                console.log('-------');
+//                //                console.log(JSON.stringify(event));
+//            }
+//
+//            function drop_handler(ev) {
+//                console.log("Drop");
+//                ev.currentTarget.style.background = "lightyellow";
+//
+//                ev.preventDefault();
+//                var data = ev.dataTransfer.getData("media_url");
+//                ev.target.appendChild(document.getElementById(data));
+//            }
+
+        </script>
+    </div>
+
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
