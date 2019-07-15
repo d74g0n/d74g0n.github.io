@@ -6,6 +6,6 @@ let pornfilter = ["http://pbs.twimg.com/media/D-chLHZUYAARUGP.jpg:large","http:/
 let bigotry = ["http://pbs.twimg.com/media/D-UXVf5XkAEwEUO.jpg:large","http://pbs.twimg.com/media/D_ff1wAUcAEC-oj.jpg:large"];
 
 
-let version = 0.10;
+let version = 0.11;
 console.log(`filter v${version}`);
 timeelm.innerHTML = `filter v${version}`;
