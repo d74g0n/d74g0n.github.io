@@ -121,7 +121,6 @@ div#maintext a {
     text-shadow: 2px 2px 4px black;
 }
 
-
 div#userbox {
     display: none;
     text-decoration: none;
@@ -176,7 +175,6 @@ div#timestamp a:hover {
     color: white;
     text-shadow: 2px 2px 4px blue;
 }
-
 
 .navbar {
     position: fixed;
@@ -247,7 +245,6 @@ div#timestamp a:hover {
 
 }
 
-
 #messages {
     position: absolute;
     top: 16px;
@@ -267,7 +264,7 @@ div#timestamp a:hover {
 
 }
 
-
+/*REDUNDANCY CHECK AND LABEL*/
 #RDCheck {
     /*            redundancy checkbox*/
     position: fixed;
@@ -289,7 +286,10 @@ user-select: none;
     user-select: none;
 }
 
-#time_wrapper {
+
+
+
+#rate_tracker_window {
     position: fixed;
     left: 5px;
     bottom: 2px;

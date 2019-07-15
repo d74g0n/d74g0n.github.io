@@ -1,0 +1,117 @@
+@font-face{
+	font-family:'digital-clock-font';
+	src: url('/common/fonts/DIGITALDREAM.ttf');
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	background: black url("http://pbs.twimg.com/media/Ddw0aOAUwAAplTe.jpg:large") no-repeat center center fixed;
+	background: black url("https://media.giphy.com/media/d2Z1uF2QgFFYSJtm/giphy.gif") no-repeat center center fixed;
+	/* background: black url("https://media.giphy.com/media/jWs1nLMJEliBa/giphy.gif") no-repeat center center fixed; */
+    z-index: 8;
+    background-size: contain;
+	transition: 1s;
+   overflow: hidden;	
+}
+
+div {
+	width: 100%;
+}
+
+#clockface {
+	position: absolute;
+	bottom: 20px;
+	left: 2%;
+	padding: 0;
+	margin: 0;
+	align: center;
+	text-align: center;
+	font-family: 'Terminal Dosis';
+	font-family: 'VT323';
+	font-size: 100%;
+	font-style: bold;
+	background-color: transparent;
+	overflow: hidden;
+	width: 94%;
+    z-index: 9;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+    
+    object-fit: contain;
+    
+    width: 98vw;
+
+}
+
+#numbers {
+	text-shadow : 4px 5px 25px white;
+	text-shadow : 4px 5px 25px transparent;
+	color: black;
+	color: transparent;
+	font-family: 'digital-clock-font';
+	z-index: 10;
+	position: inline;
+	padding: 10px;
+    cursor: move;
+    z-index: 10;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+
+}
+
+h3 {
+	font-size: 8em;
+}
+
+span {
+	font-family:'digital-clock-font';
+	color: red;	
+	white-space:true;
+	font-size: 2em;
+}
+
+#masterulist {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+	visibility: hidden;
+
+}
+
+#imagelist {
+	position: relative;
+	float: left; 
+	opacity: 0.9;
+	opacity: 0.3;
+	z-index: 11;
+	overflow: hidden;	
+	
+	border-radius: 25px;
+}
+
+#imagelist:hover {
+	
+	opacity: 0.9;
+}
+
+
+a {
+	display: block;	
+	z-index: 12;
+}
+
