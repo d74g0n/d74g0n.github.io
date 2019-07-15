@@ -3,7 +3,7 @@ let clownfilter = ["http://pbs.twimg.com/media/D-cQSmnW4AAzDUB.jpg:large", "http
 
 let pornfilter = ["http://pbs.twimg.com/media/D-chLHZUYAARUGP.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/1145909414001434624/pu/img/QG7rD968GRxEBQrj.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/1141105252176924672/pu/img/ZWx7-WCZT8dWbT0r.jpg:large","http://pbs.twimg.com/media/D8tiae1UEAAO3Qu.jpg:large","http://pbs.twimg.com/media/DfgoF8DWAAI5rJk.jpg:large","http://pbs.twimg.com/media/D8UM3VyU8AAUSFg.jpg:large","http://pbs.twimg.com/media/D7geRBLXYAEbuBf.jpg:large","http://pbs.twimg.com/media/D-kKDoaVUAA-FAl.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/748951771393953793/pu/img/Sh_9_3O_AaFCTqEh.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/1115554310195154944/pu/img/jyaDz43vqvwSJHwC.jpg:large","http://pbs.twimg.com/media/D5MdLXoW4AAAOeZ.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/1106487400396537856/pu/img/NzsPgp230ejhy07O.jpg:large","http://pbs.twimg.com/media/D_HbOIQX4AMi5fx.jpg:large","http://pbs.twimg.com/media/D_IFYYTWkAQHxAA.jpg:large","http://pbs.twimg.com/ext_tw_video_thumb/1137470648085766144/pu/img/KDGAgfe1f0mnilW3.jpg:large"];
 
-let bigotry = ["http://pbs.twimg.com/media/D-UXVf5XkAEwEUO.jpg:large","http://pbs.twimg.com/media/D_ff1wAUcAEC-oj.jpg:large"];
+let bigotry = ["http://pbs.twimg.com/media/D-UXVf5XkAEwEUO.jpg:large","http://pbs.twimg.com/media/D_ff1wAUcAEC-oj.jpg:large","http://pbs.twimg.com/tweet_video_thumb/D_f9E0BXsAARVNl.jpg:large"];
 
 
 let version = 0.11;
