@@ -8,6 +8,10 @@
     border: 1px solid red;
     
     user-select: none;
+    
+        align-content: center;
+    text-align: center;
+    
 }
 
 #spash_toptext {
@@ -41,7 +45,15 @@
     -moz-animation: imgthrobber 5s linear infinite;
     -ms-animation: imgthrobber 5s linear infinite;
     animation: imgthrobber 5s linear infinite;
-
     box-shadow: 0px 10px 40px lime;
+}
 
+
+.splash_Q_frame {
+    position: inherit;
+}
+
+#splash_Q {
+    color: lime;
+    font-size: 20px;
 }
