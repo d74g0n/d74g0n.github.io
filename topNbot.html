@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>topNBot</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+        }
+
+        #menu_jumpto {
+            position: fixed;
+/*            top: 52px;*/
+/*            left: 8px;*/
+            
+            bottom: 98px;
+            right: 98px;
+            
+            user-select: none;
+            width: 64px;
+            height: 64px;
+            border-radius: 180px;
+            border: 2px dotted lime;
+            
+            background: rgba(55,55,55,0.5);
+            
+            overflow: hidden;
+           
+        }
+        
+        #jumptotop {
+/*            background: red;*/
+            height: 32px;
+            width: 64px;
+            align-content: center;
+            text-align: center;
+             font-family: monospace;
+            background: rgba(155,55,55,0.5);
+        }
+        
+        #jumptobottom {
+/*            background: blue;*/
+            height: 32px;
+            width: 64px;
+                align-content: center;
+            text-align: center;
+             font-family: monospace;
+/*            padding-top: 1em;*/
+            background: rgba(55,55,155,0.5);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="menu_jumpto">
+        <div id="jumptotop" onclick="jumptotop()">
+            <span>^<br>top</span>
+        </div>
+
+        <div id="jumptobottom" onclick="jumptobottom()">
+            <span>bottom<br>v</span>
+        </div>
+    </div>
+
+
+</body></html>

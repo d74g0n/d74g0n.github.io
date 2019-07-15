@@ -13,17 +13,19 @@ METADATA! - keywords list.
 
 -->
 
-<html class="style-11">
+<html class="style-red">
 
 <head>
     <title>Datafag</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
     <meta name="description" content="datafag">
-    <meta name="keywords" content="datafag"> 
+    <meta name="keywords" content="datafag">
     <meta name="author" content="d74g0n">
     <!--FINALS-->
 
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_topmenu.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/css/jumpmenu.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/css/spash_tile.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_scrollbars.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/github_datafag.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
@@ -32,39 +34,50 @@ METADATA! - keywords list.
 
 
 </head>
+<!--JUMP MENU-->
+<div id="menu_jumpto">
+    <div id="jumptotop" onclick="jumptotop()">
+        <span>top</span>
+    </div>
+<hr id="jumpdivider">
+    <div id="jumptobottom" onclick="jumptobottom()">
+        <span>bottom</span>
+    </div>
+</div>
+
+<script src="./datafag/jumpmenu.js"></script>
+<!--JUMP MENU END-->
 
 <body>
-
-
     <div id="screenwrap">
+
         <div id="topnav" , class="navbar">
             <ul id="navbarul" , class="navbarul">
-
-                <!--                <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>-->
+                <!--  <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>-->
                 <li><a href="https://qmap.pub/" , class="toplinks" , target="_blank"> QMAP </a></li>
                 <li><a href="/fox.html" , class="toplinks" , target="_blank"> MSM </a></li>
-                <!--
-                <li><a href="http://datafag.tk/" , class="toplinks" , target="_blank"> datafag.tk </a></li>
-                <li><a href="http://datafg.tk/" , class="toplinks" , target="_blank"> datafg.tk </a></li>
--->
                 <li><a href="http://dragonwalls.tk/" , class="toplinks" , target="_blank"> dataClock </a></li>
             </ul>
         </div> <!-- topnav -->
+
+
+
         <ul id="messages">
-            <div id="datarecord_splash" , style="background:#002018 padding:0;">
+            <div id="datarecord_splash">
                 <li style="list-style:none">
-                    <div id="picbox" class="sunburst" style="padding-bottom:14px" , "padding-right:2em" , "visibility:visible" , "width:15px">
+                    <div id="picbox" class="sunburst">
                         <center>
-                            <h2 id="argtit" style="color:white" , "font-size:24px"> Once a d74g0n made an Argus </h2>
-                            <br><img id="argus" , style="visibility: visible" , "width:50%" , src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
+                            <h2 id="spash_toptext"> Once a d74g0n made an Argus </h2>
+                            <br><img id="splash_image" , style="visibility: visible" , "width:50%" , src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
+                        </center>
                     </div>
-                    </center>
+
 
                     <center>
-                        <div id="maintext" class="sunburst" style="margin:0px,padding: 100px;">
-                            <h2 class="sunburst" id="argtit" style="color:white" , "padding-left:20%"> What Woke The ArgUs? </h2>
-                            <h2><br> QAnon, TheGreatAwakening, ObamaGate, <br> WeThePeople, ReleaseTheCures, BigPharm, WWG1WGA,<br> DrainTheSwamp, DeepState, SethRich,<br> Pedofiles, SaveTheChildren </h2> <br>
-                            <h3 style="color:skyblue"> Service Simply Monitors Twitter Chatter <br> * For Educational Purposes Only * </h3><br>
+                        <div id="maintext">
+                            <h2 id="spash_undertext"> What Woke The ArgUs? </h2>
+                            <h2 id="search_terms"><br> QAnon, TheGreatAwakening, ObamaGate, <br> WeThePeople, ReleaseTheCures, BigPharm, WWG1WGA,<br> DrainTheSwamp, DeepState, SethRich,<br> Pedofiles, SaveTheChildren </h2> <br>
+                            <h3 style="color:red"> Service Simply Monitors Twitter Chatter <br> * For Educational Purposes Only * </h3><br>
                             <p>Q</p>
                         </div>
                     </center>
@@ -73,18 +86,24 @@ METADATA! - keywords list.
         </ul>
 
         <input type="checkbox" id="RDCheck" />
-        <span id="RDCheck_label">Filter</span>
-
-    <div id='time_wrapper'>
-        <h3 id='time_text'>Average Chatter Rate</h3>
         <script>
-            const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large", "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large"];
-            const timeelm = document.getElementById('time_text');
+            function movetoBottom() {
+                return window.scrollTo(0, document.body.scrollHeight);
+            }
 
         </script>
-    </div>
-        
-        
+        <span id="RDCheck_label">Filter</span>
+
+        <div id='time_wrapper'>
+            <h3 id='time_text'>Average Chatter Rate</h3>
+            <script>
+                const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large", "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large"];
+                const timeelm = document.getElementById('time_text');
+
+            </script>
+        </div>
+
+
 
     </div> <!-- screenwrap -->
 
@@ -116,13 +135,11 @@ METADATA! - keywords list.
     </div>
     <!--endsidearm-->
 
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="./datafag/clownfilter.js"></script>
     <script src="./datafag/redundancycheck.js"></script>
+
 
     <script>
         let isDUMPING = false;
