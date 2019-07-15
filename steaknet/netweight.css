@@ -116,4 +116,4 @@ transition: 1s;
   
   80% { transform: rotate(5deg); }
   100% { transform: rotate(0deg); }
-}s
+}

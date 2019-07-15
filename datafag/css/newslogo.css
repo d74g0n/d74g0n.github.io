@@ -1,0 +1,47 @@
+#herdnews {
+
+    position: absolute;
+    
+    
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+
+    -webkit-animation: logowonk 11s linear infinite;
+    filter: url(#drop-shadow);
+}
+
+#herdnews img {
+
+    width: inherit;
+    height: inherit;
+    z-index: 200;
+}
+
+
+@-webkit-keyframes logowonk {
+    0% {
+        transform: rotate(0deg);
+        filter: hue-rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-17deg);
+        filter: hue-rotate(90deg);
+    }
+
+    40% {
+        transform: rotate(0deg);
+        filter: hue-rotate(180deg);
+    }
+
+    80% {
+        transform: rotate(17deg);
+        filter: hue-rotate(270deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+        filter: hue-rotate(360deg);
+    }
+}
