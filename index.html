@@ -13,12 +13,12 @@ bonus: do without JQuery.
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
 
     <meta name="description" content="datafag monitors the human collective through The Great Awakening, Enjoy The Show!">
-    <meta name="keywords" content="datafag, qmap, streaming, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
+    <meta name="keywords" content="datafag, qmap, streaming, news, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
     <meta name="robots" content="noarchive" />
     <meta charset="UTF-8">
     <meta name="author" content="d74g0n">
     <!--FB-->
-<!--
+    <!--
 open graph shutdown!?
     <meta property="og:title" content="d74g0n's datafag">
     <meta property="og:image" content="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
@@ -32,6 +32,8 @@ open graph shutdown!?
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_scrollbars.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/github_datafag.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
+    
+    <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />
 
     <link rel="shortcut icon" href="./common/img/favicon.png" />
     <!-- <script src="./reflinkzilch.js"></script>	 -->
@@ -51,15 +53,29 @@ open graph shutdown!?
 <script src="./datafag/jumpmenu.js"></script>
 <!--JUMP MENU END-->
 
+<div id="frameheader">
+    <iframe id="frame" width="640" height="360" src="//ok.ru/videoembed/1384053481044?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+</div>
+    
+    <script src="/datafag/toggle_vis.js"></script>
+    <script src="/common/js/draggable_element.js"></script>
+    <script>
+    dragElement(document.getElementById("frameheader"));
+    </script>
+
+
 <body>
+
+
+
     <div id="screenwrap">
 
         <div id="topnav" , class="navbar">
             <ul id="navbarul" , class="navbarul">
                 <!--  <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>-->
                 <li><a href="https://qmap.pub/" , class="toplinks" , target="_blank"> QMAP </a></li>
-                <li><a href="/datafag/msm/index.html" , class="toplinks" , target="_blank"> MSM </a></li>
-<!--                <li><a href="http://159.203.4.98:3333" , class="toplinks" , target="_blank"> DataClock </a></li>-->
+                <li onclick="toggle_MSN_vis()" class="toplinks"> MSM </li>
+                <!--                <li><a href="http://159.203.4.98:3333" , class="toplinks" , target="_blank"> DataClock </a></li>-->
                 <li><a href="/datafag/clock/index.html" , class="toplinks" , target="_blank"> DataClock </a></li>
             </ul>
         </div> <!-- topnav -->
@@ -83,7 +99,7 @@ open graph shutdown!?
                             <h2 id="search_terms"><br> QAnon, TheGreatAwakening, ObamaGate, WeThePeople, ReleaseTheCures, BigPharm,<br> WWG1WGA, DrainTheSwamp, DeepState, SethRich, Pedofiles, SaveTheChildren </h2> <br>
                             <h3 style="color:bisque"> Service Simply Monitors Twitter Chatter <br> * For Educational Purposes Only * </h3><br>
                             <div class="splash_Q_frame">
-                            <a id="splash_Q" href="https://qmap.pub/" target="_blank">Q</a></div>
+                                <a id="splash_Q" href="https://qmap.pub/" target="_blank">Q</a></div>
 
                         </div>
                     </center>
@@ -161,8 +177,8 @@ open graph shutdown!?
 
         //-=-=-=-=-=-=-=-
 
-                var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
-//        var socket = io.connect('http://159.203.4.98:5000'); //dragoneye2
+        var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
+        //        var socket = io.connect('http://159.203.4.98:5000'); //dragoneye2
 
         //        var socket = io.connect('http://159.203.4.98:3333');
 
@@ -208,7 +224,8 @@ open graph shutdown!?
                 // mediaurl = "https://i.imgur.com/Ewjo1lg.png";
                 // mediaurl = "https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif";
                 // mediaurl = "http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large";
-                mediaurl = "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large";
+                //                mediaurl = "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large";
+                mediaurl = "http://pbs.twimg.com/media/D_fijE7XYAAWKyu.jpg:large";
             };
 
             // ******************** BUILDING THINGS SECTION **************************
