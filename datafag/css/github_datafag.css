@@ -276,7 +276,7 @@ div#timestamp a:hover {
     width: 20px;
     height: 20px;
     z-index: 300;
-
+user-select: none;
 }
 
 #RDCheck_label {
@@ -286,6 +286,7 @@ div#timestamp a:hover {
     z-index: 300;
     font-family: monospace;
     color: bisque;
+    user-select: none;
 }
 
 #time_wrapper {
@@ -316,6 +317,7 @@ div#timestamp a:hover {
     padding-right: 4px;
     z-index: 102;
     transition: 0.5s;
+    user-select: none;
 }
 
 #time_text:hover {

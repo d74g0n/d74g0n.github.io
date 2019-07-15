@@ -1,16 +1,9 @@
 <!--THIS IS FOX AT THE TOP VERSION-->
 <!--
 TADO LIST:
-HEAD:
-METADATA! - keywords list.
-
--remove styling from list item generation.
-
-
-
+- remove styling from list item generation.
 - add display/ fontsize options etc.
-- break css up into parts
-
+bonus: do without JQuery.
 -->
 
 <html class="style-red">
@@ -18,20 +11,30 @@ METADATA! - keywords list.
 <head>
     <title>Datafag</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
-    <meta name="description" content="datafag">
-    <meta name="keywords" content="datafag">
-    <meta name="author" content="d74g0n">
-    <!--FINALS-->
 
+    <meta name="description" content="datafag monitors the human collective through The Great Awakening, Enjoy The Show!">
+    <meta name="keywords" content="datafag, qmap, streaming, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <!--FB-->
+<!--
+open graph shutdown!?
+    <meta property="og:title" content="d74g0n's datafag">
+    <meta property="og:image" content="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
+    <meta property="og:description" content="datafag monitors the human collective through The Great Awakening, Enjoy The Show!">
+-->
+
+    <!--CSS-->
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_topmenu.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/jumpmenu.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/spash_tile.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_scrollbars.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/github_datafag.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
+
     <link rel="shortcut icon" href="./common/img/favicon.png" />
     <!-- <script src="./reflinkzilch.js"></script>	 -->
-
 
 </head>
 <!--JUMP MENU-->
@@ -39,7 +42,7 @@ METADATA! - keywords list.
     <div id="jumptotop" onclick="jumptotop()">
         <span>top</span>
     </div>
-<hr id="jumpdivider">
+    <hr id="jumpdivider">
     <div id="jumptobottom" onclick="jumptobottom()">
         <span>bottom</span>
     </div>
@@ -107,6 +110,7 @@ METADATA! - keywords list.
 
     </div> <!-- screenwrap -->
 
+    <!--construction WIP SIDEARM-->
     <div class='sidearm' id='sidearm' onclick="sideactivate()" ondrop="">
         <span>QuickList</span>
         <hr>
@@ -133,7 +137,7 @@ METADATA! - keywords list.
 
         </script>
     </div>
-    <!--endsidearm-->
+    <!--end sidearm-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -218,13 +222,6 @@ METADATA! - keywords list.
                 colorpass = 'white';
 
                 addtoarray(msg);
-
-                //                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:' + colorpass + '"><li>\n\
-                //                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
-                //                            <div id="media"><center><img src="' + mediaurl + '" download></center></div>\n\
-                //                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:' + bgpass + ', "text-decoration:none"><h1> ' + textpass + ' </h1></a></div>\n\
-                //                            </li></div>'));
-
 
                 $('#messages').prepend(('<div id="datarecord"><li>\n\
                             <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
