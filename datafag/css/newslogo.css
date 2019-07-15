@@ -1,23 +1,17 @@
 #herdnews {
-
     position: absolute;
-    
-    
     width: 128px;
     height: 128px;
     overflow: hidden;
-
     -webkit-animation: logowonk 11s linear infinite;
     filter: url(#drop-shadow);
 }
 
 #herdnews img {
-
     width: inherit;
     height: inherit;
     z-index: 400;
 }
-
 
 @-webkit-keyframes logowonk {
     0% {
