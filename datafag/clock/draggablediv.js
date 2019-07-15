@@ -1,5 +1,5 @@
 //Make the DIV element draggagle:
-dragElement(document.getElementById(("clockface")));
+dragElement(document.getElementById("clockface"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -30,7 +30,7 @@ function dragElement(elmnt) {
     pos4 = e.clientY;
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-  //  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
   function closeDragElement() {

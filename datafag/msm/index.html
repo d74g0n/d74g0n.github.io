@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MSM</title>
+
+    <link rel="shortcut icon" href="./common/img/favicon.ico" />
+    <script src="/common/js/draggable_element.js"></script>
+
+
+    <style>
+        body {
+            background: black;
+        }
+
+        .d74g0nIcon {
+            background: transparent;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            margin: 0;
+            padding: 0;
+            width: 64px;
+            height: 64px;
+        }
+
+
+        #dlogo {
+            width: 64px;
+            height: 64px;
+            transition: 1s;
+            z-index: 100;
+            border-radius: 10px;
+            margin-left: -20px;
+        }
+
+        /*
+        #dlogo:hover {
+            width: 75px;
+            height: 75px;
+            background: gold;
+            background: rgb(250, 244, 32);
+            background: radial-gradient(circle, rgba(250,244,32,1) 0%, rgba(78,65,16,0.19931722689075626) 63%, rgba(0,0,0,0) 95%);
+            20%, rgba(0, 0, 0, 0) 52%);
+        }
+*/
+
+        #dlogo {
+            -webkit-filter: drop-shadow(12px 12px 25px rgba(100, 100, 100, 0.9));
+            filter: url(#drop-shadow);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#AAA')";
+            filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#AAA')";
+        }
+
+        #frameheader {
+            position: fixed;
+            padding: 1em;
+            width: auto;
+            background: green;
+            background: radial-gradient(circle, rgba(250,244,32,1) 0%, rgba(178,15,16,0.79) 63%, rgba(0,0,0,0) 95%);
+            display: block;
+            border-radius: 12px;
+            
+            border: 1px solid red;
+        }
+        
+        #frame {
+            border: 1px solid skyblue;
+            border-radius: 6px;
+        }
+        
+        #frameheader:hover {
+            background: radial-gradient(circle, rgba(250,244,32,1) 0%, rgba(178,80,16,1) 63%, rgba(0,0,0,0) 95%);
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+
+        <div class='d74g0nIcon'>
+            <a href="/index.html" target="_blank" id='menulink'><img id="dlogo" src="/common/img/favicon.png" /></a>
+        </div>
+
+        <div id="source_link">
+            <a href="https://ok.ru/live/profile/572735641684" target="_blank">Borked? Try Source</a>
+        </div>
+
+
+
+        <div id="frameheader">
+            <a href="https://ok.ru/live/profile/572735641684" target="_blank">Borked? Try Source</a><br>
+            <iframe id="frame" width="640" height="360" src="//ok.ru/videoembed/1384053481044?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+        </div>
+
+    </center>
+    <script>
+        let elementtodrag = document.getElementById('frameheader');
+        dragElement(elementtodrag);
+    </script>
+</body></html>
