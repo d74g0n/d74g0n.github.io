@@ -3,18 +3,6 @@
     src: url('/monofonto.ttf');
 }
 
-
-/* DARK-RED THEME CSS
-common css: 
-
-text-shadow: 2px 2px 4px black;
-
-    font-family: 'Cuprum';
-    font-family: 'Verdana';
-    font-family: 'Anonymous Pro';
-    background-color: rgb(156,0,0);
-*/
-
 * {
     margin: 0px;
     padding: 0px;
@@ -25,13 +13,90 @@ text-shadow: 2px 2px 4px black;
 
 body {
     background-color: black;
-    /*DEBUGGING*/
-    /*    background-color: transparent;*/
     overflow: auto;
+}
 
+/*TOP MENU*/
+.navbar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 24px;
+    background: black;
+    background: transparent;
+    /*THEME*/
+    background: rgba(17, 17, 165, 0.3);
+    margin: 0px;
+    padding: 0px;
+    
+    /*THEME RELATED*/
+    border-bottom: blue solid 1px;
+    z-index: 156;
+    user-select: none;
+}
 
+.navbarul {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    background: transparent;
+    color: white;
+    align-content: center;
+}
+
+#navbarul li {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    background: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    user-select: none;
+}
+
+.toplinks {
+    text-decoration: none;
+    font-family: monospace;
+    display: block;
+    padding-left: 6px;
+    padding-right: 6px;
+    
+    
+    
+    text-shadow: 2px 2px 4px black;
+    background: transparent;
+
+    border-radius: 5px;
+    border-left: 1px dotted white;
+    border-right: 1px dotted white;
+    
+    color: goldenrod;
+}
+
+.toplinks:hover {
+    display: block;
+    padding-left: 6px;
+    padding-right: 6px;
+    color: white;
+    
+    border-radius: 5px;
+    transition: 0.5s;
+
+    /*THEME RELATED*/
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 156, 1) 51%, rgba(0, 0, 0, 0) 100%);
 
 }
+
+
+
+
+
 
 /*offsets the main list - crucial*/
 li {
@@ -50,13 +115,18 @@ div#datarecord {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
-    border: 1px solid rgb(156, 0, 0);
+
 
     overflow: hidden;
     background: rgba(0, 0, 0, 0.4);
     top: 10px;
     height: auto;
-    background: linear-gradient(90deg, rgba(9, 36, 0, 0) 0%, rgba(156, 36, 57, 1) 51%, rgba(0, 212, 255, 0) 100%);
+    
+/*    THEME RELATED*/
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 156, 1) 51%, rgba(0, 0, 0, 0) 100%);
+    
+/*    THEMERELATED*/
+    border: 1px solid rgb(0, 0, 156);
 }
 
 div#media {
@@ -74,9 +144,8 @@ div#media img {
     padding: auto;
     position: relative;
     object-fit: contain;
-
-    border: 1px solid skyblue;
-    border: 1px solid rgb(156, 0, 0);
+/*THEME*/
+    border: 1px solid rgb(0, 0, 156);
 
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
@@ -86,7 +155,7 @@ div#media img {
     min-width: 60vw;
     max-height: 80vw;
 
-    box-shadow: 0px 3px 10px red;
+    box-shadow: 0px 3px 10px blue;
     
     /*    text-shadow: */
 }
@@ -129,9 +198,8 @@ div#timestamp {
     /*    text-align: center;*/
     position: relative;
     z-index: 200;
-    border: 1px solid skyblue;
 
-    border: 1px solid rgb(156, 0, 0);
+    border: 1px solid rgb(0, 0, 156);
 
     border-top-left-radius: 1px;
     border-top-right-radius: 1px;
@@ -216,7 +284,7 @@ user-select: none;
     position: fixed;
     left: 5px;
     bottom: 2px;
-    background: rgba(56, 0, 0, 0.5);
+    background: rgba(0, 0, 56, 0.5);
     display: block;
     color: white;
     padding-left: 10px;

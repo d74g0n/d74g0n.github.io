@@ -35,15 +35,47 @@ open graph shutdown!?
     <link rel="stylesheet" type="text/css" href="/datafag/css/jumpmenu.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/spash_tile.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_scrollbars.css" />
-    <link rel="stylesheet" type="text/css" href="/datafag/css/github_datafag.css" />
+    <link id="themelink" rel="stylesheet" type="text/css" href="/datafag/css/github_datafag.css" />
+<!--    <link id="themelink" rel="stylesheet" type="text/css" href="/datafag/css/theme_light.css" />-->
+<!--    <link id="themelink" rel="stylesheet" type="text/css" href="/datafag/css/theme_red.css" />-->
+<!--    <link id="themelink" rel="stylesheet" type="text/css" href="/datafag/css/theme_green.css" />-->
+    
     <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />
-    
-    
-
     <link rel="shortcut icon" href="./common/img/favicon.png" />
     <!-- <script src="./reflinkzilch.js"></script>	 -->
 
+    <script>
+        let tog = 0;
+        const theme = [
+            '/datafag/css/github_datafag.css',
+            '/datafag/themes/theme_blue.css',
+            '/datafag/themes/theme_legoBr.css',
+            '/datafag/themes/theme_red.css',
+            '/datafag/themes/theme_green.css',
+            '/datafag/themes/theme_light.css'
+        ];
+        
+    function toggleTheme() {
+        tog++;
+        if (theme.length == tog) {
+            tog = 0;
+        }
+        console.log(tog);
+        themeFlipper(tog);
+    }    
+        
+        
+        
+    function themeFlipper(themeindex){
+        return document.getElementById('themelink').setAttribute('href', theme[themeindex]);
+    }
+    
+    </script>
+    
+    
+    
+    
 </head>
 <!--JUMP MENU-->
 <div id="menu_jumpto">
@@ -87,7 +119,8 @@ open graph shutdown!?
             <ul id="navbarul" , class="navbarul">
                 <!--  <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>-->
                 <li><a href="https://qmap.pub/" , class="toplinks" , target="_blank"> QMAP </a></li>
-                <li onclick="toggle_MSN_vis()" class="toplinks"> MSM </li>
+                <li onclick="toggleTheme()" class="toplinks"> THEME </li>
+<!--                <li onclick="toggle_MSN_vis()" class="toplinks"> MSM </li>-->
                 <!--                <li><a href="http://159.203.4.98:3333" , class="toplinks" , target="_blank"> DataClock </a></li>-->
                 <li><a href="/datafag/clock/" , class="toplinks" , target="_blank"> DataClock </a></li>
             </ul>

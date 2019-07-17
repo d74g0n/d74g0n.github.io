@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>theme example</title>
+    <style>
+    </style>
+    <link id="pagetheme" rel="stylesheet" type="text/css" href="/themes/default.css">
+    <script type="text/javascript">
+        function setTheme(sheet) {
+            document.getElementById('pagetheme').setAttribute('href', sheet);
+        }
+    </script>
+
+</head>
+
+<body>
+    <h2>Change Style Sheet Without Page Reload</h2>
+    <button onclick="setTheme('dark.css')">Dark Theme</button>
+    <button onclick="setTheme('light.css')">Light Theme</button>
+    <button onclick="setTheme('default.css')">Default Theme</button>
+</body></html>
