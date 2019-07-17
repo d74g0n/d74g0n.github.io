@@ -31,7 +31,7 @@ body {
     padding: 0px;
     
     /*THEME RELATED*/
-    border-bottom: blue solid 1px;
+    border-bottom: red solid 1px;
     z-index: 156;
     user-select: none;
 }
