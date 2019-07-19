@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>hUb</title>
+    <link rel="stylesheet" type="text/css" href="/datahub/hub.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />
+</head>
+<!--MSN WINDOWN-->
+        <div id="frameheader">
+            <iframe id="frame" width="560" height="315" src="//ok.ru/videoembed/1344443915880?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+        </div>
+        <script src="/common/js/draggable_element.js"></script>
+    <script>
+        let elementtodrag = document.getElementById('frameheader');
+        dragElement(elementtodrag);
+    </script>
+<!--MSN WINDOWN-->
+<style>
+   
+</style>
+
+
+<script>
+    let isSideOpen = true;
+
+    function toggle() {
+
+        let difference = document.getElementById('side_menu').style.width;
+
+
+        if (!isSideOpen) {
+            document.getElementById('side_menu').style.left = '0px';
+            document.getElementById('tab').style.opacity = '1';
+            document.getElementById('tab').innerHTML = `close`;
+        } else {
+//            document.getElementById('side_menu').style.left = '-505px';
+            document.getElementById('side_menu').style.left = '-258px';
+            document.getElementById('tab').style.opacity = '0.5';
+            document.getElementById('tab').innerHTML = `>>>`;
+            //            document.getElementById('side_menu').style.left = `${difference}px`;    
+        }
+        isSideOpen = !isSideOpen;
+        console.log(`${-difference}px`);
+        console.log(isSideOpen);
+    }
+
+</script>
+
+<body>
+
+    <div id="side_menu" class="tba">
+        <img class="sm_logo" src="/common/img/punisher_med_white.png" />
+        <img class="sm_gifA" src="https://media.giphy.com/media/AYJvIUh0e3N0Q/giphy.gif" />
+        <hr>
+        <script>
+        // load fox:
+            function loadfox() {
+                document.getElementById('frameheader').style.visibility = "visible";
+            }
+            function loadDataFag() {
+                document.getElementById('view_port').src = "/";
+            }
+            function loadDataWall() {
+                document.getElementById('view_port').src = "/datafag/clock/";
+            }
+        </script>
+        
+        
+        <a id="menuitem" onclick="loadDataFag()">DATAFAG</a>
+        <a id="menuitem" onclick="loadDataWall()">DATAWALL</a>
+        <a id="menuitem" target="_blank" onclick="loadfox()">FOX</a>
+        <hr>
+        <a id="menuitem" href="https://qmap.pub" target="_blank">QMAP</a>
+        
+<hr>
+
+
+
+
+
+
+        <div id="tab" onclick="toggle()">
+            <span>
+                close </span> </div>
+    </div>
+    
+    <iframe id="view_port" src="/"></iframe>
+    
+    
+</body>
+
+</html>

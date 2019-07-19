@@ -59,7 +59,7 @@
       color: black;
       font-style: oblique;
       text-shadow: 0px 1px 2px white;
-
+background: transparent;
   }
 
 
@@ -74,7 +74,7 @@
       /*            padding-top: 1em;*/
       background: rgba(55, 55, 155, 0.5);
       background: rgba(0, 0, 0, 0.2);
-
+background: transparent;
   }
 
 #jumptobottom:hover {
@@ -91,6 +91,7 @@
       color: white;
       font-style: oblique;
       text-shadow: 0px -1px 2px white;
+      background: transparent;
   }
 
   #jumpdivider {

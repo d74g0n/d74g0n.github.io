@@ -2,7 +2,7 @@
        background: black;
    }
 
-   .d74g0nIcon {
+   /*   .d74g0nIcon {
        background: transparent;
        position: fixed;
        top: 0px;
@@ -11,9 +11,9 @@
        padding: 0;
        width: 64px;
        height: 64px;
-   }
+   }*/
 
-
+   /*
    #dlogo {
        width: 64px;
        height: 64px;
@@ -21,7 +21,7 @@
        z-index: 100;
        border-radius: 10px;
        margin-left: -20px;
-   }
+   }*/
 
    /*
         #dlogo:hover {
@@ -34,34 +34,33 @@
         }
 */
 
-   #dlogo {
+   /*   #dlogo {
        -webkit-filter: drop-shadow(12px 12px 25px rgba(100, 100, 100, 0.9));
        filter: url(#drop-shadow);
        -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#AAA')";
        filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#AAA')";
-   }
+   }*/
 
    #frameheader {
        position: fixed;
-       padding: 1em;
-       width: auto;
-       background: green;
-/*       background: radial-gradient(circle, rgba(250, 244, 32, 1) 0%, rgba(178, 15, 16, 0.79) 63%, rgba(0, 0, 0, 0) 95%);*/
-       background: radial-gradient(circle, rgba(17, 244, 17, 1) 0%, rgba(17, 178, 17, 0.5) 63%, rgba(0, 0, 0, 0) 95%);
        display: block;
+       padding: 16px;
+       background: radial-gradient(circle, rgba(17, 244, 17, 1) 0%, rgba(17, 178, 17, 0.5) 63%, rgba(0, 0, 0, 0) 95%);
        border-radius: 12px;
-
-       border: 1px solid red;
-       
-       z-index: 400;
-/*       visibility: hidden;*/
-
+       border: 1px solid lime;
+       z-index: 500;
+       background-image: url(https://media.giphy.com/media/WoD6JZnwap6s8/giphy.gif);
+       background-repeat: repeat;
+       background-size: 300px 300px;
+       visibility: hidden;
+   }
 
    #frame {
        border: 1px solid skyblue;
        border-radius: 6px;
+       z-index: 390;
    }
 
    #frameheader:hover {
-       background: radial-gradient(circle, rgba(250, 244, 32, 1) 0%, rgba(178, 80, 16, 1) 63%, rgba(0, 0, 0, 0) 95%);
+       background: radial-gradient(circle, rgba(17, 344, 17, 1) 0%, rgba(17, 170, 17, 1) 63%, rgba(0, 0, 0, 0) 95%);
    }
