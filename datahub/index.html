@@ -63,8 +63,14 @@
         <hr>
         <script>
             // load fox:
+            let foxtoggler = false;
             function loadfox() {
+                if (!foxtoggler) {
                 document.getElementById('frameheader').style.visibility = "visible";
+                } else {
+                document.getElementById('frameheader').style.visibility = "hidden";
+                }
+                foxtoggler = !foxtoggler;
             }
 
             function loadDataFag() {
