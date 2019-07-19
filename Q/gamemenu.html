@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Index</title>
+</head>
+<style>
+    @font-face {
+        font-family: 'gaming';
+        src: url('/common/fonts/PrStart.ttf');
+    }
+
+    body { background: black; 
+    }
+    
+
+    #menu_container {
+        align-content: left;
+        text-align: center;
+
+
+        
+        margin: 0;
+        padding: 250px;
+        width: 350px;
+    }
+    
+/*    #button_area:hover {
+        opacity: 1;
+          filter: drop-shadow(2px 2px 0px red);
+        background: red;
+        
+    }*/
+
+    .button_text {
+        font-family: 'gaming';
+        font-size: 32px;
+        line-height: 64px;
+        color: grey;
+    }
+    
+    .button_text:hover {
+        color: white;
+        transition: 0.3s;
+    }
+    
+    .button_area{
+        float: left;
+        margin: 0;
+        padding: 0;
+        width: 330px;
+        padding-right: 12px;
+        
+        display: block;
+        background: transparent;
+        
+        
+/*        background: rgba(156,0,0,1);*/
+/*        border: 1px dashed gold;*/
+        
+    }
+    
+
+    img {
+        position: relative;
+        top: 8px;
+        left: 16px;
+        width: 32px;
+        height: 32px;
+        /*        filter: invert(100%);*/
+/*        filter: drop-shadow(2px 2px 2px red);*/
+        padding: 4px;
+
+        opacity: 0.3;
+/*        border: 1px solid white;*/
+    }
+    
+    img:active {
+        opacity: 1;
+    }
+    
+
+</style>
+
+
+<body>
+    <center>
+    <div id="menu_container">
+        <div class="button_area" onclick="console.log('hello!')">
+            <img src="/common/img/punisher_med_white.png"><span class="button_text"> DATAFAG_ </span><br>
+        </div>
+        <div class="button_area">
+            <img src="/common/img/punisher_med_white.png"><span class="button_text"> QMAP.PUB</span><br>
+        </div>
+        <div class="button_area">
+            <img src="/common/img/punisher_med_white.png"><span class="button_text"> VOAT____</span><br>
+        </div>
+        <div class="button_area">
+            <img src="/common/img/punisher_med_white.png"><span class="button_text"> Option 5</span><br>
+        </div>
+        <div class="button_area">
+            <img src="/common/img/punisher_med_white.png"><span class="button_text"> Option 6</span><br>
+        </div>
+
+    </div>
+        </center>
+
+
+</body></html>
