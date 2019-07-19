@@ -54,6 +54,8 @@
         background-repeat: repeat;
           background-size: 300px 300px;
         
+        opacity: 0.8;
+        
     }
 
     #tab {
@@ -188,13 +190,13 @@
             function loadfox() {
                 document.getElementById('view_port').src = "/datafag/msm/index.html";
             }
-            function loadQmap() {
+            function loadDataFag() {
                 document.getElementById('view_port').src = "/";
             }
         </script>
         
         
-        <a id="menuitem" target="_blank" onclick="loadQmap()">QMAP</a>
+        <a id="menuitem" target="_blank" onclick="loadDataFag()">DATAFAG</a>
         <a id="menuitem" target="_blank">ARGUS</a>
         <a id="menuitem" target="_blank" onclick="loadfox()">FOX</a>
 <hr>
@@ -209,7 +211,7 @@
                 close </span> </div>
     </div>
     
-    <iframe id="view_port"></iframe>
+    <iframe id="view_port" src="/"></iframe>
     
     
 </body>

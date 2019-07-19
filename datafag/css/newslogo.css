@@ -8,6 +8,7 @@
     -webkit-animation: logowonk 11s linear infinite;
     filter: url(#drop-shadow);
     z-index: 333;
+    background: transparent;
 }
 
 #herdnews img {
@@ -15,6 +16,7 @@
     height: inherit;
     z-index: 333;
     filter: drop-shadow(2px 2px 1px #F00);
+    background: transparent;
 }
 
 @-webkit-keyframes logowonk {
