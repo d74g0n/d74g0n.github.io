@@ -74,11 +74,22 @@
             function loadDataWall() {
                 document.getElementById('view_port').src = "/datafag/clock/";
             }
+
+            function loadBreaking() {
+                document.getElementById('view_port').src = "/datafag/breaking911/index.html";
+            }
+
+            function LoadCards() {
+//                document.getElementById('view_port').src = "https://genesis55.github.io/QCards/#qcards-source";
+                document.getElementById('view_port').src = "https://genesis55.github.io/QCards/#qcards-viewer";
+            }
         </script>
 
 
         <a id="menuitem" onclick="loadDataFag()">DATAFAG</a>
         <a id="menuitem" onclick="loadDataWall()">DATAWALL</a>
+        <a id="menuitem" onclick="loadBreaking()" style="font-size: 20px">BREAKING911</a>
+        <a id="menuitem" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
         <a id="menuitem" target="_blank" onclick="loadfox()">FOX</a>
         <hr>
         <a id="menuitem" href="https://qmap.pub" target="_blank">QMAP</a>
