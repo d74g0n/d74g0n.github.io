@@ -54,7 +54,6 @@ function checkTime(i) {
 <center>
 	<div id="clockface" >
 	<h3 id="numbers"></h3>
-
 	</div>
 </center>
 
@@ -91,7 +90,7 @@ function dragElement(elmnt) {
     pos4 = e.clientY;
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-  //  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
   function closeDragElement() {

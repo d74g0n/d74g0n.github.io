@@ -26,7 +26,7 @@ div {
 	padding: 0;
 	margin: 0;
 	
-	align: center;
+	align-content: center;
 	text-align: center;
 	font-family: 'Terminal Dosis';
 	font-family: 'VT323';
@@ -36,7 +36,7 @@ div {
 	background: red;
 	background: transparent;
 	overflow: hidden;
-	width: 94%;
+	width: auto;
 	
     z-index: 9;
 

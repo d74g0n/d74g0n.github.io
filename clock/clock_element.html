@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--EXAMPLES
+            /*animation: glitchy 0.1s ease 0.1s infinite;*/
+
+
+-->
+
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: 'digital-clock-font';
+            src: url('DIGITALDREAM.ttf');
+        }
+
+        * {
+            color: white;
+        }
+
+        body {
+            background: black;
+        }
+
+        #clockface {
+            position: absolute;
+            user-select: none;
+            padding: 0;
+            margin: 0;
+
+            width: 154px;
+            height: 28px;
+
+            border: 1px solid lime;
+            border-radius: 25px;
+            opacity: 0.5;
+
+            background-image: url(https://media.giphy.com/media/WoD6JZnwap6s8/giphy.gif);
+            background-repeat: repeat;
+            background-size: 156px 156px;
+            /*            background: transparent;*/
+
+            z-index: 600;
+
+        }
+
+        #numbers {
+            position: absolute;
+            display: block;
+            top: -18px;
+            left: 17px;
+            font-family: 'digital-clock-font';
+            /*            z-index: -100;*/
+            line-height: 27px;
+            user-select: none;
+            background: transparent;
+            z-index: 100;
+            color: lime;
+            transition: color 1s;
+            /*                        border: 1px dashed white;*/
+        }
+
+
+        /*        #numbers:hover {
+            color: white;
+            animation: glitchy 0.1s ease 0.1s infinite;
+        }*/
+
+        #daynight {
+            position: absolute;
+
+            float: right;
+            width: 10px;
+            right: 6px;
+            height: 28px;
+            
+/*            background: red;*/
+            border-radius: 90px;
+/*            border: 1px solid lime;*/
+        }
+
+        #PM {
+            display: block;
+            width: 8px;
+            height: 8px;
+/*            background: black;*/
+            margin-top: 2px;
+        }
+
+        #AM {
+            display: block;
+            width: 8px;
+            height: 8px;
+/*            background: white;*/
+            margin-top: 4px;
+        }
+
+        .circle {
+            line-height: 7px;
+            border-radius: 90px;
+            color: lime;
+            font-size: 4px;
+            background: transparent;
+            border: 1px solid green;
+        }
+    </style>
+
+    <script>
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+
+            if (h > 12) {
+                h -= 12
+            };
+            if (h == 0) {
+                h = 12;
+                ntime = false;
+            };
+
+            document.getElementById('numbers').innerHTML =
+                h + ":" + m + ":" + s;
+            document.title = h + ":" + m + ":" + s;
+            var t = setTimeout(startTime, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i
+            }; // add zero in front of numbers < 10
+            return i;
+        }
+    </script>
+</head>
+
+<body onload="startTime()">
+
+
+
+    <center>
+        <div id="clockface">
+            <h3 class="glitch" id="numbers"></h3>
+<!--            <div id="daynight">
+                <div class="circle" id="PM">P</div>
+                <div class="circle" id="AM">A</div>
+
+            </div>-->
+        </div>
+    </center>
+
+    <script>
+        //Make the DIV element draggagle:
+        dragElement(document.getElementById(("clockface")));
+
+        function dragElement(elmnt) {
+            var pos1 = 0,
+                pos2 = 0,
+                pos3 = 0,
+                pos4 = 0;
+            if (document.getElementById(elmnt.id + "clockface")) {
+                /* if present, the header is where you move the DIV from:*/
+                document.getElementById(elmnt.id + "numbers").onmousedown = dragMouseDown;
+            } else {
+                /* otherwise, move the DIV from anywhere inside the DIV:*/
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                /* stop moving when mouse button is released:*/
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+    </script>
+
+
+
+</body></html>
