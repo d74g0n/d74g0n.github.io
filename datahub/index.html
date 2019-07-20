@@ -26,17 +26,46 @@
     dragElement(elementtodrag);
 </script>
 <!--MSN PIP WINDOW-->
-    
-    
+
+
 <!--    CLOCK-->
-    
+
 <!--    	<div id="clockface" >
 	<h3 id="numbers"> 88:88 </h3>
 	</div>
     -->
 <!--    CLOCK-->
 <style>
+    #inflater_filler {
+        /*        border: 1px solid red;*/
+        height: 250px;
+    }
 
+    #hints {
+        position: relative;
+        float: inherit;
+        bottom: 0px;
+        padding-left: 8px;
+        padding-right: 8px;
+        border-left: 1px dotted white;
+        border-right: 1px dotted white;
+        border-radius: 15px;
+        width: auto;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    #superhint {
+        font-style: monospace;
+        color: lime;
+        font-size: 12px;
+        line-height: 2px
+    }
+
+    #hint {
+        color: blanchedalmond;
+        font-family: monospace;
+    }
 </style>
 
 
@@ -108,26 +137,87 @@
             function LoadDocumentaries() {
                 document.getElementById('view_port').src = "/datafag/documentary/index.html";
             }
+
+            //            BASIC TOOLTIPS SYSTEM
+            function hintsystem(selector) {
+
+                let readout = document.getElementById('hint');
+                let superreadout = document.getElementById('superhint');
+
+                switch (selector) {
+                    case 'DATAFAG':
+                        readout.innerHTML = "A Twitter Monitor";
+                        superreadout.innerHTML = "DATAFAG";
+                        break;
+                    case 'DATAWALL':
+                        readout.innerHTML = "Datafag in wallpaper mode.  Great for stores!";
+                        superreadout.innerHTML = "DATAWALL";
+                        break;
+                    case 'BREAKING911':
+                        readout.innerHTML = "Not fake news!";
+                        superreadout.innerHTML = "@BREAKING911";
+                        break;
+                    case 'QRESEARCH':
+                        readout.innerHTML = "The Foremost Frontline of Truth Research";
+                        superreadout.innerHTML = "QRESEARCH";
+                        break;
+                    case 'QCARDS':
+                        readout.innerHTML = "Legendary Q Cards";
+                        superreadout.innerHTML = "QCARDS";
+                        break;
+                    case 'DOCUMENTARIES':
+                        readout.innerHTML = "Random videos you may find eye opening";
+                        superreadout.innerHTML = "DOCUMENTARIES";
+                        break;
+                    case 'FOX':
+                        readout.innerHTML = "Opens Fox PIP Window <br> Glitchy/Jenky/Beware!";
+                        superreadout.innerHTML = "FOX";
+                        break;
+                    case 'QMAP':
+                        readout.innerHTML = "Official Hub of the QAnon movement <br> (opens new window!)";
+                        superreadout.innerHTML = "QMAP";
+                        break;
+                    case 'VOAT':
+                        readout.innerHTML = "A Secondary frontline of Truth Research <br> (opens new window!)";
+                        superreadout.innerHTML = "VOAT";
+                        break;
+                    case 'WG1WGA':
+                        readout.innerHTML = "A Wonderful Freespeech Social Media Platform";
+                        superreadout.innerHTML = "WG1WGA";
+                        break;
+                    default:
+                        console.log(`Case Mismatch/No-Match:${selector}`);
+                }
+            }
         </script>
 
 
-        <a id="menuitem" onclick="loadDataFag()">DATAFAG</a>
-        <a id="menuitem" onclick="loadDataWall()">DATAWALL</a>
-        <a id="menuitem" onclick="loadBreaking()" style="font-size: 20px">BREAKING911</a>
-        <a id="menuitem" onclick="loadQreee()" style="font-size: 20px">QRESEARCH</a>
-        <a id="menuitem" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
-        <a id="menuitem" onclick="LoadDocumentaries()" style="font-size: 17px">DOCUMENTARIES</a>
-        <a id="menuitem" target="_blank" onclick="loadfox()">FOX</a>
+        <a id="menuitem" onmouseover="hintsystem('DATAFAG')" onclick="loadDataFag()">DATAFAG</a>
+        <a id="menuitem" onmouseover="hintsystem('DATAWALL')" onclick="loadDataWall()">DATAWALL</a>
+        <a id="menuitem" onmouseover="hintsystem('BREAKING911')" onclick="loadBreaking()" style="font-size: 20px">BREAKING911</a>
+        <a id="menuitem" onmouseover="hintsystem('QRESEARCH')" onclick="loadQreee()" style="font-size: 20px">QRESEARCH</a>
+        <a id="menuitem" onmouseover="hintsystem('QCARDS')" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
+        <a id="menuitem" onmouseover="hintsystem('DOCUMENTARIES')" onclick="LoadDocumentaries()" style="font-size: 17px">DOCUMENTARIES</a>
+        <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="loadfox()">FOX</a>
         <hr>
-        <a id="menuitem" href="https://qmap.pub" target="_blank">QMAP</a>
-        <a id="menuitem" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
+        <a id="menuitem" onmouseover="hintsystem('QMAP')" href="https://qmap.pub" target="_blank">QMAP</a>
+        <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
         <hr>
-        <a id="menuitem" href="https://wg1wga.com/" target="_blank">WG1WGA</a>
+        <a id="menuitem" onmouseover="hintsystem('WG1WGA')" href="https://wg1wga.com/" target="_blank">WG1WGA</a>
         <hr>
-        <div id="tab" onclick="toggle()">
-            <span>
-                close </span> </div>
+        <div id="tab" onclick="toggle()"><span>close</span></div>
+
+        <!--MOUSEOVERTIPS-->
+        <div id='inflater_filler'></div>
+        <hr>
+        <div id="hints">
+            <h1 id='superhint'>tips</h1>
+            <h2 id='hint'>a twitter scraper</h2>
+        </div>
+
+        <!--MOUSEOVERTIPS-->
     </div>
+    <!--SIDEMENU-->
 
     <iframe id="view_port" src="/"></iframe>
 
