@@ -76,7 +76,7 @@
 
 </style>
 
-<body>
+<body onclick="clickedstart()">
     <center>
         <br><br><br><br>
         <div id='container' onclick="enterNoise()">
@@ -115,6 +115,14 @@
                         audio.play();
                     }
 
+                    
+                    function clickedstart() {
+                        setTimeout(fwdDatafag, 1000);
+                    }
+                    
+                    function fwdDatafag() {
+                        return window.location.href = "/";
+                    }
                 </script>
             </center>
 
