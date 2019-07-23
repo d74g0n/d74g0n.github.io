@@ -9,18 +9,14 @@
 <style>
     @font-face {
         font-family: 'gaming';
-        src: url('/common/fonts/PrStart.ttf');
-    }
-
-    * {
-        /*        transition: 0.2s;*/
+/*        src: url('/common/fonts/PrStart.ttf');*/
+        src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+/*        src: url('/common/fonts/PrStart.ttf');*/
+/*        src: url('/common/fonts/PrStart.ttf');*/
     }
 
     body {
         background: black;
-
-        /*        background: white;*/
-
         color: white;
         width: auto;
         align-content: center;
@@ -28,32 +24,24 @@
     }
 
     #container {
-        /*        margin-top: 54px;*/
         align-content: center;
         text-align: center;
-        /*        padding: 18px;*/
+
         margin: 0;
         padding: 0;
-
 
         background: black;
         border-radius: 65px;
         width: 800px;
         min-width: 500px;
         height: 900px;
-
-        /*        border: 1px solid lime;*/
     }
 
     img {
         margin: 64px;
         width: 600px;
 
-
         max-width: 60vw;
-
-
-
         image-rendering: -moz-crisp-edges;
         /* Firefox */
         image-rendering: -o-crisp-edges;
@@ -63,7 +51,6 @@
         image-rendering: crisp-edges;
         -ms-interpolation-mode: nearest-neighbor;
         /* IE (non-standard property) */
-
     }
 
     #pressstart {
@@ -73,7 +60,6 @@
         font-size: auto;
         transition: 0.2s;
     }
-
 </style>
 
 <body onclick="clickedstart()">
@@ -100,11 +86,10 @@
                         animation: blink 2s step-start 1s infinite;
                         /*        -webkit-animation: blink 2s step-start 1s infinite;*/
                     }
-
                 </style>
                 <span id="pressstart" class="blink"> Press Start </span>
                 <script>
-//                    let audio = new Audio('/common/audio/sfx_plink.wav');
+                    //                    let audio = new Audio('/common/audio/sfx_plink.wav');
                     let audio = new Audio('/common/audio/sfx_explosion.wav');
 
                     function enter() {
@@ -115,11 +100,11 @@
                         audio.play();
                     }
 
-                    
+
                     function clickedstart() {
                         setTimeout(fwdDatafag, 1000);
                     }
-                    
+
                     function fwdDatafag() {
                         return window.location.href = "/";
                     }
@@ -128,6 +113,4 @@
 
         </div>
     </center>
-</body>
-
-</html>
+</body></html>
