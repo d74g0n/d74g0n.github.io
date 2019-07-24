@@ -21,6 +21,11 @@
             width: 370px;
         }
 
+        #chaninput {
+            padding-left: 8px;
+            width: 350px;
+        }
+
         input {
             line-height: 18px;
             margin: 2px;
@@ -29,30 +34,45 @@
 </head>
 
 <body>
-<center>
-    <div id="datainputframe">
-        <form>
-            URL: <input type="text" id="urlinput" value="" /><input type="button" value="Popout" onclick="popOut()" />
-        </form>
-    </div>
+    <center>
+        <div id="datainputframe">
+            <form>
+                TWITCH: <input type="text" id="chaninput" value="" /><input type="button" value="Twitch" onclick="twitchchan()" />
+            </form>
+        </div>
+        <div id="datainputframe">
+            <form>
+                URL: <input type="text" id="urlinput" value="" /><input type="button" value="Popout" onclick="popOut()" />
+            </form>
+        </div>
+
     </center>
 
 
     <script src="/common/js/minimal_window.js"></script>
-    
+
     <script>
+        function prepMinTwitch(data) {
+            let addy = `https://player.twitch.tv/?volume=0.5&!muted&channel=${data}`;
+            openMinWindow(addy);
+        }
         function popOut() {
             // this function pulls the data(value) from the inputbox and sends it to the common function.
             let idata = document.getElementById('urlinput').value;
             openMinWindow(idata);
         }
+        function twitchchan() {
+            // this function pulls the data(value) from the inputbox and sends it to the common function.
+            let idata = document.getElementById('chaninput').value;
+            prepMinTwitch(idata);
+        }
 
-//        function openMinWindow(requrl) {
-//            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-//width=600,height=300,left=100,top=100`;
-//
-//            open(requrl, 'test', params);
-//
-//        }
+        //        function openMinWindow(requrl) {
+        //            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+        //width=600,height=300,left=100,top=100`;
+        //
+        //            open(requrl, 'test', params);
+        //
+        //        }
     </script>
 </body></html>
