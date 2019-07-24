@@ -230,13 +230,15 @@
         <!-- <script src="./socketcontrol.js"></script>	 -->
     </div> <!-- screenwrap -->
 
- <script src="/redundancycheck.js"></script>
+<!-- <script src="/redundancycheck.js"></script>-->
     <script>
 
         //-=-=-=-=-=-=-=-
 
         var socket = io.connect('http://159.203.4.98:5001');
-
+let mycounter  = 0;
+        
+        
         socket.on('chat message', function(msg) { //tweet recieved from .js in msg dataform.
 
             colorpass = msg.textcolor;
@@ -284,35 +286,35 @@
 
             //console.log("HERHEHERHERHE - ?: " + (isIteminArray(msg, msglist)));
 
-            if (!isIteminArray(msg, msglist)) {
-
-                addtoarray(msg);
-
-                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:#' + colorpass + '"><li>\n\
-                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
-                            <div id="media"><img src="' + mediaurl + '" download></div>\n\
-                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
-                            </li></div>'));
-
-
-
-
-
-
-
-
-            } else if (!document.getElementById("RDCheck").checked) {
-
-
-                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:#' + colorpass + '"><li>\n\
-                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
-                            <div id="media"><img src="' + mediaurl + '" download></div>\n\
-                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
-                            </li></div>'));
-
-
-
-            }
+//            if (!isIteminArray(msg, msglist)) {
+//
+//                addtoarray(msg);
+//
+//                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:#' + colorpass + '"><li>\n\
+//                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
+//                            <div id="media"><img src="' + mediaurl + '" download></div>\n\
+//                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
+//                            </li></div>'));
+//
+//
+//
+//
+//
+//
+//
+//
+//            } else if (!document.getElementById("RDCheck").checked) {
+//
+//
+//                $('#messages').prepend(('<div id="datarecord", style="border-color:#' + bgpass + '", "color:#' + colorpass + '"><li>\n\
+//                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
+//                            <div id="media"><img src="' + mediaurl + '" download></div>\n\
+//                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:#' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
+//                            </li></div>'));
+//
+//
+//
+//            }
 
 
 
@@ -326,6 +328,11 @@
 
         });
 
+        let st = document.getElementById('argus');
+        console.log(st.getAttribute(screenLeft));
+        console.log(`left:${JSON.stringify(st.getBoundingClientRect)}`);
+        
+        
     </script>
 
     <!-- {name: "herlo11", id: "1025861989124460544", text: "This is not #MAGA you moron, @realDonaldTrump https://t.co/4zDkVZ61zM", textcolor: "000000", color: "000000", …} -->
