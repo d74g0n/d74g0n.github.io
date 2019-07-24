@@ -8,43 +8,51 @@
             background: black;
             color: white;
         }
-        #urlinput {
-            padding-left: 8px;
+
+        #datainputframe {
+            margin: auto;
+            padding: auto;
+            width: 500px;
+            border: 1px solid white;
         }
 
+        #urlinput {
+            padding-left: 8px;
+            width: 370px;
+        }
+
+        input {
+            line-height: 18px;
+            margin: 2px;
+        }
     </style>
 </head>
 
 <body>
-
+<center>
     <div id="datainputframe">
         <form>
-            Enter No:<input type="text" id="urlinput" name="chan" value="/" /><br />
-            <input type="button" value="Popout" onclick="popOut()" />
+            URL: <input type="text" id="urlinput" name="chan" value="/" /><input type="button" value="Popout" onclick="popOut()" />
         </form>
-
     </div>
+    </center>
 
 
+    <script src="/common/js/minimal_window.js"></script>
+    
     <script>
-        
         function popOut() {
-            
+            // this function pulls the data(value) from the inputbox and sends it to the common function.
             let idata = document.getElementById('urlinput').value;
             openMinWindow(idata);
-            
-        }
-        
-        
-        function openMinWindow(requrl) {
-            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-width=600,height=300,left=100,top=100`;
-
-            open(requrl, 'test', params);
-
         }
 
+//        function openMinWindow(requrl) {
+//            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+//width=600,height=300,left=100,top=100`;
+//
+//            open(requrl, 'test', params);
+//
+//        }
     </script>
-</body>
-
-</html>
+</body></html>

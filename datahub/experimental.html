@@ -1,0 +1,248 @@
+`<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>d74g0nWatch</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="d74g0n's DataHub ties all data related to The Great Awakening into one location, Enjoy The Show!">
+    <meta name="keywords" content="datafag, qmap, streaming, news, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/datahub/hub.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />
+
+</head>
+
+<!--MSN PIP WINDOW-->
+<div id="frameheader">
+    <iframe id="frame" width="560" height="315" src="//ok.ru/videoembed/1348502036072?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+</div>
+<script src="/common/js/draggable_element.js"></script>
+<script>
+    let elementtodrag = document.getElementById('frameheader');
+    dragElement(elementtodrag);
+</script>
+<!--MSN PIP WINDOW-->
+
+
+<!--    CLOCK-->
+
+<!--    	<div id="clockface" >
+	<h3 id="numbers"> 88:88 </h3>
+	</div>
+    -->
+<!--    CLOCK-->
+<style>
+    #inflater_filler {
+        /*        border: 1px solid red;*/
+        height: 250px;
+        height: 10vh;
+    }
+
+    #hints {
+        position: relative;
+        float: inherit;
+        bottom: 0px;
+        padding-left: 8px;
+        padding-right: 8px;
+        border-left: 1px dotted white;
+        border-right: 1px dotted white;
+        border-radius: 15px;
+        width: auto;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    #superhint {
+        font-style: monospace;
+        color: lime;
+        font-size: 12px;
+        line-height: 2px
+    }
+
+    #hint {
+        color: blanchedalmond;
+        font-family: monospace;
+    }
+</style>
+
+
+<script>
+    let isSideOpen = true;
+
+    function toggle() {
+
+        let difference = document.getElementById('side_menu').style.width;
+
+        if (!isSideOpen) {
+            document.getElementById('side_menu').style.left = '0px';
+            document.getElementById('tab').style.opacity = '1';
+            document.getElementById('tab').innerHTML = `close`;
+        } else {
+            document.getElementById('side_menu').style.left = '-258px';
+            document.getElementById('tab').style.opacity = '0.5';
+            document.getElementById('tab').innerHTML = `>>>`;
+        }
+        isSideOpen = !isSideOpen;
+        console.log(`${-difference}px`);
+        console.log(isSideOpen);
+    }
+</script>
+
+<body>
+
+    <div id="side_menu">
+        <img class="sm_logo" src="/common/img/punisher_med_white.png" />
+        <img class="sm_gifA" src="https://media.giphy.com/media/AYJvIUh0e3N0Q/giphy.gif" />
+        <hr>
+        <script>
+            // load fox:
+            let foxtoggler = false;
+
+            function loadfox() {
+                if (!foxtoggler) {
+                    document.getElementById('frameheader').style.visibility = "visible";
+                } else {
+                    document.getElementById('frameheader').style.visibility = "hidden";
+                }
+                foxtoggler = !foxtoggler;
+            }
+
+            function loadDataFag() {
+                document.getElementById('view_port').src = "/";
+            }
+
+            function loadDataWall() {
+                document.getElementById('view_port').src = "/datafag/clock/";
+            }
+
+            function loadBreaking() {
+                document.getElementById('view_port').src = "/datafag/breaking911/index.html";
+            }
+
+            function loadQreee() {
+                document.getElementById('view_port').src = "https://8ch.net/qresearch/catalog.html";
+            }
+
+            function LoadCards() {
+                // document.getElementById('view_port').src = "https://genesis55.github.io/QCards/#qcards-source";
+                document.getElementById('view_port').src = "https://genesis55.github.io/QCards/#qcards-viewer";
+            }
+
+            function LoadDocumentaries() {
+                document.getElementById('view_port').src = "/datafag/documentary/index.html";
+            }
+
+            function scrollWin(y) {
+                console.log(`y=${y}`);
+                return window.scrollBy(0, y);
+            }
+
+
+            function loadPatriotsFight() {
+                document.getElementById('view_port').src = "https://8ch.net/patriotsfight/res/440.html";
+
+
+
+                return setInterval(scrollWin(100), 3000);
+            }
+
+            //            BASIC TOOLTIPS SYSTEM
+            function hintsystem(selector) {
+
+                let readout = document.getElementById('hint');
+                let superreadout = document.getElementById('superhint');
+
+                switch (selector) {
+                    case 'DATAFAG':
+                        readout.innerHTML = "A Twitter Monitor <br> no https*";
+                        superreadout.innerHTML = "DATAFAG";
+                        break;
+                    case 'DATAWALL':
+                        readout.innerHTML = "Datafag in wallpaper mode.  Great for stores!<br> no https*";
+                        superreadout.innerHTML = "DATAWALL";
+                        break;
+                    case 'BREAKING911':
+                        readout.innerHTML = "Not fake news!";
+                        superreadout.innerHTML = "@BREAKING911";
+                        break;
+                    case 'QRESEARCH':
+                        readout.innerHTML = "The Foremost Frontline of Truth Research";
+                        superreadout.innerHTML = "QRESEARCH";
+                        break;
+                    case 'QCARDS':
+                        readout.innerHTML = "Legendary Q Cards";
+                        superreadout.innerHTML = "QCARDS";
+                        break;
+                    case 'DOCUMENTARIES':
+                        readout.innerHTML = "Random videos you may find eye opening";
+                        superreadout.innerHTML = "DOCUMENTARIES";
+                        break;
+                    case 'FOX':
+                        readout.innerHTML = "Opens Fox PIP Window <br> Glitchy/Jenky/Beware!";
+                        superreadout.innerHTML = "FOX";
+                        break;
+                    case 'QMAP':
+                        readout.innerHTML = "Official Hub of the QAnon movement <br> (opens new window!)";
+                        superreadout.innerHTML = "QMAP";
+                        break;
+                    case 'VOAT':
+                        readout.innerHTML = "A Secondary frontline of Truth Research <br> (opens new window!)";
+                        superreadout.innerHTML = "VOAT";
+                        break;
+                    case 'WG1WGA':
+                        readout.innerHTML = "A Wonderful Freespeech Social Media Platform <br>(opens new window!)";
+                        superreadout.innerHTML = "WG1WGA";
+                        break;
+                    case 'WG1WGA':
+                        readout.innerHTML = "";
+                        superreadout.innerHTML = "CLEARMSG";
+                        break;
+                    case 'HINTS':
+                        readout.innerHTML = `<a href="http://d74g0n.github.io/datahub/" style="text-decoration: none; color: lime;">http works better than https due to nature of site showing cross domain 'mixed' (unencrypted) content.</a>`;
+                        superreadout.innerHTML = "HTTP_vs_HTTPS";
+                        break;
+                    default:
+                        console.log(`Case Mismatch/No-Match:${selector}`);
+                }
+            }
+        </script>
+
+
+        <a id="menuitem" onmouseover="hintsystem('DATAFAG')" onclick="loadDataFag()">DATAFAG</a>
+        <a id="menuitem" onmouseover="hintsystem('DATAWALL')" onclick="loadDataWall()">DATAWALL</a>
+        <a id="menuitem" onmouseover="hintsystem('BREAKING911')" onclick="loadBreaking()" style="font-size: 20px">BREAKING911</a>
+        <a id="menuitem" onmouseover="hintsystem('QRESEARCH')" onclick="loadPatriotsFight()" style="font-size: 16px">/PATRIOTSFIGHT/</a>
+        <a id="menuitem" onmouseover="hintsystem('QRESEARCH')" onclick="loadQreee()" style="font-size: 20px">QRESEARCH</a>
+        <a id="menuitem" onmouseover="hintsystem('QCARDS')" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
+        <a id="menuitem" onmouseover="hintsystem('DOCUMENTARIES')" onclick="LoadDocumentaries()" style="font-size: 17px">DOCUMENTARIES</a>
+        <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="loadfox()">FOX</a>
+        <hr>
+        <a id="menuitem" onmouseover="hintsystem('QMAP')" href="https://qmap.pub" target="_blank">QMAP</a>
+        <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
+        <hr>
+        <a id="menuitem" onmouseover="hintsystem('WG1WGA')" href="https://wg1wga.com/" target="_blank">WG1WGA</a>
+        <hr>
+        <div id="tab" onclick="toggle()"><span>close</span></div>
+
+        <!--MOUSEOVERTIPS-->
+        <div id='inflater_filler'></div>
+        <hr>
+        <div id="hints" onmouseover="hintsystem('HINTS')">
+            <h1 id='superhint'>FYI</h1>
+            <h2 id='hint'><a href="http://d74g0n.github.io/datahub/" style="text-decoration: none; color: lime;">http works better than https due to nature of site showing cross domain 'mixed' (unencrypted) content.</a></h2>
+        </div>
+
+        <!--MOUSEOVERTIPS-->
+    </div>
+    <!--SIDEMENU-->
+
+    <!--    <iframe id="view_port" src="/"></iframe>-->
+    <iframe id="view_port" src="/Q/"></iframe>
+
+
+</body></html>
