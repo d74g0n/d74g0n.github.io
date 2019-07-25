@@ -8,74 +8,149 @@
 <html>
 <head>
 
-<title>d74g0n_Toolbox</title>
-	<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0"> 
-	<meta name="description" content= "Tool Menu">
-	<meta name="keywords" content="Tool menu">
-	<meta name="author" content="d74g0n">
-	<link rel="stylesheet" type="text/css" href="toolmenu.css" />
+    <title>d74g0n_Toolbox</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tool Menu">
+    <meta name="keywords" content="Tool menu">
+    <meta name="author" content="d74g0n">
+    <!--	<link rel="stylesheet" type="text/css" href="toolmenu.css" />-->
+
+    <style>
+        @font-face {
+            font-family: 'gaming';
+            src: url('/common/fonts/PrStart.ttf');
+        }
+
+        body {
+            background: black;
+            font-family: 'gaming';
+        }
+
+
+        #menu_container {
+            align-content: left;
+            text-align: center;
+
+
+
+            margin: 0;
+            padding: 250px;
+            width: 350px;
+        }
+
+        /*    #button_area:hover {
+        opacity: 1;
+          filter: drop-shadow(2px 2px 0px red);
+        background: red;
+        
+    }*/
+
+        .button_text {
+            font-family: 'gaming';
+            font-size: 32px;
+            line-height: 64px;
+            color: grey;
+        }
+
+        .button_text:hover {
+            color: white;
+            transition: 0.3s;
+        }
+
+        .button_area {
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 330px;
+            padding-right: 12px;
+
+            display: block;
+            background: transparent;
+
+
+            /*        background: rgba(156,0,0,1);*/
+            /*        border: 1px dashed gold;*/
+
+        }
+
+
+        img {
+            position: relative;
+            top: 8px;
+            left: 16px;
+            width: 32px;
+            height: 32px;
+            /*        filter: invert(100%);*/
+            /*        filter: drop-shadow(2px 2px 2px red);*/
+            padding: 4px;
+
+            opacity: 0.3;
+            /*        border: 1px solid white;*/
+        }
+
+        img:active {
+            opacity: 1;
+        }
+
+
+        /*        NEW SECTION*/
+
+
+        .toolsTitleText {
+            color: palevioletred;
+            color: lightcyan;
+            color: lime;
+            text-decoration: none;
+            font-size: 32px;
+            padding: 6px;
+            display: block;
+            
+/*            border: 2px dotted red;*/
+        }
+        
+        .toolsSubText {
+            display: block;
+            color: lightgrey;
+            width: auto;
+/*            border-left: 1px dotted white;*/
+/*            border-right: 1px dotted red;*/
+/*            border-right: 1px dotted red;*/
+            line-height: 32px;
+            border-radius: 16px;
+            
+            border: 1px dashed red;
+            width: 200px;
+        }
+        
+        #linkul li a {
+            text-decoration: none;
+/*            padding: 12px;*/
+            line-height: 32px;
+        }
+    </style>
+
+
 </head>
+
 <body>
-<img id="webpreviewlogo" src="../favicon.png" />
-<div id="screenwrap">
-<center>
-	<div id="menu" >
-	<h1><a class="d74g0n_Toolbox" href="" target="_blank"> d74g0n_Toolbox </a></h1>
-			<ul id="linkul"><i>
-			<li><a target="_blank" href="viewport/"> Browser Viewport Dimensions </a></li>
-			<li><a target="_blank" href="base64/"> BASE64 encoding </a></li>
-			<!-- <li><a target="_blank" href="quickcopy/"> HTML_BOX </a></li> -->
-			<!-- <li><a target="_blank" href="viewport/standalone"> Browser Viewport Dimensions (Standalone) </a></li> -->
-			<li><img id="police", style="visibility: visible", src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif"></li>
-		</i></ul>
-	</div>
-</center>
+<!--    <img id="webpreviewlogo" src="../favicon.png" />-->
+    <div id="screenwrap">
+        <center>
+            <div id="menu">
+                <a class="toolsTitleText" href="/tools/index.html" target="_blank"> d74g0n_Toolbox </a><br>
+                <span class="toolsSubText"> HTMLTOOLS </span>
+                <ul id="linkul"><i>
+                        <li><a target="_blank" href="viewport/"> Browser Viewport Dimensions </a></li>
+                        <li><a target="_blank" href="base64/"> BASE64 encoding </a></li>
+                        <li><a target="_blank" href="base64_viewer/"> BASE64 Viewing </a></li>
+                        <!-- <li><a target="_blank" href="quickcopy/"> HTML_BOX </a></li> -->
+                        <!-- <li><a target="_blank" href="viewport/standalone"> Browser Viewport Dimensions (Standalone) </a></li> -->
+                        <li><img id="police" , style="visibility: visible" , src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif"></li>
+                    </i></ul>
+            </div>
+        </center>
 
-<script>
-//Make the DIV element draggagle:
-dragElement(document.getElementById(("clockface")));
-
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "clockface")) {
-    /* if present, the header is where you move the DIV from:*/
-    document.getElementById(elmnt.id + "numbers").onmousedown = dragMouseDown;
-  } else {
-    /* otherwise, move the DIV from anywhere inside the DIV:*/
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-		//  elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
-
-  function closeDragElement() {
-    /* stop moving when mouse button is released:*/
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
-</script>	
-</div> <!-- screenwrap -->
+    </div> <!-- screenwrap -->
 
 
-</body>
-</html>
+</body></html>
