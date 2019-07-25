@@ -221,6 +221,36 @@
         <a id="menuitem" onmouseover="hintsystem('QCARDS')" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
         <a id="menuitem" onmouseover="hintsystem('DOCUMENTARIES')" onclick="LoadDocumentaries()" style="font-size: 17px">DOCUMENTARIES</a>
         <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="loadfox()">FOX</a>
+        <script>
+        let panning = false;
+            let count = 1;
+            let timer = [];
+            
+            let doPan = function(){
+                let frame = document.getElementById('view_port');
+                frame.focus();
+//                window.scrollBy(0,16);
+                window.scroll(0,count++);
+                console.log('scrolling');
+                panning = true;
+            }
+            
+            function slowpan() {
+                
+                if (!panning) {
+                    timer.push(setInterval(doPan, 1000));
+                } else {
+                    clearInterval(timer[0]);
+                    panning = false;
+                }
+                
+                
+                
+            }
+        
+        </script>
+        
+        <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="slowpan()">SLOWPAN</a>
         <hr>
         <a id="menuitem" onmouseover="hintsystem('QMAP')" href="https://qmap.pub" target="_blank">QMAP</a>
         <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
