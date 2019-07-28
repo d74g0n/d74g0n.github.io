@@ -1,0 +1,30 @@
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+
+body {
+    color: White;
+    background: black;
+     font-family: '8bitOperatorPlus-Regular';
+    width: 80vw;
+    border: 1px solid lime;
+    margin:auto;
+    padding: auto;
+}
+
+#hearing {
+    color: white;
+}
+
+.sm_logo {
+    width: 156px;
+    height:auto;
+}
+
+#readout {
+    color: lightgrey;
+    line-height: 38px;
+    font-size: 24px
+}

@@ -191,6 +191,10 @@
                         readout.innerHTML = "";
                         superreadout.innerHTML = "CLEARMSG";
                         break;
+                    case 'LEARNCHESS':
+                        readout.innerHTML = "CHESS";
+                        superreadout.innerHTML = "Free online Chess server. Play Chess now in a clean interface. No registration, no ads, no plugin required. Play Chess with the computer, friends or random.  LEARN CHESS";
+                        break;
                     case 'HINTS':
                         readout.innerHTML = `<a href="http://d74g0n.github.io/datahub/" style="text-decoration: none; color: lime;">http works better than https due to nature of site showing cross domain 'mixed' (unencrypted) content.</a>`;
                         superreadout.innerHTML = "HTTP_vs_HTTPS";
@@ -215,6 +219,7 @@
         <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
         <hr>
         <a id="menuitem" onmouseover="hintsystem('WG1WGA')" href="https://wg1wga.com/" target="_blank">WG1WGA</a>
+        <a id="menuitem" onmouseover="hintsystem('LEARNCHESS')" href="https://lichess.org/" target="_blank">CHESS</a>
         <hr>
         <div id="tab" onclick="toggle()"><span>close</span></div>
 
