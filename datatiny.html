@@ -108,7 +108,9 @@ bonus: do without JQuery.
             //                colorpass = 'white';
 
 
-            $('#messages').prepend(('<div id="datarecord"><li><div id="media"><center><img src="' + mediaurl + '" download></center></div><div id="maintext"><a href="' + hrefbuild + '" target="_blank" style="text-decoration:none"><center><h1> OPEN SOURCE </h1><center></a></div></li></div>'));
+//            $('#messages').prepend(('<div id="datarecord"><li><div id="media"><center><img src="' + mediaurl + '" download></center></div><div id="maintext"><a href="' + hrefbuild + '" target="_blank" style="text-decoration:none"><center><h1> OPEN SOURCE </h1><center></a></div></li></div>'));
+            
+            $('#messages').prepend(('<div id="datarecord"><li><div id="media"><center><img src="' + mediaurl + '" download></center></div><div id="maintext"><a href="' + hrefbuild + '" target="_blank" style="text-decoration:none"><center><h1 id="linktext"> '+msg.time+' </h1><center></a></div></li></div>'));
 
 
 
@@ -141,9 +143,9 @@ bonus: do without JQuery.
         }
 
         img {
-            max-width: 256px;
-            height: 256px;
-            width: 256px;
+            min-width: 256px;
+            min-height: 256px;
+/*            width: 256px;*/
             max-height: 256px;
             object-fit: contain;
         }
@@ -167,6 +169,16 @@ bonus: do without JQuery.
         #timestamp {
 
             width: auto;
+        }
+        
+        #linktext {
+            color: grey;
+            transition: 1s;
+        }
+        
+        #linktext:hover{
+            color: skyblue;
+            transition: 5s;
         }
 
     </style>

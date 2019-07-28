@@ -30,22 +30,32 @@
             line-height: 18px;
             margin: 2px;
         }
+
     </style>
+
+
+
 </head>
 
 <body>
     <center>
+        <script src="/common/js/enter_getInput.js"></script>
         <div id="datainputframe">
             <form>
-                TWITCH: <input type="text" id="chaninput" value="d74g0n" /><input type="button" value="Twitch" onclick="twitchchan()" />
+                TWITCH: <input type="text" id="chaninput" value="d74g0n" /><input id="chanbutt" type="button" value="Twitch" onclick="twitchchan()" />
             </form>
         </div>
         <div id="datainputframe">
             <form>
-                URL: <input type="text" id="urlinput" value="http://d74g0n.github.io/clock/" /><input type="button" value="Popout" onclick="popOut()" />
+                URL: <input type="text" id="urlinput" value="http://d74g0n.github.io/clock/" /><input id="URLbutt" type="button" value="Popout" onclick="popOut()" />
             </form>
         </div>
 
+        <script>
+            watchForEnter("chaninput","chanbutt");
+            watchForEnter("urlinput","URLbutt");
+
+        </script>
     </center>
 
 
@@ -56,11 +66,13 @@
             let addy = `https://player.twitch.tv/?volume=0.5&!muted&channel=${data}`;
             openMinWindow(addy);
         }
+
         function popOut() {
             // this function pulls the data(value) from the inputbox and sends it to the common function.
             let idata = document.getElementById('urlinput').value;
             openMinWindow(idata);
         }
+
         function twitchchan() {
             // this function pulls the data(value) from the inputbox and sends it to the common function.
             let idata = document.getElementById('chaninput').value;
@@ -74,5 +86,8 @@
         //            open(requrl, 'test', params);
         //
         //        }
+
     </script>
-</body></html>
+</body>
+
+</html>

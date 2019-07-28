@@ -10,6 +10,8 @@ body {
      font-family: '8bitOperatorPlus-Regular';
     width: 80vw;
     border: 1px solid lime;
+    border-bottom: none;
+    border-top: none;
     margin:auto;
     padding: auto;
 }
