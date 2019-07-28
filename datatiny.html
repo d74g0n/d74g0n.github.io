@@ -1,0 +1,175 @@
+<!--THIS IS FOX AT THE TOP VERSION-->
+<!--
+TADO LIST:
+- refine TOPNAV shiz.
+
+- remove styling from list item generation.
+- add display/ fontsize options etc.
+bonus: do without JQuery.
+-->
+
+<html class="style-red">
+
+<head>
+    <title>Datafag</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="datafag monitors the human collective through The Great Awakening, Enjoy The Show!">
+    <meta name="keywords" content="datafag, qmap, streaming, news, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+
+    <link rel="stylesheet" type="text/css" href="/datafag/css/css_scrollbars.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
+    <link rel="shortcut icon" href="/common/img/favicon.png" />
+
+</head>
+
+<body>
+
+
+
+    <div id="screenwrap">
+
+        <ul id="messages">
+            <div id="datarecord_splash">
+                <li style="list-style:none">
+
+                </li>
+            </div>
+        </ul>
+    </div> <!-- screenwrap -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <script>
+        let isDUMPING = false;
+
+        function STARTDUMP() {
+            return isDUMPING = true;
+        }
+
+        function STOPDUMP() {
+            return isDUMPING = false;
+        }
+
+        //-=-=-=-=-=-=-=-
+
+        var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
+        //        var socket = io.connect('http://159.203.4.98:5000'); //dragoneye2
+        //        var socket = io.connect('http://159.203.4.98:3333');
+
+        socket.on('connect', function() {
+            console.log('connected');
+        });
+
+        socket.on('chat message', function(msg) { //tweet recieved from .js in msg dataform.
+
+            if (isDUMPING) {
+                return console.log(msg);
+            }
+
+
+            colorpass = msg.textcolor;
+            textpass = msg.text;
+            profilepic = msg.profilepic;
+            mediaurl = msg.media_url;
+            realname = msg.realname;
+            screenname = msg.name;
+
+            locat = msg.locat;
+            desc = msg.desc;
+
+            rturl = msg.rt_url;
+
+            bgpass = msg.color;
+
+
+            if (!msg.rt_url) {
+                rturl = "-=- ";
+            };
+
+
+            if (!msg.media_url) { // missing media icon.
+                mediaurl = "http://pbs.twimg.com/media/D_fijE7XYAAWKyu.jpg:large";
+            };
+
+            // ******************** BUILDING THINGS SECTION **************************
+
+            hrefperson = "https://twitter.com/" + msg.name; // user_id '<a href=' reference.
+            hrefbuild = "https://twitter.com/" + msg.name + "/status/" + msg.id; // tweet '<a href=' reference.
+
+
+            //console.log("HERHEHERHERHE - ?: " + (isIteminArray(msg, msglist)));
+            colorpass = '#' + colorpass;
+            //                colorpass = 'white';
+
+
+            $('#messages').prepend(('<div id="datarecord"><li><div id="media"><center><img src="' + mediaurl + '" download></center></div><div id="maintext"><a href="' + hrefbuild + '" target="_blank" style="text-decoration:none"><center><h1> OPEN SOURCE </h1><center></a></div></li></div>'));
+
+
+
+
+        });
+
+    </script>
+    <style>
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        * {
+            user-select: none;
+             font-family: '8bitOperatorPlus-Regular';
+        }
+
+        body {
+            background: black;
+            background-image: url(https://media.giphy.com/media/WoD6JZnwap6s8/giphy.gif);
+            background-repeat: repeat;
+            background-size: 20vw 33vh;
+        }
+
+        #messages {
+            float: left;
+            width: 97vw;
+            transition: 1s;
+        }
+
+        img {
+            max-width: 256px;
+            height: 256px;
+            width: 256px;
+            max-height: 256px;
+            object-fit: contain;
+        }
+/*        
+         #datarecord:hover {
+            width: 512px;
+            height: 512px;
+        }*/
+
+        #datarecord {
+/*            float: left;*/
+            float: right;
+            font-size: 6px;
+            border: 2px solid black;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            margin: 2px;
+
+        }
+
+        #timestamp {
+
+            width: auto;
+        }
+
+    </style>
+</body>
+
+</html>
