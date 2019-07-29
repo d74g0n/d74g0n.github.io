@@ -1,18 +1,12 @@
 // -=-=-=-=-=-=- Settings::
 let isRepeatingYou = false;
-
-
-
 // -=-=-=-=-=-=- Parse Speech::
-
 function ParseSentance(sentance) {
-
     sentance += ' ';
     let wordlist = [];
     let word = new String();
 
     for (i = 0; i < sentance.length; i++) {
-
         if (sentance[i] == ' ') {
             wordlist.push(word);
             word = '';
@@ -23,7 +17,6 @@ function ParseSentance(sentance) {
     }
     // console.log('[wordlist]:' + wordlist);
     ParseWords(wordlist);
-
     //    return wordlist;
 }
 
@@ -35,15 +28,12 @@ function ParseWords(wordlist = undefined) {
 
     for (i = 0; i < wordlist.length; i++) {
         let word = wordlist[i];
-
         if (i < wordlist.length - 1) {
             commands(wordlist[i], wordlist[i + 1]);
         } else {
             commands(wordlist[i]);
         }
-
     }
-
 
 }
 
@@ -156,9 +146,6 @@ function StopListening() {
     recognition.stop();
 }
 
-function listenInterval(num) {
-    // make timer push inverval +15seconds to listen.
-}
 
 function htmlReadouts(msg) {
     msg = msg + '<br>';
@@ -173,7 +160,10 @@ recognition.onresult = function (event) {
     var confidence = event.results[current][0].confidence;
 
     //    document.transcript = transcript;
-    htmlReadouts('[' + (confidence * 100).toFixed(2) + '%][' + transcript + ']');
+    
+    htmlReadouts('<h5 id="confidenceReadout">[' + (confidence * 100).toFixed(2) + '%]</h5> ' + transcript + ' ');
+    //    htmlReadouts('<h5 id="confidenceReadout">[' + (confidence * 100).toFixed(2) + '%]</h5>[ ' + transcript + ' ]');
+    //    htmlReadouts('<h5>[' + (confidence * 100).toFixed(2) + '%]</h5>[ ' + transcript + ' ]');
     //    document.getElementById('readout').innerHTML += '<br>' + '<p id="hearing">' + transcript + '</p>';
 
 
@@ -186,7 +176,7 @@ recognition.onresult = function (event) {
     }
 
     console.log('[' + (confidence * 100).toFixed(2) + '%][' + transcript + ']');
-    
+
     if (isRepeatingYou) {
         speak(transcript);
     }
@@ -206,7 +196,7 @@ recognition.onspeechend = function () {
 
 recognition.onerror = function (event) {
     if (event.error == 'no-speech') {
-         speak("I hear nothing");
+        speak("I hear nothing");
         console.log('No speech was detected. Try again.');
     };
 }

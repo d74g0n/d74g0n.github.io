@@ -1,0 +1,57 @@
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+
+        body {
+            color: White;
+            background: black;
+            font-family: '8bitOperatorPlus-Regular';
+            width: 80vw;
+/*            border: 1px dashed lime;*/
+/*            border-bottom: none;*/
+/*            border-top: none;*/
+            margin: auto;
+            padding: auto;
+
+            background-image: url(https://media.giphy.com/media/WoD6JZnwap6s8/giphy.gif);
+            background-repeat: repeat;
+            background-size: 33vw 33vh;
+            
+            
+        }
+
+        #hearing {
+            color: white;
+
+        }
+
+        .sm_logo {
+            width: 156px;
+            height: auto;
+            /*    filter: drop-shadow('2px 2px 10px red');*/
+            filter: drop-shadow(0px 4px 4px green);
+        }
+
+        .sm_logo:hover {
+            filter: drop-shadow(0px 4px 14px red);
+        }
+
+        #readout {
+            color: lightgrey;
+            line-height: 24px;
+            font-size: 24px;
+            padding: 0;
+            margin: 0;
+            background: rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 2px green;
+        }
+
+        h5 {
+            /*    float: left;*/
+            line-height: 24px;
+            padding: 0;
+            margin: 0;
+            visibility: hidden;
+        }
