@@ -1,3 +1,5 @@
+    <link rel="shortcut icon" href="/common/img/favicon.png" />
+
 PCMONITOR-landscape 1080p:
 Viewport Width: 1920
 Viewport Height: 977
