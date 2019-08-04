@@ -68,7 +68,7 @@ function noiseColTweaker(val) {
         return `rgba(${255-val*0.5},${255-val*0.5},${255-val*0.5},1)`;
     }
     
-    return 'red';
+    return 'white';
     
 //    return `rgba(${val},${val},${val},1)`;
 }
@@ -102,8 +102,9 @@ function noiseDraw(xb, yb, val) {
 //    setColor(noiseCol(val));
     setColor(noiseColTweaker(val));
 //        setColor(noiseCol2(val));
-    
-//    drawGeographyLines(val,geography_line_interval);
+    if (global.drawtopgraphy){
+    drawGeographyLines(val,geography_line_interval);
+        }
     drawSquare(xb, yb, global.scale);
 }
 

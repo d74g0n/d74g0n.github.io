@@ -2,21 +2,23 @@
 <html>
 
 <head>
-    <title>Map Generator</title>
+    <title>Plasma Generator</title>
     <style>
         body {
             background: black;
             color: white;
+            overflow: hidden;
         }
 
         canvas {
-            border: 2px solid gold;
+/*            border: 2px solid gold;*/
         }
     </style>
     <script>
         //   global declarations
         let global = {};
-        global.scale = 10;
+        global.scale = 20;
+        global.drawtopgraphy = true;
         let z = 2;
 
         let xpan = 1 / 10000000;
@@ -35,8 +37,10 @@
         let xoffset = 100;
         const incremental = 0.1;
         const canvas = document.getElementById('mapdisplay');
-        canvas.width = 600;
-        canvas.height = 600;
+//        canvas.width = 600;
+        canvas.width = window.innerWidth;
+//        canvas.height = 600;
+        canvas.height = window.innerHeight;
         
         canvas.onclick = function (){
             MapPanLeft();
@@ -44,17 +48,14 @@
         const ctx = document.getElementById('mapdisplay').getContext('2d');
 
         function incZ() {
-            //            z++;
             z = z + incremental;
-            //            z++;
-            if (z > 100) {
-                z = 0;
-            }
-//            tileLoop();
+//            if (z > 100) {
+//                z = 0;
+//            }
         }
 
         function MapPanLeft() {
-            xoffset = xoffset + 0.01;
+//            xoffset = xoffset + 0.01;
             incZ();
             tileLoop();//render Included
         }
