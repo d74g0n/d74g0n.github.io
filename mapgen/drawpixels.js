@@ -63,7 +63,6 @@ function noiseColTweaker(val) {
 
     return 'white';
 
-    //    return `rgba(${val},${val},${val},1)`;
 }
 
 
