@@ -11,17 +11,24 @@
         }
 
         canvas {
-/*            border: 2px solid gold;*/
+            /*            border: 2px solid gold;*/
         }
     </style>
     <script>
         //   global declarations
         let global = {};
         global.scale = 20;
+        //        global.drawtopgraphy = false;
         global.drawtopgraphy = true;
+        const geography_line_interval = 25;
         let z = 2;
 
         let xpan = 1 / 10000000;
+        // octaveLevel is the zoom of the noise::
+//        let octaveLevel = 40;
+        let octaveLevel = 40;
+        let xoffset = 100;
+        const incremental = 0.1;
     </script>
     <script src="/mapgen/drawpixels.js"></script>
     <script src="/mapgen/_perlin.js"></script>
@@ -32,37 +39,33 @@
         <canvas id="mapdisplay"></canvas>
     </center>
     <script>
-        // octaveLevel is the zoom of the noise::
-        let octaveLevel = 40;
-        let xoffset = 100;
-        const incremental = 0.1;
         const canvas = document.getElementById('mapdisplay');
-//        canvas.width = 600;
+        //        canvas.width = 600;
         canvas.width = window.innerWidth;
-//        canvas.height = 600;
+        //        canvas.height = 600;
         canvas.height = window.innerHeight;
-        
-        canvas.onclick = function (){
+
+        canvas.onclick = function() {
             MapPanLeft();
         }
         const ctx = document.getElementById('mapdisplay').getContext('2d');
 
         function incZ() {
             z = z + incremental;
-//            if (z > 100) {
-//                z = 0;
-//            }
+            //            if (z > 100) {
+            //                z = 0;
+            //            }
         }
 
         function MapPanLeft() {
-//            xoffset = xoffset + 0.01;
+            //            xoffset = xoffset + 0.01;
             incZ();
-            tileLoop();//render Included
+            tileLoop(); //render Included
         }
 
         //        setInterval(incZ,1000/5);
         setInterval(MapPanLeft, 1000 / 10);
-//        MapPanLeft();
+        //        MapPanLeft();
     </script>
 
 </body></html>
