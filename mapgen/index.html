@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Map Generator</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+        }
+
+        canvas {
+            border: 2px solid gold;
+        }
+    </style>
+    <script>
+        //   global declarations
+        let global = {};
+        global.scale = 8;
+        let z = 2;
+
+        let xpan = 1 / 10000000;
+    </script>
+    <script src="/mapgen/drawpixels.js"></script>
+    <script src="/mapgen/_perlin.js"></script>
+</head>
+
+<body>
+    <center>
+        <canvas id="mapdisplay"></canvas>
+    </center>
+    <script>
+        // octaveLevel is the zoom of the noise::
+        let octaveLevel = 50;
+        let xoffset = 1;
+        const incremental = 0.0000000000000000000001;
+        const canvas = document.getElementById('mapdisplay');
+        canvas.width = 600;
+        canvas.height = 600;
+        
+        canvas.onclick = function (){
+            MapPanLeft();
+        }
+        const ctx = document.getElementById('mapdisplay').getContext('2d');
+
+        function incZ() {
+            //            z++;
+            z = z + incremental;
+            //            z++;
+            if (z > 100) {
+                z = 0;
+            }
+            tileLoop();
+        }
+
+        function MapPanLeft() {
+            xoffset = xoffset + 0.1;
+            tileLoop();//render Included
+        }
+
+        //        setInterval(incZ,1000/5);
+//        setInterval(MapPanLeft, 1000 / 2);
+        MapPanLeft();
+    </script>
+
+</body></html>
