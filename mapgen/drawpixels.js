@@ -20,7 +20,8 @@ function noiseCol(val) {
     }
 
     if (val < 100) {
-        return `rgba(0,0,${val},0.9)`;
+//        return `rgba(0,0,${val},0.9)`;
+        return `rgba(0,0,${val},1)`;
     }
 
     if (val < 200) {
@@ -28,10 +29,51 @@ function noiseCol(val) {
     }
 
     if (val < 230) {
-        return `rgba(${255-val},${255-val},${255-val},0.9)`;
+//        return `rgba(${255-val},${255-val},${255-val},0.9)`;
+        return `rgba(${255-val},${255-val},${255-val},1)`;
     }
     return `rgba(${val},${val},${val},1)`;
 }
+
+
+function noiseColTweaker(val) {
+//BASE    
+    
+    if (val < 50) { // Ocean bottom
+        return `rgba(0,0,${val*0.7},1)`;
+    }
+
+    if (val < 100) {
+//        return `rgba(0,0,${val},0.9)`;
+        return `rgba(0,0,${val*1.5},1)`;
+    }
+    
+    if (val > 100 && val < 110) { // BEACH ZONE
+        return `rgba(255,255,${val*1.5},1)`; 
+    }
+
+    if (val < 180) { // GRASSLAND
+//        return `red`;
+        return `rgba(${val/2},${val*0.9},0,1)`;
+    }
+    
+    if (val > 180 && val < 200) { // MNT ZONE
+//        return 'white';
+        return `rgba(${255-val*1.1},${255-val*1.1},${255-val*1.1},1)`;
+    }
+
+    if (val < 250) { // MNT PEAK
+//        return 'red';
+//        return `rgba(${255-val},${255-val},${255-val},0.9)`;
+        return `rgba(${255-val*0.5},${255-val*0.5},${255-val*0.5},1)`;
+    }
+    
+    return 'red';
+    
+//    return `rgba(${val},${val},${val},1)`;
+}
+
+
 
 function noiseCol2(val) {
 // TUNDRA::
@@ -45,20 +87,23 @@ function noiseCol2(val) {
 
 function drawGeographyLines(val, interval) {
     
-    console.log(`mathfloorval:${MATH.floor(val)}`);
+//    console.log(`mathfloorval:${Math.floor(val)}`);
     
-    if (MATH.floor(val) % interval == 0) {
-        
+    if (Math.floor(val) % interval == 0) {
+         setColor('black');
     }
     
     
 }
 
-
+const geography_line_interval = 10;
 function noiseDraw(xb, yb, val) {
 //    console.log(`val:${val}`);
-    setColor(noiseCol(val));
+//    setColor(noiseCol(val));
+    setColor(noiseColTweaker(val));
 //        setColor(noiseCol2(val));
+    
+//    drawGeographyLines(val,geography_line_interval);
     drawSquare(xb, yb, global.scale);
 }
 
