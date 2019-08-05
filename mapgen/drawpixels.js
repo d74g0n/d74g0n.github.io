@@ -109,7 +109,35 @@ function tileLoop() {
 }
 
 
+function tileLoop2() {
+    for (let y = 0; y <= canvas.height / global.scale; y++) {
+        for (let x = 0; x <= canvas.width / global.scale; x++) {
+            
+            let noiseval = Perl.noise(xoffset + x / octaveLevel, y / octaveLevel, z);
+            
+            let secondOctave = Perl.noise(xoffset + x / (octaveLevel*2), y / (octaveLevel*2), z);
+            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel*5), y / (octaveLevel*5), z);
+            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel/2), y / (octaveLevel/2), z);
+//                        
+//            let secondOctave = Perl.noise(xoffset + x / (octaveLevel/2), y / (octaveLevel/2), z);
+//            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel/5), y / (octaveLevel/5), z);
+//            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel/10), y / (octaveLevel/10), z);
+//            
+            let freqSum = (noiseval + secondOctave + thirdOctave + fourthOctave);
+            let freqAvg = (noiseval + secondOctave + thirdOctave + fourthOctave)/4;
+            
+            let terrainfreq = (noiseval + secondOctave + thirdOctave + fourthOctave)/4;
+//            let terrainfreq = (noiseval - secondOctave - thirdOctave);
+            
+//            noiseDraw(x * global.scale, y * global.scale, freqSum -(freqAvg*2.5));
+            noiseDraw(x * global.scale, y * global.scale, terrainfreq);
+//            noiseDraw(x * global.scale, y * global.scale, noiseval);
+            //                console.log(Perl.perlin(x/100,y/100,0.1));
+            //                console.log(Perl.floorNoise(x/100,y/100,0.1));
 
+        }
+    }
+}
 
 
 

@@ -17,6 +17,9 @@
         //   global declarations
         let global = {};
         global.scale = 10;
+        global.drawtopgraphy = true;
+        const geography_line_interval = 25;
+        
         let z = 2;
 
         let xpan = 1 / 10000000;
@@ -35,32 +38,33 @@
         let xoffset = 100;
         const incremental = 0.1;
         const canvas = document.getElementById('mapdisplay');
-        canvas.width = 600;
-        canvas.height = 600;
+        canvas.width = 1200;
+        canvas.height = 700;
         
         canvas.onclick = function (){
             MapPanLeft();
         }
         const ctx = document.getElementById('mapdisplay').getContext('2d');
 
-        function incZ() {
-            //            z++;
-            z = z + incremental;
-            //            z++;
-            if (z > 100) {
-                z = 0;
-            }
-//            tileLoop();
-        }
+//        function incZ() {
+//            //            z++;
+//            z = z + incremental;
+//            //            z++;
+//            if (z > 100) {
+//                z = 0;
+//            }
+////            tileLoop();
+//        }
 
         function MapPanLeft() {
-            xoffset = xoffset + 0.01;
-            incZ();
-            tileLoop();//render Included
+//            xoffset = xoffset + 0.01;
+            xoffset = xoffset + 0.1;
+//            incZ();
+            tileLoop2();//render Included
         }
 
         //        setInterval(incZ,1000/5);
-        setInterval(MapPanLeft, 1000 / 10);
+        setInterval(MapPanLeft, 1000 / 5);
 //        MapPanLeft();
     </script>
 
