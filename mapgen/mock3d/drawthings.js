@@ -1,6 +1,6 @@
 //   global declarations
 let global = {};
-global.scale = 32;
+global.scale = 10;
 //        global.drawtopgraphy = true;
 global.drawtopgraphy = false;
 const geography_line_interval = 25;
@@ -114,6 +114,9 @@ function drawHorizonPerspective() {
     background('blue');
 
     const drawPerspectiveBlock = function (x, y, val) {
+        if (val > 200) {
+            val = 200;
+        }
         ctx.fillRect(x* global.scale, (canvas.height / 2) + (y - val / distanceShrink), global.scale, val / distanceShrink);
     }
 
@@ -123,16 +126,16 @@ function drawHorizonPerspective() {
         
         for (let x = 0; x < (canvas.width/global.scale); x++) {
 //            let val = _PL.noise(x / 100, y / 1000, 0.05);
-            let val = _PL.percentage(_PL.OctavePerlin(x / 100, (y+yoffset) / 100, z, 4, 5),200);
+            let val = _PL.percentage(_PL.OctavePerlin(x / 100, (y+yoffset) / 1000, z/1000, 5, 2),270);
             setColor(noiseColTweaker(val));
             drawPerspectiveBlock(x, y, val);
 
         }
-        distanceShrink *= 0.99;
+//        distanceShrink *= 0.99;
     }
 
 
-    yoffset -=1;
+    yoffset -=5;
 
 
 }
