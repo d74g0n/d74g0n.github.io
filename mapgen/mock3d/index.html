@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Map Generator</title>
+    <title>Horizon2d Generator</title>
     <style>
         body {
             background: black;
@@ -14,19 +14,9 @@
         }
     </style>
     <script>
-        //   global declarations
-        let global = {};
-        global.scale = 4;
-//        global.scale = 32;
-//        global.drawtopgraphy = true;
-        global.drawtopgraphy = false;
-        const geography_line_interval = 25;
-        
-        let z = 2;
 
-        let xpan = 1 / 10000000;
     </script>
-    <script src="/mapgen/drawpixels.js"></script>
+    <script src="/mapgen/mock3d/drawthings.js"></script>
     <script src="/mapgen/perlin.js"></script>
 </head>
 
@@ -35,28 +25,15 @@
         <canvas id="mapdisplay"></canvas>
     </center>
     <script>
-        // octaveLevel is the zoom of the noise::
-        let octaveLevel = 40;
-        let xoffset = 100;
-        const incremental = 0.1;
+
         const canvas = document.getElementById('mapdisplay');
-        canvas.width = 1200;
-        canvas.height = 700;
+        canvas.width = 600;
+        canvas.height = 350;
         
         canvas.onclick = function (){
             MapPanLeft();
         }
         const ctx = document.getElementById('mapdisplay').getContext('2d');
-
-//        function incZ() {
-//            //            z++;
-//            z = z + incremental;
-//            //            z++;
-//            if (z > 100) {
-//                z = 0;
-//            }
-////            tileLoop();
-//        }
 
         function MapPanLeft() {
 //            xoffset = xoffset + 0.01;
@@ -64,9 +41,12 @@
 //            incZ();
             tileLoop2();//render Included
         }
+        
+//        drawHorizonPerspective(100);
 
         //        setInterval(incZ,1000/5);
-        setInterval(MapPanLeft, 1000 / 5);
+//        setInterval(MapPanLeft, 1000 / 5);
+        setInterval(drawHorizonPerspective, 1000 / 12);
 //        MapPanLeft();
     </script>
 

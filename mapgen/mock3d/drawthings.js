@@ -1,3 +1,19 @@
+//   global declarations
+let global = {};
+global.scale = 32;
+//        global.drawtopgraphy = true;
+global.drawtopgraphy = false;
+const geography_line_interval = 25;
+const incremental = 0.1;
+let z = 2;
+let xpan = 1 / 10000000;
+
+// octaveLevel is the zoom of the noise::
+let octaveLevel = 20;
+let xoffset = 100;
+
+
+
 function background(color) {
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -47,13 +63,13 @@ function noiseColTweaker(val) {
 
     if (val < 150) { // GRASSLAND
         //        return `red`;
-//        return `rgba(${val/2},${val*0.9},0,1)`;
+        //        return `rgba(${val/2},${val*0.9},0,1)`;
         return `rgba(${(val*0.2)},${val*0.9},0,1)`;
     }
 
     if (val < 180) { // GRASSLA ND2
         //        return `red`;
-//        return `rgba(${val/2},${val*0.9},0,1)`;
+        //        return `rgba(${val/2},${val*0.9},0,1)`;
         return `rgba(${val+(val*0.2)},${val*0.9},0,1)`;
     }
 
@@ -91,6 +107,38 @@ function drawGeographyLines(val, interval) {
 }
 
 
+let yoffset = 0;
+z = 0.001;
+function drawHorizonPerspective() {
+
+    background('blue');
+
+    const drawPerspectiveBlock = function (x, y, val) {
+        ctx.fillRect(x* global.scale, (canvas.height / 2) + (y - val / distanceShrink), global.scale, val / distanceShrink);
+    }
+
+    
+    let distanceShrink = 8;
+    for (let y = 0; y < (canvas.height / 2)+100; y++) {
+        
+        for (let x = 0; x < (canvas.width/global.scale); x++) {
+//            let val = _PL.noise(x / 100, y / 1000, 0.05);
+            let val = _PL.percentage(_PL.OctavePerlin(x / 100, (y+yoffset) / 100, z, 4, 5),200);
+            setColor(noiseColTweaker(val));
+            drawPerspectiveBlock(x, y, val);
+
+        }
+        distanceShrink *= 0.99;
+    }
+
+
+    yoffset -=1;
+
+
+}
+
+
+
 
 function noiseDraw(xb, yb, val) {
     //    console.log(`val:${val}`);
@@ -114,18 +162,17 @@ function tileLoop() {
         }
     }
 }
-  let permenance = 5;
+let permenance = 5;
 let zoffset = 1;
+
 function tileLoop2() {
     for (let y = 0; y <= canvas.height / global.scale; y++) {
         for (let x = 0; x <= canvas.width / global.scale; x++) {
-            let octavething = Perl.percentage(Perl.OctavePerlin((x+xoffset)/100,y/100,(z+zoffset)/100,4,permenance),255);
+            let octavething = Perl.percentage(Perl.OctavePerlin((x + xoffset) / 100, y / 100, (z + zoffset) / 100, 4, permenance), 255);
 
             noiseDraw(x * global.scale, y * global.scale, octavething);
         }
     }
-//      permenance += 0.1;
-//    zoffset += 0.4;
+    //      permenance += 0.1;
+    //    zoffset += 0.4;
 }
-
-
