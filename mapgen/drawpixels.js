@@ -45,9 +45,16 @@ function noiseColTweaker(val) {
         return `rgba(255,255,${val*1.5},1)`;
     }
 
-    if (val < 180) { // GRASSLAND
+    if (val < 150) { // GRASSLAND
         //        return `red`;
-        return `rgba(${val/2},${val*0.9},0,1)`;
+//        return `rgba(${val/2},${val*0.9},0,1)`;
+        return `rgba(${(val*0.2)},${val*0.9},0,1)`;
+    }
+
+    if (val < 180) { // GRASSLA ND2
+        //        return `red`;
+//        return `rgba(${val/2},${val*0.9},0,1)`;
+        return `rgba(${val+(val*0.2)},${val*0.9},0,1)`;
     }
 
     if (val > 180 && val < 200) { // MNT ZONE
@@ -112,52 +119,13 @@ let zoffset = 1;
 function tileLoop2() {
     for (let y = 0; y <= canvas.height / global.scale; y++) {
         for (let x = 0; x <= canvas.width / global.scale; x++) {
+            let octavething = Perl.percentage(Perl.OctavePerlin((x+xoffset)/100,y/100,(z+zoffset)/100,4,permenance),255);
 
-//            let noiseval = Perl.noise(xoffset + x / octaveLevel, y / octaveLevel, z);
-//
-//            let secondOctave = Perl.noise(xoffset + x / (octaveLevel * 10), y / (octaveLevel * 10), z / (octaveLevel * 10));
-//            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel * 100), y / (octaveLevel * 100), z / (octaveLevel * 100));
-//            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel * 1000), y / (octaveLevel * 1000), z / (octaveLevel * 1000));
-            //                        
-            //            let secondOctave = Perl.noise(xoffset + x / (octaveLevel/2), y / (octaveLevel/2), z);
-            //            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel/5), y / (octaveLevel/5), z);
-            //            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel/10), y / (octaveLevel/10), z);
-            //            
-//            let freqSum = (noiseval + secondOctave + thirdOctave + fourthOctave);
-//            let freqAvg = (noiseval + secondOctave + thirdOctave + fourthOctave) / 4;
-//
-//            let terrainfreq = (noiseval + secondOctave + thirdOctave + fourthOctave) / 4;
-            //            let terrainfreq = (noiseval - secondOctave - thirdOctave);
-          
-//            let octavething = Perl.percentage(Perl.OctavePerlin((x+xoffset)/100,y/100,(z+zoffset)/100,4,permenance),255);
-            let octavething = Perl.percentage(Perl.OctavePerlin((x)/100,y/100,(z+zoffset)/100,4,permenance),255);
-
-            //            noiseDraw(x * global.scale, y * global.scale, freqSum -(freqAvg*2.5));
             noiseDraw(x * global.scale, y * global.scale, octavething);
-//            noiseDraw(x * global.scale, y * global.scale, terrainfreq);
-            //            noiseDraw(x * global.scale, y * global.scale, noiseval);
-            //                console.log(Perl.perlin(x/100,y/100,0.1));
-            //                console.log(Perl.floorNoise(x/100,y/100,0.1));
-
         }
     }
 //      permenance += 0.1;
-    zoffset += 0.4
+//    zoffset += 0.4
 }
 
 
-
-
-
-
-/*
-let flipcolaid = 0;
-function flipColours (x) {
-    const cccc = ["white","green","brown","gold","blue","red","orange","black"];
-    flipcolaid++;
-    if (flipcolaid >= cccc.length) {
-        flipcolaid = 0;
-    }
-    setColor(cccc[flipcolaid]);
-    
-}*/
