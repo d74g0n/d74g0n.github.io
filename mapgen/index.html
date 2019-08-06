@@ -17,7 +17,9 @@
         //   global declarations
         let global = {};
         global.scale = 10;
-        global.drawtopgraphy = true;
+//        global.scale = 32;
+//        global.drawtopgraphy = true;
+        global.drawtopgraphy = false;
         const geography_line_interval = 25;
         
         let z = 2;
@@ -58,7 +60,7 @@
 
         function MapPanLeft() {
 //            xoffset = xoffset + 0.01;
-            xoffset = xoffset + 0.1;
+            xoffset += 0.4;
 //            incZ();
             tileLoop2();//render Included
         }

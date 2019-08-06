@@ -107,36 +107,42 @@ function tileLoop() {
         }
     }
 }
-
-
+  let permenance = 5;
+let zoffset = 1;
 function tileLoop2() {
     for (let y = 0; y <= canvas.height / global.scale; y++) {
         for (let x = 0; x <= canvas.width / global.scale; x++) {
-            
-            let noiseval = Perl.noise(xoffset + x / octaveLevel, y / octaveLevel, z);
-            
-            let secondOctave = Perl.noise(xoffset + x / (octaveLevel*2), y / (octaveLevel*2), z);
-            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel*5), y / (octaveLevel*5), z);
-            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel/2), y / (octaveLevel/2), z);
-//                        
-//            let secondOctave = Perl.noise(xoffset + x / (octaveLevel/2), y / (octaveLevel/2), z);
-//            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel/5), y / (octaveLevel/5), z);
-//            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel/10), y / (octaveLevel/10), z);
-//            
-            let freqSum = (noiseval + secondOctave + thirdOctave + fourthOctave);
-            let freqAvg = (noiseval + secondOctave + thirdOctave + fourthOctave)/4;
-            
-            let terrainfreq = (noiseval + secondOctave + thirdOctave + fourthOctave)/4;
-//            let terrainfreq = (noiseval - secondOctave - thirdOctave);
-            
-//            noiseDraw(x * global.scale, y * global.scale, freqSum -(freqAvg*2.5));
-            noiseDraw(x * global.scale, y * global.scale, terrainfreq);
-//            noiseDraw(x * global.scale, y * global.scale, noiseval);
+
+//            let noiseval = Perl.noise(xoffset + x / octaveLevel, y / octaveLevel, z);
+//
+//            let secondOctave = Perl.noise(xoffset + x / (octaveLevel * 10), y / (octaveLevel * 10), z / (octaveLevel * 10));
+//            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel * 100), y / (octaveLevel * 100), z / (octaveLevel * 100));
+//            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel * 1000), y / (octaveLevel * 1000), z / (octaveLevel * 1000));
+            //                        
+            //            let secondOctave = Perl.noise(xoffset + x / (octaveLevel/2), y / (octaveLevel/2), z);
+            //            let thirdOctave = Perl.noise(xoffset + x / (octaveLevel/5), y / (octaveLevel/5), z);
+            //            let fourthOctave = Perl.noise(xoffset + x / (octaveLevel/10), y / (octaveLevel/10), z);
+            //            
+//            let freqSum = (noiseval + secondOctave + thirdOctave + fourthOctave);
+//            let freqAvg = (noiseval + secondOctave + thirdOctave + fourthOctave) / 4;
+//
+//            let terrainfreq = (noiseval + secondOctave + thirdOctave + fourthOctave) / 4;
+            //            let terrainfreq = (noiseval - secondOctave - thirdOctave);
+          
+//            let octavething = Perl.percentage(Perl.OctavePerlin((x+xoffset)/100,y/100,(z+zoffset)/100,4,permenance),255);
+            let octavething = Perl.percentage(Perl.OctavePerlin((x)/100,y/100,(z+zoffset)/100,4,permenance),255);
+
+            //            noiseDraw(x * global.scale, y * global.scale, freqSum -(freqAvg*2.5));
+            noiseDraw(x * global.scale, y * global.scale, octavething);
+//            noiseDraw(x * global.scale, y * global.scale, terrainfreq);
+            //            noiseDraw(x * global.scale, y * global.scale, noiseval);
             //                console.log(Perl.perlin(x/100,y/100,0.1));
             //                console.log(Perl.floorNoise(x/100,y/100,0.1));
 
         }
     }
+//      permenance += 0.1;
+    zoffset += 0.4
 }
 
 
