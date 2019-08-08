@@ -4,7 +4,7 @@
 <head>
     <title>Perlin Noise Viewer</title>
 
-<!--    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">-->
+    <!--    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">-->
 
     <meta name="description" content="Javascript Perlin Noise Viewer">
     <meta name="keywords" content="javascript, JS, Perlin, Noise, Code, Programming, visual, visualizer, viewer, d74g0n">
@@ -40,35 +40,6 @@
                         doDebuggerOutputs();
                         scaleLabel.innerHTML = `${this.value} - scale`;
                     }
-
-                </script>
-            </div>
-
-            <div class="slidercontainer">
-                <span id="permanenceLabel" class id="sliderLabels">permanence</span><input type="range" min="0" max="200" value="0" class="slider" id="permanenceSlider">
-                <script>
-                    let permanenceSlider = document.getElementById('permanenceSlider');
-                    let permanenceLabel = document.getElementById('permanenceLabel');
-                    permanenceSlider.oninput = function() {
-                        NoiseObj.permenance = this.value / 100;
-                        doDebuggerOutputs();
-                        permanenceLabel.innerHTML = `${this.value/10} - perm`;
-                    }
-
-                </script>
-            </div>
-
-            <div class="slidercontainer">
-                <span id="octavesLabel" class id="sliderLabels">octaves</span><input type="range" min="1" max="10" value="1" class="slider" id="octavesSlider">
-                <script>
-                    let octavesSlider = document.getElementById('octavesSlider');
-                    let octavesLabel = document.getElementById('octavesLabel');
-                    octavesSlider.oninput = function() {
-                        NoiseObj.octaves = this.value;
-                        doDebuggerOutputs();
-                        octavesLabel.innerHTML = `${this.value} - octaves`;
-                    }
-
                 </script>
             </div>
 
@@ -83,9 +54,36 @@
                         doDebuggerOutputs();
                         magnitudeLabel.innerHTML = `${this.value} - mag`;
                     }
-
                 </script>
             </div>
+
+            <div class="slidercontainer">
+                <span id="permanenceLabel" class id="sliderLabels">permanence</span><input type="range" min="0" max="200" value="0" class="slider" id="permanenceSlider">
+                <script>
+                    let permanenceSlider = document.getElementById('permanenceSlider');
+                    let permanenceLabel = document.getElementById('permanenceLabel');
+                    permanenceSlider.oninput = function() {
+                        NoiseObj.permenance = this.value / 100;
+                        doDebuggerOutputs();
+                        permanenceLabel.innerHTML = `${this.value/10} - perm`;
+                    }
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="octavesLabel" class id="sliderLabels">octaves</span><input type="range" min="1" max="10" value="1" class="slider" id="octavesSlider">
+                <script>
+                    let octavesSlider = document.getElementById('octavesSlider');
+                    let octavesLabel = document.getElementById('octavesLabel');
+                    octavesSlider.oninput = function() {
+                        NoiseObj.octaves = this.value;
+                        doDebuggerOutputs();
+                        octavesLabel.innerHTML = `${this.value} - octaves`;
+                    }
+                </script>
+            </div>
+
+
 
             <div class="slidercontainer">
                 <span id="xLabel" class id="sliderLabels">x</span><input type="range" min="1" max="20000" value="1" class="slider" id="xSlider">
@@ -98,7 +96,6 @@
                         doDebuggerOutputs();
                         xLabel.innerHTML = `${this.value} - x`;
                     }
-
                 </script>
             </div>
 
@@ -112,7 +109,6 @@
                         doDebuggerOutputs();
                         yLabel.innerHTML = `${this.value} - y`;
                     }
-
                 </script>
             </div>
 
@@ -126,7 +122,6 @@
                         doDebuggerOutputs();
                         zLabel.innerHTML = `${this.value} - z`;
                     }
-
                 </script>
             </div>
 
@@ -140,7 +135,6 @@
                         doDebuggerOutputs();
                         modeLabel.innerHTML = `${this.value} - Mode`;
                     }
-
                 </script>
             </div>
 
@@ -159,9 +153,6 @@
                 tileLoop();
             }
             tileLoop();
-
         </script>
     </center>
-</body>
-
-</html>
+</body></html>
