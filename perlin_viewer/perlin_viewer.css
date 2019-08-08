@@ -16,12 +16,17 @@ body {
 canvas {
     background: blue;
     border: 1px solid gold;
+    
+    max-width: 98vw;
+    
 /*
     height: 560px;
     width: 360px;
 */
+/*
     max-height: 560px;
     max-width: 360px;
+*/
 }
 
 #settings {
