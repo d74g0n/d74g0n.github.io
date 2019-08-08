@@ -1,6 +1,6 @@
 //   global declarations
 let global = {};
-global.scale = 10;
+global.scale = 32;
 //        global.drawtopgraphy = true;
 global.drawtopgraphy = false;
 const geography_line_interval = 25;
@@ -10,7 +10,7 @@ let xpan = 1 / 10000000;
 
 // octaveLevel is the zoom of the noise::
 let octaveLevel = 20;
-let xoffset = 100;
+let xoffset = 0;
 
 
 
@@ -45,7 +45,6 @@ function noiseCol(val) {
     }
     return `rgba(${val},${val},${val},1)`;
 }
-
 
 function noiseColTweaker(val) {
     if (val < 50) { // Ocean bottom
@@ -88,8 +87,6 @@ function noiseColTweaker(val) {
 
 }
 
-
-
 function noiseCol2(val) {
     // TUNDRA::
     if (val > 150) {
@@ -106,42 +103,46 @@ function drawGeographyLines(val, interval) {
     }
 }
 
-
 let yoffset = 0;
-z = 0.001;
+z = 0.009;
+const screenoffset = 170;
 function drawHorizonPerspective() {
 
-    background('blue');
+//    background('blue');
+    background('rgba(0,0,200,0.6)');
 
     const drawPerspectiveBlock = function (x, y, val) {
-        if (val > 200) {
-            val = 200;
+        if (val > 255) {
+            val = 255;
         }
-        ctx.fillRect(x* global.scale, (canvas.height / 2) + (y - val / distanceShrink), global.scale, val / distanceShrink);
+        if (val < 0) {
+            val = 0;
+        }
+//        ctx.fillRect(x* global.scale, (canvas.height / 2) + (y - (val / distanceShrink)), global.scale, (val / distanceShrink));
+        ctx.fillRect(x* global.scale, screenoffset + (canvas.height / 2) + (y - val), global.scale, (val+distanceShrink));
     }
 
     
-    let distanceShrink = 8;
-    for (let y = 0; y < (canvas.height / 2)+100; y++) {
+    let distanceShrink = 1;
+    for (let y = 0; y < (canvas.height / 2)+ 55; y++) {
         
         for (let x = 0; x < (canvas.width/global.scale); x++) {
 //            let val = _PL.noise(x / 100, y / 1000, 0.05);
-            let val = _PL.percentage(_PL.OctavePerlin(x / 100, (y+yoffset) / 1000, z/1000, 5, 2),270);
+//            let val = _PL.percentage(_PL.OctavePerlin((x+xoffset) / 100, (y+yoffset) / 1000, z/1000, 5, 2),255);
+            let val = _PL.percentage(_PL.OctavePerlin((x+xoffset) / 100, (y+yoffset) / 100, z/100, 1, 0.5));
             setColor(noiseColTweaker(val));
             drawPerspectiveBlock(x, y, val);
 
         }
-//        distanceShrink *= 0.99;
+//        distanceShrink += 0.001;
     }
 
 
+//    xoffset +=1;
     yoffset -=5;
 
 
 }
-
-
-
 
 function noiseDraw(xb, yb, val) {
     //    console.log(`val:${val}`);

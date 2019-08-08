@@ -1,0 +1,66 @@
+@font-face {
+    font-family: '8bitOperatorPlus-Regular';
+    src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+}
+
+* {
+    font-family: '8bitOperatorPlus-Regular';
+}
+
+body {
+    background: black;
+    color: white;
+    overflow: hidden;
+}
+
+canvas {
+    background: blue;
+    border: 1px solid gold;
+/*
+    height: 560px;
+    width: 360px;
+*/
+    max-height: 560px;
+    max-width: 360px;
+}
+
+#settings {
+    width: auto;
+    margin: auto;
+    padding: auto;
+    max-width: 360px;
+}
+
+.slidercontainer {
+    margin: auto;
+    padding: auto;
+    max-width: 132px;
+    display: inline-block;
+    user-select: none;
+}
+
+.sliderLabels {
+    line-height: 20px;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    padding-left: 1em;
+}
+
+.sliderLabels:hover {
+    color: gold;
+}
+
+input {
+    padding: 0;
+    margin: 0;
+}
+
+#dataoutput {
+    color: lime;
+    margin-top: 1em;
+    width: 200px;
+    word-break: break-all;
+    line-height: 12px;
+    font-size: 10px;
+}

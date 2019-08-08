@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Perlin Noise Viewer</title>
+    <script src="/mapgen/perlin.js"></script>
+    <script src="/perlin_viewer/colorcode.js"></script>
+    <script src="/perlin_viewer/perlinviewer.js"></script>
+    <link rel="stylesheet" type="text/css" href="/perlin_viewer/perlin_viewer.css" />
+</head>
+
+<body>
+    <center>
+        <canvas id="mapdisplay"></canvas>
+        <!--note: script loaded after canvas element-->
+        <script src="/perlin_viewer/canvasfunctions.js"></script>
+    </center>
+    <div id="settings">
+        <center>
+            <div class="slidercontainer">
+                <span id="scaleLabel" class id="sliderLabels">scale</span><input type="range" min="8" max="100" value="8" class="slider" id="scaleSlider">
+                <script>
+                    let scaleSlider = document.getElementById('scaleSlider');
+                    let scaleLabel = document.getElementById('scaleLabel');
+                    scaleSlider.oninput = function() {
+                        NoiseObj.scale = this.value;
+                        doDebuggerOutputs();
+                        scaleLabel.innerHTML = `${this.value} - scale`;
+                    }
+
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="permanenceLabel" class id="sliderLabels">permanence</span><input type="range" min="0" max="200" value="0" class="slider" id="permanenceSlider">
+                <script>
+                    let permanenceSlider = document.getElementById('permanenceSlider');
+                    let permanenceLabel = document.getElementById('permanenceLabel');
+                    permanenceSlider.oninput = function() {
+                        NoiseObj.permenance = this.value / 100;
+                        doDebuggerOutputs();
+                        permanenceLabel.innerHTML = `${this.value/10} - perm`;
+                    }
+
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="octavesLabel" class id="sliderLabels">octaves</span><input type="range" min="1" max="10" value="1" class="slider" id="octavesSlider">
+                <script>
+                    let octavesSlider = document.getElementById('octavesSlider');
+                    let octavesLabel = document.getElementById('octavesLabel');
+                    octavesSlider.oninput = function() {
+                        NoiseObj.octaves = this.value;
+                        doDebuggerOutputs();
+                        octavesLabel.innerHTML = `${this.value} - octaves`;
+                    }
+
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="magnitudeLabel" class id="sliderLabels">magnitude</span><input type="range" min="1" max="200" value="10" class="slider" id="magnitudeSlider">
+                <script>
+                    let magnitudeSlider = document.getElementById('magnitudeSlider');
+                    let magnitudeLabel = document.getElementById('magnitudeLabel');
+                    magnitudeSlider.oninput = function() {
+                        //                        NoiseObj.magxyz = 10 ** this.value;
+                        NoiseObj.magxyz = this.value;
+                        doDebuggerOutputs();
+                        magnitudeLabel.innerHTML = `${this.value} - mag`;
+                    }
+
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="xLabel" class id="sliderLabels">x</span><input type="range" min="1" max="20000" value="1" class="slider" id="xSlider">
+                <script>
+                    let xSlider = document.getElementById('xSlider');
+                    let xLabel = document.getElementById('xLabel');
+                    xSlider.oninput = function() {
+                        DS.offset.x = this.value;
+                        //                        DS.offset.x = this.value;
+                        doDebuggerOutputs();
+                        xLabel.innerHTML = `${this.value} - x`;
+                    }
+
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="yLabel" class id="sliderLabels">y</span><input type="range" min="1" max="20000" value="1" class="slider" id="ySlider">
+                <script>
+                    let ySlider = document.getElementById('ySlider');
+                    let yLabel = document.getElementById('yLabel');
+                    ySlider.oninput = function() {
+                        DS.offset.y = this.value;
+                        doDebuggerOutputs();
+                        yLabel.innerHTML = `${this.value} - y`;
+                    }
+
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="zLabel" class id="sliderLabels">z</span><input type="range" min="1" max="20000" value="1" class="slider" id="zSlider">
+                <script>
+                    let zSlider = document.getElementById('zSlider');
+                    let zLabel = document.getElementById('zLabel');
+                    zSlider.oninput = function() {
+                        DS.offset.z = this.value;
+                        doDebuggerOutputs();
+                        zLabel.innerHTML = `${this.value} - z`;
+                    }
+
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="modeLabel" class id="sliderLabels">Mode</span><input type="range" min="1" max="5" value="1" class="slider" id="modeSlider">
+                <script>
+                    let modeSlider = document.getElementById('modeSlider');
+                    let modeLabel = document.getElementById('modeLabel');
+                    modeSlider.oninput = function() {
+                        DS.colormode = this.value;
+                        doDebuggerOutputs();
+                        modeLabel.innerHTML = `${this.value} - Mode`;
+                    }
+
+                </script>
+            </div>
+
+        </center>
+    </div>
+    <center>
+        <span id="dataoutput"> DO </span>
+        <script>
+            function doDebuggerOutputs() {
+                //just remember that javascript needs the elements to exist.
+                let output = document.getElementById('dataoutput');
+                NoiseObj.x = (DS.offset.x / NoiseObj.magxyz).toFixed(2);
+                NoiseObj.y = (DS.offset.y / NoiseObj.magxyz).toFixed(2);
+                NoiseObj.z = (DS.offset.z / NoiseObj.magxyz).toFixed(2);
+//                output.innerHTML = ListKeysHTML(NoiseObj);
+                tileLoop();
+            }
+            tileLoop();
+
+        </script>
+    </center>
+</body>
+
+</html>

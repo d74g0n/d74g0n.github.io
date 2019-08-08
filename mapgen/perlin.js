@@ -137,7 +137,7 @@ let Perl = {
     },
 }
 Perl.init();
-global._PL = Perl;
+//global._PL = Perl;
 
 
 
