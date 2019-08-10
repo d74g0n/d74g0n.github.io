@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>superminidude</title>
+
+    <style>
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        span {
+            font-family: '8bitOperatorPlus-Regular';
+        }
+
+        body {
+            background: black;
+            color: white;
+            /*            color: khaki;*/
+            color: papayawhip;
+        }
+
+        canvas {
+            /*            border: 4px solid gold;*/
+            border: 4px solid #393276;
+            border-radius: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="superminidude"></canvas>
+        <!--
+<br><span>atman / atom</span><pre>I am trying to make the 'most simple' character possible
+that still can fire the imagination and be versatile.
+</pre>
+-->
+        <script>
+            //        INIT LEVEL
+            const canvas = document.getElementById('superminidude');
+            canvas.width = 150;
+            canvas.height = 150;
+            const ctx = canvas.getContext('2d');
+        </script>
+        <script src="/superminidude/canvasrelated.js"></script>
+        <script src="/superminidude/drawtinydude.js"></script>
+        <script src="/superminidude/mypallete.js"></script>
+        <script>
+            //    RUNTIME
+
+            //            background('green');
+            background(mycol.greenl);
+
+            let tinyDude = {
+                blocksize: 10,
+                shirtcolor: 'white',
+                shirtcolor: 'navy',
+                shirtcolor: '#2B4C6F',
+                shirtcolor: '#393276',
+                pantcolor: '#AA9139',
+                pantcolor: '#111111',
+                haircolor: 'khaki',
+                skincolor: 'papayawhip',
+                skincolor: '#FFDDAA',
+                purp: '#393276',
+            }
+            //            http://paletton.com/#uid=70M0w0kllllaFw0g0qFqFg0w0aF
+
+            const td = tinyDude;
+
+
+            function selectDrawCase(drawcase) {
+
+                switch (drawcase) {
+                    case 'b':
+                        backFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'br':
+                        backRightFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'r':
+                        rightFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'fr':
+                        forwardRightFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'f':
+                        forwardFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'fl':
+                        forwardLeftFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'l':
+                        leftFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'bl':
+                        backLeftFacing(canvas.width / 2, canvas.height / 2);
+                        break;
+
+                }
+
+            }
+
+            let anirun = ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'];
+            let counter = 0;
+            let huecycle = 0;
+
+            function aniloop() {
+                if (counter > anirun.length - 1) {
+                    counter = 0;
+                }
+
+                if (huecycle > 360) {
+                    huecycle -= 360;
+                }
+
+                //                background(mycol.greenl);
+                //                tinyDude.shirtcolor = stepHue(180-huecycle++);
+                tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
+                background(stepHue(huecycle++, '#440000'));
+
+                //                drawHorizon(canvas.height /2, 'black');
+//                newWaveHorizon(4, 'white');
+                newWaveHorizon(4, '#4D8F5E');
+                newWaveSkies(-4, stepHue(huecycle++, '#440000'));
+
+                selectDrawCase(anirun[counter]);
+
+                counter++;
+            }
+
+
+
+
+
+
+            setInterval(aniloop, 1000 / 6);
+
+
+
+            //            forwardFacing(canvas.width / 2, canvas.height / 2);
+            //            backFacing(canvas.width / 2, canvas.height / 2);
+            //            forwardRightFacing(canvas.width / 2, canvas.height / 2);
+            //            forwardLeftFacing(canvas.width / 2, canvas.height / 2);
+            //            backLeftFacing(canvas.width / 2, canvas.height / 2);
+            //            backRightFacing(canvas.width / 2, canvas.height / 2);
+            //            leftFacing(canvas.width / 2, canvas.height / 2);
+            //            rightFacing(canvas.width / 2, canvas.height / 2);
+        </script>
+    </center>
+</body></html>
