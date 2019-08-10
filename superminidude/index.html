@@ -67,6 +67,15 @@ that still can fire the imagination and be versatile.
             }
             //            http://paletton.com/#uid=70M0w0kllllaFw0g0qFqFg0w0aF
 
+            let sequences = {
+                spin: ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'],
+                walkr: ['fr', 'r', 'br', 'r'],
+                walkl: ['fl', 'l', 'bl', 'l'],
+            }
+            const ani = sequences;
+
+
+
             const td = tinyDude;
 
 
@@ -102,51 +111,66 @@ that still can fire the imagination and be versatile.
 
             }
 
-            let anirun = ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'];
+
             let counter = 0;
             let huecycle = 0;
+            let anipicker = 0;
+            let anitotals = 3;
+
+            let selectedAnimation = ani.spin;
 
             function aniloop() {
-                if (counter > anirun.length - 1) {
+                //                if (counter > anirun.length - 1) {
+                //                if (counter > ani.spin.length - 1) {
+                //                if (counter > ani.walkr.length - 1) {
+                if (counter > selectedAnimation.length - 1) {
                     counter = 0;
+
+
+                    if (anipicker >= anitotals) {
+                        anipicker == 0;
+                    }
+
+
+                    switch (anipicker) {
+                        case 0:
+                            selectedAnimation = ani.spin;
+                            break;
+                        case 1:
+                            selectedAnimation = ani.walkr;
+                            break;
+                        case 2:
+                            selectedAnimation = ani.walkl;
+                            break;
+                    }
+                    //anipicker++;
                 }
+
+
+                //
+                //                if (counter == 0) {
+                //
+                //
+                //                }
+
 
                 if (huecycle > 360) {
                     huecycle -= 360;
                 }
-
-                //                background(mycol.greenl);
-                //                tinyDude.shirtcolor = stepHue(180-huecycle++);
+//                ctx.shadowColor = tinyDude.shirtcolor;
+                ctx.shadowColor = stepHue(huecycle++, '#FFD700');
+                ctx.shadowBlur = 4 + counter;
                 tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
                 background(stepHue(huecycle++, '#440000'));
-
-                //                drawHorizon(canvas.height /2, 'black');
-//                newWaveHorizon(4, 'white');
-                newWaveHorizon(4, '#4D8F5E');
+                newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
                 newWaveSkies(-4, stepHue(huecycle++, '#440000'));
-
-                selectDrawCase(anirun[counter]);
-
+                selectDrawCase(selectedAnimation[counter]);
                 counter++;
             }
 
 
-
-
-
-
             setInterval(aniloop, 1000 / 6);
 
-
-
-            //            forwardFacing(canvas.width / 2, canvas.height / 2);
-            //            backFacing(canvas.width / 2, canvas.height / 2);
-            //            forwardRightFacing(canvas.width / 2, canvas.height / 2);
-            //            forwardLeftFacing(canvas.width / 2, canvas.height / 2);
-            //            backLeftFacing(canvas.width / 2, canvas.height / 2);
-            //            backRightFacing(canvas.width / 2, canvas.height / 2);
-            //            leftFacing(canvas.width / 2, canvas.height / 2);
-            //            rightFacing(canvas.width / 2, canvas.height / 2);
         </script>
     </center>
 </body></html>
