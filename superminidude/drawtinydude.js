@@ -16,7 +16,7 @@ let sequences = {
     spin: ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'],
     runleft: ['l', 'rldd', 'rlcc', 'l', 'rlbb', 'rlaa'],
     runright: ['r', 'rrdd', 'rrcc', 'r', 'rrbb', 'rraa'],
-    runaway: ['b','raaa','rabb','b','racc','radd'],
+    runaway: ['b', 'raaa', 'rabb', 'b', 'racc', 'radd'],
     //     runright: ['r','rraa','rrbb','r','rrcc','rrdd'],
 }
 const ani = sequences;
@@ -330,6 +330,110 @@ function RunRightD(x, y) {
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize, td.blocksize);
     drawSquare(x - td.blocksize * 0.5, y - td.blocksize, td.blocksize);
 }
+// RUN AWAY ANIMATION FRAMES:
+function runAwayA(x, y) {
+    // head
+    setColor(td.skincolor);
+    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+    // shirt:
+    setColor(td.shirtcolor);
+    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
+    // pants:
+    setColor(td.pantcolor);
+    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
+    // Skin Color things:
+
+    // left leg:
+    setColor(td.skincolor);
+    //    drawSquare(x - td.blocksize * 2, y + td.blocksize * 2, td.blocksize);
+    // right leg:
+    // setColor(td.skincolor);
+    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
+    // left Arm
+    drawSquare(x - td.blocksize * 3, y - td.blocksize, td.blocksize);
+    //    drawSquare(x - td.blocksize * 4, y, td.blocksize);
+    // right Arm
+    drawSquare(x + td.blocksize * 2, y - td.blocksize * 2, td.blocksize);
+    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
+}
+
+function runAwayB(x, y) {
+    // head
+    setColor(td.skincolor);
+    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+    // shirt:
+    setColor(td.shirtcolor);
+    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
+    // pants:
+    setColor(td.pantcolor);
+    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
+    // Skin Color things:
+
+    // left leg:
+    setColor(td.skincolor);
+    drawSquare(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize);
+    // right leg:
+    // setColor(td.skincolor);
+    //    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
+    // left Arm
+    drawSquare(x - td.blocksize * 3, y - td.blocksize, td.blocksize);
+    //    drawSquare(x - td.blocksize * 4, y, td.blocksize);
+    // right Arm
+    drawSquare(x + td.blocksize * 2, y - td.blocksize * 2, td.blocksize);
+    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
+}
+
+function runAwayC(x, y) {
+    // head
+    setColor(td.skincolor);
+    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+    // shirt:
+    setColor(td.shirtcolor);
+    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
+    // pants:
+    setColor(td.pantcolor);
+    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
+    // Skin Color things:
+
+    // left leg:
+    setColor(td.skincolor);
+    drawSquare(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize);
+    // right leg:
+    // setColor(td.skincolor);
+    //    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
+    // left Arm
+    drawSquare(x - td.blocksize * 3, y - td.blocksize * 2, td.blocksize);
+    drawSquare(x - td.blocksize * 4, y - td.blocksize, td.blocksize);
+    // right Arm
+    drawSquare(x + td.blocksize * 2, y - td.blocksize * 1, td.blocksize);
+    //    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
+}
+
+function runAwayD(x, y) {
+    // head
+    setColor(td.skincolor);
+    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+    // shirt:
+    setColor(td.shirtcolor);
+    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
+    // pants:
+    setColor(td.pantcolor);
+    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
+    // Skin Color things:
+
+    // left leg:
+    setColor(td.skincolor);
+    drawSquare(x - td.blocksize * 2, y + td.blocksize * 2, td.blocksize);
+    // right leg:
+    // setColor(td.skincolor);
+    //    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
+    // left Arm
+    drawSquare(x - td.blocksize * 3, y - td.blocksize * 2, td.blocksize);
+    drawSquare(x - td.blocksize * 4, y - td.blocksize, td.blocksize);
+    // right Arm
+    drawSquare(x + td.blocksize * 2, y - td.blocksize * 1, td.blocksize);
+    //    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
+}
 // CORE STILL FRAMES:
 // Core Facing:
 function forwardFacing(x, y) {
@@ -361,6 +465,7 @@ function forwardFacing(x, y) {
     // head
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+    facemask(x - td.blocksize, y - td.blocksize * 3);
 }
 // Core Back:
 function backFacing(x, y) {
@@ -527,109 +632,22 @@ function rightFacing(x, y) {
 }
 
 
-
-
-function runAwayA(x, y) {
-    // head
-    setColor(td.skincolor);
-    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
-    // shirt:
-    setColor(td.shirtcolor);
-    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
-    // pants:
-    setColor(td.pantcolor);
-    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
-    // Skin Color things:
-
-    // left leg:
-    setColor(td.skincolor);
-    //    drawSquare(x - td.blocksize * 2, y + td.blocksize * 2, td.blocksize);
-    // right leg:
-    // setColor(td.skincolor);
-    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
-    // left Arm
-    drawSquare(x - td.blocksize * 3, y - td.blocksize, td.blocksize);
-    //    drawSquare(x - td.blocksize * 4, y, td.blocksize);
-    // right Arm
-    drawSquare(x + td.blocksize * 2, y - td.blocksize * 2, td.blocksize);
-    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
+function facemask(x, y) {
+    let fg = new Image();
+//    fg.width = td.blocksize / 2;
+//    fg.height = td.blocksize / 2;
+//    fg.src = "/common/img/punisher_black.png";
+    fg.src = "/common/img/punisher_med_white.png";
+    fg.onload = function () {
+        ctx.globalAlpha = 0.1;
+        ctx.drawImage(this, x-td.blocksize*0.25, y,td.blocksize*2.5,td.blocksize*2);
+        ctx.globalAlpha = 1;
+        
+    }
 }
-
-function runAwayB(x, y) {
-    // head
-    setColor(td.skincolor);
-    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
-    // shirt:
-    setColor(td.shirtcolor);
-    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
-    // pants:
-    setColor(td.pantcolor);
-    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
-    // Skin Color things:
-
-    // left leg:
-    setColor(td.skincolor);
-    drawSquare(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize);
-    // right leg:
-    // setColor(td.skincolor);
-    //    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
-    // left Arm
-    drawSquare(x - td.blocksize * 3, y - td.blocksize, td.blocksize);
-    //    drawSquare(x - td.blocksize * 4, y, td.blocksize);
-    // right Arm
-    drawSquare(x + td.blocksize * 2, y - td.blocksize * 2, td.blocksize);
-    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
-}
-
-
-function runAwayC(x, y) {
-    // head
-    setColor(td.skincolor);
-    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
-    // shirt:
-    setColor(td.shirtcolor);
-    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
-    // pants:
-    setColor(td.pantcolor);
-    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
-    // Skin Color things:
-
-    // left leg:
-    setColor(td.skincolor);
-    drawSquare(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize);
-    // right leg:
-    // setColor(td.skincolor);
-    //    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
-    // left Arm
-    drawSquare(x - td.blocksize * 3, y - td.blocksize * 2, td.blocksize);
-    drawSquare(x - td.blocksize * 4, y - td.blocksize, td.blocksize);
-    // right Arm
-    drawSquare(x + td.blocksize * 2, y - td.blocksize * 1, td.blocksize);
-//    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
-}
-
-function runAwayD(x, y) {
-    // head
-    setColor(td.skincolor);
-    drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
-    // shirt:
-    setColor(td.shirtcolor);
-    drawRect(x - td.blocksize * 2, y - td.blocksize * 2, td.blocksize * 4, td.blocksize * 3);
-    // pants:
-    setColor(td.pantcolor);
-    drawRect(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize * 4, td.blocksize * 1);
-    // Skin Color things:
-
-    // left leg:
-    setColor(td.skincolor);
-    drawSquare(x - td.blocksize * 2, y + td.blocksize * 2, td.blocksize);
-    // right leg:
-    // setColor(td.skincolor);
-    //    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
-    // left Arm
-    drawSquare(x - td.blocksize * 3, y - td.blocksize * 2, td.blocksize);
-    drawSquare(x - td.blocksize * 4, y - td.blocksize, td.blocksize);
-    // right Arm
-    drawSquare(x + td.blocksize * 2, y - td.blocksize * 1, td.blocksize);
-//    drawSquare(x + td.blocksize * 3, y - td.blocksize, td.blocksize);
-}
+//
+//        fg = new Image();
+////        fg.src = 'http://uncc.ath.cx/LayerCake/images/16/3.png';
+////        fg.src = "/common/img/skull.png";
+////        fg.src = "/common/img/punisher_med_white.png";
+//        fg.src = "/common/img/punisher_black.png";

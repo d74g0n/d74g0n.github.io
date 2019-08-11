@@ -33,9 +33,12 @@
   #qstick {
       position: relative;
       top: 150px;
-      left: 150px;
-      width: 100px;
+      left: 176px;
+/*      left: 150px;*/
+/*      width: 100px;*/
+      width: 50px;
       border-top: 4px solid blue;
+      border-bottom-style: groove;
       opacity: 0.2;
 
       transform: rotate(45deg);
