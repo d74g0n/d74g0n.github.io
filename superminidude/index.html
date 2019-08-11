@@ -50,6 +50,10 @@ that still can fire the imagination and be versatile.
             canvas.width = 150;
             canvas.height = 150;
             const ctx = canvas.getContext('2d');
+            
+            canvas.onclick = function (ev) {
+                anipicker++;
+            }
         </script>
         <script src="/superminidude/canvasrelated.js"></script>
         <script src="/superminidude/drawtinydude.js"></script>
@@ -76,6 +80,9 @@ that still can fire the imagination and be versatile.
             //            http://paletton.com/#uid=70M0w0kllllaFw0g0qFqFg0w0aF
 
             let sequences = {
+//                runfwd: ['f', 'rfra','rfrb', 'f', 'rfla', 'rflb'],
+//                runfwd: ['f', 'rfra','rfrb', 'f', 'rflb', 'rfla'],
+                runfwd: ['f', 'rfrb','rfra', 'f', 'rfla', 'rflb'],
                 spin: ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'],
                 walkr: ['fr', 'r', 'br', 'r'],
                 walkl: ['fl', 'l', 'bl', 'l'],
@@ -114,6 +121,18 @@ that still can fire the imagination and be versatile.
                     case 'bl':
                         backLeftFacing(canvas.width / 2, canvas.height / 2);
                         break;
+                    case 'rfra':
+                        forwardRunAR(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'rfrb':
+                        forwardRunBR(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'rfla':
+                        forwardRunAL(canvas.width / 2, canvas.height / 2);
+                        break;
+                    case 'rflb':
+                        forwardRunBL(canvas.width / 2, canvas.height / 2);
+                        break;
 
                 }
 
@@ -142,7 +161,8 @@ that still can fire the imagination and be versatile.
 
                     switch (anipicker) {
                         case 0:
-                            selectedAnimation = ani.spin;
+//                            selectedAnimation = ani.spin;
+                            selectedAnimation = ani.runfwd;
                             break;
                         case 1:
                             selectedAnimation = ani.walkr;
@@ -154,18 +174,10 @@ that still can fire the imagination and be versatile.
                     //anipicker++;
                 }
 
-
-                //
-                //                if (counter == 0) {
-                //
-                //
-                //                }
-
-
                 if (huecycle > 360) {
                     huecycle -= 360;
                 }
-//                ctx.shadowColor = tinyDude.shirtcolor;
+                //                ctx.shadowColor = tinyDude.shirtcolor;
                 ctx.shadowColor = stepHue(huecycle++, '#FFD700');
                 ctx.shadowBlur = 4 + counter;
                 tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
@@ -175,10 +187,17 @@ that still can fire the imagination and be versatile.
                 selectDrawCase(selectedAnimation[counter]);
                 counter++;
             }
+//
+//            tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
+//            background(stepHue(huecycle++, '#440000'));
+//            newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
+//            newWaveSkies(-4, stepHue(huecycle++, '#440000'));
 
-
-            setInterval(aniloop, 1000 / 6);
-
+            //forwardFacing(canvas.width/2,canvas.height/2);
+//            forwardRunA(canvas.width / 2, canvas.height / 2);
+//            forwardRunBL(canvas.width / 2, canvas.height / 2);
+//            forwardRunAL(canvas.width / 2, canvas.height / 2);
+                        setInterval(aniloop, 1000 / 15);
         </script>
     </center>
 </body></html>
