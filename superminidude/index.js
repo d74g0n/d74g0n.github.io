@@ -117,8 +117,8 @@
              //             break;
      }
 
-     if (huecycle > 360) {
-         huecycle -= 360;
+     if (huecycle > (360*2)) {
+         huecycle = 1;
      }
      //                ctx.shadowColor = tinyDude.shirtcolor;
      //     ctx.shadowColor = stepHue(huecycle++, '#FFD700');
@@ -136,13 +136,14 @@
      UnderTextLineB.style.color = stepHue(-90, tinyDude.shirtcolor);
 
      tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
-     background(stepHue(huecycle++, '#440000'));
+//     background(stepHue(huecycle, '#440000'));
+     background(stepHue(huecycle, '#222200'));
 //     newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
      
 //     newWaveHorizon((huecycle/36).toFixed(0), stepHue(-huecycle, '#4D8F5E'));
 //     newWaveHorizon(Math.floor(4+(huecycle/90)), '#4D8F5E');
-     newWaveHorizon(Math.floor(4+(huecycle/90)), stepHue(-(huecycle/2), '#4D8F5E'));
-     newWaveSkies(Math.floor(-4-(huecycle/90)), stepHue(huecycle++, '#440000'));
+     newWaveHorizon(Math.floor(4-(huecycle/90)), stepHue(-(huecycle/2), '#4D8F5E'));
+     newWaveSkies(Math.floor(-4+(huecycle/90)), stepHue(huecycle++, '#440000'));
      //                newWaveSkies(-4, stepHue(huecycle++, '#440000'));
      
 //     newWaveSkies(-10, stepHue(huecycle++, '#440000'));

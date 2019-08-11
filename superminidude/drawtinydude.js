@@ -40,7 +40,7 @@ todo:
 - joystick
 
 - perlin noise cityscape
-
+- building lights intensities based on noise z travel.
 */
 
 // unused:
