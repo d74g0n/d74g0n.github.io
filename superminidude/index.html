@@ -7,7 +7,7 @@
     <meta name="robots" content="noarchive" />
     <meta charset="UTF-8">
     <meta name="author" content="d74g0n">
-<!--    <link rel="shortcut icon" href="/common/img/favicon.png" />-->
+    <!--    <link rel="shortcut icon" href="/common/img/favicon.png" />-->
     <link rel="shortcut icon" href="/common/img/punisher_black.png" />
     <link rel="stylesheet" type="text/css" href="/superminidude/tinydude.css" />
 
@@ -24,11 +24,11 @@
                 <canvas id="superminidude"></canvas>
 
                 <center>
-                    <span>IAM</span><br><span>STRONK</span>
+                    <span id="coloredTextLineOne">IAM</span><br><span id="coloredTextLineTwo">STRONK</span>
                 </center>
         </div>
     </div>
- 
+
     <script>
         // INIT LEVEL
         const canvas = document.getElementById('superminidude');
@@ -37,7 +37,10 @@
         const ctx = canvas.getContext('2d');
 
         const qstick = document.getElementById('qstick');
-        
+        const UnderTextLineA = document.getElementById('coloredTextLineOne');
+        const UnderTextLineB = document.getElementById('coloredTextLineTwo');
+
+
         let anipicker = 4;
 
         // how many animation cases there are... runleft runright etc:
@@ -49,12 +52,14 @@
             if (anipicker < 0) {
                 anipicker = anitotals;
             }
+            
+            td.isMasked = !td.isMasked;
         }
     </script>
     <script src="/superminidude/mypallete.js"></script>
-        <script src="/superminidude/canvasrelated.js"></script>
+    <script src="/superminidude/canvasrelated.js"></script>
     <script src="/superminidude/drawtinydude.js"></script>
-    
+
     <script src="/superminidude/index.js"></script>
     <script>
 

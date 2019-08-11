@@ -1,7 +1,7 @@
 //background('#4D8F5E');
 
 let tinyDude = {
-    isMasked: true,
+    isMasked: false,
     blocksize: 10,
     shirtcolor: '#393276',
     pantcolor: '#111111',
@@ -78,11 +78,7 @@ function forwardRunAR(x, y) {
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
 
-
-    if (td.isMasked) {
-        facemask(x - td.blocksize, y - td.blocksize * 3);
-    }
-
+    facemask(x - td.blocksize, y - td.blocksize * 3);
 }
 
 function forwardRunAL(x, y) {
@@ -111,10 +107,7 @@ function forwardRunAL(x, y) {
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
 
-
-    if (td.isMasked) {
-        facemask(x - td.blocksize, y - td.blocksize * 3);
-    }
+    facemask(x - td.blocksize, y - td.blocksize * 3);
 
 }
 
@@ -144,10 +137,7 @@ function forwardRunBR(x, y) {
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
 
-    if (td.isMasked) {
-        facemask(x - td.blocksize, y - td.blocksize * 3);
-    }
-
+    facemask(x - td.blocksize, y - td.blocksize * 3);
 }
 
 function forwardRunBL(x, y) {
@@ -175,10 +165,7 @@ function forwardRunBL(x, y) {
     // head
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
-
-    if (td.isMasked) {
-        facemask(x - td.blocksize, y - td.blocksize * 3);
-    }
+    facemask(x - td.blocksize, y - td.blocksize * 3);
 
 }
 // RUN LEFT ANIMATION FRAMES:
@@ -199,6 +186,7 @@ function RunLeftA(x, y) {
     drawSquare(x + td.blocksize * 1.5, y - td.blocksize, td.blocksize);
     // head
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x - td.blocksize * 2.45, y - td.blocksize * 3);
     setColor(td.skincolorShade); // SHADEME! REFACTOR INTO FUNCTION THAT MATHS COLOR DARKER
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize, td.blocksize);
 }
@@ -220,6 +208,7 @@ function RunLeftB(x, y) {
     drawSquare(x + td.blocksize * 1.5, y - td.blocksize, td.blocksize);
     // head
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x - td.blocksize * 2.45, y - td.blocksize * 3);
     setColor(td.skincolorShade); // SHADEME! REFACTOR INTO FUNCTION THAT MATHS COLOR DARKER
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize, td.blocksize);
 }
@@ -242,6 +231,7 @@ function RunLeftC(x, y) {
     //    drawSquare(x + td.blocksize * 1.5, y - td.blocksize, td.blocksize);
     // head
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x - td.blocksize * 2.45, y - td.blocksize * 3);
     //left hand
     //    setColor(td.skincolorShade); // SHADEME! REFACTOR INTO FUNCTION THAT MATHS COLOR DARKER
     drawSquare(x - td.blocksize * 1.5, y - td.blocksize, td.blocksize);
@@ -263,6 +253,7 @@ function RunLeftD(x, y) {
     drawSquare(x + td.blocksize * 1.5, y + td.blocksize * 1, td.blocksize);
     // head
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x - td.blocksize * 2.45, y - td.blocksize * 3);
     //left hand
     drawSquare(x - td.blocksize * 1.5, y - td.blocksize, td.blocksize);
     drawSquare(x - td.blocksize * 0.5, y - td.blocksize, td.blocksize);
@@ -285,6 +276,7 @@ function RunRightA(x, y) {
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize, td.blocksize);
     // head
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x + td.blocksize * 2.75, y - td.blocksize * 3);
     setColor(td.skincolorShade); // SHADEME! REFACTOR INTO FUNCTION THAT MATHS COLOR DARKER
     drawSquare(x + td.blocksize * 1.5, y - td.blocksize, td.blocksize);
 }
@@ -306,6 +298,7 @@ function RunRightB(x, y) {
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize, td.blocksize);
     // head
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x + td.blocksize * 2.75, y - td.blocksize * 3);
     setColor(td.skincolorShade); // SHADEME! REFACTOR INTO FUNCTION THAT MATHS COLOR DARKER
     drawSquare(x + td.blocksize * 1.5, y - td.blocksize, td.blocksize);
 }
@@ -328,6 +321,7 @@ function RunRightC(x, y) {
     //    drawSquare(x + td.blocksize * 1.5, y - td.blocksize, td.blocksize);
     // head
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x + td.blocksize * 2.75, y - td.blocksize * 3);
     //left hand
     //    setColor(td.skincolorShade); // SHADEME! REFACTOR INTO FUNCTION THAT MATHS COLOR DARKER
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize, td.blocksize);
@@ -349,6 +343,7 @@ function RunRightD(x, y) {
     drawSquare(x + td.blocksize * 1.5, y + td.blocksize * 1, td.blocksize);
     // head
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x + td.blocksize * 2.75, y - td.blocksize * 3);
     //left hand
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize, td.blocksize);
     drawSquare(x - td.blocksize * 0.5, y - td.blocksize, td.blocksize);
@@ -485,9 +480,8 @@ function forwardFacing(x, y) {
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
 
-    if (td.isMasked) {
-        facemask(x - td.blocksize, y - td.blocksize * 3);
-    }
+    facemask(x - td.blocksize, y - td.blocksize * 3);
+
 
 }
 // Core Back:
@@ -633,6 +627,7 @@ function leftFacing(x, y) {
     drawSquare(x - td.blocksize * 0.5, y, td.blocksize);
     // head
     drawSquare(x - td.blocksize * 2.5, y - td.blocksize * 3, td.blocksize * 2);
+    facemaskSquished(x - td.blocksize * 2.45, y - td.blocksize * 3);
 }
 // Core Right
 function rightFacing(x, y) {
@@ -652,28 +647,35 @@ function rightFacing(x, y) {
     // head
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize * 3, td.blocksize * 2);
     //    only head moves from left to right
+    facemaskSquished(x + td.blocksize * 2.75, y - td.blocksize * 3, td.blocksize * 2);
 }
 
 let fg = new Image();
 fg.src = "/common/img/punisher_black.png";
+//fg.src = "/common/img/punisher_med_white.png";
 let throbcounter = 0;
 let throbmax = 500;
 
 function facemask(x, y) {
-
-    throbcounter++;
-    if (throbcounter > throbmax) {
-        throbcounter = 0;
+    if (td.isMasked) {
+        //    throbcounter++;
+        //    if (throbcounter > throbmax) {
+        //        throbcounter = 0;
+        //    }
+        ctx.globalAlpha = 0.6;
+        //    ctx.globalAlpha = (throbcounter / 1000).toFixed(4);
+        //    ctx.drawImage(fg, x - td.blocksize * 0.25, y, td.blocksize * 2.5, td.blocksize * 2);
+        ctx.drawImage(fg, x - td.blocksize * 0.25, y, td.blocksize * 2.5, td.blocksize * 2.5);
+        ctx.globalAlpha = 1;
     }
-
-    //     ctx.globalAlpha = 0.1;
-    ctx.globalAlpha = (throbcounter / 1000).toFixed(4);
-    ctx.drawImage(fg, x - td.blocksize * 0.25, y, td.blocksize * 2.5, td.blocksize * 2);
-    ctx.globalAlpha = 1;
 }
-//
-//        fg = new Image();
-////        fg.src = 'http://uncc.ath.cx/LayerCake/images/16/3.png';
+
+function facemaskSquished(x, y) {
+    if (td.isMasked) {
+        return ctx.drawImage(fg, x - td.blocksize * 0.25, y, 2, td.blocksize * 2.5);
+    }
+}
+
 ////        fg.src = "/common/img/skull.png";
 ////        fg.src = "/common/img/punisher_med_white.png";
 //        fg.src = "/common/img/punisher_black.png";

@@ -128,15 +128,24 @@
      
      ctx.shadowColor = stepHue(huecycle, '#FFD700');
      ctx.shadowBlur = 4 + counter;
+     ctx.imageSmoothingEnabled = false;
 
      canvas.style.borderColor = stepHue(180, tinyDude.shirtcolor);
- qstick.style.borderColor = stepHue(180, tinyDude.shirtcolor);
+     qstick.style.borderColor = stepHue(180, tinyDude.shirtcolor);
+     UnderTextLineA.style.color = stepHue(90, tinyDude.shirtcolor);
+     UnderTextLineB.style.color = stepHue(-90, tinyDude.shirtcolor);
 
      tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
      background(stepHue(huecycle++, '#440000'));
-     newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
+//     newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
+     
+//     newWaveHorizon((huecycle/36).toFixed(0), stepHue(-huecycle, '#4D8F5E'));
+//     newWaveHorizon(Math.floor(4+(huecycle/90)), '#4D8F5E');
+     newWaveHorizon(Math.floor(4+(huecycle/90)), stepHue(-(huecycle/2), '#4D8F5E'));
+     newWaveSkies(Math.floor(-4-(huecycle/90)), stepHue(huecycle++, '#440000'));
      //                newWaveSkies(-4, stepHue(huecycle++, '#440000'));
-     newWaveSkies(-10, stepHue(huecycle++, '#440000'));
+     
+//     newWaveSkies(-10, stepHue(huecycle++, '#440000'));
      selectDrawCase(selectedAnimation[counter]);
      counter++;
  }
