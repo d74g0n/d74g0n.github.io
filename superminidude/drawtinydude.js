@@ -1,6 +1,7 @@
 //background('#4D8F5E');
 
 let tinyDude = {
+    isMasked: true,
     blocksize: 10,
     shirtcolor: '#393276',
     pantcolor: '#111111',
@@ -76,6 +77,12 @@ function forwardRunAR(x, y) {
     // head
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+
+
+    if (td.isMasked) {
+        facemask(x - td.blocksize, y - td.blocksize * 3);
+    }
+
 }
 
 function forwardRunAL(x, y) {
@@ -103,6 +110,12 @@ function forwardRunAL(x, y) {
     // head
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+
+
+    if (td.isMasked) {
+        facemask(x - td.blocksize, y - td.blocksize * 3);
+    }
+
 }
 
 function forwardRunBR(x, y) {
@@ -130,6 +143,11 @@ function forwardRunBR(x, y) {
     // head
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+
+    if (td.isMasked) {
+        facemask(x - td.blocksize, y - td.blocksize * 3);
+    }
+
 }
 
 function forwardRunBL(x, y) {
@@ -157,6 +175,11 @@ function forwardRunBL(x, y) {
     // head
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
+
+    if (td.isMasked) {
+        facemask(x - td.blocksize, y - td.blocksize * 3);
+    }
+
 }
 // RUN LEFT ANIMATION FRAMES:
 function RunLeftA(x, y) {
@@ -458,14 +481,14 @@ function forwardFacing(x, y) {
     drawSquare(x + td.blocksize * 2, y - td.blocksize, td.blocksize);
     drawSquare(x + td.blocksize * 3, y, td.blocksize);
 
-    if (false) {
-        forwardHair(x, y);
-    }
-
     // head
     setColor(td.skincolor);
     drawSquare(x - td.blocksize, y - td.blocksize * 3, td.blocksize * 2);
-    facemask(x - td.blocksize, y - td.blocksize * 3);
+
+    if (td.isMasked) {
+        facemask(x - td.blocksize, y - td.blocksize * 3);
+    }
+
 }
 // Core Back:
 function backFacing(x, y) {
@@ -631,19 +654,22 @@ function rightFacing(x, y) {
     //    only head moves from left to right
 }
 
+let fg = new Image();
+fg.src = "/common/img/punisher_black.png";
+let throbcounter = 0;
+let throbmax = 500;
 
 function facemask(x, y) {
-    let fg = new Image();
-//    fg.width = td.blocksize / 2;
-//    fg.height = td.blocksize / 2;
-//    fg.src = "/common/img/punisher_black.png";
-    fg.src = "/common/img/punisher_med_white.png";
-    fg.onload = function () {
-        ctx.globalAlpha = 0.1;
-        ctx.drawImage(this, x-td.blocksize*0.25, y,td.blocksize*2.5,td.blocksize*2);
-        ctx.globalAlpha = 1;
-        
+
+    throbcounter++;
+    if (throbcounter > throbmax) {
+        throbcounter = 0;
     }
+
+    //     ctx.globalAlpha = 0.1;
+    ctx.globalAlpha = (throbcounter / 1000).toFixed(4);
+    ctx.drawImage(fg, x - td.blocksize * 0.25, y, td.blocksize * 2.5, td.blocksize * 2);
+    ctx.globalAlpha = 1;
 }
 //
 //        fg = new Image();

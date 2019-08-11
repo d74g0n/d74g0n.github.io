@@ -157,6 +157,6 @@
      }
  }
 
-setInterval(autoflipanimations, 1000);
+setInterval(autoflipanimations, 2500);
 
  setInterval(aniloop, 1000 / 15);
