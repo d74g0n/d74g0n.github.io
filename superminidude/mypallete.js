@@ -1,18 +1,21 @@
+/*
+these function revolve around WIP colour functions.
+
+
+*/
+
 //https://color.adobe.com/create/color-wheel/
-
 //https://coolors.co/a3a380-d6ce93-efebce-d8a48f-bb8588
-
-
 //http://paletton.com/#uid=1000u0kllllaFw0g0qFqFg0w0aF
 
-
-let mycol = {
-    greenl: '#4D8F5E',
-    greend: 'rgb()',
-    cauc: '#EFEBCE',
-    tan: '#D6CE93',
-    kaki: '#A3A380',
-}
+//
+//let mycol = {
+//    greenl: '#4D8F5E',
+//    greend: 'rgb()',
+//    cauc: '#EFEBCE',
+//    tan: '#D6CE93',
+//    kaki: '#A3A380',
+//}
 
 function stepHue(step, hex = `0000EE`) {
 //    step *= 1.4;

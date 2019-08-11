@@ -1,25 +1,4 @@
  //    RUNTIME
-background(mycol.greenl);
-
- let tinyDude = {
-     blocksize: 10,
-     shirtcolor: '#393276',
-     pantcolor: '#111111',
-     haircolor: 'khaki',
-     skincolor: '#FFDDAA',
-     skincolorShade: '#997A6B',
-     purp: '#393276',
- }
-  const td = tinyDude;
-
- let sequences = {
-     runfwd: ['f', 'rfrb', 'rfra', 'f', 'rfla', 'rflb'],
-     spin: ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'],
-     runleft: ['l','rldd','rlcc','l','rlbb','rlaa'],
-     runright: ['r','rrdd','rrcc','r','rrbb','rraa'],
-//     runright: ['r','rraa','rrbb','r','rrcc','rrdd'],
- }
- const ani = sequences;
 
  function selectDrawCase(drawcase) {
 
@@ -84,6 +63,18 @@ background(mycol.greenl);
          case 'rrdd':
              RunRightD(canvas.width / 2, canvas.height / 2);
              break;
+         case 'raaa':
+             runAwayA(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rabb':
+             runAwayB(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'racc':
+             runAwayC(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'radd':
+             runAwayD(canvas.width / 2, canvas.height / 2);
+             break;
 
      }
 
@@ -101,34 +92,37 @@ background(mycol.greenl);
 
      switch (anipicker) {
          case 0:
-             selectedAnimation = ani.runfwd;
-//             selectedAnimation = ani.walkl;
+             selectedAnimation = ani.runleft;
              break;
          case 1:
-             selectedAnimation = ani.spin;
+             selectedAnimation = ani.runaway;
              break;
          case 2:
-            selectedAnimation = ani.runleft;
+            selectedAnimation = ani.runright;
              break;
          case 3:
-             selectedAnimation = ani.spin;
-//            selectedAnimation = ani.walkr;
+             selectedAnimation = ani.runfwd;
              break;
          case 4:
-             selectedAnimation = ani.runright;
-//            selectedAnimation = ani.walkr;
-             break;
-         case 5:
              selectedAnimation = ani.spin;
-//            selectedAnimation = ani.walkr;
              break;
+//         case 5:
+//             selectedAnimation = ani.spin;
+//             break;
+//         case 6:
+//             selectedAnimation = ani.runright;
+//             break;
+//         case 7:
+//             selectedAnimation = ani.spin;
+//             break;
      }
 
      if (huecycle > 360) {
          huecycle -= 360;
      }
      //                ctx.shadowColor = tinyDude.shirtcolor;
-     ctx.shadowColor = stepHue(huecycle++, '#FFD700');
+//     ctx.shadowColor = stepHue(huecycle++, '#FFD700');
+     ctx.shadowColor = stepHue(huecycle, '#FFD700');
      ctx.shadowBlur = 4 + counter;
 
      canvas.style.borderColor = stepHue(180, tinyDude.shirtcolor);
@@ -143,11 +137,14 @@ background(mycol.greenl);
      counter++;
  }
 
- //            forwardRunAL(canvas.width / 2, canvas.height / 2);
-//RunLeftA(canvas.width / 2, canvas.height / 2);
-//RunLeftD(canvas.width / 2, canvas.height / 2);
- setInterval(aniloop, 1000 / 15);
 
-//RunRightA(canvas.width / 2, canvas.height / 2);;
-//RunRightB(canvas.width / 2, canvas.height / 2);;
-//RunRightD(canvas.width / 2, canvas.height / 2);;
+
+
+//runAwayA(canvas.width / 2, canvas.height / 2);
+//runAwayB(canvas.width / 2, canvas.height / 2);
+//runAwayC(canvas.width / 2, canvas.height / 2);
+//runAwayD(canvas.width / 2, canvas.height / 2);
+
+
+
+setInterval(aniloop, 1000 / 15);
