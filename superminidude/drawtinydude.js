@@ -31,9 +31,9 @@ BlackLeft B BackRight
    Left ->|<- Right
   FwdLeft F FwdRight
 
-    BL B BR
-     L 0 R
-    FL F FR
+    BL B BR  |  (Z+,X-)  (Z+)  (X+,Z+)
+     L 0 R   |     (X-)        (X+)
+    FL F FR  |  (Z-,X-)  (Z-)  (X+,Z-)
 
 todo: 
 - colors for forground and background.  Arms swung back are darker (hueshift but literal shader)

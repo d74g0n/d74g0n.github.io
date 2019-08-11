@@ -106,9 +106,9 @@
          case 4:
              selectedAnimation = ani.spin;
              break;
-          case 5:
-              selectedAnimation = ani.runfwd;
-          break;
+         case 5:
+             selectedAnimation = ani.runfwd;
+             break;
              //         case 6:
              //             selectedAnimation = ani.runright;
              //             break;
@@ -117,17 +117,18 @@
              //             break;
      }
 
-     if (huecycle > (360*2)) {
+     if (huecycle > (360 * 2)) {
          huecycle = 1;
      }
      //                ctx.shadowColor = tinyDude.shirtcolor;
      //     ctx.shadowColor = stepHue(huecycle++, '#FFD700');
-     
-     
-    
-     
+
+
+
+
      ctx.shadowColor = stepHue(huecycle, '#FFD700');
-     ctx.shadowBlur = 4 + counter;
+     //     ctx.shadowBlur = 4 + counter;
+     ctx.shadowBlur = 4 + Math.floor(huecycle / 90);
      ctx.imageSmoothingEnabled = false;
 
      canvas.style.borderColor = stepHue(180, tinyDude.shirtcolor);
@@ -136,18 +137,30 @@
      UnderTextLineB.style.color = stepHue(-90, tinyDude.shirtcolor);
 
      tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
-//     background(stepHue(huecycle, '#440000'));
+     //     background(stepHue(huecycle, '#440000'));
      background(stepHue(huecycle, '#222200'));
-//     newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
-     
-//     newWaveHorizon((huecycle/36).toFixed(0), stepHue(-huecycle, '#4D8F5E'));
-//     newWaveHorizon(Math.floor(4+(huecycle/90)), '#4D8F5E');
-     newWaveHorizon(Math.floor(4-(huecycle/90)), stepHue(-(huecycle/2), '#4D8F5E'));
-     newWaveSkies(Math.floor(-4+(huecycle/90)), stepHue(huecycle++, '#440000'));
-     //                newWaveSkies(-4, stepHue(huecycle++, '#440000'));
-     
-//     newWaveSkies(-10, stepHue(huecycle++, '#440000'));
+     //     newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
+
+     //     newWaveHorizon((huecycle/36).toFixed(0), stepHue(-huecycle, '#4D8F5E'));
+     //     newWaveHorizon(Math.floor(4+(huecycle/90)), '#4D8F5E');
+     newWaveHorizon(Math.floor(4 - (huecycle / 90)), stepHue(-(huecycle / 2), '#4D8F5E'));
+     newWaveSkies(Math.floor(-4 - (huecycle / 90)), stepHue(huecycle * 1.25, '#440000'));
+
+     function horizonMist() {
+         //     setColor(stepHue((huecycle*1.75), '#FF44FF'));
+//         setColor(stepHue(180, tinyDude.shirtcolor));
+//         setColor(stepHue((-225), '#330000'));
+         setColor(stepHue(Math.floor(huecycle), '#331100'));
+//         setColor(stepHue(-270, tinyDude.shirtcolor));
+         ctx.globalAlpha = 0.8;
+         drawRect(0, canvas.height / 2 - td.blocksize / 2, canvas.width, td.blocksize);
+         ctx.globalAlpha = 1;
+         //                newWaveSkies(-4, stepHue(huecycle++, '#440000'));
+     }
+     horizonMist();
+     //     newWaveSkies(-10, stepHue(huecycle++, '#440000'));
      selectDrawCase(selectedAnimation[counter]);
+     huecycle++;
      counter++;
  }
 
@@ -167,6 +180,6 @@
      }
  }
 
-setInterval(autoflipanimations, 2500);
+ setInterval(autoflipanimations, 2500);
 
  setInterval(aniloop, 1000 / 15);
