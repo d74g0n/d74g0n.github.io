@@ -8,196 +8,41 @@
     <meta charset="UTF-8">
     <meta name="author" content="d74g0n">
     <link rel="shortcut icon" href="/common/img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="/superminidude/tinydude.css" />
 
     <meta property="og:image" content="/superminidude/img/newwave.png">
     <meta name="twitter:image" content="/superminidude/img/newwave.png">
-    <style>
-        @font-face {
-            font-family: '8bitOperatorPlus-Regular';
-            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
-        }
-
-        span {
-            font-family: '8bitOperatorPlus-Regular';
-        }
-
-        body {
-            background: black;
-            color: white;
-            /*            color: khaki;*/
-            color: papayawhip;
-        }
-
-        canvas {
-            /*            border: 4px solid gold;*/
-            border: 4px solid #393276;
-            border-radius: 150px;
-        }
-    </style>
+    <!--http://paletton.com/#uid=70M0w0kllllaFw0g0qFqFg0w0aF-->
 </head>
 
 <body>
     <center>
         <canvas id="superminidude"></canvas>
-        <!--
-<br><span>atman / atom</span><pre>I am trying to make the 'most simple' character possible
-that still can fire the imagination and be versatile.
-</pre>
--->
         <script>
-            //        INIT LEVEL
+            // INIT LEVEL
             const canvas = document.getElementById('superminidude');
             canvas.width = 150;
             canvas.height = 150;
             const ctx = canvas.getContext('2d');
+
+            let anipicker = 1;
+            let anitotals = 3;
             
-            canvas.onclick = function (ev) {
-                anipicker++;
+            canvas.onclick = function(ev) {
+                
+                console.log(anipicker--);
+                if (anipicker < 0){
+                    anipicker = anitotals;
+                }
             }
+            
         </script>
         <script src="/superminidude/canvasrelated.js"></script>
         <script src="/superminidude/drawtinydude.js"></script>
         <script src="/superminidude/mypallete.js"></script>
+        <script src="/superminidude/index.js"></script>
         <script>
-            //    RUNTIME
-
-            //            background('green');
-            background(mycol.greenl);
-
-            let tinyDude = {
-                blocksize: 10,
-                shirtcolor: 'white',
-                shirtcolor: 'navy',
-                shirtcolor: '#2B4C6F',
-                shirtcolor: '#393276',
-                pantcolor: '#AA9139',
-                pantcolor: '#111111',
-                haircolor: 'khaki',
-                skincolor: 'papayawhip',
-                skincolor: '#FFDDAA',
-                purp: '#393276',
-            }
-            //            http://paletton.com/#uid=70M0w0kllllaFw0g0qFqFg0w0aF
-
-            let sequences = {
-//                runfwd: ['f', 'rfra','rfrb', 'f', 'rfla', 'rflb'],
-//                runfwd: ['f', 'rfra','rfrb', 'f', 'rflb', 'rfla'],
-                runfwd: ['f', 'rfrb','rfra', 'f', 'rfla', 'rflb'],
-                spin: ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'],
-                walkr: ['fr', 'r', 'br', 'r'],
-                walkl: ['fl', 'l', 'bl', 'l'],
-            }
-            const ani = sequences;
-
-
-
-            const td = tinyDude;
-
-
-            function selectDrawCase(drawcase) {
-
-                switch (drawcase) {
-                    case 'b':
-                        backFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'br':
-                        backRightFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'r':
-                        rightFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'fr':
-                        forwardRightFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'f':
-                        forwardFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'fl':
-                        forwardLeftFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'l':
-                        leftFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'bl':
-                        backLeftFacing(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'rfra':
-                        forwardRunAR(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'rfrb':
-                        forwardRunBR(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'rfla':
-                        forwardRunAL(canvas.width / 2, canvas.height / 2);
-                        break;
-                    case 'rflb':
-                        forwardRunBL(canvas.width / 2, canvas.height / 2);
-                        break;
-
-                }
-
-            }
-
-
-            let counter = 0;
-            let huecycle = 0;
-            let anipicker = 0;
-            let anitotals = 3;
-
-            let selectedAnimation = ani.spin;
-
-            function aniloop() {
-                //                if (counter > anirun.length - 1) {
-                //                if (counter > ani.spin.length - 1) {
-                //                if (counter > ani.walkr.length - 1) {
-                if (counter > selectedAnimation.length - 1) {
-                    counter = 0;
-
-
-                    if (anipicker >= anitotals) {
-                        anipicker == 0;
-                    }
-
-
-                    switch (anipicker) {
-                        case 0:
-//                            selectedAnimation = ani.spin;
-                            selectedAnimation = ani.runfwd;
-                            break;
-                        case 1:
-                            selectedAnimation = ani.walkr;
-                            break;
-                        case 2:
-                            selectedAnimation = ani.walkl;
-                            break;
-                    }
-                    //anipicker++;
-                }
-
-                if (huecycle > 360) {
-                    huecycle -= 360;
-                }
-                //                ctx.shadowColor = tinyDude.shirtcolor;
-                ctx.shadowColor = stepHue(huecycle++, '#FFD700');
-                ctx.shadowBlur = 4 + counter;
-                tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
-                background(stepHue(huecycle++, '#440000'));
-                newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
-                newWaveSkies(-4, stepHue(huecycle++, '#440000'));
-                selectDrawCase(selectedAnimation[counter]);
-                counter++;
-            }
-//
-//            tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
-//            background(stepHue(huecycle++, '#440000'));
-//            newWaveHorizon(4, stepHue(-huecycle, '#4D8F5E'));
-//            newWaveSkies(-4, stepHue(huecycle++, '#440000'));
-
-            //forwardFacing(canvas.width/2,canvas.height/2);
-//            forwardRunA(canvas.width / 2, canvas.height / 2);
-//            forwardRunBL(canvas.width / 2, canvas.height / 2);
-//            forwardRunAL(canvas.width / 2, canvas.height / 2);
-                        setInterval(aniloop, 1000 / 15);
+       
         </script>
     </center>
 </body></html>

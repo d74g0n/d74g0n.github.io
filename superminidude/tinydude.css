@@ -1,0 +1,19 @@
+  @font-face {
+      font-family: '8bitOperatorPlus-Regular';
+      src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+  }
+
+  span {
+      font-family: '8bitOperatorPlus-Regular';
+  }
+
+  body {
+      background: black;
+      color: white;
+      color: papayawhip;
+  }
+
+  canvas {
+      border: 4px solid #393276;
+      border-radius: 150px;
+  }
