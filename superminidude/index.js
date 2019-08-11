@@ -7,6 +7,7 @@ background(mycol.greenl);
      pantcolor: '#111111',
      haircolor: 'khaki',
      skincolor: '#FFDDAA',
+     skincolorShade: '#997A6B',
      purp: '#393276',
  }
   const td = tinyDude;
@@ -14,8 +15,9 @@ background(mycol.greenl);
  let sequences = {
      runfwd: ['f', 'rfrb', 'rfra', 'f', 'rfla', 'rflb'],
      spin: ['f', 'fr', 'r', 'br', 'b', 'bl', 'l', 'fl'],
-     walkr: ['fr', 'r', 'br', 'r'],
-     walkl: ['fl', 'l', 'bl', 'l'],
+     runleft: ['l','rldd','rlcc','l','rlbb','rlaa'],
+     runright: ['r','rrdd','rrcc','r','rrbb','rraa'],
+//     runright: ['r','rraa','rrbb','r','rrcc','rrdd'],
  }
  const ani = sequences;
 
@@ -58,6 +60,30 @@ background(mycol.greenl);
          case 'rflb':
              forwardRunBL(canvas.width / 2, canvas.height / 2);
              break;
+         case 'rldd':
+             RunLeftD(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rlcc':
+             RunLeftC(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rlbb':
+             RunLeftB(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rlaa':
+             RunLeftA(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rraa':
+             RunRightA(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rrbb':
+             RunRightB(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rrcc':
+             RunRightC(canvas.width / 2, canvas.height / 2);
+             break;
+         case 'rrdd':
+             RunRightD(canvas.width / 2, canvas.height / 2);
+             break;
 
      }
 
@@ -82,9 +108,17 @@ background(mycol.greenl);
              selectedAnimation = ani.spin;
              break;
          case 2:
-            selectedAnimation = ani.runfwd;
+            selectedAnimation = ani.runleft;
              break;
          case 3:
+             selectedAnimation = ani.spin;
+//            selectedAnimation = ani.walkr;
+             break;
+         case 4:
+             selectedAnimation = ani.runright;
+//            selectedAnimation = ani.walkr;
+             break;
+         case 5:
              selectedAnimation = ani.spin;
 //            selectedAnimation = ani.walkr;
              break;
@@ -110,5 +144,10 @@ background(mycol.greenl);
  }
 
  //            forwardRunAL(canvas.width / 2, canvas.height / 2);
-
+//RunLeftA(canvas.width / 2, canvas.height / 2);
+//RunLeftD(canvas.width / 2, canvas.height / 2);
  setInterval(aniloop, 1000 / 15);
+
+//RunRightA(canvas.width / 2, canvas.height / 2);;
+//RunRightB(canvas.width / 2, canvas.height / 2);;
+//RunRightD(canvas.width / 2, canvas.height / 2);;

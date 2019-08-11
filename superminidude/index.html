@@ -18,6 +18,9 @@
 <body>
     <center>
         <canvas id="superminidude"></canvas>
+        <center>
+        <span>IAM</span>
+        </center>
         <script>
             // INIT LEVEL
             const canvas = document.getElementById('superminidude');
@@ -26,11 +29,11 @@
             const ctx = canvas.getContext('2d');
 
             let anipicker = 1;
-            let anitotals = 3;
+            let anitotals = 5;
             
             canvas.onclick = function(ev) {
-                
-                console.log(anipicker--);
+                anipicker--;
+//                console.log(anipicker--);
                 if (anipicker < 0){
                     anipicker = anitotals;
                 }
