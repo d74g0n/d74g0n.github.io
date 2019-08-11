@@ -159,9 +159,12 @@
      }
      horizonMist();
      //     newWaveSkies(-10, stepHue(huecycle++, '#440000'));
+//     selectDrawCase(ani.runaway[counter]);
      selectDrawCase(selectedAnimation[counter]);
      huecycle++;
-     counter++;
+     
+     counter++; //HAX
+     
  }
 
 
@@ -182,4 +185,5 @@
 
  setInterval(autoflipanimations, 2500);
 
- setInterval(aniloop, 1000 / 15);
+// setInterval(aniloop, 1000 / 15);
+ setInterval(aniloop, 1000 / 10);

@@ -366,7 +366,7 @@ function runAwayA(x, y) {
     //    drawSquare(x - td.blocksize * 2, y + td.blocksize * 2, td.blocksize);
     // right leg:
     // setColor(td.skincolor);
-    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
+    drawSquare(x + td.blocksize * 1, y + td.blocksize * 1, td.blocksize);
     // left Arm
     drawSquare(x - td.blocksize * 3, y - td.blocksize, td.blocksize);
     //    drawSquare(x - td.blocksize * 4, y, td.blocksize);
@@ -389,7 +389,7 @@ function runAwayB(x, y) {
 
     // left leg:
     setColor(td.skincolor);
-    drawSquare(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize);
+    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
     // right leg:
     // setColor(td.skincolor);
     //    drawSquare(x + td.blocksize * 1, y + td.blocksize * 2, td.blocksize);
@@ -415,6 +415,7 @@ function runAwayC(x, y) {
 
     // left leg:
     setColor(td.skincolor);
+//    drawSquare(x - td.blocksize * 2, y , td.blocksize);
     drawSquare(x - td.blocksize * 2, y + td.blocksize * 1, td.blocksize);
     // right leg:
     // setColor(td.skincolor);
