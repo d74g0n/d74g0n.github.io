@@ -297,10 +297,6 @@ function RunRightD(x, y) {
     drawSquare(x + td.blocksize * 0.5, y - td.blocksize, td.blocksize);
     drawSquare(x - td.blocksize * 0.5, y - td.blocksize, td.blocksize);
 }
-
-
-
-
 // CORE STILL FRAMES:
 // Core Facing:
 function forwardFacing(x, y) {

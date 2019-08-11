@@ -16,36 +16,40 @@
 </head>
 
 <body>
-    <center>
-        <canvas id="superminidude"></canvas>
-        <center>
-        <span>IAM</span>
-        </center>
-        <script>
-            // INIT LEVEL
-            const canvas = document.getElementById('superminidude');
-            canvas.width = 150;
-            canvas.height = 150;
-            const ctx = canvas.getContext('2d');
+    <div class='outer-div'>
+        <div class='inner-div'>
+            <center>
+                <canvas id="superminidude"></canvas>
 
-            let anipicker = 1;
-            let anitotals = 5;
-            
-            canvas.onclick = function(ev) {
-                anipicker--;
-//                console.log(anipicker--);
-                if (anipicker < 0){
-                    anipicker = anitotals;
-                }
+                <center>
+                    <span>IAM</span>
+                </center>
+        </div>
+    </div>
+    <script>
+        // INIT LEVEL
+        const canvas = document.getElementById('superminidude');
+        canvas.width = 150;
+        canvas.height = 150;
+        const ctx = canvas.getContext('2d');
+
+        let anipicker = 1;
+        let anitotals = 5;
+
+        canvas.onclick = function(ev) {
+            anipicker--;
+            //                console.log(anipicker--);
+            if (anipicker < 0) {
+                anipicker = anitotals;
             }
-            
-        </script>
-        <script src="/superminidude/canvasrelated.js"></script>
-        <script src="/superminidude/drawtinydude.js"></script>
-        <script src="/superminidude/mypallete.js"></script>
-        <script src="/superminidude/index.js"></script>
-        <script>
-       
-        </script>
+        }
+    </script>
+    <script src="/superminidude/canvasrelated.js"></script>
+    <script src="/superminidude/drawtinydude.js"></script>
+    <script src="/superminidude/mypallete.js"></script>
+    <script src="/superminidude/index.js"></script>
+    <script>
+
+    </script>
     </center>
 </body></html>
