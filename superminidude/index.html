@@ -7,7 +7,8 @@
     <meta name="robots" content="noarchive" />
     <meta charset="UTF-8">
     <meta name="author" content="d74g0n">
-    <link rel="shortcut icon" href="/common/img/favicon.png" />
+<!--    <link rel="shortcut icon" href="/common/img/favicon.png" />-->
+    <link rel="shortcut icon" href="/common/img/punisher_black.png" />
     <link rel="stylesheet" type="text/css" href="/superminidude/tinydude.css" />
 
     <meta property="og:image" content="/superminidude/img/newwave.png">
@@ -18,11 +19,12 @@
 <body>
     <div class='outer-div'>
         <div class='inner-div'>
+            <div id="qstick"></div>
             <center>
                 <canvas id="superminidude"></canvas>
 
                 <center>
-                    <span>IAM</span>
+                    <span>IAM</span><br><span>STRONK</span>
                 </center>
         </div>
     </div>
@@ -34,9 +36,12 @@
         canvas.height = 150;
         const ctx = canvas.getContext('2d');
 
+        const qstick = document.getElementById('qstick');
+        
         let anipicker = 4;
-//        let anitotals = 7;
-        let anitotals = 4;
+
+        // how many animation cases there are... runleft runright etc:
+        let anitotals = 5;
 
         canvas.onclick = function(ev) {
             anipicker--;

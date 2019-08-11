@@ -98,7 +98,7 @@
              selectedAnimation = ani.runaway;
              break;
          case 2:
-            selectedAnimation = ani.runright;
+             selectedAnimation = ani.runright;
              break;
          case 3:
              selectedAnimation = ani.runfwd;
@@ -106,27 +106,31 @@
          case 4:
              selectedAnimation = ani.spin;
              break;
-//         case 5:
-//             selectedAnimation = ani.spin;
-//             break;
-//         case 6:
-//             selectedAnimation = ani.runright;
-//             break;
-//         case 7:
-//             selectedAnimation = ani.spin;
-//             break;
+          case 5:
+              selectedAnimation = ani.runfwd;
+          break;
+             //         case 6:
+             //             selectedAnimation = ani.runright;
+             //             break;
+             //         case 7:
+             //             selectedAnimation = ani.spin;
+             //             break;
      }
 
      if (huecycle > 360) {
          huecycle -= 360;
      }
      //                ctx.shadowColor = tinyDude.shirtcolor;
-//     ctx.shadowColor = stepHue(huecycle++, '#FFD700');
+     //     ctx.shadowColor = stepHue(huecycle++, '#FFD700');
+     
+     
+    
+     
      ctx.shadowColor = stepHue(huecycle, '#FFD700');
      ctx.shadowBlur = 4 + counter;
 
      canvas.style.borderColor = stepHue(180, tinyDude.shirtcolor);
-
+ qstick.style.borderColor = stepHue(180, tinyDude.shirtcolor);
 
      tinyDude.shirtcolor = stepHue(1, tinyDude.shirtcolor);
      background(stepHue(huecycle++, '#440000'));
@@ -140,11 +144,19 @@
 
 
 
-//runAwayA(canvas.width / 2, canvas.height / 2);
-//runAwayB(canvas.width / 2, canvas.height / 2);
-//runAwayC(canvas.width / 2, canvas.height / 2);
-//runAwayD(canvas.width / 2, canvas.height / 2);
+ //runAwayA(canvas.width / 2, canvas.height / 2);
+ //runAwayB(canvas.width / 2, canvas.height / 2);
+ //runAwayC(canvas.width / 2, canvas.height / 2);
+ //runAwayD(canvas.width / 2, canvas.height / 2);
 
+ function autoflipanimations() {
+     anipicker--;
+     //                console.log(anipicker--);
+     if (anipicker < 0) {
+         anipicker = anitotals;
+     }
+ }
 
+setInterval(autoflipanimations, 1000);
 
-setInterval(aniloop, 1000 / 15);
+ setInterval(aniloop, 1000 / 15);
