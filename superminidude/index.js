@@ -1,4 +1,29 @@
- //    RUNTIME
+/*
+To Do - Refactor Always
+
+1 - add 4 more directions
+
+2 - add joystick
+
+3 - add jump
+
+4 - add text bubble or something.
+
+
+always consider 'autochess' dynasty tactics 2 stuff.
+
+
+
+
+bonus
+
+- sun
+- noise-generated-buildings-skyline
+- palm tree?
+- topdown;
+*/ 
+
+//    RUNTIME
 
  function selectDrawCase(drawcase) {
 
