@@ -64,5 +64,5 @@ function drawcity() {
     GD.horizonY -= 7;
 }
 
-setInterval(drawcity, 1000/3);
-drawcity();
+let timer = setInterval(drawcity, 1000/3);
+

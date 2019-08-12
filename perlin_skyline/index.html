@@ -30,6 +30,7 @@
         body {
             background: black;
             color: skyblue;
+            user-select: none;
 
         }
 
@@ -69,6 +70,12 @@
         const canvas = document.getElementById('perlskyline');
         canvas.width = 480;
         canvas.height = 270;
+        canvas.onclick = function (ev){
+            clearInterval(timer);
+            drawcity();
+        }
+        
+        
         const ctx = canvas.getContext('2d');
         ctx.imageSmoothingEnabled = false;
         let colorscheme = {
