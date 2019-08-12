@@ -9,15 +9,24 @@
     <meta charset="UTF-8">
     <meta name="author" content="d74g0n">
     <link rel="shortcut icon" href="/common/img/punisher_black.png" />
-    
+
     <!--    <link rel="stylesheet" type="text/css" href="/superminidude/tinydude.css" />-->
 
-    
+
     <meta property="og:image" content="/perlin_skyline/skyline.png">
     <meta name="twitter:image" content="/perlin_skyline/skyline.png">
 
     <!--http://paletton.com/#uid=70M0w0kllllaFw0g0qFqFg0w0aF-->
     <style>
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        span {
+            font-family: '8bitOperatorPlus-Regular';
+        }
+
         body {
             background: black;
             color: skyblue;
@@ -28,9 +37,18 @@
             width: 480px;
             height: 270px;
             border: 2px solid skyblue;
-            
+
         }
 
+        span {
+            position: fixed;
+            top: 225px;
+            left: 240px;
+            right: 240px;
+            font-size: 32px;
+            text-shadow: -1px 1px 4px blue;
+
+        }
     </style>
 </head>
 
@@ -41,6 +59,7 @@
             <div id="qstick"></div>
             <center>
                 <canvas id="perlskyline"></canvas>
+                <br><span>LEARN TO CODE ...</span>
             </center>
         </div>
     </div>
@@ -57,7 +76,6 @@
             metal: 'lightgrey',
 
         }
-
     </script>
 
     <script src="/perlin_skyline/skylinectx.js"></script>
@@ -68,9 +86,7 @@
 
 
     <script>
-    
+
     </script>
 
-</body>
-
-</html>
+</body></html>
