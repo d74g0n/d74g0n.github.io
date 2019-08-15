@@ -23,6 +23,7 @@
             padding: 0px;
             margin: 0px;
             user-select: none;
+            overflow: hidden;
         }
 
         body {
@@ -31,8 +32,11 @@
         }
 
         canvas {
-            width: 300px;
+            width: 900px;
+            width: 100vw;
+            
             height: 300px;
+            height: 100vh;
             border: 1px solid gold;
         }
 
@@ -74,6 +78,7 @@
             // I call this 'booting up the canvas'
             const canvas = document.getElementById('d74game');
             const ctx = canvas.getContext('2d');
+//            canvas.width = 900;
             canvas.width = 300;
             canvas.height = 300;
 
