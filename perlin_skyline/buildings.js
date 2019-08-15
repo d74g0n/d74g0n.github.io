@@ -1,3 +1,12 @@
+/*TODONOTES
+
+- could add pearl Antenna.
+
+all boolean toggles become perlin noise controlled.
+
+
+*/
+
 let GeoData = {
     horizonY: Math.floor(canvas.height * 0.7),
     top: 190,
@@ -33,7 +42,7 @@ function buildingABasic(x, w, h) {
     let doorHeight = 4;
 
     let lightcolor = 'rgba(156,156,156,1)';
-    
+
     //    setColor('gold');
     //    drawRect(x + 2, B.Top + 4, w / 3 - 4, 2);
     //    drawRect(x + 2 + (w * .2), B.Top + 4, w / 3 - 4, 2);
@@ -42,16 +51,16 @@ function buildingABasic(x, w, h) {
 
     for (let floors = (h / 4); floors > doorHeight; floors--) {
         if (RNDBool()) {
-//            setColor('yellow');
-            setColor(windowLight(RNDNum(0,255)));
+            //            setColor('yellow');
+            setColor(windowLight(RNDNum(0, 255)));
         } else {
             setColor('black');
         }
         drawRect(x + 2, B.Top + 4 + floorHeight, w / 3 - 4, 2);
 
         if (RNDBool()) {
-           setColor(windowLight(RNDNum(0,255)));
-//            setColor(lightcolor);
+            setColor(windowLight(RNDNum(0, 255)));
+            //            setColor(lightcolor);
         } else {
             setColor('black');
         }
@@ -61,15 +70,15 @@ function buildingABasic(x, w, h) {
 
         drawRect(x + 2 + (w * .2), B.Top + 4 + floorHeight, w / 3 - 4, 2);
         if (RNDBool()) {
-           setColor(windowLight(RNDNum(0,255)));
-//             setColor(lightcolor);
+            setColor(windowLight(RNDNum(0, 255)));
+            //             setColor(lightcolor);
         } else {
             setColor('black');
         }
         drawRect(x + 2 + (w * .4), B.Top + 4 + floorHeight, w / 3 - 4, 2);
         if (RNDBool()) {
-          setColor(windowLight(RNDNum(0,255)));
-//              setColor(lightcolor);
+            setColor(windowLight(RNDNum(0, 255)));
+            //              setColor(lightcolor);
         } else {
             setColor('black');
         }
@@ -89,7 +98,7 @@ function buildingABasic(x, w, h) {
 
 
 
-//console.log(`BTOP-${(GD.horizonY - h)}`);
+    //console.log(`BTOP-${(GD.horizonY - h)}`);
     if (GD.horizonY - h <= 50) {
 
         // un-hardcode color for twinkle:
@@ -105,6 +114,6 @@ function buildingABasic(x, w, h) {
 }
 
 
-function windowLight(val='50'){
+function windowLight(val = '50') {
     return `rgba(255,255,${val},1)`;
 }

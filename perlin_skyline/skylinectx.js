@@ -61,7 +61,7 @@ function drawCircle(x, y, r) {
     ctx.stroke();
 }
 
-function fillCicle(x, y, r, color) {
+function fillCircle(x, y, r, color) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fillStyle = color;

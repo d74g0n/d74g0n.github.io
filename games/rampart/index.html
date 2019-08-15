@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rampart</title>
+
+    <meta name="description" content="d74g0n's Javascript Rampart Knockoff">
+    <meta name="keywords" content="javascript, JS, Art, Pixel, Code, Programming, visual, visualizer, viewer, d74g0n, art">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <link rel="shortcut icon" href="/common/img/punisher_black.png" />
+    <meta property="og:image" content="/common/img/punisher_med_white.png">
+    <meta name="twitter:image" content="/common/img/punisher_med_white.png">
+
+
+    <style>
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        * {
+            padding: 0px;
+            margin: 0px;
+            user-select: none;
+        }
+
+        body {
+            font-family: '8bitOperatorPlus-Regular';
+            background: black;
+        }
+
+        canvas {
+            width: 300px;
+            height: 300px;
+        }
+
+        #debugger {
+            position: fixed;
+            top: 10;
+            left: 20;
+            border: 1px solid red;
+            padding: 1em;
+            border-bottom-right-radius: 15px;
+
+        }
+
+        #debugOnscreen {
+            font-size: 16px;
+            color: white;
+            padding: 0;
+            margin: 0;
+            line-height: 8px;
+        }
+
+        br {}
+    </style>
+</head>
+</head>
+
+<body>
+
+    <center>
+        <div id='debugger'>
+            <span id='debugOnscreen'></span>
+        </div>
+        <canvas id="d74game"></canvas>
+        <script>
+            // I call this 'booting up the canvas'
+            const canvas = document.getElementById('d74game');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 300;
+            canvas.height = 300;
+
+            const dbg = document.getElementById('debugOnscreen');
+
+            function dlog(msg) {
+
+                dbg.innerHTML = msg;
+
+            }
+        </script>
+    </center>
+    <script src="/games/common/PerlinNoise.js"></script>
+    <script src="/games/common/math.js"></script>
+    <script src="/games/common/drawing.js"></script>
+    <script>
+        let rndSeed = RNDNum(0, 9000);
+    </script>
+    <script src="/games/rampart/rampart.js"></script>
+    <script src="/games/rampart/playerdata.js"></script>
+
+
+
+
+</body></html>
