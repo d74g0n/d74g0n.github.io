@@ -7,7 +7,6 @@
 // REDO ALL MATH TO BE CENTERED DOH!!!
 // 2 for loops x of canvas.width/2 one + one - from center of every loop fill... 
 
-
 let global = {
     scale: 10,
 }
@@ -71,7 +70,6 @@ function run() {
 }
 
 //run();
-
 //setInterval(run, 1000 / 30);
 //    let rowwidth = 80;
 
@@ -85,9 +83,6 @@ function drawCenteredRows(rowwidth = 40) {
     }
 
 }
-
-
-
 
 function drawCenteredRow(rowcount = 12, rowbaseY = canvas.height * 0.6, Px = 0.2, Py = 0.2, Pz = 0.2, m = 25, ) {
     //z is up down not to be used aside from tripping out.
@@ -138,7 +133,6 @@ function drawCenteredRow(rowcount = 12, rowbaseY = canvas.height * 0.6, Px = 0.2
 
 }
 
-
 let tX = 1.1;
 let tY = 1.1;
 
@@ -188,12 +182,9 @@ function Step(rowW = 20) {
 
 //setInterval(Step, 1000 / 30);
 
-
-
-
 function drawFeetOut(rowcount=10, rowbaseY,Px=0.02,Py=0.02,Pz=0.02){
     // how much do we amp up the perlnoise - colour purposes mostly:
-    let perlMagnifier = 40;
+    let perlMagnifier = 80;
     // get our Perlin Noise for Coordinate:
     let PERLNOISE = Perl.noise(Px, Py, Pz) / 255;
     // Scale up the noise to our needs:
@@ -210,11 +201,11 @@ function drawFeetOut(rowcount=10, rowbaseY,Px=0.02,Py=0.02,Pz=0.02){
     
     for (x = 0; x <= rowcount/2; x++){
         
-        PERLNOISE = Perl.noise(Px + (x * .1), Py, Pz) / 255;
+        PERLNOISE = Perl.noise(Px + (x * .049), Py, Pz) / 255;
         PERLNOISE *= perlMagnifier;
         setColor(`rgba(${PERLNOISE*4.5},${PERLNOISE*4.5},${PERLNOISE*2},1)`);
         setColor(`rgba(${PERLNOISE*4.5},${PERLNOISE*4.5},${PERLNOISE*2},1)`);
-           setColor(`rgba(0,0,${PERLNOISE*4},0.5)`);
+           setColor(`rgba(0,0,${PERLNOISE*4},0.8)`);
         ctx.fillRect(deltaXofCenter+(x*blockSize),rowbaseY - PERLNOISE,blockSize,PERLNOISE);
         
     }
@@ -224,10 +215,10 @@ function drawFeetOut(rowcount=10, rowbaseY,Px=0.02,Py=0.02,Pz=0.02){
         //LEFT SIDE
     for (x = 0; x < rowcount/2; x++){
         
-        PERLNOISE = Perl.noise(Px - ((steps-x) * .1), Py, Pz) / 255;
+        PERLNOISE = Perl.noise(Px - ((steps-x) * .049), Py, Pz) / 255;
         PERLNOISE *= perlMagnifier;
         setColor(`rgba(0,${PERLNOISE*4.5},${PERLNOISE*2},1)`);
-        setColor(`rgba(0,0,${PERLNOISE*4},0.5)`);
+        setColor(`rgba(0,0,${PERLNOISE*4},0.8)`);
         
 //        ctx.fillRect(deltaXofCenter-(x*blockSize),rowbaseY - PERLNOISE,blockSize,PERLNOISE);
         ctx.fillRect(-deltaX+(x*blockSize),rowbaseY - PERLNOISE,blockSize,PERLNOISE);
@@ -277,19 +268,20 @@ function drawFeetOut(rowcount=10, rowbaseY,Px=0.02,Py=0.02,Pz=0.02){
 
 function boop(xx=0.01){
 
-    background(gradientV());
+    background(gradientV('black','purple','blue'));
     
-let ystep = 0;
+let ystep = 0.1;
 let rowincreaser = 0;
 let rows = 0;
 
 for (y = canvas.height; y > canvas.height/2; y-=2){
 
-    drawFeetOut(rows + rowincreaser, canvas.height-ystep, 3.02+xx, 0.2+xx);
+//    drawFeetOut(rows + rowincreaser, canvas.height-ystep, ystep*10, 0.2+xx);
+    drawFeetOut(rows + rowincreaser, canvas.height-ystep, ystep*10+xx, 0.2+xx);
 //    drawFeetOut(rows + rowincreaser, canvas.height-ystep, 3.02, 0.2+xx);
 //    drawFeetOut(rows + rowincreaser, canvas.height-ystep, 3.02, 0.2+MPy,0.2+xx);
     rowincreaser+=1;
-    ystep+=1;
+    ystep+=0.1;
     MPy += 0.1;
 }
     
