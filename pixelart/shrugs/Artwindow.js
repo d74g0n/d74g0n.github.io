@@ -31,7 +31,7 @@ class Artwindow {
 
         this.elm.style.background = this.bg;
         this.elm.style.border = this.border;
-        this.elm.drraggable = 'true';
+        this.elm.draggable = 'true';
 
         // get 2dcontext:
         this.ctx = this.elm.getContext('2d');
