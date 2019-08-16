@@ -184,7 +184,7 @@ function Step(rowW = 20) {
 
 function drawFeetOut(rowcount=10, rowbaseY,Px=0.02,Py=0.02,Pz=0.02){
     // how much do we amp up the perlnoise - colour purposes mostly:
-    let perlMagnifier = 80;
+    let perlMagnifier = 40;
     // get our Perlin Noise for Coordinate:
     let PERLNOISE = Perl.noise(Px, Py, Pz) / 255;
     // Scale up the noise to our needs:
@@ -199,13 +199,17 @@ function drawFeetOut(rowcount=10, rowbaseY,Px=0.02,Py=0.02,Pz=0.02){
     let deltaX = (canvas.width/2 - deltaXofCenter);
 
     
-    for (x = 0; x <= rowcount/2; x++){
+    for (x = 0; x <= Math.floor(rowcount/2); x++){
         
-        PERLNOISE = Perl.noise(Px + (x * .049), Py, Pz) / 255;
+        PERLNOISE = Perl.noise(Px + (x * .059), Py, Pz) / 255;
         PERLNOISE *= perlMagnifier;
-        setColor(`rgba(${PERLNOISE*4.5},${PERLNOISE*4.5},${PERLNOISE*2},1)`);
-        setColor(`rgba(${PERLNOISE*4.5},${PERLNOISE*4.5},${PERLNOISE*2},1)`);
-           setColor(`rgba(0,0,${PERLNOISE*4},0.8)`);
+//        setColor(`rgba(${PERLNOISE*4.5},${PERLNOISE*4.5},${PERLNOISE*2},1)`);
+//        setColor(`rgba(${PERLNOISE*4.5},${PERLNOISE*4.5},${PERLNOISE*2},1)`);
+           setColor(`rgba(0,0,${PERLNOISE*4},0.6)`);
+//           setColor(`rgba(0,0,${PERLNOISE*4},1)`);
+        
+//        setColor(`rgba(0,,${rowbaseY/2},${PERLNOISE*4},0.8)`);
+//        ctx.fillRect(deltaXofCenter+(x*blockSize),rowbaseY - PERLNOISE,blockSize+0.5,PERLNOISE+0.5);
         ctx.fillRect(deltaXofCenter+(x*blockSize),rowbaseY - PERLNOISE,blockSize,PERLNOISE);
         
     }
@@ -213,75 +217,38 @@ function drawFeetOut(rowcount=10, rowbaseY,Px=0.02,Py=0.02,Pz=0.02){
     let steps = (rowcount/2);
     
         //LEFT SIDE
-    for (x = 0; x < rowcount/2; x++){
+    for (x = 0; x < Math.floor(rowcount/2)+0.25; x++){
         
-        PERLNOISE = Perl.noise(Px - ((steps-x) * .049), Py, Pz) / 255;
+        PERLNOISE = Perl.noise(Px - ((steps-x) * .059), Py, Pz) / 255;
         PERLNOISE *= perlMagnifier;
-        setColor(`rgba(0,${PERLNOISE*4.5},${PERLNOISE*2},1)`);
-        setColor(`rgba(0,0,${PERLNOISE*4},0.8)`);
+//        setColor(`rgba(0,${PERLNOISE*4.5},${PERLNOISE*2},1)`);
+        setColor(`rgba(0,0,${PERLNOISE*4},0.6)`);
+//        setColor(`rgba(0,0,${PERLNOISE*4},1)`);
         
 //        ctx.fillRect(deltaXofCenter-(x*blockSize),rowbaseY - PERLNOISE,blockSize,PERLNOISE);
-        ctx.fillRect(-deltaX+(x*blockSize),rowbaseY - PERLNOISE,blockSize,PERLNOISE);
+//        ctx.fillRect((x*blockSize)-(deltaX*2),rowbaseY - PERLNOISE,blockSize+0.5,PERLNOISE+0.5);
+        ctx.fillRect((x*blockSize)-(deltaX*2),rowbaseY - PERLNOISE,blockSize,PERLNOISE);
         
     }
-    
-    
-    
-    
-    
-    
-    
-
-    // Do right side::
-//    for (let x = 0; x <= rowcount / 2; x++) {
-//        PERLNOISE = Perl.noise(Px + (x / 10), Py, Pz) / 255;
-//        PERLNOISE *= perlMagnifier;
-//        setColor(`rgba(0,${PERLNOISE*4.5},${PERLNOISE*2},1)`);
-//        
-//        ctx.fillRect((x * blockSize) + deltaXofRow, rowbaseY - PERLNOISE, canvas.width / rowcount, PERLNOISE);
-//
-//    }
-    
-    // re-init for leftside::
-//    console.log(PERLNOISE);
-    
-    
-//    PERLNOISE = Perl.noise(Px, Py, Pz) / 255;
-//    PERLNOISE *= perlMagnifier;
-//    blockSize = canvas.width / rowcount;
-
-    // Do left side::    
-//    for (let x = 0; x >= (-1 * blockSize); x--) {
-////    for (let x = (blockSize*-1); x < (rowcount / 2) - blockSize; x--) {
-//        setColor(`rgba(0,${PERLNOISE*4.5},${PERLNOISE*2},1)`);
-//        PERLNOISE = Perl.noise(Px + (-1 *(x / 10)), Py, Pz) / (255);
-////        PERLNOISE *= perlMagnifier;
-//        ctx.fillRect((x * blockSize) + deltaXofRow, (rowbaseY - PERLNOISE), canvas.width / rowcount, PERLNOISE);
-
-
-
-//    }
-
-    
-    
 }
 
 function boop(xx=0.01){
 
     background(gradientV('black','purple','blue'));
     
-let ystep = 0.1;
+let ystep = 2;
 let rowincreaser = 0;
-let rows = 0;
+let rows = 5;
 
-for (y = canvas.height; y > canvas.height/2; y-=2){
+for (y = canvas.height; y > canvas.height/2; y-=10){
+//for (y = canvas.height; y > 200; y-=2){
 
 //    drawFeetOut(rows + rowincreaser, canvas.height-ystep, ystep*10, 0.2+xx);
-    drawFeetOut(rows + rowincreaser, canvas.height-ystep, ystep*10+xx, 0.2+xx);
+    drawFeetOut(rows + rowincreaser, y-ystep, ystep, 0.02+xx);
 //    drawFeetOut(rows + rowincreaser, canvas.height-ystep, 3.02, 0.2+xx);
 //    drawFeetOut(rows + rowincreaser, canvas.height-ystep, 3.02, 0.2+MPy,0.2+xx);
-    rowincreaser+=1;
-    ystep+=0.1;
+    rowincreaser+=2;
+    ystep+=0.025;
     MPy += 0.1;
 }
     
@@ -291,7 +258,7 @@ let MPy = 0.1;
 let rrun = 0.01;
 function booptheboop(){
     
-    boop(rrun+=0.02);
+    boop(rrun+=0.01);
     
 }
 
