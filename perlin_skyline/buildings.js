@@ -103,13 +103,13 @@ function buildingABasic(x, w, h) {
 
         // un-hardcode color for twinkle:
         // airplane saftey lights:
-        fillCicle(x + (w * .1), bTop, w / 15, 'red');
-        fillCicle(x + (w * .5), bTop, w / 15, 'red');
-        fillCicle(x + (w * .9), bTop, w / 15, 'red');
+        fillCircle(x + (w * .1), bTop, w / 15, 'red');
+        fillCircle(x + (w * .5), bTop, w / 15, 'red');
+        fillCircle(x + (w * .9), bTop, w / 15, 'red');
 
-        fillCicle(x + (w * .1), bTop, w / 25, 'white');
-        fillCicle(x + (w * .5), bTop, w / 25, 'white');
-        fillCicle(x + (w * .9), bTop, w / 25, 'white');
+        fillCircle(x + (w * .1), bTop, w / 25, 'white');
+        fillCircle(x + (w * .5), bTop, w / 25, 'white');
+        fillCircle(x + (w * .9), bTop, w / 25, 'white');
     }
 }
 
