@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>sineColors</title>
+
+    <meta name="description" content="d74g0n's Javascript Tripping on Sine">
+    <meta name="keywords" content="javascript, JS, Art, Pixel, Code, Programming, visual, visualizer, viewer, d74g0n, art, Sine Noise, Noise">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <link rel="shortcut icon" href="/common/img/punisher_black.png" />
+    <!--    <script src="/common/js/perlin.js"></script>-->
+    <meta property="og:image" content="/common/img/punisher_black.png">
+    <meta name="twitter:image" content="/common/img/punisher_black.png">
+
+    <style>
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        * {
+            padding: 0px;
+            margin: 0px;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: '8bitOperatorPlus-Regular';
+            background: black;
+        }
+
+        canvas {
+            width: 300px;
+            /*            width: 100vw;*/
+
+            height: 300px;
+            /*            height: 100vh;*/
+            border: 1px solid gold;
+        }
+
+
+        #settings {
+            width: auto;
+            margin: auto;
+            padding: auto;
+            max-width: 360px;
+        }
+
+        .slidercontainer {
+            margin: auto;
+            padding: auto;
+            max-width: 132px;
+            display: inline-block;
+            user-select: none;
+        }
+
+        .sliderLabels {
+            line-height: 20px;
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+            padding-left: 1em;
+        }
+
+        .sliderLabels:hover {
+            color: gold;
+        }
+
+        input {
+            padding: 0;
+            margin: 0;
+        }
+
+        #dataoutput {
+            color: lime;
+            margin-top: 1em;
+            width: 200px;
+            word-break: break-all;
+            line-height: 12px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let timerInternals = {
+            fps: 1000/30,
+            sine: {
+                a: 0,
+                b: 32,
+//                b: 0,
+                c: 64,
+//                c: 0,
+                step: 1,
+                incrementA: 0.0002,
+                incrementB: 0.0001,
+                incrementC: 0.0004,
+            },
+            color: {
+                a: undefined,
+                b: undefined,
+                c: undefined,
+            }
+
+        }
+        const _TI = timerInternals;
+
+        function itIsSetupTimeNowInit() {
+
+
+        }
+
+        function funTime() {
+
+            function doTick() {
+               _TI.sine.a += _TI.sine.incrementA;
+               _TI.sine.b += _TI.sine.incrementB;
+               _TI.sine.c += _TI.sine.incrementC;
+                
+                _TI.color.a = colourSine(_TI.sine.a);
+                _TI.color.b = colourSine(_TI.sine.b);
+                _TI.color.c = colourSine(_TI.sine.c);
+                 document.body.style.background = singleSineRBGA(_TI.color.a, _TI.color.b, _TI.color.c);
+            }
+            
+            doTick();
+
+           
+
+        }
+
+        const qstyle = document.body;
+        //        qstyle.style.background = 'red';
+
+        function posSine(val) {
+            return (Math.sin(val) + 1);
+        }
+
+        function sine(val) {
+            // radians btw.
+            return Math.sin(val);
+        }
+
+        function percentage(val = 1, percentageOf = 255) {
+            // return Math.floor((val / 1) * percentageOf);
+            return (val / 1) * percentageOf;
+        }
+
+        function percentage2(val = 1, percentageOf = 255) {
+            // return Math.floor((val / 1) * percentageOf);
+//            return Math.ceil((val / 2) * percentageOf);
+            return ((val / 2) * percentageOf).toFixed(2);
+        }
+
+        function colourSine(sineInput) {
+            return percentage2(posSine(sineInput));
+        }
+
+        function singleSineRBGA(valA, valB = valA, valC = valA) {
+            console.log(`rgba(${colourSine(valA)},${colourSine(valB)},${colourSine(valC)},1)`);
+            return `rgba(${colourSine(valA)},${colourSine(valB)},${colourSine(valC)},1)`;
+        }
+
+
+
+        setInterval(funTime, _TI.fps);
+
+
+
+
+        //        console.log(`negcheck: ${-.8/1}`);
+
+        //        for (i = 0; i < Math.PI * 10; i += 0.25) {
+        //            //        console.log(`posSine: ${percentage2(posSine(i))}`);
+        //            //            console.log(`${colourSine(i)} - colourSine(${i})`);
+        //            document.body.style.background = singleSineRBGA(i, i + 23, i + 46);
+        //
+        //            //            console.log(`SineRGBA - ${singleSineRBGA(i,i+23,i+46)}`);
+        //            console.log(`SineRGBA - ${singleSineRBGA(i,i+23,i+46)}`);
+        //            //            document.body.style.background = `rgb(${colourSine(i)},${colourSine(i+23)},${colourSine(i+46)},1)`;
+        //        }
+    </script>
+    <div id="settings">
+        <center>
+            <div class="slidercontainer">
+                <span id="scaleLabel" class id="sliderLabels">scale</span><input type="range" min="8" max="100" value="8" class="slider" id="scaleSlider">
+                <script>
+                    let scaleSlider = document.getElementById('scaleSlider');
+                    let scaleLabel = document.getElementById('scaleLabel');
+                    scaleSlider.oninput = function() {
+                        NoiseObj.scale = this.value;
+                        doDebuggerOutputs();
+                        scaleLabel.innerHTML = `${this.value} - scale`;
+                    }
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="magnitudeLabel" class id="sliderLabels">magnitude</span><input type="range" min="1" max="200" value="10" class="slider" id="magnitudeSlider">
+                <script>
+                    let magnitudeSlider = document.getElementById('magnitudeSlider');
+                    let magnitudeLabel = document.getElementById('magnitudeLabel');
+                    magnitudeSlider.oninput = function() {
+                        //                        NoiseObj.magxyz = 10 ** this.value;
+                        NoiseObj.magxyz = this.value;
+                        doDebuggerOutputs();
+                        magnitudeLabel.innerHTML = `${this.value} - mag`;
+                    }
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="permanenceLabel" class id="sliderLabels">permanence</span><input type="range" min="0" max="200" value="0" class="slider" id="permanenceSlider">
+                <script>
+                    let permanenceSlider = document.getElementById('permanenceSlider');
+                    let permanenceLabel = document.getElementById('permanenceLabel');
+                    permanenceSlider.oninput = function() {
+                        NoiseObj.permenance = this.value / 100;
+                        doDebuggerOutputs();
+                        permanenceLabel.innerHTML = `${this.value/10} - perm`;
+                    }
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="octavesLabel" class id="sliderLabels">octaves</span><input type="range" min="1" max="10" value="1" class="slider" id="octavesSlider">
+                <script>
+                    let octavesSlider = document.getElementById('octavesSlider');
+                    let octavesLabel = document.getElementById('octavesLabel');
+                    octavesSlider.oninput = function() {
+                        NoiseObj.octaves = this.value;
+                        doDebuggerOutputs();
+                        octavesLabel.innerHTML = `${this.value} - octaves`;
+                    }
+                </script>
+            </div>
+
+
+
+            <div class="slidercontainer">
+                <span id="xLabel" class id="sliderLabels">x</span><input type="range" min="1" max="20000" value="1" class="slider" id="xSlider">
+                <script>
+                    let xSlider = document.getElementById('xSlider');
+                    let xLabel = document.getElementById('xLabel');
+                    xSlider.oninput = function() {
+                        DS.offset.x = this.value;
+                        //                        DS.offset.x = this.value;
+                        doDebuggerOutputs();
+                        xLabel.innerHTML = `${this.value} - x`;
+                    }
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="yLabel" class id="sliderLabels">y</span><input type="range" min="1" max="20000" value="1" class="slider" id="ySlider">
+                <script>
+                    let ySlider = document.getElementById('ySlider');
+                    let yLabel = document.getElementById('yLabel');
+                    ySlider.oninput = function() {
+                        DS.offset.y = this.value;
+                        doDebuggerOutputs();
+                        yLabel.innerHTML = `${this.value} - y`;
+                    }
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="zLabel" class id="sliderLabels">z</span><input type="range" min="1" max="20000" value="1" class="slider" id="zSlider">
+                <script>
+                    let zSlider = document.getElementById('zSlider');
+                    let zLabel = document.getElementById('zLabel');
+                    zSlider.oninput = function() {
+                        DS.offset.z = this.value;
+                        doDebuggerOutputs();
+                        zLabel.innerHTML = `${this.value} - z`;
+                    }
+                </script>
+            </div>
+
+            <div class="slidercontainer">
+                <span id="modeLabel" class id="sliderLabels">Mode</span><input type="range" min="1" max="5" value="1" class="slider" id="modeSlider">
+                <script>
+                    let modeSlider = document.getElementById('modeSlider');
+                    let modeLabel = document.getElementById('modeLabel');
+                    modeSlider.oninput = function() {
+                        DS.colormode = this.value;
+                        doDebuggerOutputs();
+                        modeLabel.innerHTML = `${this.value} - Mode`;
+                    }
+                </script>
+            </div>
+
+        </center>
+    </div>
+
+
+
+
+</body></html>
