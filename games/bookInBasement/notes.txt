@@ -1,0 +1,4 @@
+make quick game about book in basement - there is no way out - ask book how it ends
+Ha.
+
+how fancy we do it?  socket it... watch book from backend? ;)  back to nodejs we go!

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>The Book in The Basement</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="d74g0n helps a book out of a basement - You can help too!">
+    <meta name="keywords" content="datafag, qmap, streaming, news, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
+    <script src="/games/common/drawing.js"></script>
+    <script src="/games/common/math.js"></script>
+    <!--
+    <link rel="stylesheet" type="text/css" href="/datahub/hub.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />
+-->
+
+    <style>
+        @font-face {
+            font-family: '8bit';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+            
+        }
+
+        canvas {
+            font-size: 98px;
+        }
+
+        body {
+            background: black;
+            color: white;
+        }
+
+        canvas {
+            border: 1px solid gold;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="bucht"></canvas>
+    </center>
+    <script>
+        // control a canvas to draw to (by linking to canvas tag above)
+        const canvas = document.getElementById('bucht');
+        // set properties of canvas (CSS does not effect these numbers)
+        // meaning that if these are 500,500 and CSS w/h is different it will stretch.
+        canvas.width = 640;
+        canvas.height = 480;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+    </script>
+    <script src="/games/bookInBasement/set.js"></script>
+    <script src="/games/bookInBasement/mainloop.js"></script>
+    <script src="/games/bookInBasement/controls.js"></script>
+</body></html>

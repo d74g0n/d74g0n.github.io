@@ -1,3 +1,47 @@
+let f = new FontFace('8-bit', '/common/fonts/8bitOperatorPlus-Regular.ttf');
+
+
+
+function drawImage(img, x, y) {
+    ctx.drawImage(img, x, y, img.width, img.height);
+}
+
+function superdrawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
+    ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+}
+
+function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = f, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {
+    ctx.fillStyle = fillStyle;
+    ctx.strokeStyle = strokeStyle;
+    ctx.font = font;
+    ctx.textAlign = textAlign;
+    ctx.textBaseline = textBaseline;
+    ctx.fillText(string, scaleX, scaleY);
+    ctx.strokeText(string, scaleX, scaleY);
+    // REMEMBER SHADOWING?
+}
+
+
+// set globalalpha
+function GlobalAlpha(num = 1) {
+    ctx.globalAlpha = num;
+}
+// set shadows:
+function Shadow(shadowBlur = 2, shadowColor = 'white', shadowOffsetX = 1, shadowOffsetY = 1) {
+    ctx.shadowBlur = shadowBlur;
+    ctx.shadowColor = shadowColor;
+    ctx.shadowOffsetX = shadowOffsetX;
+    ctx.shadowOffsetY = shadowOffsetY;
+}
+// clear shadows:
+function clrShadow(color = 'rgb(255,0,255)') {
+    // 'greenscreen-pink' used as debugging detector; 
+    // finalize perhaps we go green or transparent.
+    Shadow(0, color, 0, 0);
+}
+
+
+
 function background(color) {
     ctx.fillStyle = color;
     return ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -23,8 +67,8 @@ function drawRect(x, y, w, h) {
     return ctx.fillRect(x, y, w, h);
 }
 
-function drawGround(y){
-    return ctx.fillRect(0,y,canvas.width,canvas.height-y);
+function drawGround(y) {
+    return ctx.fillRect(0, y, canvas.width, canvas.height - y);
 }
 
 function drawCircle(x, y, r) {
@@ -33,7 +77,7 @@ function drawCircle(x, y, r) {
     ctx.stroke();
 }
 
-function fillCicle(x,y,r,color){
+function fillCicle(x, y, r, color) {
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fillStyle = color;
@@ -81,74 +125,81 @@ function horizontalLine(y) {
     ctx.stroke();
 }
 
+function drawline(x, y, xb, yb) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(xb, yb);
+    ctx.stroke();
+}
+
 //=-=-=-=-=-=-=-=-
 
 function highlightTile(x, y, color) {
-// these functions are essentially the draw functions interpreted into board coordinates.
+    // these functions are essentially the draw functions interpreted into board coordinates.
     setColor(color);
     drawSquare(x * global.scale, y * global.scale, global.scale);
 }
 
 function outlineTile(x, y, color) {
-// these functions are essentially the draw functions interpreted into board coordinates.
+    // these functions are essentially the draw functions interpreted into board coordinates.
     sSq(x * global.scale, y * global.scale, color);
 }
 
 function circleTile(x, y, color) {
-// these functions are essentially the draw functions interpreted into board coordinates.
+    // these functions are essentially the draw functions interpreted into board coordinates.
     setStrokeColor(color);
     drawCircle((x * global.scale) + (global.scale / 2), (y * global.scale) + (global.scale / 2), 13);
 }
 
 function circleFillTile(x, y, color) {
-// these functions are essentially the draw functions interpreted into board coordinates.
+    // these functions are essentially the draw functions interpreted into board coordinates.
     fillCicle((x * global.scale) + (global.scale / 2), (y * global.scale) + (global.scale / 2), 13, color);
 }
 
-function fillCheckerboard(x,y){
-//    CHECKER LOGIC
-            if (y % 2 == 0) {
-                if (x % 2 == 0) {
-                    setColor('white');
-                } else {
-                    setColor('black');
-                }
-            } else {
-                if (x % 2 == 0) {
-                    setColor('black');
-                } else {
-                    setColor('white');
-                }
-            }
+function fillCheckerboard(x, y) {
+    //    CHECKER LOGIC
+    if (y % 2 == 0) {
+        if (x % 2 == 0) {
+            setColor('white');
+        } else {
+            setColor('black');
+        }
+    } else {
+        if (x % 2 == 0) {
+            setColor('black');
+        } else {
+            setColor('white');
+        }
+    }
 }
 
 
-function fillGrass(x,y,m){
-    
-    let noise = Perl.noise((rndSeed+x)/m,(rndSeed+y)/m,5/m);
-    if (noise > 100){
+function fillGrass(x, y, m) {
+
+    let noise = Perl.noise((rndSeed + x) / m, (rndSeed + y) / m, 5 / m);
+    if (noise > 100) {
         // GRASS LEVEL
-     setColor(`rgb(0,${noise/3},0)`);   
-        
+        setColor(`rgb(0,${noise/3},0)`);
+
         if (noise > 100 && noise < 110) {
-            setColor(`rgba(${noise/1},${noise/1},${noise/2},1)`);   
+            setColor(`rgba(${noise/1},${noise/1},${noise/2},1)`);
         }
-        
+
         if (Math.floor(noise).toFixed(0) == 130) {
             setColor('black');
         }
-        
+
         if ((noise).toFixed(0) % 10 == 0 && Math.floor(noise).toFixed(0) > 130) {
             setColor('black');
         }
-        
+
         global.tiles.grass++;
-    }else{
+    } else {
         // WATER LEVEL
         setColor(`rgb(0,0,${noise/2})`);
         global.tiles.water++;
     }
 
-    
+
 }
 console.log(`/g/c/drawing.js loaded`);
