@@ -21,6 +21,6 @@ function mainLoop() {
 }
 
 window.onload = function () {
-    mainLoop();
+    setTimeout(mainLoop,3000);
 };
 //mainLoop();
