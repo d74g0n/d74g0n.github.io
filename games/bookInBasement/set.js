@@ -17,14 +17,17 @@ let RoomProps = {
     floor: {
         height: 180,
     },
-//    desk: {
-//        door: {
-//            t: 80,
-//            h: 10,
-//            w: 200,
-//            l: 150,
-//        },
-//    },
+    computer: {
+        lightT: false,
+        lightB: true,
+        blinkmodolo: 60,
+    },
+    tv: {
+        refresh: true,
+        modolo: 30,
+        gradient: undefined,
+    }
+
 }
 const RP = RoomProps;
 
@@ -54,7 +57,29 @@ let Global = {
 };
 const G = Global;
 
+function BlinkComputerLights(frame) {
 
+    function blink(frame) {
+        if (frame % RP.computer.blinkmodolo == 0) {
+            RP.computer.lightT = !RP.computer.lightT;
+            RP.computer.lightB = !RP.computer.lightB;
+        }
+
+        if (RP.computer.lightT) {
+            fillCicle(212, 504 - RP.floor.height, 1, 'red');
+        } else {
+            fillCicle(212, 504 - RP.floor.height, 1, 'black');
+        }
+
+        if (RP.computer.lightB) {
+            fillCicle(212, 508 - RP.floor.height, 1, 'red');
+        } else {
+            fillCicle(212, 508 - RP.floor.height, 1, 'black');
+        }
+    }
+
+    blink(frame);
+}
 
 
 function drawRoomBase(Xoffset = 0, Yoffset = 0) {
@@ -78,19 +103,16 @@ drawRoomBase();
 
 
 function loadImage(path, id) {
-
     function setspritesheet() {
         Global.images[id] = this;
     }
-
     let image = new Image(); // Using optional size for image
     image.onload = setspritesheet;
-
     image.src = path;
     return image;
 }
 
-
+// SO MUCH SIZE REDUCTION NEEDED ON IMAGES OOPH!
 Global.images.desk = loadImage(Global.paths.desk, `desk`);
 Global.images.book = loadImage(Global.paths.book, `book`);
 Global.images.bookshelf = loadImage(Global.paths.bookshelf, `bookshelf`);
@@ -104,30 +126,57 @@ Global.images.arta = loadImage(Global.paths.arta, `arta`);
 
 
 function drawPropLayer() {
-    //adjust all y's by -80 add RP.floor.height
 
-    // wall lines
-    drawline(70, canvas.height - RP.floor.height, 69, RP.ceiling.height);
-    //    setStrokeColor('brown');
-    setStrokeColor('rgba(70,70,30,1)');
-    drawline(70, 408 - RP.floor.height, canvas.width, 408 - RP.floor.height);
-    drawline(70, 408 - RP.floor.height, 0, 422 - RP.floor.height);
+    // wall details
+    function PlaceWallDetails() {
+        // RP.floor.height is the Yoffset essentially;
+        drawline(70, canvas.height - RP.floor.height, 69, RP.ceiling.height); // VertLine - Walls Intersecting
+        setStrokeColor('rgba(70,70,30,1)');
+        ctx.lineWidth = 4;
+        drawline(70, 408 - RP.floor.height, canvas.width, 408 - RP.floor.height);
+        drawline(70, 408 - RP.floor.height, 0, 422 - RP.floor.height);
 
 
-    ctx.rotate(0.02);
-    superdrawImage(Global.images.arta, 0, 0, 132, 74, 255, 305 - RP.floor.height, 128, 64);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
+        // BASEBOARD TRIM
+        ctx.lineWidth = 8;
+        setStrokeColor('rgba(200,200,170,0.9)');
+        drawline(70, canvas.height - RP.floor.height, canvas.width, canvas.height - RP.floor.height);
+        ctx.lineWidth = 1;
+    }
+    PlaceWallDetails();
+
+    function PlacePainting() {
+        ctx.rotate(0.02);
+        superdrawImage(Global.images.arta, 0, 0, 132, 74, 255, 305 - RP.floor.height, 128, 64);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+    }
+    PlacePainting();
 
     superdrawImage(Global.images.trashe, 0, 0, 512, 512, 355, 455 - RP.floor.height, 64, 64);
     superdrawImage(Global.images.bookshelf, 0, 0, 256, 256, 150, 400 - RP.floor.height, 75, 108);
+
+    // desk (ontop of bookshelf and trashe/f)
     superdrawImage(Global.images.desk, 0, 0, 256, 256, 200, 355 - RP.floor.height, 200, 200);
+
+
     //    setColor('blue');
 
     // TV SCREEN::
-    setColor(gradientH());
-    drawRect(150, 360 - RP.floor.height, 50, 36);
-    superdrawImage(Global.images.tv, 0, 0, 1248, 808, 145, 355 - RP.floor.height, 85, 50);
-
+    //    setColor(gradientH());
+    function PlaceTV() {
+        
+        if (RP.tv.gradient == undefined || frame % RP.tv.modolo == 0){
+            RP.tv.gradient = gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor());
+        }
+                
+        setColor(RP.tv.gradient);
+//        setColor(gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor()));
+        drawRect(150, 360 - RP.floor.height, 50, 36);
+        superdrawImage(Global.images.tv, 0, 0, 1248, 808, 145, 355 - RP.floor.height, 85, 50);
+    }
+    PlaceTV();
+    
+    
     drawImage(Global.images.couch, -70, 430 - RP.floor.height, 256, 256);
 
 
@@ -138,57 +187,9 @@ function drawPropLayer() {
 
     superdrawImage(Global.images.book, 0, 0, 128, 128, 5, 455 - RP.floor.height, 64, 64);
 
-    setInterval(BlinkComputerLights, 1000 / 10);
+    //    setInterval(BlinkComputerLights, 1000 / 10);
 
 
 }
 
-setTimeout(drawPropLayer, 500);
-let frame = 1;
 
-function BlinkComputerLights() {
-
-    function blink(frame = 0) {
-        if (frame % 2 == 0) {
-            fillCicle(212, 504 - RP.floor.height, 1, 'red');
-            fillCicle(212, 508 - RP.floor.height, 1, 'black');
-
-        } else {
-            //    Shadow();
-            fillCicle(212, 504 - RP.floor.height, 1, 'black');
-            fillCicle(212, 508 - RP.floor.height, 1, 'red');
-        }
-    }
-
-
-    if (frame > 100) {
-        frame == 0;
-    }
-    blink(frame++);
-
-}
-
-// Quick Debugging Draws::
-let boop = 0;
-let isadding = false;
-
-function wipLoop() {
-
-    if (boop > 60) {
-        boop = 1;
-    }
-    boop++
-    if (boop % 60 == 0) {
-        isadding = !isadding;
-    }
-    if (!isadding) {
-        boop = boop * -1;
-    }
-
-    drawRoomBase(0, boop);
-
-    if (!isadding) {
-        boop = boop * -1;
-    }
-}
-//setInterval(wipLoop, 1000/10);

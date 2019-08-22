@@ -2,6 +2,16 @@ let TalkLog = []; //push everything said to endless log incase things are missed
 
 let TalkingData = {
     Topic: {
+        KarmaFails: [
+            `What is a karma fail?`,
+            `Is there a motif to a 'karma fail?'`,
+            `What is the Opposite of a Karma fail?`, //miracle
+            `is there a Single word for the opposite of Karma fail`,
+        ],
+        CrazyMathHistoryRide: [
+            `in Math (all there is) what do the terms 'first' and 'last' pertain to?`, //sets
+            `who killed osirus?`,
+        ],
         ClosedSystem: [
            `the universe is a CLOSED SYSTEM`,
             `(aside from space dust)`,
@@ -70,7 +80,7 @@ let TalkingData = {
         ],
     },
     ResponseCheck: {
-        buzzwords: [`CLOSED SYSTEM`, `ALL IS MATH`, `WRITTEN BY ACTION FIXME*`],
+        buzzwords: [`CLOSED SYSTEM`, `ALL IS MATH`, `WRITTEN BY ACTION FIXME*`, `KARMA FAIL`, `MIRACLE`],
         Topic: {
             ClosedSystem: [
               `yup`,

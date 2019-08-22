@@ -1,5 +1,8 @@
 let f = new FontFace('8-bit', '/common/fonts/8bitOperatorPlus-Regular.ttf');
 
+function clearCanvas(){
+    return ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
 
 
 function drawImage(img, x, y) {
