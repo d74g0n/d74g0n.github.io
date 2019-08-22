@@ -20,5 +20,7 @@ function mainLoop() {
 
 }
 
-
-mainLoop();
+window.onload = function () {
+    mainLoop();
+};
+//mainLoop();
