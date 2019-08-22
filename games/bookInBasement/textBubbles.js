@@ -17,7 +17,7 @@ function Textbubble(msg = '01234567891', x = 164, y = 150, direction = `DOWN`) {
         bubscale = 2.7;
     }
     
-    console.log(`bubscale= ${bubscale}`);
+//    console.log(`bubscale= ${bubscale}`);
 //    bubscale *= 0.95;
  
     ctx.save();
