@@ -1,3 +1,9 @@
+// ASIDE FROM ADDING MORE STATES OF CONTROL TO TOGGLE THIS SCRIPT IS DONE-ZOE
+// OTHER SCRIPTS / TICK PROCESSES WILL JUST ACCESS THE 'CS' OBJECT 
+// DONE DONE DONE DONE 
+
+let debugging = false; //TURN ON AND OFF KEYBOARD PRESS CONSOLE VERBOSITY
+
 // -=-=-=-=-=-=-=-=-=-=-=-[ declarations ]=-=-=-=-=-=-=-=-=-=-=-=-=
 // -=- Main controller object - processed each tick for calculations.
 let ControllerState = {
@@ -46,9 +52,23 @@ function onControllerPress(val) {
             // S code block
             CS.d = true;
             break;
+            // TOGGLEY INPUTS.
+        case 84:
+            // T code block - TV TOGGLE
+            RP.tv.isOn = !RP.tv.isOn;
+            break;
+            // TOGGLEY INPUTS.
+        case 38:
+            // ARROW UP
+            RP.floor.height++;
+            break;
+        case 40:
+            // ARROW DOWN
+            RP.floor.height--;
+            break;
         default:
             // FAIL code block
-            console.log(`no case detected`);
+//            console.log(`no case detected`);
 
     }
 }
@@ -73,7 +93,7 @@ function onControllerRelease(val) {
             break;
         default:
             // FAIL code block
-            console.log(`no case detected`);
+//            console.log(`no case detected`);
 
     }
 }
@@ -83,7 +103,7 @@ function setCtrlAltState(ev) {
     CS.ctrl = ev.ctrlKey;
 }
 
-let debugging = true;
+
 
 function controllerDebuggingMessanger(ev, id = 'TBA') {
     console.log(ev);

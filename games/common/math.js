@@ -13,9 +13,18 @@ const RND = {
         RGB: function () {
             return `rgb(${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))})`;
         },
-        RGBA: function (opacity=1){
-             return `rgba(${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))},opacity)`;
-        }
+        RGBA: function (opacity = 1) {
+            return `rgba(${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))},opacity)`;
+        },
+        single: function (min = 0) {
+            return RND.Num(min, 255);
+        },
+        gradientH: function () {
+            console.log(`RND horz Gradient TBF`); //GRUNTWORK
+        },
+        gradientV: function () {
+            console.log(`RND vert Gradient TBF`); //GRUNTWORK
+        },
     },
 }
 
@@ -32,12 +41,12 @@ function RNDNum(min, max) {
 }
 
 function RNDHexColor() {
-     return `#${(0x1000000 | (Math.floor(Math.random()*16777215))).toString(16).substring(1).toUpperCase()}`;
-//    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+    return `#${(0x1000000 | (Math.floor(Math.random()*16777215))).toString(16).substring(1).toUpperCase()}`;
+    //    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
 }
 
 function RNDRGBColor() {
-    return `rgb(${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))})`; 
+    return `rgb(${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))},${Math.floor(Math.random() * (255))})`;
 }
 
 function RNDRGBColor() {

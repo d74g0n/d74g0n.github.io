@@ -78,6 +78,26 @@ let TalkingData = {
 
 
         ],
+        FakeNews: [
+            `orange man bad`,
+            `love nazi's hate`,
+            `milk is racist`,
+            `hatred or red hat?`,
+//            `MAGAT!`,
+            `another shooting, ban guns`,
+            `beat hate with love... we must love the nazi's`,
+            `He lied again`,
+            `Economies Doomed Everywhere`,
+            `${RNDNum(1,100)} years left before world ends`,
+            `So stunning so brave`,
+`Russian Subverstion`,
+            `Not and Invasion`,
+            `It's not illegals, it's racists`,
+            `it's a right to illegally, inflitra*grate, exuse me`,
+            `are you not enraged!?`,
+            `did you just!?`,
+            `We gonna burn these fascist establishments!`
+        ]
     },
     ResponseCheck: {
         buzzwords: [`CLOSED SYSTEM`, `ALL IS MATH`, `WRITTEN BY ACTION FIXME*`, `KARMA FAIL`, `MIRACLE`],
@@ -90,3 +110,4 @@ let TalkingData = {
         },
     }
 }
+const TD = TalkingData;

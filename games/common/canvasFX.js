@@ -20,32 +20,3 @@ function FX_Chopshop(image, scale = 10) {
     }
 }
 
-
-
-
-function FX_bufferChop(canvas = canvas) {
-
-
-    var primaryCtx = canvas.getContext("2d");
-
-    var secondaryCanvas = document.createElement("canvas"),
-        secondaryCtx = secondaryCanvas.getContext("2d");
-
-    function drawFrame() {
-        requestAnimationFrame(drawFrame);
-        secondaryCtx.fillStyle = "#f00";
-        secondaryCtx.fillRect(10, 10, 20, 20);
-        primaryCtx.drawImage(secondaryCanvas);
-    }
-
-
-}
-
-
-(function drawFrame() {
-    requestAnimationFrame(drawFrame);
-    primaryCtx.save(); //Freeze redraw
-    primaryCtx.fillStyle = "#f00";
-    primaryCtx.fillRect(10, 10, 20, 20);
-    primaryCtx.restore(); //And now do the redraw
-})();

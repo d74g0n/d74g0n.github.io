@@ -1,4 +1,22 @@
-make quick game about book in basement - there is no way out - ask book how it ends
-Ha.
+TADO:
 
-how fancy we do it?  socket it... watch book from backend? ;)  back to nodejs we go!
+ - Punisher Batman Transition
+ - FX Trip Outs VIA buffer-to-image, then noise-grid manipulation.
+ - FX TINT buffer. CSS FILTER OPTIONS?
+ - FX FALLASLEEP
+ 
+ - CONTROLS - FLOOR MAP
+ 
+ - VOICE FUNCTIONS FOR SPEACH BUBBLES
+ 
+ - NODES FOR TALKING THINGS (DEBUGGER DRAW POINTS STUFF)
+ 
+ - BOOK OBJECT.
+ 
+ - BOOK INTERNALS. WRITING YOUR LIFE.
+
+
+- Turn Off or On Monitors
+
+Josies:
+Beard-Watch TV Stargate Comic Scene Stuff.

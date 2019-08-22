@@ -20,11 +20,11 @@ let RoomProps = {
     computer: {
         lightT: false,
         lightB: true,
-        blinkmodolo: 60,
+        blinkmodolo: 10,
     },
     tv: {
-        refresh: true,
-        modolo: 30,
+        isOn: true,
+        modolo: 60,
         gradient: undefined,
     }
 
@@ -130,6 +130,7 @@ function drawPropLayer() {
     // wall details
     function PlaceWallDetails() {
         // RP.floor.height is the Yoffset essentially;
+        setStrokeColor('rgba(70,70,30,0.5)');
         drawline(70, canvas.height - RP.floor.height, 69, RP.ceiling.height); // VertLine - Walls Intersecting
         setStrokeColor('rgba(70,70,30,1)');
         ctx.lineWidth = 4;
@@ -142,6 +143,8 @@ function drawPropLayer() {
         setStrokeColor('rgba(200,200,170,0.9)');
         drawline(70, canvas.height - RP.floor.height, canvas.width, canvas.height - RP.floor.height);
         ctx.lineWidth = 1;
+        setStrokeColor('black');
+        drawline(70, canvas.height - RP.floor.height-2, canvas.width, canvas.height - RP.floor.height-2);
     }
     PlaceWallDetails();
 
@@ -164,6 +167,8 @@ function drawPropLayer() {
     // TV SCREEN::
     //    setColor(gradientH());
     function PlaceTV() {
+
+        if (RP.tv.isOn){
         
         if (RP.tv.gradient == undefined || frame % RP.tv.modolo == 0){
             RP.tv.gradient = gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor());
@@ -171,7 +176,15 @@ function drawPropLayer() {
                 
         setColor(RP.tv.gradient);
 //        setColor(gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor()));
+     
+        GlobalAlpha(frame/150);
         drawRect(150, 360 - RP.floor.height, 50, 36);
+        GlobalAlpha(1);
+        }else {
+             setColor('black');
+            drawRect(150, 360 - RP.floor.height, 50, 36);
+        }
+        
         superdrawImage(Global.images.tv, 0, 0, 1248, 808, 145, 355 - RP.floor.height, 85, 50);
     }
     PlaceTV();
@@ -180,15 +193,14 @@ function drawPropLayer() {
     drawImage(Global.images.couch, -70, 430 - RP.floor.height, 256, 256);
 
 
-    superdrawImage(Global.images.speecha, 0, 0, 600, 147, 30, 415 - RP.floor.height, 120, 32);
-    writeText(`I am book!`, 55, 418 - RP.floor.height, '18px serif', Pal.floor, Pal.ceiling, 'top', 'left');
+//    superdrawImage(Global.images.speecha, 0, 0, 600, 147, 30, 415 - RP.floor.height, 128, 32);
+
+    
+//    writeText(`I am book!`, 55, 418 - RP.floor.height, '18px serif', Pal.floor, Pal.ceiling, 'top', 'left');
 
     //    writeText(`The Book In The Basement`, canvas.width / 2, 270 - RP.floor.height, '38px serif', Pal.floor, Pal.ceiling, 'top', 'center');
 
     superdrawImage(Global.images.book, 0, 0, 128, 128, 5, 455 - RP.floor.height, 64, 64);
-
-    //    setInterval(BlinkComputerLights, 1000 / 10);
-
 
 }
 
