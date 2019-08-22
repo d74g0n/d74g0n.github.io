@@ -119,7 +119,7 @@ Global.images.bookshelf = loadImage(Global.paths.bookshelf, `bookshelf`);
 Global.images.couch = loadImage(Global.paths.couch, `couch`);
 Global.images.trashf = loadImage(Global.paths.trashf, `trashf`);
 Global.images.trashe = loadImage(Global.paths.trashe, `trashe`);
-Global.images.tv = loadImage(Global.paths.tv, `tv`);
+//Global.images.tv = loadImage(Global.paths.tv, `tv`);
 Global.images.speecha = loadImage(Global.paths.speecha, `speecha`);
 Global.images.arta = loadImage(Global.paths.arta, `arta`);
 
@@ -185,7 +185,7 @@ function drawPropLayer() {
             drawRect(150, 360 - RP.floor.height, 50, 36);
         }
         
-        superdrawImage(Global.images.tv, 0, 0, 1248, 808, 145, 355 - RP.floor.height, 85, 50);
+//        superdrawImage(Global.images.tv, 0, 0, 1248, 808, 145, 355 - RP.floor.height, 85, 50);
     }
     PlaceTV();
     
