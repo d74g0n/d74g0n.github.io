@@ -1,5 +1,7 @@
-let ver = 0.001;
-let verName = `fakenoods`;
+let ver = `0.001a`;
+let verName = `fakenoose`;
+
+let players = [];
 
 
 let msg;
@@ -25,6 +27,27 @@ function mainLoop() {
         //talking TVSTUFF
     Textbubble(`${msg}`);
     }
+    
+    
+        book.tick();
+        tip.tick();
+    
+    
+        function knodewey(scale){
+        //DEWEY
+//    superdrawImage(Global.images.dewey, 0,0,64,48,canvas.width/2, canvas.height/2-8, 64, 48);
+    
+        ctx.save();
+        ctx.translate(.5,0);
+//        ctx.rotate(frame/360*2);
+        ctx.rotate(-tip.endlesscount/100);
+        
+        superdrawImage(Global.images.dewey, 0,0,64,48,canvas.width/2, canvas.height/2-8, 64*scale, 48*scale);
+
+        ctx.restore();
+     }knodewey(-tip.endlesscount/100);
+
+    
     
     
     // NON WIP STUFF:

@@ -35,6 +35,28 @@ let TalkingData = {
             `nana, zip, a big fat goose egg?`,
             `oh I see you are new here, no time to waste!`,
         ],
+        Philo: [
+            `Everyone is given ONE CHANCE`,
+            `The ONE CHANCE is over when you QUIT`,
+        ],
+        Quest: [
+            `Items to obtain`,
+            `KEYSTONE`,
+            `CROSSHIELD`,
+            `RAINBOW`,
+            `GOLDENFLEECE`,
+        ],
+        SimpleToComplex: [
+          `matter is information`,
+            `all must logically flow`,
+            `a seed becomes a trunk`,
+            `a trunk becomes branches`,
+            `SIMPLE TO COMPLEX`,
+            `from single cell to complex organizm`,
+            `what are we? who are we?`,
+            `what is life? does life exist outside of DNA?`,
+            
+        ],
         AllIsMath: [
             `do you understand ALL IS MATH?`,
             `that everything can 'add up' to making sense?`,
@@ -53,6 +75,9 @@ let TalkingData = {
             `what is a sum-thing?, a sum-one?, a whole-sum-ness?`,
             `what is comm-unity?`,
             `what is communication unity?`,
+            `what is a FACTor`,
+            `what is a first`,
+            `what does MEAN MEAN`,
 
         ],
         RandoPhiloWantResponse: [ //modolo QA byindex+1
@@ -79,8 +104,18 @@ let TalkingData = {
 
         ],
         FakeNews: [
+            `mothers wish to terminate`,
+            `my life my choice`,
+            `less babies`,
+            `diversity not individuality`,
+            `race over merits`,
+            `frogs are racist`,
+            `neckbearded incel terrorists`,
             `orange man bad`,
             `love nazi's hate`,
+            `he's double hitler`,
+            `ban guns! orange hitler!`,
+            `throw kids in cages!`,
             `milk is racist`,
             `hatred or red hat?`,
             `by any means neccesary`,

@@ -44,6 +44,7 @@ let Global = {
         speecha: `/games/bookinBasement/img/speecha.png`,
         arta: `/games/bookinBasement/img/arta.png`,
         ghosttail: `/games/bookinBasement/img/ghosttail.png`,
+        dewey: `/games/bookinBasement/img/dewey.png`,
     },
     images: {
         desk: undefined,
@@ -56,6 +57,7 @@ let Global = {
         speecha: undefined,
         arta: undefined,
         ghosttail: undefined,
+        dewey: undefined,
     },
 };
 const G = Global;
@@ -120,6 +122,7 @@ Global.images.tv = loadImage(Global.paths.tv, `tv`);
 //Global.images.speecha = loadImage(Global.paths.speecha, `speecha`);
 Global.images.arta = loadImage(Global.paths.arta, `arta`);
 Global.images.ghosttail = loadImage(Global.paths.ghosttail, `ghosttail`);
+Global.images.dewey = loadImage(Global.paths.dewey, `ghosttail`);
 
 
 function drawPropLayer() {
@@ -182,10 +185,12 @@ function drawPropLayer() {
     PlaceTV();
     
     drawImage(Global.images.couch, -70, 430 - RP.floor.height, 256, 256);
+    
+    
 
 //    writeText(`The Book In The Basement`, canvas.width / 2, 270 - RP.floor.height, '38px serif', Pal.floor, Pal.ceiling, 'top', 'center');
 
-    superdrawImage(Global.images.book, 0, 0, 128, 128, 5, 455 - RP.floor.height, 64, 64);
+//    superdrawImage(Global.images.book, 0, 0, 128, 128, 5, 455 - RP.floor.height, 64, 64);
 
 }
 
