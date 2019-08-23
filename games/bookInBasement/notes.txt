@@ -1,5 +1,11 @@
 TADO:
 
+need door on right side of screen - or stargate - still debating - remote for sliders alt.
+
+
+
+
+
  - Punisher Batman Transition
  - FX Trip Outs VIA buffer-to-image, then noise-grid manipulation.
  - FX TINT buffer. CSS FILTER OPTIONS?
