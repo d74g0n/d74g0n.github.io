@@ -24,7 +24,7 @@ let RoomProps = {
     },
     tv: {
         isOn: true,
-        modolo: 60,
+        modolo: 110,
         gradient: undefined,
     }
 
@@ -39,9 +39,11 @@ let Global = {
         trashf: `/games/bookinBasement/img/trashf.png`,
         trashe: `/games/bookinBasement/img/trashe.png`,
         couch: `/games/bookinBasement/img/couchd.png`,
-        tv: `/games/bookinBasement/img/televisiontop.png`,
+//        tv: `/games/bookinBasement/img/televisiontop.png`,
+        tv: `/games/bookinBasement/img/tva.png`,
         speecha: `/games/bookinBasement/img/speecha.png`,
         arta: `/games/bookinBasement/img/arta.png`,
+        ghosttail: `/games/bookinBasement/img/ghosttail.png`,
     },
     images: {
         desk: undefined,
@@ -53,6 +55,7 @@ let Global = {
         tv: undefined,
         speecha: undefined,
         arta: undefined,
+        ghosttail: undefined,
     },
 };
 const G = Global;
@@ -81,7 +84,6 @@ function BlinkComputerLights(frame) {
     blink(frame);
 }
 
-
 function drawRoomBase(Xoffset = 0, Yoffset = 0) {
     // ceiling::    
     setColor(Pal.ceiling);
@@ -97,11 +99,6 @@ function drawRoomBase(Xoffset = 0, Yoffset = 0) {
     drawRect(0 + Xoffset, RP.ceiling.top + RP.ceiling.height + Yoffset, canvas.width - Xoffset, canvas.height - RP.floor.height - RP.ceiling.height + Yoffset);
 }
 
-drawRoomBase();
-
-
-
-
 function loadImage(path, id) {
     function setspritesheet() {
         Global.images[id] = this;
@@ -112,17 +109,17 @@ function loadImage(path, id) {
     return image;
 }
 
-// SO MUCH SIZE REDUCTION NEEDED ON IMAGES OOPH!
+// -=-=-=- PROP LOADING:
 Global.images.desk = loadImage(Global.paths.desk, `desk`);
 Global.images.book = loadImage(Global.paths.book, `book`);
 Global.images.bookshelf = loadImage(Global.paths.bookshelf, `bookshelf`);
 Global.images.couch = loadImage(Global.paths.couch, `couch`);
-Global.images.trashf = loadImage(Global.paths.trashf, `trashf`);
+Global.images.trashf = loadImage(Global.paths.trashf, `trashf`); // 512 is a bit large.
 Global.images.trashe = loadImage(Global.paths.trashe, `trashe`);
-//Global.images.tv = loadImage(Global.paths.tv, `tv`);
-Global.images.speecha = loadImage(Global.paths.speecha, `speecha`);
+Global.images.tv = loadImage(Global.paths.tv, `tv`);
+//Global.images.speecha = loadImage(Global.paths.speecha, `speecha`);
 Global.images.arta = loadImage(Global.paths.arta, `arta`);
-
+Global.images.ghosttail = loadImage(Global.paths.ghosttail, `ghosttail`);
 
 
 function drawPropLayer() {
@@ -161,11 +158,6 @@ function drawPropLayer() {
     // desk (ontop of bookshelf and trashe/f)
     superdrawImage(Global.images.desk, 0, 0, 256, 256, 200, 355 - RP.floor.height, 200, 200);
 
-
-    //    setColor('blue');
-
-    // TV SCREEN::
-    //    setColor(gradientH());
     function PlaceTV() {
 
         if (RP.tv.isOn){
@@ -185,23 +177,57 @@ function drawPropLayer() {
             drawRect(150, 360 - RP.floor.height, 50, 36);
         }
         
-//        superdrawImage(Global.images.tv, 0, 0, 1248, 808, 145, 355 - RP.floor.height, 85, 50);
+        superdrawImage(Global.images.tv, 0, 0, 384, 256, 145, 355 - RP.floor.height, 85, 50);
     }
     PlaceTV();
     
-    
     drawImage(Global.images.couch, -70, 430 - RP.floor.height, 256, 256);
 
-
-//    superdrawImage(Global.images.speecha, 0, 0, 600, 147, 30, 415 - RP.floor.height, 128, 32);
-
-    
-//    writeText(`I am book!`, 55, 418 - RP.floor.height, '18px serif', Pal.floor, Pal.ceiling, 'top', 'left');
-
-    //    writeText(`The Book In The Basement`, canvas.width / 2, 270 - RP.floor.height, '38px serif', Pal.floor, Pal.ceiling, 'top', 'center');
+//    writeText(`The Book In The Basement`, canvas.width / 2, 270 - RP.floor.height, '38px serif', Pal.floor, Pal.ceiling, 'top', 'center');
 
     superdrawImage(Global.images.book, 0, 0, 128, 128, 5, 455 - RP.floor.height, 64, 64);
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function loadingScreen(){
+    
+    let loadmsg = `LOADING ASSETS`;
+    let intervalcount = 6;
+    background(gradientH());
+    writeText(loadmsg);
+    
+    let dotinterval = setInterval(function(){
+    
+        loadmsg+= `.`;
+        intervalcount--;
+//        clearCanvas();
+        background(gradientH());
+        writeText(loadmsg);
+        
+        if (intervalcount < 0){
+            clearInterval(dotinterval);
+        }
+        
+    },500);
+    
+    
+    
+}
+loadingScreen();
 

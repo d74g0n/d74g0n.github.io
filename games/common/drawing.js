@@ -1,6 +1,6 @@
 let f = new FontFace('8-bit', '/common/fonts/8bitOperatorPlus-Regular.ttf');
 
-function clearCanvas(){
+function clearCanvas() {
     return ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
@@ -13,6 +13,59 @@ function superdrawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
     ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 }
 
+
+
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+    if (typeof stroke == 'undefined') {
+        stroke = true;
+    }
+    if (typeof radius === 'undefined') {
+        radius = 5;
+    }
+    if (typeof radius === 'number') {
+        radius = {
+            tl: radius,
+            tr: radius,
+            br: radius,
+            bl: radius
+        };
+    } else {
+        var defaultRadius = {
+            tl: 0,
+            tr: 0,
+            br: 0,
+            bl: 0
+        };
+        for (var side in defaultRadius) {
+            radius[side] = radius[side] || defaultRadius[side];
+        }
+    }
+    ctx.beginPath();
+    ctx.moveTo(x + radius.tl, y);
+    ctx.lineTo(x + width - radius.tr, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+    ctx.lineTo(x + width, y + height - radius.br);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+    ctx.lineTo(x + radius.bl, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+    ctx.lineTo(x, y + radius.tl);
+    ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+    ctx.closePath();
+    if (fill) {
+        ctx.fill();
+    }
+    if (stroke) {
+        ctx.stroke();
+    }
+
+} 
+
+
+
+
+
+
+
 function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = f, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {
     ctx.fillStyle = fillStyle;
     ctx.strokeStyle = strokeStyle;
@@ -24,6 +77,13 @@ function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, fon
     // REMEMBER SHADOWING?
 }
 
+function strokeRect(x = 100, y = 100, w = 100, h = 100, color = 'black') {
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = color;
+    ctx.strokeRect(x + 0.5, y + 0.5, w, h);
+    ctx.stroke();
+}
 
 // set globalalpha
 function GlobalAlpha(num = 1) {
