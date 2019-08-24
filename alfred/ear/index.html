@@ -3,29 +3,46 @@
 <head>
     <script>
         console.log('alfred Ear v0.02');
+
     </script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Alfred Ear [listen]</title>
-    <meta name="description" content="">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="/common/img/favicon.png" />
-    
+    <link rel="shortcut icon" href="/common/img/punisher_med_white.png" />
+
+    <meta name="description" content="d74g0n's Javascript Speech Recognition - If yoiur device hears It - this will transcribe it for you - targeted marketing in a nutshell">
+    <meta name="keywords" content="javascript, JS, Speech Recognition, Pixel, Code, Programming, visual, visualizer, viewer, d74g0n, art">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+
+
+    <meta property="og:image" content="/common/img/punisher_med_white.png">
+    <meta name="twitter:image" content="/common/img/punisher_med_white.png">
+
+
+
     <link rel="stylesheet" href="/alfred/ear/styles.css">
+
 
 </head>
 
 <body>
-    <button type="button" id="speakbtn" onclick="speak('For letting me speak, I thank you.');">Voice On</button>
+    <!--    <button type="button" id="speakbtn" onclick="speak('For letting me speak, I thank you.');">Voice On</button>-->
     <div class="wrapper">
         <center>
-            <img class="sm_logo" src="/common/img/punisher_med_white.png" />
+            <img class="sm_logo" id="face" src="/common/img/punisher_med_white.png" />
             <h1>Alfred Heard</h1>
             <p id='readout'></p>
         </center>
     </div>
+    <script src="/alfred/ear/colorlib.js"></script>
+
     <script src="/alfred/ear/alfred_ear.js"></script>
+    <script src="/alfred/ear/fx.js"></script>
 </body>
 
 </html>

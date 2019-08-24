@@ -1,3 +1,47 @@
+/*
+Text to speech / spech recognition is one unit.
+official -> https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition
+
+grumpy user notes:
+- https required for mic access 
+- popups have to be allowed before it can be used to open windows by voice command
+- needs help screen by saying help
+
+
+
+debugger notes:
+- redunancy on say
+- has to be mouseclickon body to activate responses since 2018
+- 17 voices to date.
+
+refactor considerations:
+
+break up scripts into components from sense perspective hear>say.
+hear.js - initialize all the components
+speak.js - if initialized speak components. (almost none)
+
+speechprocessor.js - 
+
+
+
+*/
+
+
+let Alfred = {
+    face: document.getElementById('face'),
+    frame: 0,
+    tick: function () {
+        this.frame++;
+        if (this.frame > 360) {
+            this.frame = 0;
+        }
+    },
+    isTalking: false,
+    voice: 4,
+}
+const Al = Alfred;
+
+
 // -=-=-=-=-=-=- Settings::
 let isRepeatingYou = false;
 // -=-=-=-=-=-=- Parse Speech::
@@ -66,8 +110,25 @@ function commands(word, nextword) {
 
     if (word == 'thank' && nextword == 'you') {
         speak("you are welcome");
+    }
 
+    if (word == 'hello') {
+        speak("Hello to you to");
+    }
 
+    if (word) {
+        Al.isTalking = true;
+        if (Al.voice <= 0){
+            var voices = window.speechSynthesis.getVoices();
+            Al.voice = voices.length-1;
+            
+        }
+//        msg.voice = voices[Al.voice--];
+        //-=-=-=-=-=-=-=-=-=-=-=-=-=- EXPERIEMENTAL
+        Al.voice--;        
+        console.log(`Al.voice${Al.voice}`);
+        speak(word);
+        DelayisTalkingFalse(1);
     }
 
 }
@@ -137,14 +198,17 @@ try {
 }
 
 function listenNow() {
-    speak("ah yes, I can hear you");
+    //    speak("ah yes, I can hear you");
     recognition.start();
 }
 
+//document.body.onclick = listenNow();
+
 function StopListening() {
-    speak("I will stop listening now");
+    //    speak("I will stop listening now");
     recognition.stop();
 }
+
 
 
 function htmlReadouts(msg) {
@@ -154,13 +218,16 @@ function htmlReadouts(msg) {
 
 // This block is called every time the Speech APi captures a line. 
 recognition.onresult = function (event) {
+
+    Al.isTalking = true;
+
     //    console.log(event);
     var current = event.resultIndex;
     var transcript = event.results[current][0].transcript;
     var confidence = event.results[current][0].confidence;
 
     //    document.transcript = transcript;
-    
+
     htmlReadouts('<h5 id="confidenceReadout">[' + (confidence * 100).toFixed(2) + '%]</h5> ' + transcript + ' ');
     //    htmlReadouts('<h5 id="confidenceReadout">[' + (confidence * 100).toFixed(2) + '%]</h5>[ ' + transcript + ' ]');
     //    htmlReadouts('<h5>[' + (confidence * 100).toFixed(2) + '%]</h5>[ ' + transcript + ' ]');
@@ -181,7 +248,35 @@ recognition.onresult = function (event) {
         speak(transcript);
     }
 
+
+    DelayisTalkingFalse(1);
+
+
 };
+
+function DelayisTalkingFalse(sec = 1) {
+    {
+
+        if (sec > 2) {
+
+        } else {
+            sec *= 1000;
+        }
+
+        // THIS IS THE TURN OFF FLICKER
+        setTimeout(function () {
+            Al.isTalking = false;
+        }, sec);
+    }
+}
+
+
+recognition.onsoundstart = function () {
+    console.log('Some sound is being received');
+
+    Al.isTalking = true;
+    DelayisTalkingFalse(2);
+}
 
 recognition.onstart = function () {
     document.title = 'Alfred [Listening]';
@@ -190,14 +285,16 @@ recognition.onstart = function () {
 
 recognition.onspeechend = function () {
     document.title = 'Alfred [sleeping]';
-    speak("Going to sleep now.");
+    //    speak("Going to sleep now.");
     console.log('[sleeping]');
+    setTimeout(listenNow, 1000);
 }
 
 recognition.onerror = function (event) {
     if (event.error == 'no-speech') {
-        speak("I hear nothing");
+        //        speak("I hear nothing");
         console.log('No speech was detected. Try again.');
+        setTimeout(listenNow, 1000);
     };
 }
 // -=-=-=-=-=-=- Text to Speech::
@@ -206,8 +303,14 @@ function speak(message) {
     var msg = new SpeechSynthesisUtterance(message);
     var voices = window.speechSynthesis.getVoices();
     //    console.log(voices);
-    msg.voice = voices[4];
+    msg.voice = voices[Al.voice];
+    
+    Al.isTalking = true;
     window.speechSynthesis.speak(msg);
+    DelayisTalkingFalse(1);
+    
+    console.log(`${message}`);
+//    console.log(`click on screen to activate responses`);
 }
 
 /*setInterval(function () {
