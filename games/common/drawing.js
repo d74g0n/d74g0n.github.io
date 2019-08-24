@@ -1,9 +1,13 @@
-let f = new FontFace('8-bit', '/common/fonts/8bitOperatorPlus-Regular.ttf');
+//let f = new FontFace('8-bit', '/common/fonts/8bitOperatorPlus-Regular.ttf');
 
 function clearCanvas() {
     return ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+function background(color) {
+    ctx.fillStyle = color;
+    return ctx.fillRect(0, 0, canvas.width, canvas.height)
+}
 
 function drawImage(img, x, y) {
     ctx.drawImage(img, x, y, img.width, img.height);
@@ -12,8 +16,6 @@ function drawImage(img, x, y) {
 function superdrawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
     ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 }
-
-
 
 function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
     if (typeof stroke == 'undefined') {
@@ -58,13 +60,7 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
         ctx.stroke();
     }
 
-} 
-
-
-
-
-
-
+}
 
 function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = f, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {
     ctx.fillStyle = fillStyle;
@@ -85,29 +81,22 @@ function strokeRect(x = 100, y = 100, w = 100, h = 100, color = 'black') {
     ctx.stroke();
 }
 
-// set globalalpha
+
 function GlobalAlpha(num = 1) {
     ctx.globalAlpha = num;
 }
-// set shadows:
+
 function Shadow(shadowBlur = 2, shadowColor = 'white', shadowOffsetX = 1, shadowOffsetY = 1) {
     ctx.shadowBlur = shadowBlur;
     ctx.shadowColor = shadowColor;
     ctx.shadowOffsetX = shadowOffsetX;
     ctx.shadowOffsetY = shadowOffsetY;
 }
-// clear shadows:
+
 function clrShadow(color = 'rgb(255,0,255)') {
     // 'greenscreen-pink' used as debugging detector; 
     // finalize perhaps we go green or transparent.
     Shadow(0, color, 0, 0);
-}
-
-
-
-function background(color) {
-    ctx.fillStyle = color;
-    return ctx.fillRect(0, 0, canvas.width, canvas.height)
 }
 
 function setColor(color) {
@@ -129,7 +118,7 @@ function strokeSquare(x, y, scale) {
 function drawRect(x, y, w, h) {
     return ctx.fillRect(x, y, w, h);
 }
-
+// game specific me thinks:
 function drawGround(y) {
     return ctx.fillRect(0, y, canvas.width, canvas.height - y);
 }
@@ -180,6 +169,38 @@ function gradientH(colorA = 'black', colorB = 'blue', colorC = 'skyblue') {
     //background(gradient);
 }
 
+function makeGradient(colorA='red', valueA=0, colorB='white', valueB=0.5, colorC='blue', valueC=1, direction = 'V',scale=RP.tv.height, o = 0) {
+    // valid direction values: H/V Horizontal / Vertical
+    let gradient;
+    switch (direction) {
+        case `V`:
+//            gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient = ctx.createLinearGradient(0, o, 0, scale);
+            break;
+        case `H`:
+            gradient = ctx.createLinearGradient(o, 0, scale, 0);
+            break;
+        default:
+            return console.log(`ERROR - makeGradient - Incorrect direction value`);
+    }
+
+    gradient.addColorStop(valueA, colorA);
+    gradient.addColorStop(valueB, colorB);
+    gradient.addColorStop(valueC, colorC);
+//debugger
+    ctx.fillStyle = gradient;
+//    ctx.fillRect(10, 10, 200, 100);
+//    
+    return gradient;
+}
+
+
+function drawLine(xa, ya, xb, yb) {
+    ctx.beginPath();
+    ctx.moveTo(xa, ya);
+    ctx.lineTo(xb, yb);
+    ctx.stroke();
+}
 
 function horizontalLine(y) {
     ctx.beginPath();

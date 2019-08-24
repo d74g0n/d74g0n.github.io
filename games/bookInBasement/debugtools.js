@@ -1,9 +1,10 @@
 function outputMousedown(event){
+            if (debugging){
     event.preventDefault();
     console.log(event);
     console.log(`ev.layerX ${event.layerX}`);
     console.log(`ev.layerY ${event.layerY}`);
-    
+            }
     checkTvClick(event.layerX,event.layerY);
 }
 

@@ -31,20 +31,38 @@ let RoomProps = {
 }
 const RP = RoomProps;
 
+
+
+//let imgpath = `https://github.com/d74g0n/d74g0n.github.io/blob/master/games/bookInBasement/img/arta.png?raw=true`;
+//let imgpath = `http://github.com/d74g0n/d74g0n.github.io/blob/master/games/bookInBasement/img/`;
+let imgpath = `/games/bookInBasement/img/`;
+
 let Global = {
     paths: {
-        desk: `/games/bookinBasement/img/deska.png`,
-        book: `/games/bookinBasement/img/booka.png`,
-        bookshelf: `/games/bookinBasement/img/bookshelfd.png`,
-        trashf: `/games/bookinBasement/img/trashf.png`,
-        trashe: `/games/bookinBasement/img/trashe.png`,
-        couch: `/games/bookinBasement/img/couchd.png`,
-//        tv: `/games/bookinBasement/img/televisiontop.png`,
-        tv: `/games/bookinBasement/img/tva.png`,
-        speecha: `/games/bookinBasement/img/speecha.png`,
-        arta: `/games/bookinBasement/img/arta.png`,
-        ghosttail: `/games/bookinBasement/img/ghosttail.png`,
-        dewey: `/games/bookinBasement/img/dewey.png`,
+        desk: `${imgpath}deska.png`,
+        book: `${imgpath}booka.png`,
+        bookshelf: `${imgpath}bookshelfd.png`,
+        trashf: `${imgpath}trashf.png`,
+        trashe: `${imgpath}trashe.png`,
+        couch: `${imgpath}couchd.png`,
+        //        tv: `/games/bookinBasement/img/televisiontop.png`,
+        tv: `${imgpath}tva.png`,
+        speecha: `${imgpath}speecha.png`,
+        arta: `${imgpath}arta.png`,
+        ghosttail: `${imgpath}ghosttail.png`,
+        dewey: `${imgpath}dewey.png`,
+        //        desk: `/games/bookinBasement/img/deska.png`,
+        //        book: `/games/bookinBasement/img/booka.png`,
+        //        bookshelf: `/games/bookinBasement/img/bookshelfd.png`,
+        //        trashf: `/games/bookinBasement/img/trashf.png`,
+        //        trashe: `/games/bookinBasement/img/trashe.png`,
+        //        couch: `/games/bookinBasement/img/couchd.png`,
+        ////        tv: `/games/bookinBasement/img/televisiontop.png`,
+        //        tv: `/games/bookinBasement/img/tva.png`,
+        //        speecha: `/games/bookinBasement/img/speecha.png`,
+        //        arta: `/games/bookinBasement/img/arta.png`,
+        //        ghosttail: `/games/bookinBasement/img/ghosttail.png`,
+        //        dewey: `/games/bookinBasement/img/dewey.png`,
     },
     images: {
         desk: undefined,
@@ -144,7 +162,7 @@ function drawPropLayer() {
         drawline(70, canvas.height - RP.floor.height, canvas.width, canvas.height - RP.floor.height);
         ctx.lineWidth = 1;
         setStrokeColor('black');
-        drawline(70, canvas.height - RP.floor.height-2, canvas.width, canvas.height - RP.floor.height-2);
+        drawline(70, canvas.height - RP.floor.height - 2, canvas.width, canvas.height - RP.floor.height - 2);
     }
     PlaceWallDetails();
 
@@ -163,34 +181,34 @@ function drawPropLayer() {
 
     function PlaceTV() {
 
-        if (RP.tv.isOn){
-        
-        if (RP.tv.gradient == undefined || frame % RP.tv.modolo == 0){
-            RP.tv.gradient = gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor());
-        }
-                
-        setColor(RP.tv.gradient);
-//        setColor(gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor()));
-     
-        GlobalAlpha(frame/150);
-        drawRect(150, 360 - RP.floor.height, 50, 36);
-        GlobalAlpha(1);
-        }else {
-             setColor('black');
+        if (RP.tv.isOn) {
+
+            if (RP.tv.gradient == undefined || frame % RP.tv.modolo == 0) {
+//                RP.tv.gradient = gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor());
+//                RP.tv.gradient = makeGradient(RNDHexColor(), 0., RNDHexColor(), 0.5, RNDHexColor(), 1, `V`,36,260);
+//                RP.tv.gradient = makeGradient(`black`, 0,`white`, 0.5, RNDHexColor(), 1, `V`,32,500-frame);
+                RP.tv.gradient = makeGradient(RNDHexColor(), 0., RNDHexColor(), 0.5, RNDHexColor(), 1, `V`,36,260-frame/3);
+//                RP.tv.gradient = makeGradient(`red`, 0, 'black', 0.7, 'white', 1, `V`,100,260);
+            }
+
+            setColor(RP.tv.gradient);
+            
+//            setColor(makeGradient(RNDHexColor(), 0., RNDHexColor(), 0.5, RNDHexColor(), 1, `V`,36,260-frame)
+            
+            
+            GlobalAlpha(frame / 150);
+            drawRect(150, 360 - RP.floor.height, 50, 36);
+            GlobalAlpha(1);
+        } else {
+            setColor('black');
             drawRect(150, 360 - RP.floor.height, 50, 36);
         }
-        
         superdrawImage(Global.images.tv, 0, 0, 384, 256, 145, 355 - RP.floor.height, 85, 50);
     }
     PlaceTV();
-    
+
     drawImage(Global.images.couch, -70, 430 - RP.floor.height, 256, 256);
-    
-    
 
-//    writeText(`The Book In The Basement`, canvas.width / 2, 270 - RP.floor.height, '38px serif', Pal.floor, Pal.ceiling, 'top', 'center');
-
-//    superdrawImage(Global.images.book, 0, 0, 128, 128, 5, 455 - RP.floor.height, 64, 64);
 
 }
 
@@ -202,37 +220,30 @@ function drawPropLayer() {
 
 
 
+//THIS IS THE PATTERN FOR FADEOUT BUBBLES>
 
+function loadingScreen() {
 
-
-
-
-
-
-
-function loadingScreen(){
-    
     let loadmsg = `LOADING ASSETS`;
     let intervalcount = 6;
     background(gradientH());
     writeText(loadmsg);
-    
-    let dotinterval = setInterval(function(){
-    
-        loadmsg+= `.`;
+
+    let dotinterval = setInterval(function () {
+
+        loadmsg += `.`;
         intervalcount--;
-//        clearCanvas();
+        //        clearCanvas();
         background(gradientH());
         writeText(loadmsg);
-        
-        if (intervalcount < 0){
+
+        if (intervalcount < 0) {
             clearInterval(dotinterval);
         }
-        
-    },500);
-    
-    
-    
-}
-loadingScreen();
 
+    }, 500);
+
+
+
+}
+//loadingScreen();

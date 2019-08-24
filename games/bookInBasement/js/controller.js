@@ -66,6 +66,10 @@ function onControllerPress(val) {
             // ARROW DOWN
             RP.floor.height--;
             break;
+        case 32:
+            // ARROW DOWN
+            CS.isJumping = true;
+            break;
         default:
             // FAIL code block
 //            console.log(`no case detected`);
@@ -90,6 +94,10 @@ function onControllerRelease(val) {
         case 83:
             // S code block
             CS.d = false;
+            break;
+        case 32:
+            // JUMP
+            CS.isJumping = false;
             break;
         default:
             // FAIL code block

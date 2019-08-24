@@ -2,7 +2,7 @@ TADO:
 
 need door on right side of screen - or stargate - still debating - remote for sliders alt.
 
-
+-- figure out png loading things - perhaps base64 conversion etc..
 
 
 
@@ -13,7 +13,7 @@ need door on right side of screen - or stargate - still debating - remote for sl
  
  - CONTROLS - FLOOR MAP
  
- - VOICE FUNCTIONS FOR SPEACH BUBBLES
+ - VOICE FUNCTIONS FOR SPEeCH BUBBLES
  
  - NODES FOR TALKING THINGS (DEBUGGER DRAW POINTS STUFF)
  
