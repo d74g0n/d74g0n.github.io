@@ -2,7 +2,7 @@ let ver = `0.001b`;
 let verName = `fakenoose`;
 
 let players = [];
-
+let book = new Book('bob',25,455);
 
 let msg;
 
@@ -40,7 +40,7 @@ function mainLoop() {
 
 
     isFloor(book.x, book.y, book);
-    book.tick();
+//    book.tick();
     tip.tick();
 
     if (debugging) {

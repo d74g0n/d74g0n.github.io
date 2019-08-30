@@ -6,7 +6,7 @@ function renderImage() {
     background('darkred'); //tmp clear
     drawSet(SET.level);
     player.tick();
-//    SET.leveldoors[0].tick(AT.sixtycount); // lazy first door target.
+    SET.leveldoors[0].tick(AT.sixtycount); // lazy first door target.
 }
 
 function setup() {

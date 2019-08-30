@@ -1,4 +1,4 @@
-function isFloor(x, y, obj) {
+function oldisFloor(x, y, obj) {
 
     //sort by x to isolate math.
 
@@ -73,9 +73,9 @@ class Book {
         this.vz = 0;
         this.isJumping = false;
         this.friction = 0.9;
-        this.gravity = 4;
+        this.gravity = 9;
         this.accumulatedGravity = 1;
-        this.jumppower = -10;
+        this.jumppower = -2;
     }
 
     readout() {
@@ -98,20 +98,23 @@ class Book {
     applyForces() {
         // Look at this gravity Spaget Ooph::
 
-        if (this.isJumping || !isFloor(this.x, this.y + 2, this)) {
+//        if (this.isJumping || !SET.leveldoors[0].isFloor(this.x, this.y + 2, this)) {
+        if (this.isJumping && !SET.level[0].isFloor(this.y +2)) {
             this.accumulatedGravity++;
             this.vy += (this.gravity * this.accumulatedGravity) / 10;
         } else {
             this.accumulatedGravity = 1;
 
-            if (!isFloor(this.x, this.y + 2, this)) {
+            if ( !SET.level[0].isFloor(this.y + 2)) {
                 this.vy += this.gravity / 100;
             }
+            
+            console.log(`applyForces Collision - ${this.y}`);
         }
 
         this.vx *= this.friction;
 
-        if (!isFloor(this.x, this.y + 2, this)) {
+        if ( !SET.level[0].isFloor(this.y + 2)) {
             this.y += this.vy;
         } else {
             //if ON floor then calc only -neg vy.

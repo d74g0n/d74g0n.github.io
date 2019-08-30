@@ -20,7 +20,7 @@ class TOSDoor {
         let doorH = this.h * 3;
         superdrawImage(this.lookingglass, 120, 100, Global.images.thumb.width / 2, Global.images.thumb.height / 1.3, doorL, doorT, panelWidth, doorH);
 
-        if (player) {
+        if (player.y < doorT+doorH+player.scale) {
             player.drawSelf();
         }
     }

@@ -21,6 +21,15 @@ class TOSfloor {
         drawRect(0,this.y*7,canvas.width,canvas.height - this.y*7);
     }
     
+    isFloor(yval){
+        if(yval > (this.y*7)+50){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    
+    
     gradientFloor() {
         let gradient = ctx.createLinearGradient(0, this.y*7.2, 0,canvas.height);
         gradient.addColorStop(1, this.color.dark);
