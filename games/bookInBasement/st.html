@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>The Book in The Basement</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="d74g0n helps a book out of a basement - You can help too! - An Abstract Mathematics game">
+    <meta name="keywords" content="datafag, qmap, streaming, news, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+
+    <meta property="og:image" content="/common/img/punisher_med_white.png">
+    <meta name="twitter:image" content="/common/img/punisher_med_white.png">
+    <script>
+        let imgpath = `/games/bookInBasement/img/`;
+
+        let Global = {
+            paths: {
+                thumb: `${imgpath}thumb.png`,
+                desk: `${imgpath}deska.png`,
+                book: `${imgpath}booka.png`,
+                bookshelf: `${imgpath}bookshelfd.png`,
+                trashf: `${imgpath}trashf.png`,
+                trashe: `${imgpath}trashe.png`,
+                couch: `${imgpath}couchd.png`,
+                tv: `${imgpath}tva.png`,
+                speecha: `${imgpath}speecha.png`,
+                arta: `${imgpath}arta.png`,
+                ghosttail: `${imgpath}ghosttail.png`,
+                dewey: `${imgpath}dewey.png`,
+            },
+            images: {
+                desk: undefined,
+                book: undefined,
+                bookshelf: undefined,
+                trashf: undefined,
+                trashe: undefined,
+                couch: undefined,
+                tv: undefined,
+                speecha: undefined,
+                arta: undefined,
+                ghosttail: undefined,
+                dewey: undefined,
+            },
+        };
+        const G = Global;
+
+
+
+        function loadImage(path, id) {
+            function setspritesheet() {
+                Global.images[id] = this;
+            }
+            let image = new Image(); // Using optional size for image
+            image.onload = setspritesheet;
+            image.src = path;
+            return image;
+        }
+
+        // -=-=-=- PROP LOADING:
+        Global.images.desk = loadImage(Global.paths.desk, `desk`);
+        Global.images.thumb = loadImage(Global.paths.thumb, `thumb`);
+        Global.images.book = loadImage(Global.paths.book, `book`);
+        Global.images.bookshelf = loadImage(Global.paths.bookshelf, `bookshelf`);
+        Global.images.couch = loadImage(Global.paths.couch, `couch`);
+        Global.images.trashf = loadImage(Global.paths.trashf, `trashf`); // 512 is a bit large.
+        Global.images.trashe = loadImage(Global.paths.trashe, `trashe`);
+        Global.images.tv = loadImage(Global.paths.tv, `tv`);
+        //Global.images.speecha = loadImage(Global.paths.speecha, `speecha`);
+        Global.images.arta = loadImage(Global.paths.arta, `arta`);
+        Global.images.ghosttail = loadImage(Global.paths.ghosttail, `ghosttail`);
+        Global.images.dewey = loadImage(Global.paths.dewey, `ghosttail`);
+    </script>
+
+
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
+
+    <style>
+        @font-face {
+            font-family: '8bit';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+
+        }
+
+        canvas {
+            font-size: 98px;
+            width: 1280px;
+            /*            height: 560px;*/
+        }
+
+        body {
+            background: black;
+            color: white;
+        }
+
+        canvas {
+            border: 1px solid gold;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="bucht"></canvas>
+    </center>
+    <script>
+        // control a canvas to draw to (by linking to canvas tag above)
+        const canvas = document.getElementById('bucht');
+        // set properties of canvas (CSS does not effect these numbers)
+        // meaning that if these are 500,500 and CSS w/h is different it will stretch.
+        canvas.width = 640;
+        canvas.height = 480;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        let frame = 0;
+    </script>
+<!--    COMMON SCRIPTS-->
+    <script src="/games/common/math.js"></script>
+    <script src="/games/common/drawing.js"></script>
+    
+    <script src="/games/bookInBasement/class/AnimationTimer.js"></script> <!-- timer system-->
+    
+    <script src="/games/bookInBasement/js/controller.js"></script> <!-- TOSDATA -->
+    <script src="/games/bookInBasement/class/Book.js"></script> <!-- TOSDATA -->
+    
+    
+    <script src="/games/bookInBasement/settings/TOSsettings.js"></script> <!-- TOSDATA -->
+    <script src="/games/bookInBasement/class/TOSWall.js"></script>
+    <script src="/games/bookInBasement/class/TOSFloor.js"></script>
+    <script src="/games/bookInBasement/class/TOSDoor.js"></script>
+    <script src="/games/bookInBasement/class/TOSmapassembler.js"></script> <!-- TOSEND -->
+    
+    <script src="/games/bookInBasement/class/TOSmain.js"></script> <!-- TOSEND -->
+    
+    
+    
+
+    <!--    <script src="/games/bookInBasement/debugtools.js"></script>-->
+
+</body></html>

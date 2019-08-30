@@ -1,11 +1,76 @@
+function isFloor(x, y, obj) {
+
+    //sort by x to isolate math.
+
+
+    if (x < 32) {
+        //LEFT = 32 - anything under 32 is set to 32.
+        // zero to edge
+        //        x = 32;
+        obj.x = 32;
+        obj.vx = 0;
+        if (y > 332) {
+            obj.y = 333;
+            obj.hitFloor();
+            return true;
+        }
+        if (debugging){
+        console.log(`LEFT edge hit`);
+            }
+    }
+
+    if (x >= 31 && x <= 69) {
+        //on couch
+        if (y > 332) {
+            obj.y = 333;
+            obj.hitFloor();
+            return true;
+        }
+                if (debugging){
+        console.log(`on couch`);}
+    }
+
+    if (x >= 69.01 && x <= 80) {
+
+        let deltaS = (80 - 69); //11steps - 332-340 8
+        let deltaX = 80 - x;
+
+        if (y > 332) {
+            obj.hitFloor();
+            obj.y = 340 - deltaX;
+            return true;
+        }
+                if (debugging){
+        console.log(`getting off couch`);}
+
+
+    }
+
+
+    if (x >= 81) {
+        if (y > 390) {
+            //bottom floor general.
+            obj.y = 390;
+            return true;
+        }
+                if (debugging){
+        console.log(`carpet`);}
+    }
+
+return false;
+
+}
+
 class Book {
-    constructor(id = 'book', x, y) {
+    constructor(id = 'book', x, y,z=0) {
         this.x = x;
         this.y = y;
+        this.z = z;
         this.scale = 64;
         this.id = id;
         this.vx = 0;
         this.vy = 0;
+        this.vz = 0;
         this.isJumping = false;
         this.friction = 0.9;
         this.gravity = 4;
@@ -20,7 +85,7 @@ class Book {
         console.log(`isJumping ${this.isJumping}`);
     }
 
-    drawself() {
+    drawSelf() {
         superdrawImage(Global.images.book, 0, 0, 128, 128, this.x - (this.scale / 3), this.y - this.scale + 4, this.scale, this.scale);
     }
 
@@ -92,7 +157,7 @@ class Book {
     tick() {
         this.processControllerState();
         this.applyForces();
-        this.drawself();
+        this.drawSelf();
     }
 
     jumpTimer() {
@@ -100,5 +165,5 @@ class Book {
     }
 }
 
-let book = new Book('bob', 5, 455);
-console.log(`quickboot - book = newbook`);
+//let book = new Book('bob', 5, 455);
+//console.log(`quickboot - book = newbook`);

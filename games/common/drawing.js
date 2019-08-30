@@ -112,7 +112,12 @@ function drawSquare(x, y, scale) {
 }
 
 function strokeSquare(x, y, scale) {
-    ctx.Rect(x, y, scale, scale);
+    ctx.strokeRect(x, y, scale, scale);
+}
+
+function strokeRect(x,y,w,h){
+     ctx.strokeRect(x,y,w,h);
+//    ctx.stroke();
 }
 
 function drawRect(x, y, w, h) {
