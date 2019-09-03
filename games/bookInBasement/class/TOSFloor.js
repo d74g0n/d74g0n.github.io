@@ -22,7 +22,7 @@ class TOSfloor {
     }
     
     isFloor(yval){
-        if(yval > (this.y*7)+50){
+        if(yval > (this.y*7)+4){
             return true;
         }else {
             return false;
