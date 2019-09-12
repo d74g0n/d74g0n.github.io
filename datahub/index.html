@@ -17,10 +17,12 @@
 
 </head>
 
-<!--MSN PIP WINDOW-->
+<!--
+MSN PIP WINDOW
 <div id="frameheader">
     <iframe id="frame" width="560" height="315" src="http://ok.ru/videoembed/1359778356840?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
 </div>
+-->
 <script src="/common/js/draggable_element.js"></script>
 <script>
     let elementtodrag = document.getElementById('frameheader');
@@ -107,12 +109,15 @@
             let foxtoggler = false;
 
             function loadfox() {
-                if (!foxtoggler) {
-                    document.getElementById('frameheader').style.visibility = "visible";
-                } else {
-                    document.getElementById('frameheader').style.visibility = "hidden";
-                }
-                foxtoggler = !foxtoggler;
+//                if (!foxtoggler) {
+//                    document.getElementById('frameheader').style.visibility = "visible";
+//                } else {
+//                    document.getElementById('frameheader').style.visibility = "hidden";
+//                }
+//                foxtoggler = !foxtoggler;
+                 window.open('http://ustv247.tv/foxnewslive/','_blank');
+//                 document.getElementById('view_port').src = "http://ustv247.tv/foxnewslive/";
+                
             }
 
             function loadDataFag() {
@@ -172,7 +177,7 @@
                         superreadout.innerHTML = "DOCUMENTARIES";
                         break;
                     case 'FOX':
-                        readout.innerHTML = "Opens Fox PIP Window <br> Glitchy/Jenky/Beware!";
+                        readout.innerHTML = "Opens Fox News in new Tab";
                         superreadout.innerHTML = "FOX";
                         break;
                     case 'QMAP':
@@ -213,7 +218,7 @@
         <a id="menuitem" onmouseover="hintsystem('QRESEARCH')" onclick="loadQreee()" style="font-size: 20px">QRESEARCH</a>
         <a id="menuitem" onmouseover="hintsystem('QCARDS')" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
         <a id="menuitem" onmouseover="hintsystem('DOCUMENTARIES')" onclick="LoadDocumentaries()" style="font-size: 16px">DOCUMENTARIES</a>
-        <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="loadfox()">FOX</a>
+        <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="loadfox()">FOX NEWS</a>
         <hr>
         <a id="menuitem" onmouseover="hintsystem('QMAP')" href="https://qmap.pub" target="_blank">QMAP</a>
         <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
