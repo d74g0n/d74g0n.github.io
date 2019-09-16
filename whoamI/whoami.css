@@ -40,10 +40,10 @@ body {
 
 .item {
     display: block;
-    padding: 24px;
+    padding: 22px;
     border: 1px solid white;
     width: 300px;
-    font-size: 48px;
+    font-size: 28px;
     font-family: '8bitOperatorPlus-Regular';
     margin: 10px;
     border-radius: 10px;
