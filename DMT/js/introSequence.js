@@ -1,5 +1,8 @@
 // needs audio now:
-
+ canvas.onclick = function () {
+    IntroSequence.introMusic.play();
+    IntroSequence.zoomOutSignature();
+}
 
 let IntroSequence = {
     aDMT: undefined,
@@ -8,9 +11,26 @@ let IntroSequence = {
     aniscale: 6.01,
     loadAudio: function () {
         IntroSequence.aDMT = new Audio('audio/DMT.mp3');
+        IntroSequence.aDMT.addEventListener('loadeddata', () => {
+            if (IntroSequence.debugging) {
+                console.log('I have loaded aDMT');
+            }
+        })
+
+
+
         IntroSequence.introMusic = new Audio('audio/introtune.mp3');
-        IntroSequence.introMusic.load();
-        IntroSequence.aDMT.load();
+
+        IntroSequence.introMusic.addEventListener('loadeddata', () => {
+            if (IntroSequence.debugging) {
+                console.log('I have loaded introMusic');
+            }
+        })
+
+
+
+        //        IntroSequence.introMusic.load();
+        //        IntroSequence.aDMT.load();
 
 
     },
@@ -28,7 +48,8 @@ let IntroSequence = {
             image.src = path;
             return image;
         }
-        return loadImage("img/housevan.png");
+        //        return loadImage("img/housevan.png");
+        return loadImage("img/alphahouse.png");
     },
     zoomOutSignature: function () {
         if (IntroSequence.aniscale > 1) {
@@ -56,10 +77,6 @@ let IntroSequence = {
                 })
             }
 
-            //            IntroSequence.aDMT.play();
-
-
-
             IntroSequence.zoomOutCleanUp();
         }
     },
@@ -81,6 +98,9 @@ let IntroSequence = {
 
         function doit() {
             fadesteps--;
+
+            background(gradientV('red', 'blue', 'skyblue'));
+
             ctx.globalAlpha = 1 / fadesteps;
             ctx.drawImage(IntroSequence.outsideview, 0, 0, 640, 2000);
             ctx.globalAlpha = 1;
@@ -99,29 +119,25 @@ let IntroSequence = {
     PanDownOutsides: function () {
         let steps = -400;
         let sigstep = 0;
+        ctx.globalAlpha = 1;
 
-        function doit() {
-            steps += 0.5;
+        function doPan() {
+            steps += 0.4;
             sigstep += 0.15;
-            ctx.drawImage(IntroSequence.outsideview, 0, -400 - steps, 640, 1000);
-            ctx.globalAlpha = 1;
-            if (sigstep > 50) {
-                ctx.globalAlpha = 0.1;
-            }
-            IntroSequence.centerDrawRiser(IntroSequence.signature, 1, sigstep);
+            background(gradientV('red', 'blue', 'skyblue')); //draw BG
+            IntroSequence.centerDrawRiser(IntroSequence.signature, 1, sigstep); //draw SIG
+            ctx.drawImage(IntroSequence.outsideview, 0, -400 - steps, 640, 1000); //draw SET
+
             if (steps > 0) {
                 if (IntroSequence.debugging) {
                     console.log('[4][done] - PanDownOutsides');
                 }
-
                 IntroSequence.finished();
-                0
-
             } else {
-                requestAnimationFrame(doit);
+                requestAnimationFrame(doPan);
             }
         }
-        doit();
+        doPan();
     },
     centerDraw: function (image, s = 1) {
         //    middleofcanvas::
@@ -170,23 +186,24 @@ let IntroSequence = {
 
 }
 IntroSequence.init();
+writeText('click to start');
+
 
 function musicGo() {
     let playPromise = IntroSequence.introMusic.play();
     if (playPromise !== null) {
         playPromise.catch(() => {
             IntroSequence.introMusic.play();
-        })
+        });
+    } else {
+        IntroSequence.introMusic.play();
     }
-
     IntroSequence.zoomOutSignature();
 }
-setTimeout(musicGo, 1000);
+//musicGo();
 
 
-
-
-
-
+//IntroSequence.zoomOutSignature();
+//setTimeout(musicGo, 5000);
 //var audio = new Audio('audio/DMT.mp3');
 //audio.play();

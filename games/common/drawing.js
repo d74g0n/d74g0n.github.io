@@ -87,7 +87,7 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
 
 }
 
-function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = f, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {
+function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = `monospace`, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {
     ctx.fillStyle = fillStyle;
     ctx.strokeStyle = strokeStyle;
     ctx.font = font;
