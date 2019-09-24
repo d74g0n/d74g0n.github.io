@@ -1,5 +1,15 @@
 TADO:
 
+Make Sets into object.  obj.draw();
+Set includes its own floormap.
+
+
+
+
+
+
+
+-=--=- ODLER:
 need door on right side of screen - or stargate - still debating - remote for sliders alt.
 
 -- figure out png loading things - perhaps base64 conversion etc..

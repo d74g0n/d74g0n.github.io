@@ -1,5 +1,30 @@
 //let f = new FontFace('8-bit', '/common/fonts/8bitOperatorPlus-Regular.ttf');
 
+
+function centerDraw(image, s = 1) {
+    //    ctx.drawImage(image,dx,dy,dw,dh);
+    //    middleofcanvas::
+    let cx = canvas.width / 2;
+    let cy = canvas.height / 2;
+    let ix = image.width * s / 2;
+    let iy = image.height * s / 2;
+
+    let left = cx - ix;
+    let top = cy - iy;
+
+
+    //    ctx.fillStyle = "black";
+    ctx.fillStyle = "rgba(0,0,0,0.1)";
+    ctx.globalAlpha = 0.8;
+    ctx.rect(left, top, image.width * s, image.height * s);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    //    ctx.clearRect(left,top,image.width*s,image.height*s);
+    ctx.drawImage(image, left, top, image.width * s, image.height * s);
+}
+
+
 function clearCanvas() {
     return ctx.clearRect(0, 0, canvas.width, canvas.height);
 }

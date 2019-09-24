@@ -105,23 +105,23 @@ class Book {
         } else {
             this.accumulatedGravity = 1;
 
-            if ( !SET.level[0].isFloor(this.y + 2)) {
-                this.vy += this.gravity / 100;
-            }
+//            if ( !SET.level[0].isFloor(this.y + 2)) {
+//                this.vy += this.gravity / 100;
+//            }
             
             console.log(`applyForces Collision - ${this.y}`);
         }
 
         this.vx *= this.friction;
 
-        if ( !SET.level[0].isFloor(this.y + 2)) {
-            this.y += this.vy;
-        } else {
-            //if ON floor then calc only -neg vy.
-            if (this.vy < 0) {
-                this.y += this.vy;
-            }
-        }
+//        if ( !SET.level[0].isFloor(this.y + 2)) {
+//            this.y += this.vy;
+//        } else {
+//            //if ON floor then calc only -neg vy.
+//            if (this.vy < 0) {
+//                this.y += this.vy;
+//            }
+//        }
         this.x += this.vx;
 //        console.log(this.accumulatedGravity);
     }

@@ -39,7 +39,7 @@ function manualBubble(x = canvas.width / 2, y = canvas.height / 2, w =128) {
     roundRect(ctx, x, y, w, bub.h, 8, 'white', 'black');
     ctx.restore();
     
-    superdrawImage(Global.images.ghosttail, 0, 0, 16, 8, x + 2, y + bub.h - 2, 32, 16);
+    superdrawImage(Global.images.ghosttail, 0, 0, Global.images.ghosttail.width,Global.images.ghosttail.height, x + 4, y + bub.h - 2, Global.images.ghosttail.width*2, Global.images.ghosttail.height*2);
 //    superdrawImage(Global.images.ghosttail, 0, 0, 16, 8, x + 2, y + bub.h - 1.5, 32, 16);
     
 

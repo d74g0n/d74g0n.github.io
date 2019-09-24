@@ -45,24 +45,11 @@ let Global = {
         trashf: `${imgpath}trashf.png`,
         trashe: `${imgpath}trashe.png`,
         couch: `${imgpath}couchd.png`,
-        //        tv: `/games/bookinBasement/img/televisiontop.png`,
         tv: `${imgpath}tva.png`,
         speecha: `${imgpath}speecha.png`,
         arta: `${imgpath}arta.png`,
         ghosttail: `${imgpath}ghosttail.png`,
         dewey: `${imgpath}dewey.png`,
-        //        desk: `/games/bookinBasement/img/deska.png`,
-        //        book: `/games/bookinBasement/img/booka.png`,
-        //        bookshelf: `/games/bookinBasement/img/bookshelfd.png`,
-        //        trashf: `/games/bookinBasement/img/trashf.png`,
-        //        trashe: `/games/bookinBasement/img/trashe.png`,
-        //        couch: `/games/bookinBasement/img/couchd.png`,
-        ////        tv: `/games/bookinBasement/img/televisiontop.png`,
-        //        tv: `/games/bookinBasement/img/tva.png`,
-        //        speecha: `/games/bookinBasement/img/speecha.png`,
-        //        arta: `/games/bookinBasement/img/arta.png`,
-        //        ghosttail: `/games/bookinBasement/img/ghosttail.png`,
-        //        dewey: `/games/bookinBasement/img/dewey.png`,
     },
     images: {
         desk: undefined,
@@ -140,7 +127,7 @@ Global.images.tv = loadImage(Global.paths.tv, `tv`);
 //Global.images.speecha = loadImage(Global.paths.speecha, `speecha`);
 Global.images.arta = loadImage(Global.paths.arta, `arta`);
 Global.images.ghosttail = loadImage(Global.paths.ghosttail, `ghosttail`);
-Global.images.dewey = loadImage(Global.paths.dewey, `ghosttail`);
+Global.images.dewey = loadImage(Global.paths.dewey, `dewey`);
 
 
 function drawPropLayer() {
@@ -184,18 +171,10 @@ function drawPropLayer() {
         if (RP.tv.isOn) {
 
             if (RP.tv.gradient == undefined || frame % RP.tv.modolo == 0) {
-//                RP.tv.gradient = gradientH(RNDHexColor(), RNDHexColor(), RNDHexColor());
-//                RP.tv.gradient = makeGradient(RNDHexColor(), 0., RNDHexColor(), 0.5, RNDHexColor(), 1, `V`,36,260);
-//                RP.tv.gradient = makeGradient(`black`, 0,`white`, 0.5, RNDHexColor(), 1, `V`,32,500-frame);
-                RP.tv.gradient = makeGradient(RNDHexColor(), 0., RNDHexColor(), 0.5, RNDHexColor(), 1, `V`,36,260-frame/3);
-//                RP.tv.gradient = makeGradient(`red`, 0, 'black', 0.7, 'white', 1, `V`,100,260);
+                RP.tv.gradient = makeGradient(RNDHexColor(), 0., RNDHexColor(), 0.5, RNDHexColor(), 1, `V`, 36, 260 - frame / 3);
             }
 
             setColor(RP.tv.gradient);
-            
-//            setColor(makeGradient(RNDHexColor(), 0., RNDHexColor(), 0.5, RNDHexColor(), 1, `V`,36,260-frame)
-            
-            
             GlobalAlpha(frame / 150);
             drawRect(150, 360 - RP.floor.height, 50, 36);
             GlobalAlpha(1);
