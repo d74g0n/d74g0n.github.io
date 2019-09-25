@@ -11,19 +11,31 @@
     <meta name="author" content="d74g0n">
 
     <link rel="shortcut icon" href="/common/img/favicon.ico" />
-    
-    
-    <!--    <link rel="stylesheet" type="text/css" href="/whoamI/whoami.css" />-->
 
     <style>
+        @font-face {
+            font-family: '8bitO';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+        
+        
+        * {
+            font-family: '8bitO';
+        }
+
+
+
         body {
             background: black;
             color: white;
         }
-        
+
         canvas {
-            border 1px solid gold;
-/*            background: grey;*/
+            border 2px solid gold;
+/*
+            width: 1280px;
+            height: 960px;
+*/
         }
 
     </style>
@@ -36,15 +48,14 @@
         <script>
             const canvas = document.getElementById("mainscreen");
             const ctx = canvas.getContext("2d");
-
             canvas.width = 640;
-            canvas.height= 480;
+            canvas.height = 480;
             ctx.imageSmoothingEnabled = false;
         </script>
 
-<!-- <script src="js/DMT.js"></script>-->
- <script src="/games/common/drawing.js"></script>
- <script src="js/introSequence.js"></script>
+        <!-- <script src="js/DMT.js"></script>-->
+        <script src="/games/common/drawing.js"></script>
+        <script src="js/introSequence.js"></script>
     </center>
 </body>
 

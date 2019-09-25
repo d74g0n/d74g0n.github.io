@@ -1,14 +1,18 @@
 // needs audio now:
- canvas.onclick = function () {
-    IntroSequence.introMusic.play();
-    IntroSequence.zoomOutSignature();
+canvas.onclick = function () {
+    IntroSequence.start();
+    canvas.onclick = undefined;
 }
 
 let IntroSequence = {
     aDMT: undefined,
     introMusic: undefined,
-    debugging: true,
+    debugging: false,
     aniscale: 6.01,
+    gradientfader: 0,
+    colorA: 'black',
+    colorB: 'blue',
+    colorC: 'skyblue',
     loadAudio: function () {
         IntroSequence.aDMT = new Audio('audio/DMT.mp3');
         IntroSequence.aDMT.addEventListener('loadeddata', () => {
@@ -81,6 +85,15 @@ let IntroSequence = {
         }
     },
     zoomOutCleanUp: function () {
+        
+        if (IntroSequence.gradientfader >= 1){
+            IntroSequence.gradientfader = 1;
+        }else{
+            IntroSequence.gradientfader += 0.009;
+        }
+        ctx.globalAlpha = IntroSequence.gradientfader;
+        background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
+        ctx.globalAlpha = 1;
         IntroSequence.centerDraw(IntroSequence.signature, 1);
         IntroSequence.aniscale -= 0.1;
         if (IntroSequence.aniscale < 0) {
@@ -99,7 +112,9 @@ let IntroSequence = {
         function doit() {
             fadesteps--;
 
-            background(gradientV('red', 'blue', 'skyblue'));
+            //            background(gradientV('red', 'blue', 'skyblue'));
+            //            background(gradientV('black', 'black', 'skyblue'));
+            background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
 
             ctx.globalAlpha = 1 / fadesteps;
             ctx.drawImage(IntroSequence.outsideview, 0, 0, 640, 2000);
@@ -124,7 +139,8 @@ let IntroSequence = {
         function doPan() {
             steps += 0.4;
             sigstep += 0.15;
-            background(gradientV('red', 'blue', 'skyblue')); //draw BG
+            background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
+            //            background(gradientV('red', 'blue', 'skyblue')); //draw BG
             IntroSequence.centerDrawRiser(IntroSequence.signature, 1, sigstep); //draw SIG
             ctx.drawImage(IntroSequence.outsideview, 0, -400 - steps, 640, 1000); //draw SET
 
@@ -180,30 +196,18 @@ let IntroSequence = {
         //trying to insert noise::
 
     },
+    start: function () {
+        IntroSequence.introMusic.play();
+        IntroSequence.zoomOutSignature();
+    },
     finished: function () {
         console.log(`[5][complete] - INTROSEQUENCE COMPLETE`);
+        console.log(`[5b][complete] - CLEAN UP IntroSequence Object`);
     },
 
 }
 IntroSequence.init();
-writeText('click to start');
 
 
-function musicGo() {
-    let playPromise = IntroSequence.introMusic.play();
-    if (playPromise !== null) {
-        playPromise.catch(() => {
-            IntroSequence.introMusic.play();
-        });
-    } else {
-        IntroSequence.introMusic.play();
-    }
-    IntroSequence.zoomOutSignature();
-}
-//musicGo();
-
-
-//IntroSequence.zoomOutSignature();
-//setTimeout(musicGo, 5000);
-//var audio = new Audio('audio/DMT.mp3');
-//audio.play();
+//writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');
+writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');
