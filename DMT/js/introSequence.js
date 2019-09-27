@@ -1,7 +1,7 @@
 // needs audio now:
 canvas.onclick = function () {
     IntroSequence.start();
-    canvas.onclick = undefined;
+    canvas.onclick = undefined;  // so it don't start more than once!
 }
 
 let IntroSequence = {
@@ -207,6 +207,11 @@ let IntroSequence = {
 
 }
 IntroSequence.init();
+
+
+
+
+
 
 
 //writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');

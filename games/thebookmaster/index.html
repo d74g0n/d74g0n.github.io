@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MakingSuperBook</title>
+
+    <!--
+    <link rel="stylesheet" type="text/css" href="/datahub/hub.css" />
+    <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />
+-->
+   <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="I AM d74g0n!">
+    <meta name="keywords" content="d74g0n">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
+
+    <style>
+        @font-face {
+            font-family: '8bitO';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+        
+        
+        * {
+            font-family: '8bitO';
+        }
+
+
+
+        body {
+            background: black;
+            color: white;
+        }
+
+        canvas {
+            border 2px solid gold;
+            background: grey;
+/*
+            width: 1280px;
+            height: 960px;
+*/
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="mainviewer"></canvas>
+    </center>
+    <script>
+        // control a canvas to draw to (by linking to canvas tag above)
+        const canvas = document.getElementById('mainviewer');
+        // set properties of canvas (CSS does not effect these numbers)
+        // meaning that if these are 500,500 and CSS w/h is different it will stretch.
+        canvas.width = 640;
+        canvas.height = 480;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        let frame = 0;
+    </script>
+            <script src="/games/common/drawing.js"></script>
+<!--        <script src="js/introSequence.js"></script>-->
+    <script src="/games/thebookmaster/superBook.js"></script>
+    
+<!--
+    
+    
+    <script src="/games/bookInBasement/floormap.js"></script>
+    <script src="/games/bookInBasement/rantdata.js"></script>
+    <script src="/games/bookInBasement/set.js"></script>
+    <script src="/games/bookInBasement/js/textBubbles.js"></script>
+    <script src="/games/bookInBasement/timers.js"></script>
+    
+    <script src="/games/bookInBasement/js/controller.js"></script>
+    
+    
+    <script src="/games/bookInBasement/mainloop.js"></script>
+    
+ 
+-->
+        
+<!--    <script src="/games/bookInBasement/debugtools.js"></script>-->
+   
+</body></html>

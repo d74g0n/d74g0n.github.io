@@ -1,29 +1,37 @@
 //let f = new FontFace('8-bit', '/common/fonts/8bitOperatorPlus-Regular.ttf');
+function loadImage(path) {
+    let image = new Image();
+    image.src = path;
+    return image;
+}
 
+function drawImageRotated(image, x, y, s, r) {
+    ctx.translate(x, y);
+    ctx.rotate(r * Math.PI / 180);
+    // ctx.drawImage(image, (-image.width / 2), (-image.height / 2));
+    let scaledh = image.height * s;
+    let scaledw = image.width * s;
+    ctx.drawImage(image, 0, 0, image.width, image.height, (-scaledw / 2), (-scaledh / 2), scaledw, scaledh);
+}
+
+function justRotate(r=0){
+        return ctx.rotate(r * Math.PI / 180);
+}
 
 function centerDraw(image, s = 1) {
-    //    ctx.drawImage(image,dx,dy,dw,dh);
-    //    middleofcanvas::
     let cx = canvas.width / 2;
     let cy = canvas.height / 2;
     let ix = image.width * s / 2;
     let iy = image.height * s / 2;
-
     let left = cx - ix;
     let top = cy - iy;
-
-
-    //    ctx.fillStyle = "black";
     ctx.fillStyle = "rgba(0,0,0,0.1)";
     ctx.globalAlpha = 0.8;
     ctx.rect(left, top, image.width * s, image.height * s);
     ctx.fill();
     ctx.globalAlpha = 1;
-
-    //    ctx.clearRect(left,top,image.width*s,image.height*s);
     ctx.drawImage(image, left, top, image.width * s, image.height * s);
 }
-
 
 function clearCanvas() {
     return ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -42,7 +50,7 @@ function superdrawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
     ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 }
 
-function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+function roundRect(ctx = ctx, x, y, width, height, radius, fill, stroke) {
     if (typeof stroke == 'undefined') {
         stroke = true;
     }
@@ -106,7 +114,6 @@ function strokeRect(x = 100, y = 100, w = 100, h = 100, color = 'black') {
     ctx.stroke();
 }
 
-
 function GlobalAlpha(num = 1) {
     ctx.globalAlpha = num;
 }
@@ -140,9 +147,9 @@ function strokeSquare(x, y, scale) {
     ctx.strokeRect(x, y, scale, scale);
 }
 
-function strokeRect(x,y,w,h){
-     ctx.strokeRect(x,y,w,h);
-//    ctx.stroke();
+function strokeRect(x, y, w, h) {
+    ctx.strokeRect(x, y, w, h);
+    //    ctx.stroke();
 }
 
 function drawRect(x, y, w, h) {
@@ -166,7 +173,6 @@ function fillCicle(x, y, r, color) {
     ctx.fill();
 }
 
-//function sSq(x, y, color = 'rgba(255,255,255,1)') {
 function sSq(x, y, color = 'green') {
     ctx.beginPath();
     ctx.lineWidth = 1;
@@ -175,8 +181,6 @@ function sSq(x, y, color = 'green') {
     ctx.stroke();
 }
 // -=-=-=-=-=-=-=-
-
-//function gradientV(colorA = 'black', colorB = 'blue', colorC = 'skyblue') {
 function gradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
     let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradient.addColorStop(0, colorA);
@@ -199,12 +203,12 @@ function gradientH(colorA = 'black', colorB = 'blue', colorC = 'skyblue') {
     //background(gradient);
 }
 
-function makeGradient(colorA='red', valueA=0, colorB='white', valueB=0.5, colorC='blue', valueC=1, direction = 'V',scale=RP.tv.height, o = 0) {
+function makeGradient(colorA = 'red', valueA = 0, colorB = 'white', valueB = 0.5, colorC = 'blue', valueC = 1, direction = 'V', scale = RP.tv.height, o = 0) {
     // valid direction values: H/V Horizontal / Vertical
     let gradient;
     switch (direction) {
         case `V`:
-//            gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            //            gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient = ctx.createLinearGradient(0, o, 0, scale);
             break;
         case `H`:
@@ -217,19 +221,11 @@ function makeGradient(colorA='red', valueA=0, colorB='white', valueB=0.5, colorC
     gradient.addColorStop(valueA, colorA);
     gradient.addColorStop(valueB, colorB);
     gradient.addColorStop(valueC, colorC);
-//debugger
-    ctx.fillStyle = gradient;
-//    ctx.fillRect(10, 10, 200, 100);
-//    
+    //debugger
+    //    ctx.fillStyle = gradient;
+    //    ctx.fillRect(10, 10, 200, 100);
+    //    
     return gradient;
-}
-
-
-function drawLine(xa, ya, xb, yb) {
-    ctx.beginPath();
-    ctx.moveTo(xa, ya);
-    ctx.lineTo(xb, yb);
-    ctx.stroke();
 }
 
 function horizontalLine(y) {
@@ -245,9 +241,7 @@ function drawline(x, y, xb, yb) {
     ctx.lineTo(xb, yb);
     ctx.stroke();
 }
-
 //=-=-=-=-=-=-=-=-
-
 function highlightTile(x, y, color) {
     // these functions are essentially the draw functions interpreted into board coordinates.
     setColor(color);
@@ -286,7 +280,6 @@ function fillCheckerboard(x, y) {
         }
     }
 }
-
 
 function fillGrass(x, y, m) {
 
