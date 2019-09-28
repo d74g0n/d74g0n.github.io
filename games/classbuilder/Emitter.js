@@ -8,6 +8,7 @@ class Emitter {
         this.isOn = true;
 
         this.framecount = 0;
+        this.puffcount = 0;
 
     }
 
@@ -37,33 +38,54 @@ class Emitter {
 
     doCalculations() {
         this.framecount++;
-        
+
         if (this.emitted.length < this.amount) {
-            this.takePuff();
+//            this.takePuff();
         }
 
         if (this.framecount > 100) {
             this.framecount -= 100;
+            this.puffcount++;
+            if (this.puffcount >= 100) {
+                this.puffcount -= 100;
+            }
         }
     }
 
     tick() {
         if (this.isOn) {
+            
+            if (this.emitted.length <= this.amount){
+                console.log(`puffhalf`);
+                this.takePuff();
+            }
+            
+            
             for (let i = 0; i < this.emitted.length; i++) {
                 //                console.log(`I:${i}`);
 
                 this.emitted[i].tick();
 
                 if (this.emitted[i].isDead) {
-//                    console.log(`particle Removed`);
+                    //                    console.log(`particle Removed`);
                     //                    this.emitted[i] = this.addParticle();
                     this.emitted.splice(i, 1);
                     this.doCalculations();
                 }
             }
 
-            if (this.framecount % 90 == 0 && EMIT.emitted.length < 100) {
-                this.takePuff();
+            if (this.framecount % 16 == 0 && EMIT.emitted.length < 200) {
+
+                this.puffcount++;
+                if (this.puffcount % 90 == 0) {
+                    console.log(`frame: ${this.framecount} puff: ${this.puffcount}`);
+                    this.takePuff();
+                    console.log(`puff`);
+                    if (this.puffcount > 100){
+                        this.puffcount = 0;
+                        this.takePuff();
+                    }
+                }
             }
 
 
@@ -84,13 +106,9 @@ class Smoke {
         this.x = x;
         this.y = y;
         this.image = image;
-        this.alpha = 0.5;
-        this.r = Math.floor(Math.random() * (360) + 0.5);
-        //        this.sizeStart = sizeStart;
-        //        this.sizeFinish = sizeFinish;
-        //        this.lifespan = lifespan;
-        //        this.alpha = 1;
-        //        this.vy = -1;
+        this.alpha = 0.3;
+
+        this.r = -Math.floor(Math.random() * (360) + 0.5);
         this.vy = Math.floor(Math.random() * (1) + 0.5);
         this.vx = Math.floor(Math.random() * (1) + 0.5);
 
@@ -188,7 +206,7 @@ function experimental() {
 
 let smokeImage = init();
 //let particle = new Smoke(canvas.width / 2, canvas.height / 2, smokeImage);
-//let EMIT = new Emitter(canvas.width / 2-20, canvas.height / 2, 3);
-let EMIT = new Emitter(canvas.width / 2-20, canvas.height, 8);
+let EMIT = new Emitter(canvas.width / 2-20, canvas.height / 2, 32);
+//let EMIT = new Emitter(canvas.width / 2 - 20, canvas.height, 32);
 EMIT.init();
 experimental();
