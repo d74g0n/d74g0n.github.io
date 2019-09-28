@@ -39,9 +39,9 @@ class Emitter {
     doCalculations() {
         this.framecount++;
 
-        if (this.emitted.length < this.amount) {
-//            this.takePuff();
-        }
+        //        if (this.emitted.length < this.amount) {
+        //            //            this.takePuff();
+        //        }
 
         if (this.framecount > 100) {
             this.framecount -= 100;
@@ -50,17 +50,44 @@ class Emitter {
                 this.puffcount -= 100;
             }
         }
+
+        //        this.shakeEmitter(random_range(-5,5));
     }
+    shakeEmitter(val = 1) {
+        let centX = canvas.width / 2;
+        let centY = canvas.height / 2;
+
+
+        if (random_bool()) {
+            this.x = centX + val;
+        } else {
+            this.x = centX - val;
+        }
+
+        if (random_bool()) {
+            this.x = centY + val;
+        } else {
+            this.x = centY - val;
+        }
+
+
+
+
+    }
+
+
+
+
 
     tick() {
         if (this.isOn) {
-            
-            if (this.emitted.length <= this.amount){
+
+            if (this.emitted.length <= this.amount) {
                 console.log(`puffhalf`);
                 this.takePuff();
             }
-            
-            
+
+
             for (let i = 0; i < this.emitted.length; i++) {
                 //                console.log(`I:${i}`);
 
@@ -74,18 +101,20 @@ class Emitter {
                 }
             }
 
-            if (this.framecount % 16 == 0 && EMIT.emitted.length < 200) {
+            if (this.framecount % 30 == 0 && EMIT.emitted.length < 200) {
 
                 this.puffcount++;
-                if (this.puffcount % 90 == 0) {
+                if (this.puffcount % 40 == 0) {
                     console.log(`frame: ${this.framecount} puff: ${this.puffcount}`);
                     this.takePuff();
                     console.log(`puff`);
-                    if (this.puffcount > 100){
-                        this.puffcount = 0;
-                        this.takePuff();
-                    }
+
                 }
+            }
+
+            if (this.puffcount >= 100) {
+                this.puffcount = 1;
+                //                        this.takePuff();
             }
 
 
@@ -106,19 +135,14 @@ class Smoke {
         this.x = x;
         this.y = y;
         this.image = image;
-        this.alpha = 0.3;
+        this.alpha = random_range(0.5, 0.8).toFixed(3);
 
-        this.r = -Math.floor(Math.random() * (360) + 0.5);
-        this.vy = Math.floor(Math.random() * (1) + 0.5);
-        this.vx = Math.floor(Math.random() * (1) + 0.5);
-
+        this.r = (random_range(-1, 1) * Math.PI * 0.5);
+        this.vy = random_range(-1, 1);
+        this.vx = random_range(-1, 1);
+        this.lifecount = 100000 + random_range(-100,100);
         this.s = 1;
         this.isDead = false;
-        //        this.velY = -1 - (Math.random() * 0.5);
-        //        this.velY = 0.5 * (Math.random() * 0.5);
-        //        this.velX = Math.floor(Math.random() * (-6) + 3);
-        //        this.velX = Math.floor(Math.random() * (-6)+1);
-        //        this.velX = Math.floor(Math.random() * (-6) + 3) / 10;
 
     }
 
@@ -127,19 +151,35 @@ class Smoke {
     }
 
     calculateSelf() {
+        
+//        if (this.lifecount < 0){
+//            this.isDead = true;
+//        }else{
+//            this.lifecount--;
+//        }
+        
         this.x += this.vx;
         this.y += this.vy;
         this.s += 0.1;
-        this.r += 0.5;
 
-        if (this.s > 1) {
-            this.alpha -= 0.001;
-            if (this.alpha < 0) {
+        if (this.r < 0) {
+            this.r -= 0.01;
+        } else {
+            this.r += 0.01;
+        }
+
+        this.alpha -= (0.001).toFixed(4);
+        
+        if (this.s > 5) {
+//            this.alpha -= 0.001;
+            if (this.alpha < 0.1) {
                 this.alpha = 0;
                 this.isDead = true;
             }
         }
 
+        
+        
         //        if (this.alpha = 0.5) {
         //            EMIT.addBatch(1);
         //        }
@@ -164,10 +204,11 @@ class Smoke {
         //        ctx.clearRect(0, 0, canvas.width, canvas.height);  //temp clear rec
         ctx.globalAlpha = this.alpha;
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.r / 180 * Math.PI);
-        //        ctx.drawImage(this.image,this.x,this.y);
-        //        ctx.drawImage(this.image,0,0,this.image.width,this.image.height, this.x,this.y,this.image.width*this.s,this.image.height*this.s);
-        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2, this.image.width * this.s, this.image.height * this.s);
+        //        ctx.rotate(this.r / 180 * Math.PI);
+        ctx.rotate(this.r);
+        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
+            (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
+            this.image.width * this.s, this.image.height * this.s);
         ctx.restore();
     }
 
@@ -178,6 +219,13 @@ class Smoke {
 
 }
 
+function random_range(min, max) {
+    return Math.random() * (+max - +min) + +min;
+}
+
+function random_bool() {
+    return Math.random() >= 0.5;
+}
 
 
 function init() {
@@ -188,17 +236,10 @@ function init() {
 }
 
 function experimental() {
-    //this becomes the function of the Emitter::
-    //Refactor into list.
-    //tick then isdead removal slice.
-
-    //    particle.tick();
-    //    if (particle.isDead) {
-    //        console.log(`died`);
-    //        particle = new Smoke(canvas.width / 2, canvas.height / 2, smokeImage);
-    //    }
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+//    ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'blue';
+    ctx.fill();
     EMIT.tick();
 
     requestAnimationFrame(experimental);
@@ -206,7 +247,7 @@ function experimental() {
 
 let smokeImage = init();
 //let particle = new Smoke(canvas.width / 2, canvas.height / 2, smokeImage);
-let EMIT = new Emitter(canvas.width / 2-20, canvas.height / 2, 32);
+let EMIT = new Emitter(canvas.width / 2, canvas.height / 2, 64);
 //let EMIT = new Emitter(canvas.width / 2 - 20, canvas.height, 32);
 EMIT.init();
 experimental();
