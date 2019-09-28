@@ -99,13 +99,14 @@ class SuperBook {
     }
 
     drawSelf() {
-        
+
         ctx.save();
-        ctx.translate(canvas.width/2,canvas.height/2);
-        justRotate(-this.r);
-//        centerDraw(sun,10);
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        //        justRotate(-this.r);
+        justRotate(-this.r * 2);
+        //        centerDraw(sun,10);
         ctx.globalAlpha = 0.5;
-        superdrawImage(sun,0,0, sun.width,sun.height,-sun.width*10/2,-sun.height*10/2,sun.width*10,sun.height*10);
+        superdrawImage(sun, 0, 0, sun.width, sun.height, -sun.width * 10 / 2, -sun.height * 10 / 2, sun.width * 10, sun.height * 10);
         ctx.restore();
         ctx.globalAlpha = 1;
         ctx.save();
@@ -114,9 +115,9 @@ class SuperBook {
         this.s += 0.05;
 
         drawImageRotated(this.image, this.x, this.y, this.s, this.r);
-        
 
-//        drawImage sun
+
+        //        drawImage sun
         //        this.drawFootline();
 
         ctx.restore();
@@ -136,12 +137,12 @@ class SuperBook {
 }
 
 
-function loadAudio(path){
+function loadAudio(path) {
     let tmp = new Audio(path);
-        tmp.addEventListener('loadeddata', () => {
-            console.log(`[Audio][${path}]`);
-            
-        });
+    tmp.addEventListener('loadeddata', () => {
+        console.log(`[Audio][${path}]`);
+
+    });
     return tmp;
 }
 
@@ -155,18 +156,28 @@ canvas.onclick = function () {
     console.log(`rot ${Tester.r}`);
     Tester.r += 21;
     Tester.s += 0.05;
-    
+
     entertainer.play();
 }
 
 let rval = 1;
+
 function loopdraw() {
     background('black');
+
+
+      
+
     Tester.tick();
-    Tester.rotate(rval+=0.01);
-    if(rval>15){
+    ctx.save();
+    Tester.rotate(rval += 0.01);
+    ctx.restore();
+    if (rval > 15) {
         rval -= 15;
     }
+    ctx.save();
+      smokedraw();
+    ctx.restore();
     requestAnimationFrame(loopdraw);
 }
 
