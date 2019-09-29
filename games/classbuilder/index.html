@@ -3,29 +3,35 @@
 
 <head>
     <title>class builder</title>
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
     <style>
         body {
-            background: black;            
+            background: black;
         }
+
         canvas {
             border: 2px solid white;
             width: 640;
             height: 480;
+            border-radius: 325px;
         }
     </style>
 </head>
 
 <body>
-    <center><canvas id="mainscreen"></canvas></center>
-    <script>
-        const canvas = document.getElementById("mainscreen");
-        const ctx = canvas.getContext('2d');
-        canvas.width = 640;
-        canvas.height = 480;
+    <center><canvas id="mainscreen"></canvas>
+        <script>
+            const canvas = document.getElementById("mainscreen");
+            const ctx = canvas.getContext('2d');
+            canvas.width = 640;
+            canvas.height = 480;
+        </script>
+        <script type="text/javascript" src="SmokeEmitter.js"></script>
 
-    </script>
+    </center>
     
-    	<script type="text/javascript" src="Emitter.js"></script>
-</body>
-
-</html>
+    
+    
+    
+    
+</body></html>
