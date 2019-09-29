@@ -108,17 +108,17 @@ class Smoke {
         this.lifecount = 100000 + random_range(-100, 100);
         this.s = 1;
         this.sMax = 100;
-        this.sFadePoint = 0.5;
-//        this.sFadePoint = 15;
+        //        this.sFadePoint = 0.5;
+        this.sFadePoint = 3;
         this.scalerate = 0.08;
         this.isDead = false;
         this.wind = 0;
 
-//        this.tintColor = random_hexColor();
-//        this.tintColor = '#22f0f0';
+        //        this.tintColor = random_hexColor();
+        //        this.tintColor = '#22f0f0';
         this.tintColor = tmpcol;
         this.isTinted = true;
-//        this.isTinted = false;
+        //        this.isTinted = false;
     }
 
     calculateSelf() {
@@ -138,7 +138,7 @@ class Smoke {
         if (this.s > this.sFadePoint) {
             this.alpha -= this.alphaDecay;
 
-            if (this.alpha < 0) {
+            if (this.alpha < 0.01) {
                 this.alpha = 0;
             }
         }
@@ -162,39 +162,45 @@ class Smoke {
         ctx.imageSmoothing = false;
 
         if (this.isTinted) {
-            ctx.save();
+            this.drawTinted();
+        } else {
 
+
+
+
+
+            //
+            if (this.isTinted) {
+                ctx.globalAlpha = this.alpha / 2;
+            } else {
+                ctx.globalAlpha = this.alpha;
+            }
+            if (this.isDead) {
+                ctx.globalAlpha = 0.1;
+            }
+            ctx.save();
             ctx.translate(this.x, this.y);
             ctx.rotate(this.r);
-            ctx.globalAlpha = this.alpha / 2;
-//            ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
-            ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
+            ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
                 (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
                 this.image.width * this.s, this.image.height * this.s);
-
-
             ctx.restore();
+
         }
+    }
 
-
-
-
-
-//
-        if (this.isTinted) {
-            ctx.globalAlpha = this.alpha / 2;
-        } else {
-            ctx.globalAlpha = this.alpha;
-        }
-        if (this.isDead) {
-            ctx.globalAlpha = 0.1;
-        }
+    drawTinted() {
         ctx.save();
+
         ctx.translate(this.x, this.y);
         ctx.rotate(this.r);
-        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
+        ctx.globalAlpha = this.alpha / 2;
+        //            ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
+        ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
             (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
             this.image.width * this.s, this.image.height * this.s);
+
+
         ctx.restore();
     }
 
@@ -265,20 +271,20 @@ function init() {
     smokeImage.src = "/games/common/particles/smoke.png";
     ctx.imageSmoothing = false;
     return smokeImage;
-    
+
 
 }
 
-function reRollColour(){
+function reRollColour() {
     tmpcol = random_hexColor();
 }
 
 function renderLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     EMIT.tick();
-    EMITB.tick();
-    EMIT.setWind(2);
-    EMITB.setWind(-2);
+    //    EMITB.tick();
+    //    EMIT.setWind(2);
+    //    EMITB.setWind(-2);
     requestAnimationFrame(renderLoop);
 }
 
@@ -295,6 +301,6 @@ document.onclick = function () {
 }
 
 
-setInterval(reRollColour,3000);
-setTimeout(renderLoop,1000);
+setInterval(reRollColour, 3000);
+setTimeout(renderLoop, 1000);
 //renderLoop();
