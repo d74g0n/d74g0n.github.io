@@ -111,8 +111,8 @@ class Smoke {
         this.isDead = false;
         this.wind = 0;
 
-//        this.tintColor = random_hexColor();
-        this.tintColor = '#22f0f0';
+        this.tintColor = random_hexColor();
+//        this.tintColor = '#22f0f0';
         this.isTinted = true;
     }
 
@@ -162,6 +162,7 @@ class Smoke {
             ctx.translate(this.x, this.y);
             ctx.rotate(this.r);
             ctx.globalAlpha = this.alpha / 2;
+//            ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
             ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
                 (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
                 this.image.width * this.s, this.image.height * this.s);
@@ -276,5 +277,5 @@ document.onclick = function () {
     EMIT.isOn = !EMIT.isOn;
 }
 
-
-renderLoop();
+setTimeout(renderLoop,1000);
+//renderLoop();
