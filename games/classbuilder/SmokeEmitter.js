@@ -1,4 +1,15 @@
-// TODO: merge with tinter.
+// TODO: add has completed check for emitted array empty
+// add sliders. windxy.
+
+const buffer = document.createElement('canvas');
+const bx = buffer.getContext('2d');
+
+function initBuffer(img = smokeImage) {
+    let fg = img;
+    buffer.width = fg.width;
+    buffer.height = fg.height;
+
+}
 
 class SmokeEmitter {
     constructor(x, y, amount, emitRate = 1) {
@@ -13,9 +24,11 @@ class SmokeEmitter {
         this.puffcount = 0;
         this.emitRate = 1;
         this.wind = 0;
+
+
     }
-    
-    resetWind(){
+
+    resetWind() {
         this.setWind();
     }
 
@@ -97,6 +110,10 @@ class Smoke {
         this.scalerate = 0.08;
         this.isDead = false;
         this.wind = 0;
+
+//        this.tintColor = random_hexColor();
+        this.tintColor = '#22f0f0';
+        this.isTinted = true;
     }
 
     calculateSelf() {
@@ -138,19 +155,41 @@ class Smoke {
 
     drawSelf() {
         ctx.imageSmoothing = false;
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
 
+        if (this.isTinted) {
+            ctx.save();
+
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.r);
+            ctx.globalAlpha = this.alpha / 2;
+            ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
+                (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
+                this.image.width * this.s, this.image.height * this.s);
+
+
+            ctx.restore();
+        }
+
+
+
+
+//        ctx.save();
+//
+        if (this.isTinted) {
+            ctx.globalAlpha = this.alpha / 2;
+        } else {
+            ctx.globalAlpha = this.alpha;
+        }
         if (this.isDead) {
             ctx.globalAlpha = 0.1;
         }
 
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.r);
-        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
-            (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
-            this.image.width * this.s, this.image.height * this.s);
-        ctx.restore();
+//        ctx.translate(this.x, this.y);
+//        ctx.rotate(this.r);
+//        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
+//            (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
+//            this.image.width * this.s, this.image.height * this.s);
+//        ctx.restore();
     }
 
     tick() {
@@ -158,6 +197,27 @@ class Smoke {
         this.drawSelf();
     }
 
+    tintImage(img, tint = random_hexColor()) {
+        // fill offscreen buffer with the tint color
+        bx.fillStyle = tint;
+        bx.fillRect(0, 0, buffer.width, buffer.height);
+        // destination atop makes a result with an alpha channel 
+        // identical to fg, but with all pixels retaining their original color *as far as I can tell*
+        bx.globalCompositeOperation = "destination-atop";
+        bx.drawImage(this.image, 0, 0);
+
+        //then set the global alpha to the amound that you want to tint it, and draw the buffer 
+
+
+        //DRAW BUFFER ON TOP WITH ALPHA As TINT AMOUNT
+        return buffer;
+
+    }
+
+}
+// -=-= MATH:
+function random_hexColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
 function random_range(min, max) {
@@ -168,7 +228,28 @@ function random_bool() {
     return Math.random() >= 0.5;
 }
 
-
+//function tintImage(img, tint = '#FF0000') {
+//
+//    let fg = img;
+//    let buffer = document.createElement('canvas');
+//    buffer.width = fg.width;
+//    buffer.height = fg.height;
+//    let bx = buffer.getContext('2d');
+//    // fill offscreen buffer with the tint color
+//    bx.fillStyle = tint;
+//    //        bx.fillStyle = '#FF0000'
+//    bx.fillRect(0, 0, buffer.width, buffer.height);
+//    // destination atop makes a result with an alpha channel identical to fg, but with all pixels retaining their original color *as far as I can tell*
+//    bx.globalCompositeOperation = "destination-atop";
+//    bx.drawImage(fg, 0, 0);
+//
+//    //then set the global alpha to the amound that you want to tint it, and draw the buffer 
+//
+//
+//    //DRAW BUFFER ON TOP WITH ALPHA As TINT AMOUNT
+//    return buffer;
+//
+//}
 // -=- Example Below is Setup and Use::
 
 function init() {
@@ -186,7 +267,10 @@ function renderLoop() {
 }
 
 const smokeImage = init();
-let EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 24);
+
+initBuffer(smokeImage);
+
+let EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 8);
 
 document.onclick = function () {
     EMIT.isOn = !EMIT.isOn;
