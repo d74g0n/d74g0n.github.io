@@ -93,6 +93,8 @@ class SmokeEmitter {
     }
 }
 
+let tmpcol = random_hexColor();
+
 class Smoke {
     constructor(x, y, image) {
         this.x = x;
@@ -107,13 +109,16 @@ class Smoke {
         this.s = 1;
         this.sMax = 100;
         this.sFadePoint = 0.5;
+//        this.sFadePoint = 15;
         this.scalerate = 0.08;
         this.isDead = false;
         this.wind = 0;
 
-        this.tintColor = random_hexColor();
+//        this.tintColor = random_hexColor();
 //        this.tintColor = '#22f0f0';
+        this.tintColor = tmpcol;
         this.isTinted = true;
+//        this.isTinted = false;
     }
 
     calculateSelf() {
@@ -174,7 +179,7 @@ class Smoke {
 
 
 
-//        ctx.save();
+
 //
         if (this.isTinted) {
             ctx.globalAlpha = this.alpha / 2;
@@ -184,13 +189,13 @@ class Smoke {
         if (this.isDead) {
             ctx.globalAlpha = 0.1;
         }
-
-//        ctx.translate(this.x, this.y);
-//        ctx.rotate(this.r);
-//        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
-//            (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
-//            this.image.width * this.s, this.image.height * this.s);
-//        ctx.restore();
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.r);
+        ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
+            (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
+            this.image.width * this.s, this.image.height * this.s);
+        ctx.restore();
     }
 
     tick() {
@@ -201,6 +206,7 @@ class Smoke {
     tintImage(img, tint = random_hexColor()) {
         // fill offscreen buffer with the tint color
         bx.fillStyle = tint;
+        bx.clearRect(0, 0, buffer.width, buffer.height);
         bx.fillRect(0, 0, buffer.width, buffer.height);
         // destination atop makes a result with an alpha channel 
         // identical to fg, but with all pixels retaining their original color *as far as I can tell*
@@ -218,6 +224,7 @@ class Smoke {
 }
 // -=-= MATH:
 function random_hexColor() {
+    // sand - "#dede90"
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
@@ -258,12 +265,20 @@ function init() {
     smokeImage.src = "/games/common/particles/smoke.png";
     ctx.imageSmoothing = false;
     return smokeImage;
+    
 
+}
+
+function reRollColour(){
+    tmpcol = random_hexColor();
 }
 
 function renderLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     EMIT.tick();
+    EMITB.tick();
+    EMIT.setWind(2);
+    EMITB.setWind(-2);
     requestAnimationFrame(renderLoop);
 }
 
@@ -271,11 +286,15 @@ const smokeImage = init();
 
 initBuffer(smokeImage);
 
-let EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 8);
+let EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 4);
+let EMITB = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 4);
 
 document.onclick = function () {
     EMIT.isOn = !EMIT.isOn;
+    tmpcol = random_hexColor();
 }
 
+
+setInterval(reRollColour,3000);
 setTimeout(renderLoop,1000);
 //renderLoop();
