@@ -159,7 +159,7 @@ class Smoke {
     }
 
     drawSelf() {
-        ctx.imageSmoothing = false;
+//        ctx.imageSmoothing = false;
 
         if (this.isTinted) {
             this.drawTinted();

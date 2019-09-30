@@ -17,8 +17,8 @@
             font-family: '8bitO';
             src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
         }
-        
-        
+
+
         * {
             font-family: '8bitO';
         }
@@ -32,12 +32,19 @@
 
         canvas {
             border 2px solid gold;
-/*
+
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+
+            /*
             width: 1280px;
             height: 960px;
+            
+            
 */
         }
-
     </style>
 </head>
 
@@ -56,11 +63,9 @@
         <!-- <script src="js/DMT.js"></script>-->
         <script src="/games/common/drawing.js"></script>
         <script src="js/SmokeEmitter.js"></script>
-        
-        <script src="js/introSequence.js"></script>
-        
-        
-    </center>
-</body>
 
-</html>
+        <script src="js/introSequence.js"></script>
+
+
+    </center>
+</body></html>

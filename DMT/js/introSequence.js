@@ -10,9 +10,11 @@ let IntroSequence = {
     debugging: false,
     aniscale: 6.01,
     gradientfader: 0,
-    colorA: 'black',
+//    colorA: 'black',
+    colorA: 'rgba(0,0,0,0.2)',
     colorB: 'blue',
     colorC: 'skyblue',
+//    colorC: 'rgba(0,0,0,0)',
     loadAudio: function () {
         IntroSequence.aDMT = new Audio('audio/DMT.mp3');
         IntroSequence.aDMT.addEventListener('loadeddata', () => {
@@ -57,6 +59,7 @@ let IntroSequence = {
     },
     zoomOutSignature: function () {
 
+        ctx.imageSmoothingEnabled = true;
         EMIT.tick();
 
         if (IntroSequence.aniscale > 1) {
