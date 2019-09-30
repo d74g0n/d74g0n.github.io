@@ -105,20 +105,17 @@ class Smoke {
         this.r = (random_range(-1, 1) * Math.PI * 0.5);
         this.vy = random_range(-1, 1);
         this.vx = random_range(-1, 1);
-//        this.lifecount = 100000 + random_range(-100, 100);
         this.s = 1;
         this.sMax = 24;
-        //        this.sFadePoint = 0.5;
         this.sFadePoint = 0.4;
         this.scalerate = 0.3;
         this.isDead = false;
         this.wind = 0;
-
-//                this.tintColor = random_hexColor();
-        //        this.tintColor = '#22f0f0';
-//        this.tintColor = tmpcol;
-                this.isTinted = false;
-//        this.isTinted = false;
+        // this.tintColor = random_hexColor();
+        // this.tintColor = '#22f0f0';
+        // this.tintColor = tmpcol;
+        this.isTinted = false;
+        // this.isTinted = false;
     }
 
     calculateSelf() {
@@ -132,8 +129,6 @@ class Smoke {
         } else {
             this.r += 0.01;
         }
-
-
 
         if (this.s > this.sFadePoint) {
             this.alpha -= this.alphaDecay;
@@ -159,21 +154,15 @@ class Smoke {
     }
 
     drawSelf() {
-//        ctx.imageSmoothing = false;
-
         if (this.isTinted) {
             this.drawTinted();
         } else {
-
-
             ctx.imageSmoothing = true;
 
-
-            //
             if (this.isTinted) {
                 ctx.globalAlpha = this.alpha / 2;
             } else {
-                ctx.globalAlpha = this.alpha/4;
+                ctx.globalAlpha = this.alpha / 4;
             }
             if (this.isDead) {
                 ctx.globalAlpha = 0.1;
@@ -185,22 +174,17 @@ class Smoke {
                 (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
                 this.image.width * this.s, this.image.height * this.s);
             ctx.restore();
-
         }
     }
 
     drawTinted() {
         ctx.save();
-
         ctx.translate(this.x, this.y);
         ctx.rotate(this.r);
         ctx.globalAlpha = this.alpha / 2;
-        //            ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
         ctx.drawImage(this.tintImage(this.image, this.tintColor), 0, 0, this.image.width, this.image.height,
             (-this.image.width * this.s) / 2, (-this.image.height * this.s) / 2,
             this.image.width * this.s, this.image.height * this.s);
-
-
         ctx.restore();
     }
 
@@ -218,13 +202,9 @@ class Smoke {
         // identical to fg, but with all pixels retaining their original color *as far as I can tell*
         bx.globalCompositeOperation = "destination-atop";
         bx.drawImage(this.image, 0, 0);
-
         //then set the global alpha to the amound that you want to tint it, and draw the buffer 
-
-
         //DRAW BUFFER ON TOP WITH ALPHA As TINT AMOUNT
         return buffer;
-
     }
 
 }
@@ -245,10 +225,8 @@ function random_bool() {
 function init() {
     const smokeImage = new Image();
     smokeImage.src = "/games/common/particles/smoke.png";
-    ctx.imageSmoothing = false;
+//    ctx.imageSmoothing = false;
     return smokeImage;
-
-
 }
 
 function reRollColour() {
@@ -257,4 +235,4 @@ function reRollColour() {
 
 const smokeImage = init();
 
-let EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 8);
+let EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 12);

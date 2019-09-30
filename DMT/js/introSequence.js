@@ -10,11 +10,10 @@ let IntroSequence = {
     debugging: false,
     aniscale: 6.01,
     gradientfader: 0,
-//    colorA: 'black',
     colorA: 'rgba(0,0,0,0.2)',
     colorB: 'blue',
     colorC: 'skyblue',
-//    colorC: 'rgba(0,0,0,0)',
+    //    colorC: 'rgba(0,0,0,0)',
     loadAudio: function () {
         IntroSequence.aDMT = new Audio('audio/DMT.mp3');
         IntroSequence.aDMT.addEventListener('loadeddata', () => {
@@ -22,9 +21,6 @@ let IntroSequence = {
                 console.log('I have loaded aDMT');
             }
         })
-
-
-
         IntroSequence.introMusic = new Audio('audio/introtune.mp3');
 
         IntroSequence.introMusic.addEventListener('loadeddata', () => {
@@ -32,13 +28,6 @@ let IntroSequence = {
                 console.log('I have loaded introMusic');
             }
         })
-
-
-
-        //        IntroSequence.introMusic.load();
-        //        IntroSequence.aDMT.load();
-
-
     },
     loadSignature: function () {
         function loadImage(path) {
@@ -54,11 +43,10 @@ let IntroSequence = {
             image.src = path;
             return image;
         }
-        //        return loadImage("img/housevan.png");
         return loadImage("img/alphahouse.png");
     },
     zoomOutSignature: function () {
-
+        // This one matters::
         ctx.imageSmoothingEnabled = true;
         EMIT.tick();
 
@@ -92,8 +80,6 @@ let IntroSequence = {
     },
     zoomOutCleanUp: function () {
 
-
-
         if (IntroSequence.gradientfader >= 1) {
             IntroSequence.gradientfader = 1;
         } else {
@@ -112,31 +98,21 @@ let IntroSequence = {
             if (IntroSequence.debugging) {
                 console.log('[2][done] - zoomOutCleanUp');
             }
-            //            setTimeout(IntroSequence.FadeInWorldView, 500);
             IntroSequence.FadeInWorldView();
         } else {
-
             requestAnimationFrame(IntroSequence.zoomOutCleanUp);
         }
     },
     FadeInWorldView: function () {
-
         let fadesteps = 12;
 
         function doit() {
-            
             fadesteps--;
             ctx.globalAlpha = 1;
-
             background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
-
-
-//            ctx.drawImage(IntroSequence.outsideview, 0, 0, 640, 2000);
-//            ctx.globalAlpha = 1;
+            EMIT.setWind(1);
             EMIT.tick();
 
-
-            //            ctx.globalAlpha = 1;
             IntroSequence.centerDraw(IntroSequence.signature, 1);
             if (fadesteps <= 0) {
                 if (IntroSequence.debugging) {
@@ -147,7 +123,6 @@ let IntroSequence = {
                 requestAnimationFrame(doit);
             }
         }
-//        let alphaknob = 0; // ALL THIS CAN BE REMOVED
         doit();
     },
     PanDownOutsides: function () {
@@ -155,31 +130,22 @@ let IntroSequence = {
         let sigstep = 0;
         ctx.globalAlpha = 1;
 
-      
-        
         function doPan() {
 
             steps += 0.4;
             sigstep += 0.15;
             ctx.globalAlpha = 1;
             background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
-            //            background(gradientV('red', 'blue', 'skyblue')); //draw BG
 
             EMIT.tick();
-            EMIT.setWind(1);
+            EMIT.setWind(1.5);
             EMIT.isOn = false;
 
             IntroSequence.centerDrawRiser(IntroSequence.signature, 1, sigstep); //draw SIG
 
-
-
             knobtree += 0.005;
             ctx.globalAlpha = knobtree.toFixed(1);
-            
             ctx.drawImage(IntroSequence.outsideview, 0, -400 - steps, 640, 1000); //draw SET
-
-
-
 
             if (steps > 0) {
                 if (IntroSequence.debugging) {
@@ -229,10 +195,6 @@ let IntroSequence = {
         IntroSequence.loadAudio();
         IntroSequence.signature = IntroSequence.loadSignature();
         IntroSequence.outsideview = IntroSequence.loadOutsides();
-
-        //        IntroSequence.introMusic.play();
-        //trying to insert noise::
-
     },
     start: function () {
         IntroSequence.introMusic.play();
@@ -244,13 +206,9 @@ let IntroSequence = {
     },
 
 }
+
 IntroSequence.init();
 
-
-
 //  Signature Fade out needed on start Game Trigger.
-
-
-
-//writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');
+//  writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');
 writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');
