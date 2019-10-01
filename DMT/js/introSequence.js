@@ -82,6 +82,9 @@ let IntroSequence = {
     },
     zoomOutCleanUp: function () {
 
+        //garbagecleanup
+        IntroSequence.zoomOutSignature = undefined;
+        
         if (IntroSequence.gradientfader >= 1) {
             IntroSequence.gradientfader = 1;
         } else {
@@ -106,6 +109,10 @@ let IntroSequence = {
         }
     },
     FadeInWorldView: function () {
+        
+        //garbagecleanup
+        IntroSequence.zoomOutCleanUp = undefined;
+        
         let fadesteps = 12;
 
         function doit() {
@@ -128,6 +135,10 @@ let IntroSequence = {
         doit();
     },
     PanDownOutsides: function () {
+        
+        //garbagecleanup
+        IntroSequence.FadeInWorldView = undefined;
+        
         let steps = -400;
         let sigstep = 0;
         ctx.globalAlpha = 1;
@@ -292,7 +303,7 @@ let IntroSequence = {
         setTimeout(function () {
             hasStarted = true;
             console.log('timeoutended - loop killed');
-        }, 25000)
+        }, 65000)
         portchloop();
 
     },
