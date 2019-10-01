@@ -24,18 +24,60 @@ class SmokeEmitter {
         this.puffcount = 0;
         this.emitRate = 1;
         this.wind = 0;
+        this.windy = 0;
 
+        this.alphaDecay = 0.001;
+        this.sFadePoint = 0.4;
+        this.scalerate = 0.1;
+    }
 
+    reinit() {
+        this.emitted = [];
+        this.emit(this.amount);
+        this.setalphaDecay();
+        this.setsFadePoint();
+        this.setscalerate();
+        this.setWind(this.wind, this.windy);
+        return this;
+    }
+
+    syncData() {
+        this.setalphaDecay();
+        this.setsFadePoint();
+        this.setscalerate();
+        this.setWind(this.wind, this.windy);
+    }
+
+    setalphaDecay(val = this.alphaDecay) {
+        this.alphaDecay = val;
+        for (let i = 0; i < this.emitted.length; i++) {
+            this.emitted[i].alphaDecay = this.alphaDecay;
+        }
+    }
+    setsFadePoint(val = this.sFadePoint) {
+        this.sFadePoint = val;
+        for (let i = 0; i < this.emitted.length; i++) {
+            this.emitted[i].sFadePoint = this.sFadePoint;
+        }
+    }
+
+    setscalerate(val = this.scalerate) {
+        this.scalerate = val;
+        for (let i = 0; i < this.emitted.length; i++) {
+            this.emitted[i].scalerate = this.scalerate;
+        }
     }
 
     resetWind() {
         this.setWind();
     }
 
-    setWind(val = 0) {
-        this.wind = val;
+    setWind(valx = 0, valy = 0) {
+        this.wind = valx;
+        this.windy = valy
         for (let i = 0; i < this.emitted.length; i++) {
             this.emitted[i].wind = this.wind;
+            this.emitted[i].windy = this.windy;
         }
     }
 
@@ -54,6 +96,9 @@ class SmokeEmitter {
     }
 
     doCalculations() {
+        
+        this.syncData();
+        
         this.framecount++;
         if (this.framecount > 100) {
             this.framecount = 1;
@@ -111,6 +156,7 @@ class Smoke {
         this.scalerate = 0.3;
         this.isDead = false;
         this.wind = 0;
+        this.windy = 0;
         // this.tintColor = random_hexColor();
         // this.tintColor = '#22f0f0';
         // this.tintColor = tmpcol;
@@ -119,8 +165,11 @@ class Smoke {
     }
 
     calculateSelf() {
+
         this.x += this.wind;
         this.x += this.vx;
+
+        this.y += this.windy;
         this.y += this.vy;
         this.s += this.scalerate;
 
@@ -222,10 +271,10 @@ function random_bool() {
     return Math.random() >= 0.5;
 }
 
-function init() {
+function initsmokeImage() {
     const smokeImage = new Image();
     smokeImage.src = "/games/common/particles/smoke.png";
-//    ctx.imageSmoothing = false;
+    //    ctx.imageSmoothing = false;
     return smokeImage;
 }
 
@@ -233,6 +282,4 @@ function reRollColour() {
     tmpcol = random_hexColor();
 }
 
-const smokeImage = init();
-
-let EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 12);
+const smokeImage = initsmokeImage();
