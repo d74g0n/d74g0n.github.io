@@ -50,7 +50,7 @@ function superdrawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
     ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 }
 
-function roundRect(ctx = ctx, x, y, width, height, radius, fill, stroke) {
+function roundRect(ctx = ctx, x, y, width, height, radius, fill=true, stroke) {
     if (typeof stroke == 'undefined') {
         stroke = true;
     }
@@ -75,6 +75,7 @@ function roundRect(ctx = ctx, x, y, width, height, radius, fill, stroke) {
             radius[side] = radius[side] || defaultRadius[side];
         }
     }
+    ctx.save();
     ctx.beginPath();
     ctx.moveTo(x + radius.tl, y);
     ctx.lineTo(x + width - radius.tr, y);
@@ -93,6 +94,8 @@ function roundRect(ctx = ctx, x, y, width, height, radius, fill, stroke) {
         ctx.stroke();
     }
 
+    ctx.restore();
+    
 }
 
 function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = `monospace`, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {

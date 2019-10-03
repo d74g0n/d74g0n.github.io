@@ -203,6 +203,9 @@ class Smoke {
     }
 
     drawSelf() {
+        
+         ctx.resetTransform();
+        
         if (this.isTinted) {
             this.drawTinted();
         } else {

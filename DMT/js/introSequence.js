@@ -1,13 +1,9 @@
-// needs audio now:
-canvas.onclick = function () {
-    IntroSequence.start();
-    canvas.onclick = undefined; // so it don't start more than once!
-}
-
-
 let IntroSequence = {
     aDMT: undefined,
     introMusic: undefined,
+    music01: undefined,
+    sfxUnlatch: undefined,
+    sfxDoorclose: undefined,
     debugging: false,
     aniscale: 6.01,
     gradientfader: 0,
@@ -29,6 +25,30 @@ let IntroSequence = {
             IntroSequence.introMusic.volume = 0.6;
             if (IntroSequence.debugging) {
                 console.log('I have loaded introMusic');
+            }
+        })
+        IntroSequence.sfxUnlatch = new Audio('audio/dlatch.mp3');
+
+        IntroSequence.sfxUnlatch.addEventListener('loadeddata', () => {
+            IntroSequence.sfxUnlatch.volume = 0.8;
+            if (IntroSequence.debugging) {
+                console.log('I have loaded sfxUnlatch');
+            }
+        })
+        IntroSequence.sfxDoorclose = new Audio('audio/dclose.mp3');
+
+        IntroSequence.sfxDoorclose.addEventListener('loadeddata', () => {
+            IntroSequence.sfxDoorclose.volume = 0.8;
+            if (IntroSequence.debugging) {
+                console.log('I have loaded sfxDoorclose');
+            }
+        })
+        IntroSequence.music01 = new Audio('music/01.mp3');
+
+        IntroSequence.music01.addEventListener('loadeddata', () => {
+            IntroSequence.music01.volume = 0.8;
+            if (IntroSequence.debugging) {
+                console.log('I have loaded music01');
             }
         })
     },
@@ -175,7 +195,7 @@ let IntroSequence = {
             steps += 0.4;
             sigstep += 0.15;
             ctx.globalAlpha = 1;
-//            ctx.imageSmoothingEnabled = false;
+            //            ctx.imageSmoothingEnabled = false;
             background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
             EMIT.tick();
             EMIT.setWind(1.5);
@@ -252,7 +272,7 @@ let IntroSequence = {
 
         let left = cx - ix;
         let top = cy - iy;
-//        ctx.globalAlpha = 1;
+        //        ctx.globalAlpha = 1;
         ctx.drawImage(image, left, top - yoffset, image.width * s, image.height * s);
     },
     init: function () {
@@ -261,14 +281,19 @@ let IntroSequence = {
         IntroSequence.outsideview = IntroSequence.loadOutsides();
         IntroSequence.outsideFG = IntroSequence.loadOutsideFG();
         IntroSequence.book = IntroSequence.loadPlayer();
+        canvas.onclick = function () {
+            IntroSequence.start();
+            //    canvas.onclick = undefined; // so it don't start more than once!
+            canvas.onclick = null; // so it don't start more than once!
+        }
+        writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'red', 'bottom', 'center');
     },
+    hasStarted: false,
     start: function () {
         IntroSequence.introMusic.play();
 
         // debugging: skipahead:
-        //                IntroSequence.portchbegin();
-
-
+        //        IntroSequence.portchbegin();
         //        EMIT.isOn = false;
         //        ctx.GlobalAlpha = 1;
         //        ctx.imageSmoothingEnabled = true;
@@ -281,8 +306,13 @@ let IntroSequence = {
         console.log(`[5][complete] - INTROSEQUENCE COMPLETE`);
         //        console.log(`[5b][complete] - CLEAN UP IntroSequence Object`);
 
-
-
+        IntroSequence.introMusic.pause();
+        background('black');
+        IntroSequence.sfxDoorclose.play();
+        setTimeout(function(){
+        IntroSequence.music01.play();    
+        },1000);
+        
         //        IntroSequence.portchbegin();
 
     },
@@ -292,17 +322,43 @@ let IntroSequence = {
 
         cS.On();
 
+        let doorState = {
+            frame: 0,
+        }
+
         function drawSet() {
 
             ctx.save();
             ctx.globalAlpha = 1;
             background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
-            ctx.restore();
-            ctx.save();
             IntroSequence.centerDrawRiser(IntroSequence.signature, 1, 150); //draw SIG
-            ctx.restore();
-            ctx.save();
             ctx.drawImage(IntroSequence.outsideview, 0, -400, 640, 1000);
+
+            function drawOpendoor() {
+
+                doorState.frame++;
+
+                if (doorState.frame == 1) {
+                    IntroSequence.sfxUnlatch.play();
+                }
+
+                ctx.save();
+                ctx.fillStyle = 'black';
+                ctx.beginPath();
+                ctx.rect(
+                    271,
+                    334,
+                    24,
+                    66);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+
+            if (cS.DoorAni) {
+                drawOpendoor();
+            }
+
             ctx.drawImage(IntroSequence.book, canvas.width / 2 - 20 + portchBook.x, canvas.height - 110 + portchBook.y, -45, 45);
             ctx.drawImage(IntroSequence.outsideFG, 232, 290, 200, 150);
             EMIT.tick();
@@ -315,24 +371,16 @@ let IntroSequence = {
         }
         //init controller?
         function portchloop() {
-//            ctx.save();
             portchBook.tick(); //process control forces
-//            ctx.restore();
             drawSet();
-            if (!hasStarted) {
+            if (!IntroSequence.hasStarted) {
                 requestAnimationFrame(portchloop);
             } else {
                 console.log('portchloop hasended');
                 IntroSequence.finished();
             }
         }
-        // TEMP SOLUTION UNTIL CONTROLLER BOUND>
-        let hasStarted = false;
-        //timeoutKills hitstartanimationloop.
-        setTimeout(function () {
-            hasStarted = true;
-            console.log('timeoutended - loop killed');
-        }, 65000);
+
         IntroSequence.tweakEmitterDataA();
         portchloop();
     },
@@ -340,4 +388,3 @@ let IntroSequence = {
 
 IntroSequence.init();
 const EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 12);
-writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'red', 'bottom', 'center');

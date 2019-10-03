@@ -15,24 +15,18 @@ class TextBubbles {
     }
 
     tick() {
-        //        ctx.save();
         this.textbubble(this.msg, this.x, this.y, `DOWN`);
-        //        ctx.restore();
     }
 
     say(msg = this.msg, x = this.x, y = this.y) {
         this.msg = msg;
         this.x = x;
         this.y = y;
-
-        //        ctx.save();
         this.textbubble(this.msg, this.x, this.y, `DOWN`);
-        //        ctx.restore();
     }
 
     writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = `monospace`, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {
-
-                ctx.save();
+        ctx.save();
         ctx.imageSmoothingEnabled = false;
         ctx.fillStyle = fillStyle;
         ctx.strokeStyle = strokeStyle;
@@ -41,8 +35,8 @@ class TextBubbles {
         ctx.textBaseline = textBaseline;
         ctx.fillText(string, scaleX, scaleY);
         ctx.strokeText(string, scaleX, scaleY);
-                ctx.restore();
-        // REMEMBER SHADOWING?
+        // SHADOWING?
+        ctx.restore();
     }
 
     textbubble(msg = '01234567891', x = 217, y = 180, direction = `DOWN`) {
@@ -71,21 +65,13 @@ class TextBubbles {
         }
         ctx.imageSmoothingEnabled = false;
         ctx.imageSmoothing = false;
-        //        ctx.save();        
         setColor(`white`);
         setStrokeColor('black');
         ctx.lineWidth = 2;
+        ctx.save();
         roundRect(ctx, x, y, w, bub.h, 8, 'white', 'black');
-        //        ctx.restore();
-
-        //        ctx.save();
-        //        ctx.imageSmoothingEnabled = false;
-        //        ctx.imageSmoothing = false;
+        ctx.restore();
         superdrawImage(this.image, 0, 0, this.image.width, this.image.height, x + 4, y + bub.h - 2, this.image.width * 2, this.image.height * 2);
-
-        //        ctx.restore();
-        //        ctx.imageSmoothingEnabled = true;
-
     }
 
     loadImage(path) {
