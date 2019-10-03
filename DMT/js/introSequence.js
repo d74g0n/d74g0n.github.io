@@ -4,6 +4,7 @@ let IntroSequence = {
     music01: undefined,
     sfxUnlatch: undefined,
     sfxDoorclose: undefined,
+    dn_full: undefined,
     debugging: false,
     aniscale: 6.01,
     gradientfader: 0,
@@ -49,6 +50,14 @@ let IntroSequence = {
             IntroSequence.music01.volume = 0.8;
             if (IntroSequence.debugging) {
                 console.log('I have loaded music01');
+            }
+        })
+        IntroSequence.dn_full = new Audio('audio/dn_full.mp3');
+
+        IntroSequence.dn_full.addEventListener('loadeddata', () => {
+            IntroSequence.dn_full.volume = 0.8;
+            if (IntroSequence.debugging) {
+                console.log('I have loaded dn_full');
             }
         })
     },
@@ -311,8 +320,17 @@ let IntroSequence = {
         IntroSequence.sfxDoorclose.play();
         setTimeout(function(){
         IntroSequence.music01.play();    
+         writeText('Your Mom Gay', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'pink', 'bottom', 'center');
+   
         },1000);
         
+        setTimeout(function(){
+         IntroSequence.dn_full.play();  
+   
+        },1500);
+        
+        
+//             IntroSequence.dn_full.play();  
         //        IntroSequence.portchbegin();
 
     },
