@@ -177,21 +177,6 @@ let IntroSequence = {
         EMIT.reinit();
         EMIT.isOn = true;
     },
-    tweakEmitterDataB: function () {
-        // portch smoking effect::
-        //unsused::
-        EMIT.x = canvas.width / 2 - 32;
-        EMIT.y = canvas.height - 100;
-        EMIT.emitRate = 6;
-        EMIT.setWind(1, -2);
-        EMIT.amount = 2;
-        EMIT.setsFadePoint(0.05);
-        EMIT.setalphaDecay(0.005);
-        EMIT.setscalerate(0.05);
-        EMIT.reinit();
-        EMIT.isOn = true;
-        EMIT.takepuff();
-    },
     PanDownOutsides: function () {
         //garbagecleanup
         IntroSequence.FadeInWorldView = undefined;
