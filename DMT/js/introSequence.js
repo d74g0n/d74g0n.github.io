@@ -4,6 +4,7 @@ canvas.onclick = function () {
     canvas.onclick = undefined; // so it don't start more than once!
 }
 
+
 let IntroSequence = {
     aDMT: undefined,
     introMusic: undefined,
@@ -13,6 +14,7 @@ let IntroSequence = {
     colorA: 'rgba(0,0,0,0.2)',
     colorB: 'blue',
     colorC: 'skyblue',
+    messaging: function () {}, // need some messaging toggles for fades etc.
     loadAudio: function () {
         IntroSequence.aDMT = new Audio('audio/DMT.mp3');
         IntroSequence.aDMT.addEventListener('loadeddata', () => {
@@ -84,7 +86,7 @@ let IntroSequence = {
 
         //garbagecleanup
         IntroSequence.zoomOutSignature = undefined;
-        
+
         if (IntroSequence.gradientfader >= 1) {
             IntroSequence.gradientfader = 1;
         } else {
@@ -109,10 +111,10 @@ let IntroSequence = {
         }
     },
     FadeInWorldView: function () {
-        
+
         //garbagecleanup
         IntroSequence.zoomOutCleanUp = undefined;
-        
+
         let fadesteps = 12;
 
         function doit() {
@@ -134,25 +136,49 @@ let IntroSequence = {
         }
         doit();
     },
+    tweakEmitterDataA: function () {
+        // portch smoking effect::
+        EMIT.x = canvas.width / 2 - 22;
+        EMIT.emitRate = 16;
+        EMIT.setWind(1.9, -1.5);
+        EMIT.amount = 4;
+        EMIT.setsFadePoint(0.005);
+        EMIT.setalphaDecay(0.01);
+        EMIT.setscalerate(0.1);
+        EMIT.reinit();
+        EMIT.isOn = true;
+    },
+    tweakEmitterDataB: function () {
+        // portch smoking effect::
+        //unsused::
+        EMIT.x = canvas.width / 2 - 32;
+        EMIT.y = canvas.height - 100;
+        EMIT.emitRate = 6;
+        EMIT.setWind(1, -2);
+        EMIT.amount = 2;
+        EMIT.setsFadePoint(0.05);
+        EMIT.setalphaDecay(0.005);
+        EMIT.setscalerate(0.05);
+        EMIT.reinit();
+        EMIT.isOn = true;
+        EMIT.takepuff();
+    },
     PanDownOutsides: function () {
-        
         //garbagecleanup
         IntroSequence.FadeInWorldView = undefined;
-        
+
         let steps = -400;
         let sigstep = 0;
         ctx.globalAlpha = 1;
-
 
         function doPan() {
             steps += 0.4;
             sigstep += 0.15;
             ctx.globalAlpha = 1;
+//            ctx.imageSmoothingEnabled = false;
             background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
-
             EMIT.tick();
             EMIT.setWind(1.5);
-            EMIT.isOn = false;
 
             if (sigstep > 150) {
                 sigstep = 150;
@@ -160,31 +186,39 @@ let IntroSequence = {
             IntroSequence.centerDrawRiser(IntroSequence.signature, 1, sigstep); //draw SIG
 
             knobtree += 0.005;
+            ctx.save();
             ctx.globalAlpha = knobtree.toFixed(1);
             ctx.drawImage(IntroSequence.outsideview, 0, -400 - steps, 640, 1000); //draw SET
+            ctx.restore();
 
-            //fun to watch:
-            //            ctx.drawImage(IntroSequence.book, ((canvas.width/2)-20), (canvas.height - 110), -45, 45);
-            //            ctx.drawImage(IntroSequence.outsideFG, 232, 290, 200, 150);
-
-            if (sigstep >= 130) {
-
-                ctx.save();
-                ctx.globalAlpha = 1;
-                EMIT.tick();
-                ctx.restore();
-
-            }
-
+            ctx.save();
+            ctx.globalAlpha = 1;
             ctx.drawImage(IntroSequence.book, ((canvas.width / 2) - 20), (canvas.height - 110) - steps, -45, 45);
             ctx.drawImage(IntroSequence.outsideFG, 232, 290 - steps, 200, 150);
+            ctx.restore();
+
+            if (sigstep > 120 && sigstep < 122) {
+                IntroSequence.tweakEmitterDataA();
+                EMIT.y = (canvas.height - 100) - steps;
+                EMIT.amount = 12;
+                EMIT.isOn = true;
+                EMIT.emitRate = 16;
+                EMIT.setWind(1.9, -1.5);
+            }
+
+            if (sigstep >= 122) {
+                EMIT.setWind(1.9, -1.5);
+                ctx.save();
+                ctx.globalAlpha = 1;
+                EMIT.y = canvas.height - 100 - steps;
+                EMIT.tick();
+                ctx.restore();
+            }
 
             if (steps > 0) {
                 if (IntroSequence.debugging) {
-
                     console.log('[4][done] - PanDownOutsides');
                 }
-
                 IntroSequence.portchbegin();
             } else {
                 requestAnimationFrame(doPan);
@@ -218,11 +252,7 @@ let IntroSequence = {
 
         let left = cx - ix;
         let top = cy - iy;
-        ctx.fillStyle = "rgba(0,0,0,0.1)";
-        ctx.globalAlpha = 0.8;
-        ctx.rect(left, top - yoffset, image.width * s, image.height * s);
-        ctx.fill();
-        ctx.globalAlpha = 1;
+//        ctx.globalAlpha = 1;
         ctx.drawImage(image, left, top - yoffset, image.width * s, image.height * s);
     },
     init: function () {
@@ -235,9 +265,14 @@ let IntroSequence = {
     start: function () {
         IntroSequence.introMusic.play();
 
-
         // debugging: skipahead:
-        //        IntroSequence.portchbegin();
+        //                IntroSequence.portchbegin();
+
+
+        //        EMIT.isOn = false;
+        //        ctx.GlobalAlpha = 1;
+        //        ctx.imageSmoothingEnabled = true;
+        //        IntroSequence.PanDownOutsides();
 
         //TRUESTART::
         IntroSequence.zoomOutSignature();
@@ -248,46 +283,42 @@ let IntroSequence = {
 
 
 
-//        IntroSequence.portchbegin();
+        //        IntroSequence.portchbegin();
 
     },
     portchbegin: function () {
         console.log(`[6][portchbegin] - portchbegin]`);
         ctx.imageSmoothingEnabled = true;
 
-        function prepEmitterData() {
-
-
-            // portch smoking effect::
-            EMIT.x = canvas.width / 2 - 32;
-            EMIT.y = canvas.height - 100;
-            EMIT.emitRate = 6;
-            EMIT.setWind(1, -2);
-            EMIT.amount = 2;
-            EMIT.setsFadePoint(0.05);
-            EMIT.setalphaDecay(0.005);
-            EMIT.setscalerate(0.05);
-            EMIT.reinit();
-            EMIT.isOn = true;
-
-        }
+        cS.On();
 
         function drawSet() {
+
             ctx.save();
             ctx.globalAlpha = 1;
             background(gradientV(IntroSequence.colorA, IntroSequence.colorB, IntroSequence.colorC));
+            ctx.restore();
+            ctx.save();
             IntroSequence.centerDrawRiser(IntroSequence.signature, 1, 150); //draw SIG
+            ctx.restore();
+            ctx.save();
             ctx.drawImage(IntroSequence.outsideview, 0, -400, 640, 1000);
-            ctx.drawImage(IntroSequence.book, canvas.width / 2 - 20, canvas.height - 110, -45, 45);
+            ctx.drawImage(IntroSequence.book, canvas.width / 2 - 20 + portchBook.x, canvas.height - 110 + portchBook.y, -45, 45);
             ctx.drawImage(IntroSequence.outsideFG, 232, 290, 200, 150);
             EMIT.tick();
             ctx.restore();
+            if (portchBook.x > 62) {
+                ctx.save();
+                TB.say(`No Need to go that way`, canvas.width / 2 - 20 + portchBook.x, canvas.height - 132 + portchBook.y);
+                ctx.restore();
+            }
         }
         //init controller?
-
         function portchloop() {
+//            ctx.save();
+            portchBook.tick(); //process control forces
+//            ctx.restore();
             drawSet();
-
             if (!hasStarted) {
                 requestAnimationFrame(portchloop);
             } else {
@@ -295,24 +326,18 @@ let IntroSequence = {
                 IntroSequence.finished();
             }
         }
-
+        // TEMP SOLUTION UNTIL CONTROLLER BOUND>
         let hasStarted = false;
-
-        prepEmitterData();
-
+        //timeoutKills hitstartanimationloop.
         setTimeout(function () {
             hasStarted = true;
             console.log('timeoutended - loop killed');
-        }, 65000)
+        }, 65000);
+        IntroSequence.tweakEmitterDataA();
         portchloop();
-
     },
-
 }
 
 IntroSequence.init();
 const EMIT = new SmokeEmitter(canvas.width / 2, canvas.height / 2, 12);
-//  Signature Fade out needed on start Game Trigger.
-//  writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');
-//writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'lime', 'bottom', 'center');
 writeText('click to start', canvas.width / 2, canvas.height / 2, '48px monospace', 'black', 'red', 'bottom', 'center');

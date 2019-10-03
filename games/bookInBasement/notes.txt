@@ -4,7 +4,8 @@ Make Sets into object.  obj.draw();
 Set includes its own floormap.
 
 
-
+bonus: Forensic Files: S2 e13
+'explained by a garbage bag, 2 other times' quote taken literally.
 
 
 

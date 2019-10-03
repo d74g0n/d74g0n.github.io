@@ -206,7 +206,7 @@ class Smoke {
         if (this.isTinted) {
             this.drawTinted();
         } else {
-            ctx.imageSmoothing = true;
+
 
             if (this.isTinted) {
                 ctx.globalAlpha = this.alpha / 2;
@@ -217,6 +217,7 @@ class Smoke {
                 ctx.globalAlpha = 0.1;
             }
             ctx.save();
+            ctx.imageSmoothingEnabled = true;         
             ctx.translate(this.x, this.y);
             ctx.rotate(this.r);
             ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height,
@@ -238,8 +239,10 @@ class Smoke {
     }
 
     tick() {
+        ctx.save();
         this.calculateSelf();
         this.drawSelf();
+        ctx.restore();
     }
 
     tintImage(img, tint = random_hexColor()) {
