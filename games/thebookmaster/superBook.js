@@ -176,7 +176,7 @@ function loopdraw() {
         rval -= 15;
     }
     ctx.save();
-      smokedraw();
+//      smokedraw();
     ctx.restore();
     requestAnimationFrame(loopdraw);
 }

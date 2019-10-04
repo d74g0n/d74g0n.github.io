@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DMT</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="I AM d74g0n!">
+    <meta name="keywords" content="d74g0n">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <meta property="og:image" content="index.png">
+    <meta name="twitter:image" content="index.png">
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
+
+    <style>
+        @font-face {
+            font-family: '8bitO';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+        
+
+
+        * {
+            font-family: '8bitO';
+        }
+
+
+
+        body {
+            background: black;
+            color: white;
+        }
+
+        canvas {
+            border 2px solid gold;
+
+/*
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+*/
+
+            /*
+            width: 1280px;
+            height: 960px;
+            
+            
+*/
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="mainscreen"></canvas>
+
+        <script>
+            const canvas = document.getElementById("mainscreen");
+            const ctx = canvas.getContext("2d");
+            canvas.width = 640;
+            canvas.height = 480;
+            ctx.imageSmoothingEnabled = false;
+        </script>
+
+
+<!--
+part One INTRO:
+        <script src="/games/common/drawing.js"></script>
+        <script src="js/SmokeEmitter.js"></script>
+        <script src="js/introSequence.js"></script>
+        <script src="js/introController.js"></script>
+        <script src="class/TextBubbles.js"></script>
+-->
+
+        <script src="js/bookCreation.js"></script>
+        
+        
+
+    </center>
+</body></html>
