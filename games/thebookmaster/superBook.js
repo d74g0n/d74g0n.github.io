@@ -1,10 +1,5 @@
 let counter = 0;
 
-
-
-
-
-
 class SuperBook {
     constructor(id = 'SuperBook', image, x, y, z, ) {
         this.id = id;
@@ -29,6 +24,10 @@ class SuperBook {
         this.vx = 0;
         this.vy = 0;
         this.vz = 0;
+
+        this.bools = {
+            isShrinking: false,
+        };
 
         this.friction = 0.9;
 
@@ -67,8 +66,8 @@ class SuperBook {
     }
 
     BoundLimits() {
-        if (this.s > 10) {
-            this.s = 0.05;
+        if (this.s > 20 || this.s < 0.1) {
+            this.bools.isShrinking = !this.bools.isShrinking;
         }
         if (this.r > 360) {
             this.r -= 360;
@@ -101,10 +100,9 @@ class SuperBook {
     drawSelf() {
 
         ctx.save();
+        //manual canvas rotate
         ctx.translate(canvas.width / 2, canvas.height / 2);
-        //        justRotate(-this.r);
-        justRotate(-this.r * 2);
-        //        centerDraw(sun,10);
+        rotateCanvas(-this.r * 1.2);
         ctx.globalAlpha = 0.5;
         superdrawImage(sun, 0, 0, sun.width, sun.height, -sun.width * 10 / 2, -sun.height * 10 / 2, sun.width * 10, sun.height * 10);
         ctx.restore();
@@ -112,8 +110,11 @@ class SuperBook {
         ctx.save();
         //        background('pink'); //TEMPORARY.
 
-        this.s += 0.05;
-
+        if (this.bools.isShrinking) {
+            this.s -= 0.15;
+        } else {
+            this.s += 0.15;
+        }
         drawImageRotated(this.image, this.x, this.y, this.s, this.r);
 
 
@@ -166,7 +167,7 @@ function loopdraw() {
     background('black');
 
 
-      
+
 
     Tester.tick();
     ctx.save();
@@ -176,7 +177,7 @@ function loopdraw() {
         rval -= 15;
     }
     ctx.save();
-//      smokedraw();
+    //      smokedraw();
     ctx.restore();
     requestAnimationFrame(loopdraw);
 }

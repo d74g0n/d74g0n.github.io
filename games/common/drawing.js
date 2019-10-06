@@ -14,6 +14,10 @@ function drawImageRotated(image, x, y, s, r) {
     ctx.drawImage(image, 0, 0, image.width, image.height, (-scaledw / 2), (-scaledh / 2), scaledw, scaledh);
 }
 
+function rotateCanvas(r=0){
+    return justRotate(r);
+}
+
 function justRotate(r=0){
         return ctx.rotate(r * Math.PI / 180);
 }
@@ -152,7 +156,11 @@ function strokeSquare(x, y, scale) {
 
 function strokeRect(x, y, w, h) {
     ctx.strokeRect(x, y, w, h);
-    //    ctx.stroke();
+        ctx.stroke();
+}
+
+function fillRect(x,y,w,h){
+     return drawRect(x, y, w, h);
 }
 
 function drawRect(x, y, w, h) {

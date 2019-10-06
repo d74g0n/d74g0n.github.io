@@ -10,11 +10,17 @@ let characterGenerator = {
         images: {},
         sfx: {},
         music: {},
+        preload: function(){
+            
+        },
     },
     cookies: {
         //un
         read: function () {},
         write: function (data) {},
+        preload: function(){
+            
+        },
     },
     start: function () {
         console.log(`[chargen.start]`);
