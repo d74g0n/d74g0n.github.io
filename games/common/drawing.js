@@ -160,7 +160,8 @@ function strokeRect(x, y, w, h) {
 }
 
 function fillRect(x,y,w,h){
-     return drawRect(x, y, w, h);
+    return ctx.fillRect(x, y, w, h);
+//     return drawRect(x, y, w, h);
 }
 
 function drawRect(x, y, w, h) {
