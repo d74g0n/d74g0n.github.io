@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>DMT</title>
+    <title>Make Blue</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
     <meta name="description" content="I AM d74g0n!">
     <meta name="keywords" content="d74g0n">
@@ -94,8 +94,6 @@
                 }
             }
 
-
-
             let _Puzzle = {
                 size: {
                     x: 3,
@@ -133,11 +131,11 @@
                     console.log(_Puzzle.grid);
                 },
                 style: {
-                    fill: 'skyblue',
-                    stroke: 'grey',
+                    fill: '#DD7744',
+                    stroke: 'white',
                     background: 'black',
-                    inverted: 'red',
-                    invertedf: 'brown',
+                    inverted: '#DD7744',
+                    invertedf: 'rgba(0,44,44,0.9)',
                 },
                 grid: [],
                 hasWON: false,
@@ -147,7 +145,7 @@
                     let centX = canvas.width / 2;
                     let centY = canvas.height / 2;
                     if (_Puzzle.hasWON) {
-                        background('gold');
+                        background('rgba(0,44,44,0.9)');
                         _Puzzle.round++;
                         writeText(`YOU WON!`, centX, centY - 64, font = `48px monospace`, fillStyle = 'red', strokeStyle = 'black', textBaseline = 'top', textAlign = 'center');
                     } else {
