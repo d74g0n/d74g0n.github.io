@@ -322,3 +322,15 @@ function fillGrass(x, y, m) {
 
 }
 console.log(`/g/c/drawing.js loaded`);
+
+
+function loadAudio(path) {
+        let newAudio = new Audio(path);
+        newAudio.addEventListener('loadeddata', () => {
+            newAudio.volume = 0.7;
+            console.log(`I have loaded ${path}`);
+        })
+    return newAudio;
+    };
+
+

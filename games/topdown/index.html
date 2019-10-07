@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Make Blue</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="I AM d74g0n!">
+    <meta name="keywords" content="d74g0n">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <meta property="og:image" content="index.png">
+    <meta name="twitter:image" content="index.png">
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
+
+    <style>
+        @font-face {
+            font-family: '8bitO';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        * {
+            font-family: '8bitO';
+        }
+
+        body {
+            background: black;
+            color: white;
+        }
+
+        4 canvas {
+            border 2px solid gold;
+        }
+
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="mainscreen"></canvas>
+
+        <script>
+            const canvas = document.getElementById("mainscreen");
+            const ctx = canvas.getContext("2d");
+            canvas.width = 1280;
+//            canvas.width = 640;
+//            canvas.height = 480;
+            canvas.height = 720;
+            ctx.imageSmoothingEnabled = false;
+
+        </script>
+        <script src="/games/common/drawing.js"></script>
+        <script src="tdhero.js"></script>
+        <script src="main.js"></script>
+        <script>
+     
+            
+            
+
+        </script>
+
+    </center>
+</body>
+
+</html>

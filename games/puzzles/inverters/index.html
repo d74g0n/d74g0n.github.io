@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Make Blue</title>
+    <title>Inverter</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
     <meta name="description" content="I AM d74g0n!">
     <meta name="keywords" content="d74g0n">
@@ -25,13 +25,23 @@
 
         body {
             background: black;
-            color: white;
+            /*            color: #00aeba;*/
         }
 
-        4 canvas {
+        canvas {
             border 2px solid gold;
         }
 
+        #solve {
+            color: #00aeba;
+            height: 4em;
+            overflow: hidden;
+            /*            height: 440px;*/
+        }
+
+        hr {
+            width: 200px;
+        }
     </style>
 </head>
 
@@ -39,6 +49,30 @@
     <center>
         <canvas id="mainscreen"></canvas>
 
+        <div id="solve">
+            <hr>
+            d74g0ns Solve Steps:
+            <hr><br>
+            a) turn on all corners
+            <br>
+            <br>
+            b1)-even edge count: (all off or 2 on/off)<br> click the 2 edges that are ON.
+            <br>
+            <br>
+            b2)-odd edge count: (1 or 3 edges ON)<br> click one of the ON edges <br> then return to step a.
+            <br>
+            <br>
+            c) solution could now be obvious: <br>
+
+            i) all corners only thing ON: click ON center. <br>
+            ii) only center OFF: click ON Center then 4 edges. <br>
+
+            iii) diagnal pattern exists: click the 2 OFF corners.<br>
+            iv) star pattern exists (double diagnal): click ON the 4 Edges.<br><br>
+            <hr>
+
+        </div>
+     <script src="/games/common/drawing.js"></script>
         <script>
             const canvas = document.getElementById("mainscreen");
             const ctx = canvas.getContext("2d");
@@ -46,8 +80,19 @@
             canvas.height = 480;
             ctx.imageSmoothingEnabled = false;
 
+            const winnoise = loadAudio('/DMT/audio/transit.mp3');
+            
+            const solver = document.getElementById("solve");
+            solver.onclick = function() {
+
+                if (solver.style.height = '4em') {
+                    solver.style.height = '440px';
+                } else {
+                    solver.style.height = '4em';
+                }
+            };
         </script>
-        <script src="/games/common/drawing.js"></script>
+   
         <script>
             class PuzzleSquare {
                 constructor(x, y, s) {
@@ -84,8 +129,9 @@
                         ctx.fillStyle = this.style.fill;
                         ctx.strokeStyle = this.style.stroke;
                     }
-                    fillRect(this.x - (this.s / 2), this.y - (this.s / 2), this.s, this.s);
-                    strokeRect(this.x - (this.s / 2) - this.linewidth / 2, this.y - (this.s / 2) - this.linewidth / 2, this.s + this.linewidth, this.s + this.linewidth);
+                    //                    fillRect(this.x - (this.s / 2), this.y - (this.s / 2), this.s, this.s);
+                    fillRect(this.x - (this.s / 1.5), this.y - (this.s / 2), this.s, this.s);
+                    strokeRect(this.x - (this.s / 1.5) - this.linewidth / 2, this.y - (this.s / 2) - this.linewidth / 2, this.s + this.linewidth, this.s + this.linewidth);
 
                 }
 
@@ -148,6 +194,7 @@
                         background('rgba(0,44,44,0.9)');
                         _Puzzle.round++;
                         writeText(`YOU WON!`, centX, centY - 64, font = `48px monospace`, fillStyle = 'red', strokeStyle = 'black', textBaseline = 'top', textAlign = 'center');
+                        winnoise.play();
                     } else {
                         _Puzzle.drawAll();
                     }
@@ -200,8 +247,6 @@
                 }
 
             }
-
-
 
             function checkClick(e) {
                 if (_Puzzle.hasWON) {
@@ -300,13 +345,9 @@
                 }
 
                 _Puzzle.grid[fy][fx].invertSelf();
-
                 _Puzzle.inverterLogic(fx, fy);
-
                 _Puzzle.checkWin();
                 console.log(`final answer:[${fx},${fy}]`);
-
-
                 drawPuzzleState();
             }
 
@@ -319,20 +360,12 @@
             }
 
             function drawPuzzleState() {
-
                 background('black');
                 _Puzzle.tick();
-
-
             }
 
-
-
             drawPuzzleState();
-
         </script>
 
     </center>
-</body>
-
-</html>
+</body></html>
