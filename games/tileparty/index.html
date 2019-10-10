@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spritesheet Tile Browser</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
+    <meta name="description" content="I AM d74g0n!">
+    <meta name="keywords" content="d74g0n">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <meta property="og:image" content="index.png">
+    <meta name="twitter:image" content="index.png">
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
+
+    <style>
+        @font-face {
+            font-family: '8bitO';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        * {
+            font-family: '8bitO';
+        }
+
+        body {
+            background: black;
+            /*            color: #00aeba;*/
+        }
+
+        canvas {
+            border: 2px solid gold;
+        }
+
+        #btns {
+            padding: 0;
+            margin: 0;
+            width: 100px;
+        }
+        
+        #coord{
+            color: gold;
+        }
+        
+        #solve {
+            color: #00aeba;
+            height: 4em;
+            overflow: hidden;
+            /*            height: 440px;*/
+        }
+
+        hr {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="mainscreen"></canvas>
+
+        <script src="/games/common/drawing.js"></script>
+        <script src="/games/common/_Math.js"></script>
+
+        <script>
+            const canvas = document.getElementById("mainscreen");
+            const ctx = canvas.getContext("2d");
+            //            canvas.height = 1080;
+            canvas.height = 512;
+            //            canvas.width = 1920;
+            canvas.width = 512;
+            ctx.imageSmoothingEnabled = false;
+
+            //            const winnoise = loadAudio('/DMT/audio/transit.mp3');
+
+
+            function bottonLogic(val) {
+                switch (val) {
+                    case `UP`:
+                        tilePicker.tY--;
+                        break;
+                    case `LEFT`:
+                        tilePicker.tX--;
+                        break;
+                    case `RIGHT`:
+                        tilePicker.tX++;
+                        break;
+                    case `DOWN`:
+                        tilePicker.tY++;
+                        break;
+                }
+
+                toggleIndex(); //draws and bounds
+//                console.log(`${val}worked`);
+            }
+        </script>
+        <script src="tilework.js"></script>
+        <br>
+        <button id="btns" onclick="bottonLogic(`UP`)">UP</button><br>
+        <button id="btns" onclick="bottonLogic(`LEFT`)">LEFT</button>
+        <span id='coord'>[ XX,YY ]</span>
+        <button id="btns" onclick="bottonLogic(`RIGHT`)">RIGHT</button><br>
+        <button id="btns" onclick="bottonLogic(`DOWN`)">DOWN</button>
+
+        <script>
+
+
+        </script>
+
+    </center>
+</body></html>

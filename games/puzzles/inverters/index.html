@@ -42,12 +42,14 @@
         hr {
             width: 200px;
         }
+
     </style>
 </head>
 
 <body>
     <center>
         <canvas id="mainscreen"></canvas>
+        <!--
 
         <div id="solve">
             <hr>
@@ -72,7 +74,8 @@
             <hr>
 
         </div>
-     <script src="/games/common/drawing.js"></script>
+-->
+        <script src="/games/common/drawing.js"></script>
         <script>
             const canvas = document.getElementById("mainscreen");
             const ctx = canvas.getContext("2d");
@@ -81,18 +84,19 @@
             ctx.imageSmoothingEnabled = false;
 
             const winnoise = loadAudio('/DMT/audio/transit.mp3');
-            
-            const solver = document.getElementById("solve");
-            solver.onclick = function() {
 
-                if (solver.style.height = '4em') {
-                    solver.style.height = '440px';
-                } else {
-                    solver.style.height = '4em';
-                }
-            };
+            //            const solver = document.getElementById("solve");
+            //            solver.onclick = function() {
+            //
+            //                if (solver.style.height = '4em') {
+            //                    solver.style.height = '440px';
+            //                } else {
+            //                    solver.style.height = '4em';
+            //                }
+            //            };
+
         </script>
-   
+
         <script>
             class PuzzleSquare {
                 constructor(x, y, s) {
@@ -205,7 +209,11 @@
                     ctx.save();
                     let centX = canvas.width / 2;
                     let centY = canvas.height / 2;
-                    ctx.translate(centX - _Puzzle.size.s * 1.5 - _Puzzle.size.padY, centY - _Puzzle.size.s * 1.5 - _Puzzle.size.padY);
+
+
+
+
+                    ctx.translate(centX - _Puzzle.size.s * (_Puzzle.size.x / 2) - _Puzzle.size.padY, centY - _Puzzle.size.s * (_Puzzle.size.y / 2) - _Puzzle.size.padY);
                     for (y = 0; y < _Puzzle.size.y; y++) {
                         for (x = 0; x < _Puzzle.size.x; x++) {
                             _Puzzle.grid[y][x].tick();
@@ -365,7 +373,10 @@
             }
 
             drawPuzzleState();
+
         </script>
 
     </center>
-</body></html>
+</body>
+
+</html>
