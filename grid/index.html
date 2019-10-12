@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Spritesheet Tile Browser</title>
+    <title>gridEditor</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
     <meta name="description" content="I AM d74g0n!">
     <meta name="keywords" content="d74g0n">
@@ -29,7 +29,13 @@
         }
 
         canvas {
-            border: 2px solid gold;
+            /*
+            
+            display: inline-block;
+            position: fixed;
+*/
+
+            border: 2px solid white;
         }
 
         #btns {
@@ -49,6 +55,38 @@
             /*            height: 440px;*/
         }
 
+
+        #mainscreen {
+            border: 2px solid white;
+            align-self: center;
+            display: block;
+            margin: auto;
+            padding: auto;
+/*
+            height: 50%;
+            width: 50%;
+*/
+/*             float: left;*/
+
+        }
+
+        #tilechoice {
+            /*            border: 2px solid grey;*/
+/*                        float: right;*/
+            margin-left: 20px;
+        }
+
+        #spritecanvas {
+            /*        display: inline-block;*/
+
+            /*
+            width: 768;
+            height: 368;
+             position: inherit;
+*/
+
+        }
+
         hr {
             width: 200px;
         }
@@ -56,48 +94,95 @@
 </head>
 
 <body>
+    
+
+
     <center>
-        <canvas id="mainscreen"></canvas>
-
-        <script src="/games/common/drawing.js"></script>
-        <script src="/games/common/_Math.js"></script>
-
-        <script>
-            const canvas = document.getElementById("mainscreen");
-            const ctx = canvas.getContext("2d");
-            //            canvas.height = 1080;
-            canvas.height = 32 * 10;
-            //            canvas.width = 1920;
-            canvas.width = 32 * 10;
-            ctx.imageSmoothingEnabled = false;
-
-            function loadImage(path) {
-                let image = new Image();
-                image.src = path;
-                return image;
-            }
-
-            let spritesheet = loadImage(`/games/tileparty/img/Voirol.png`);
-
-            //            const winnoise = loadAudio('/DMT/audio/transit.mp3');
-        </script>
-        <script src="grid.js"></script>
-        <script src="gridEditor.js"></script>
-<br>
         <canvas id="tilechoice"></canvas>
-        
-        <script>
-            const tanvas = document.getElementById("tilechoice");
-            const ttx = tanvas.getContext("2d");
-            //            canvas.height = 1080;
-            tanvas.height = 128;
-            //            canvas.width = 1920;
-            tanvas.width = 128;
-            ttx.imageSmoothingEnabled = false;
-        </script>
-        <script src="myTile.js"></script>
-
-
-
+        <canvas id="mainscreen"></canvas>
     </center>
+<center><canvas id="spritecanvas"></canvas></center>
+    <script src="/games/common/drawing.js"></script>
+    <script src="/games/common/_Math.js"></script>
+    <script>
+        const canvas = document.getElementById("mainscreen");
+        const ctx = canvas.getContext("2d");
+        ctx.imageSmoothingEnabled = false;
+
+
+
+        //            const winnoise = loadAudio('/DMT/audio/transit.mp3');
+    </script>
+    <script src="grid.js"></script>
+    <script src="gridEditor.js"></script>
+    <!--        <br>-->
+
+
+
+
+    <script>
+        const tanvas = document.getElementById("tilechoice");
+        const ttx = tanvas.getContext("2d");
+        //            canvas.height = 1080;
+        tanvas.height = 128;
+        //            canvas.width = 1920;
+        tanvas.width = 128;
+        ttx.imageSmoothingEnabled = false;
+    </script>
+    <script src="myTile.js"></script>
+
+
+    <script>
+        const sanvas = document.getElementById("spritecanvas");
+        const stx = sanvas.getContext("2d");
+
+        function loadImage(path) {
+            let image = new Image();
+            image.src = path;
+            image.onload = function() {
+                stx.drawImage(this, 0, 0, this.width, this.height, 0, 0, sanvas.width, sanvas.height, );
+            };
+            return image;
+        }
+
+        let spritesheet = loadImage(`/games/tileparty/img/Voirol.png`)
+
+        sanvas.width = spritesheet.width;
+        sanvas.height = spritesheet.height;
+
+        sanvas.onclick = function(evt) {
+            var rect = canvas.getBoundingClientRect();
+            let pos = {
+                x: evt.layerX,
+                y: evt.layerY,
+                scale: (spritesheet.width / 48),
+                scaleH: (spritesheet.height / 22),
+            };
+            
+            let coord = [Math.floor(pos.x/pos.scale),Math.floor(pos.y/pos.scale)];
+            
+            myTile.x = coord[0];
+            myTile.y = coord[1];
+            ttx.clearRect(0,0,tanvas.width,tanvas.height);
+            myTile.draw();
+            
+            console.log(`sanvas[${Math.floor(pos.x/pos.scale)},${Math.floor(pos.y/pos.scale)}]`);
+//            console.log(evt);
+
+            stx.drawImage(spritesheet,0,0);
+            
+            stx.save();
+            stx.beginPath();
+            stx.lineWidth = 1;
+            stx.strokeStyle = 'white';
+            stx.strokeRect(coord[0]*pos.scale, coord[1]*pos.scale, pos.scale, pos.scale);
+            stx.stroke();
+            stx.closePath();
+            stx.restore();
+
+        }
+    </script>
+
+
+
 </body></html>

@@ -185,12 +185,13 @@ function fillCicle(x, y, r, color) {
     ctx.fill();
 }
 
-function sSq(x, y, color = 'green') {
+function sSq(x=myTile.x,y=myTile.y, w = grid.scale, color = 'green') {
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.strokeStyle = color;
-    ctx.strokeRect(x + 0.5, y + 0.5, global.scale - 1, global.scale - 1);
+    ctx.strokeRect(x + 0.5, y + 0.5, w - 1, w - 1);
     ctx.stroke();
+    ctx.closePath();
 }
 // -=-=-=-=-=-=-=-
 function gradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') {

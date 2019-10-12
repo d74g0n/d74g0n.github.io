@@ -4,7 +4,7 @@ let myTile = {
     s: 32,
     scale: 256,
     draw: function(){
-        ttx.drawImage(spritesheet, myTile.x * 32, myTile.y * 32, 32, 32, 0, 0, canvas.width, canvas.height);
+        ttx.drawImage(spritesheet, myTile.x * 32, myTile.y * 32, 32, 32, 0, 0, tanvas.width, tanvas.height);
     },
     nextSprite(){
         
@@ -16,9 +16,9 @@ let myTile = {
         }
         
         ttx.clearRect(0,0,tanvas.width,tanvas.height);
-        ttx.drawImage(spritesheet, myTile.x * 32, myTile.y * 32, 32, 32, 0, 0, canvas.width, canvas.height);
+        ttx.drawImage(spritesheet, myTile.x * 32, myTile.y * 32, 32, 32, 0, 0, tanvas.width, tanvas.height);
     },
-    backSpirte(){
+    backSprite(){
         
     },
     
