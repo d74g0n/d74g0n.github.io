@@ -25,16 +25,10 @@
 
         body {
             background: black;
-            /*            color: #00aeba;*/
         }
 
         canvas {
-            /*
-            
-            display: inline-block;
-            position: fixed;
-*/
-
+            display: inline;
             border: 2px solid white;
         }
 
@@ -52,74 +46,48 @@
             color: #00aeba;
             height: 4em;
             overflow: hidden;
-            /*            height: 440px;*/
         }
 
 
         #mainscreen {
-            border: 2px solid white;
             align-self: center;
             display: block;
             margin: auto;
             padding: auto;
-/*
-            height: 50%;
-            width: 50%;
-*/
-/*             float: left;*/
-
+             display:inline-block;
         }
 
         #tilechoice {
-            /*            border: 2px solid grey;*/
-/*                        float: right;*/
-            margin-left: 20px;
+            display:inline-block;
         }
 
-        #spritecanvas {
-            /*        display: inline-block;*/
-
-            /*
-            width: 768;
-            height: 368;
-             position: inherit;
-*/
-
-        }
+        #spritecanvas {}
 
         hr {
             width: 200px;
         }
+
     </style>
 </head>
 
 <body>
-    
-
-
     <center>
         <canvas id="tilechoice"></canvas>
         <canvas id="mainscreen"></canvas>
     </center>
-<center><canvas id="spritecanvas"></canvas></center>
+    <center><canvas id="spritecanvas"></canvas></center>
     <script src="/games/common/drawing.js"></script>
     <script src="/games/common/_Math.js"></script>
+
     <script>
         const canvas = document.getElementById("mainscreen");
         const ctx = canvas.getContext("2d");
         ctx.imageSmoothingEnabled = false;
-
-
-
-        //            const winnoise = loadAudio('/DMT/audio/transit.mp3');
     </script>
+
     <script src="grid.js"></script>
     <script src="gridEditor.js"></script>
-    <!--        <br>-->
-
-
-
-
+    <script src="mapData.js"></script>
     <script>
         const tanvas = document.getElementById("tilechoice");
         const ttx = tanvas.getContext("2d");
@@ -129,23 +97,13 @@
         tanvas.width = 128;
         ttx.imageSmoothingEnabled = false;
     </script>
-    <script src="myTile.js"></script>
 
+    <script src="myTile.js"></script>
 
     <script>
         const sanvas = document.getElementById("spritecanvas");
         const stx = sanvas.getContext("2d");
 
-        function loadImage(path) {
-            let image = new Image();
-            image.src = path;
-            image.onload = function() {
-                stx.drawImage(this, 0, 0, this.width, this.height, 0, 0, sanvas.width, sanvas.height, );
-            };
-            return image;
-        }
-
-        let spritesheet = loadImage(`/games/tileparty/img/Voirol.png`)
 
         sanvas.width = spritesheet.width;
         sanvas.height = spritesheet.height;
@@ -156,33 +114,38 @@
                 x: evt.layerX,
                 y: evt.layerY,
                 scale: (spritesheet.width / 48),
+//                scale: (spritesheet.width / 16),
                 scaleH: (spritesheet.height / 22),
+//                scaleH: (spritesheet.height/2),
             };
-            
-            let coord = [Math.floor(pos.x/pos.scale),Math.floor(pos.y/pos.scale)];
-            
+
+            let coord = [Math.floor(pos.x / pos.scale), Math.floor(pos.y / pos.scale)];
+
             myTile.x = coord[0];
             myTile.y = coord[1];
-            ttx.clearRect(0,0,tanvas.width,tanvas.height);
+            ttx.clearRect(0, 0, tanvas.width, tanvas.height);
             myTile.draw();
-            
-            console.log(`sanvas[${Math.floor(pos.x/pos.scale)},${Math.floor(pos.y/pos.scale)}]`);
-//            console.log(evt);
 
-            stx.drawImage(spritesheet,0,0);
-            
+            console.log(`sanvas[${Math.floor(pos.x/pos.scale)},${Math.floor(pos.y/pos.scale)}]`);
+            //            console.log(evt);
+
+            stx.drawImage(spritesheet, 0, 0);
+
             stx.save();
             stx.beginPath();
             stx.lineWidth = 1;
             stx.strokeStyle = 'white';
-            stx.strokeRect(coord[0]*pos.scale, coord[1]*pos.scale, pos.scale, pos.scale);
+            stx.strokeRect(coord[0] * pos.scale, coord[1] * pos.scale, pos.scale, pos.scale);
             stx.stroke();
             stx.closePath();
             stx.restore();
 
         }
+
     </script>
 
 
 
-</body></html>
+</body>
+
+</html>
