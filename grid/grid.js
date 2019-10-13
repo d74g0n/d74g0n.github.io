@@ -69,4 +69,4 @@ let pos = getMousePos(e);
     }
 }
 
-grid.init();
+grid.init().testPattern('rgba(0,0,0,0.4)','rgba(255,255,255,0.4)');

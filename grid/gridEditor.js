@@ -2,12 +2,13 @@ let gridEditor = {
     map: [[0], [0]],
     selectedTile: [],
     highlightTile: function (x = 0, y = 0, color = 'red') {
-        // these functions are essentially the draw functions interpreted into board coordinates.
-        //        setColor(color);
-        //        drawSquare(x * grid.scale, y * grid.scale, grid.scale);
-//        ctx.drawImage(spritesheet, myTile.x * 32, myTile.y * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
-          ctx.drawImage(spritesheet, myTile.x * 32, myTile.y * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
-//        gridEditor.OutlineTile(x,y,'rgba(55,55,55,0.5)');
+        //INSERT DATAOBJ INTO GRID - THEN RE-DRAW GRID.  
+        //THEN HIGHLIGHT TILE.
+
+        
+        ctx.drawImage(spritesheet, myTile.x * 32, myTile.y * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
+        
+//        gridEditor.OutlineTile(x,y,'red');
         
 
     },
@@ -15,7 +16,7 @@ let gridEditor = {
              sSq(x * grid.scale, y * grid.scale, grid.scale, color);    
     },
     
-    currentPaint: [0, 1],
+//    currentPaint: [0, 1],
     init: function () {
 
         gridEditor.Create2dMap();
@@ -56,6 +57,7 @@ let gridEditor = {
 //gridEditor.DrawSpriteTiles();
 
 //gridEditor.grassFill();
-setTimeout(gridEditor.grassFill,1000);
+//setTimeout(gridEditor.grassFill,1000);
+//setTimeout(gridEditor.grassFill,1000);
 
-setTimeout(gridEditor.OutlineTile,2000);
+//setTimeout(gridEditor.OutlineTile,2000);

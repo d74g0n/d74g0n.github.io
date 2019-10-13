@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>gridEditor</title>
+    <title>32x32 Map Maker</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
     <meta name="description" content="I AM d74g0n!">
     <meta name="keywords" content="d74g0n">
@@ -25,17 +25,13 @@
 
         body {
             background: black;
+            overflow: hidden;
         }
 
         canvas {
             display: inline;
             border: 2px solid white;
-        }
-
-        #btns {
-            padding: 0;
-            margin: 0;
-            width: 100px;
+            position: absolute;
         }
 
         #coord {
@@ -48,41 +44,49 @@
             overflow: hidden;
         }
 
-
         #mainscreen {
             align-self: center;
-            display: block;
-            margin: auto;
-            padding: auto;
-             display:inline-block;
+            top: 1px;
+            left: 1px;
+            width: 600px;
+            height: 600px;
         }
 
         #tilechoice {
-            display:inline-block;
+            z-index: 10;
+            top: 1px;
+            left: 613px;
+            width: 256px;
+            height: 256px;
         }
 
-        #spritecanvas {}
-
-        hr {
-            width: 200px;
+        #spritecanvas {
+            top:613px;
+            left: 1px;
+            
+            
         }
+
 
     </style>
 </head>
 
 <body>
-    <center>
-        <canvas id="tilechoice"></canvas>
-        <canvas id="mainscreen"></canvas>
-    </center>
-    <center><canvas id="spritecanvas"></canvas></center>
+
+    <canvas id="tilechoice"></canvas>
+    <canvas id="mainscreen"></canvas>
+
+    <canvas id="spritecanvas"></canvas>
     <script src="/games/common/drawing.js"></script>
     <script src="/games/common/_Math.js"></script>
+    <script src="/common/js/draggable_element.js"></script>
 
     <script>
         const canvas = document.getElementById("mainscreen");
         const ctx = canvas.getContext("2d");
+
         ctx.imageSmoothingEnabled = false;
+
     </script>
 
     <script src="grid.js"></script>
@@ -96,6 +100,7 @@
         //            canvas.width = 1920;
         tanvas.width = 128;
         ttx.imageSmoothingEnabled = false;
+
     </script>
 
     <script src="myTile.js"></script>
@@ -114,9 +119,9 @@
                 x: evt.layerX,
                 y: evt.layerY,
                 scale: (spritesheet.width / 48),
-//                scale: (spritesheet.width / 16),
+                //                scale: (spritesheet.width / 16),
                 scaleH: (spritesheet.height / 22),
-//                scaleH: (spritesheet.height/2),
+                //                scaleH: (spritesheet.height/2),
             };
 
             let coord = [Math.floor(pos.x / pos.scale), Math.floor(pos.y / pos.scale)];
@@ -124,6 +129,7 @@
             myTile.x = coord[0];
             myTile.y = coord[1];
             ttx.clearRect(0, 0, tanvas.width, tanvas.height);
+            stx.clearRect(0, 0, sanvas.width, sanvas.height);
             myTile.draw();
 
             console.log(`sanvas[${Math.floor(pos.x/pos.scale)},${Math.floor(pos.y/pos.scale)}]`);
@@ -141,6 +147,11 @@
             stx.restore();
 
         }
+
+
+//        dragElement(canvas);
+        dragElement(tanvas);
+        dragElement(sanvas);
 
     </script>
 
