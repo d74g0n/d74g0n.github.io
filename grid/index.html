@@ -61,46 +61,97 @@
         }
 
         #spritecanvas {
-            top:613px;
+            top: 613px;
             left: 1px;
-            
-            
+
+
         }
 
+        #displayData {
+            position: absolute;
+            border: 2px solid gold;
+            width: 256px;
+            height: 256px;
+            top: 266px;
+            left: 613px;
+            color: gold;
+            padding: 12px;
+        }
 
+        #btn {
+            display: inline-block;
+            border: 1px solid gold;
+            width: 3em;
+            padding: 4px;
+            margin: 4px;
+            align-content: center;
+            color: white;
+        }
+
+        #btn:hover {
+            color: black;
+            background: gold;
+        }
     </style>
 </head>
+<script src="/common/js/draggable_element.js"></script>
+
+
 
 <body>
 
     <canvas id="tilechoice"></canvas>
     <canvas id="mainscreen"></canvas>
-
     <canvas id="spritecanvas"></canvas>
     <script src="/games/common/drawing.js"></script>
     <script src="/games/common/_Math.js"></script>
-    <script src="/common/js/draggable_element.js"></script>
 
     <script>
         const canvas = document.getElementById("mainscreen");
         const ctx = canvas.getContext("2d");
-
         ctx.imageSmoothingEnabled = false;
-
     </script>
 
     <script src="grid.js"></script>
     <script src="gridEditor.js"></script>
     <script src="mapData.js"></script>
+    
+    
+    <div id="displayData">
+    <span id="infotitle">LAYER-></span><a id='btn' onclick='grid.layerUP()'><center>UP</center></a><a id='btn' onclick='grid.layerDOWN()'><center>DOWN</center></a>
+    
+    <br><span id="info">LAYER: </span> <a id="layerData">[0]</a>
+    <br><span id="info">CELL: </span> <a id="cellData">[x,y]</a>
+    <br><span id="info">ACTION: </span> <a id="stateData">DRAW</a>
+
+    <br><br><span id="infotitle">-=[ SPRITE:</span>
+    <br><span id="info">SPRITE: </span> <span id="spriteData">[x,y]</span>
+
+    <br><br>
+    <sprite>-=[ TOOLBAR</sprite>
+    <br><a id='btn'>
+        <center>DRAW</center>
+    </a>
+    <a id='btn' onclick='gridEditor.fillLayer()'>
+        <center>FILL</center>
+    </a>
+    <a id='btn' onclick='gridEditor.clear()'>
+        <center>CLEAR</center>
+    </a>
+
+
+    <script>
+        dragElement(document.getElementById("displayData"));
+    </script>
+</div>
+    
+    
     <script>
         const tanvas = document.getElementById("tilechoice");
         const ttx = tanvas.getContext("2d");
-        //            canvas.height = 1080;
         tanvas.height = 128;
-        //            canvas.width = 1920;
         tanvas.width = 128;
         ttx.imageSmoothingEnabled = false;
-
     </script>
 
     <script src="myTile.js"></script>
@@ -108,8 +159,6 @@
     <script>
         const sanvas = document.getElementById("spritecanvas");
         const stx = sanvas.getContext("2d");
-
-
         sanvas.width = spritesheet.width;
         sanvas.height = spritesheet.height;
 
@@ -119,12 +168,12 @@
                 x: evt.layerX,
                 y: evt.layerY,
                 scale: (spritesheet.width / 48),
-                //                scale: (spritesheet.width / 16),
                 scaleH: (spritesheet.height / 22),
-                //                scaleH: (spritesheet.height/2),
             };
 
             let coord = [Math.floor(pos.x / pos.scale), Math.floor(pos.y / pos.scale)];
+
+            document.getElementById("spriteData").innerHTML = `[${coord}]`;
 
             myTile.x = coord[0];
             myTile.y = coord[1];
@@ -133,7 +182,6 @@
             myTile.draw();
 
             console.log(`sanvas[${Math.floor(pos.x/pos.scale)},${Math.floor(pos.y/pos.scale)}]`);
-            //            console.log(evt);
 
             stx.drawImage(spritesheet, 0, 0);
 
@@ -145,18 +193,9 @@
             stx.stroke();
             stx.closePath();
             stx.restore();
-
         }
 
-
-//        dragElement(canvas);
         dragElement(tanvas);
         dragElement(sanvas);
-
     </script>
-
-
-
-</body>
-
-</html>
+</body></html>
