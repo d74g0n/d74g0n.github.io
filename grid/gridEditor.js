@@ -1,30 +1,37 @@
 let gridEditor = {
-    map: [[0], [0]],
-    selectedTile: {},
+    //    map: [[0], [0]],
     highlightTile: function (x = 0, y = 0, color = 'red') {
-        gridEditor.selectedTile = {layer: grid.layer, x: x, y: y,};
-        mapData.setMapData(grid.layer, y,x,{x: myTile.x, y: myTile.y});
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        mapData.setMapData(grid.layer, y, x, {
+            x: myTile.x,
+            y: myTile.y
+        });
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         mapData.redraw();
+
     },
-    OutlineTile: function(x,y,color = 'blue') {
-             sSq(x * grid.scale, y * grid.scale, grid.scale, color);    
+    OutlineTile: function (x, y, color = 'blue') {
+        sSq(x * grid.scale, y * grid.scale, grid.scale, color);
     },
-    
-//    currentPaint: [0, 1],
-    init: function () {
-        gridEditor.Create2dMap();
-        return gridEditor;
-    },
-    Create2dMap: function () {
-        for (y = 0; y < (canvas.height / grid.scale); y++) {
-            let tmparr = [];
-            for (x = 0; x < (canvas.width / grid.scale); x++) {
-                tmparr[x] = undefined;
-            }
-            gridEditor.map[y] = (tmparr);
-        }
-        grid.log(gridEditor.map);
+    undoTile: function () {
+        console.log(`undo Tile attempted`);
+        //        mapData.map = gridEditor.undoMap;
+        //        mapData.redraw();
+
+//        function drawUndoMapData() {
+//            ctx.clearRect(0, 0, canvas.width, canvas.height);
+//            for (let l = 0; l < gridEditor.undoMap.length; l++) {
+//                // this will do layers.
+//                let layer = gridEditor.undoMap[l];
+//                mapData.processLayer(layer, l);
+//                console.log(`[draw][layer][${l}]`);
+//
+//            }
+//        
+//        }
+//        
+//       drawUndoMapData();
+
     },
     DrawSpriteTiles: function () {
         for (y = 0; y < (canvas.height / grid.scale); y++) {
@@ -43,30 +50,35 @@ let gridEditor = {
     clear: function () {
 
     },
-    fillLayer: function(spos={x: myTile.x, y: myTile.y}){
-          for (y = 0; y < (canvas.height / grid.scale); y++) {
+    fillLayer: function (spos = {
+        x: myTile.x,
+        y: myTile.y
+    }) {
+//        gridEditor.undoMap = mapData.map;
+        for (y = 0; y < (canvas.height / grid.scale); y++) {
             for (x = 0; x < (canvas.width / grid.scale); x++) {
                 mapData.map[grid.layer][y][x] = spos;
                 ctx.drawImage(spritesheet, spos.x * 32, spos.y * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
             }
-        }      
+        }
         mapData.redraw();
     },
     waterFill: function () {
         for (y = 0; y < (canvas.height / grid.scale); y++) {
             for (x = 0; x < (canvas.width / grid.scale); x++) {
-                mapData.map[grid.layer][y][x] = {x: 19, y: 4};
+                mapData.map[grid.layer][y][x] = {
+                    x: 19,
+                    y: 4
+                };
                 ctx.drawImage(spritesheet, 19 * 32, 4 * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
             }
         }
     },
-    exportMap: function (){
-      console.log(mapData.map);
-      console.log(JSON.stringify(mapData.map));
+    exportMap: function () {
+        console.log(mapData.map);
+        console.log(JSON.stringify(mapData.map));
     },
-    importMap: function (jsonmap){
+    importMap: function (jsonmap) {
         mapData.map = JSON.parse(jsonmap);
     }
 }
-
-

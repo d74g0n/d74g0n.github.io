@@ -64,6 +64,9 @@ let grid = {
 
         let pos = getMousePos(e);
         grid.log(`[pos+1][${Math.floor(pos.x / pos.scale)+1},${Math.floor(pos.y /pos.scale)+1}]`);
+        
+//        gridEditor.undoMap = mapData.map;
+        
         gridEditor.highlightTile(Math.floor(pos.x / pos.scale), Math.floor(pos.y / pos.scale));
 
         document.getElementById("cellData").innerHTML = `[${Math.floor(pos.x / pos.scale)},${Math.floor(pos.y /pos.scale)}]`
