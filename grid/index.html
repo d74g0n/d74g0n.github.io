@@ -12,124 +12,19 @@
     <meta property="og:image" content="index.png">
     <meta name="twitter:image" content="index.png">
     <link rel="shortcut icon" href="/common/img/favicon.ico" />
+    <link href='index.css' rel='stylesheet' type='text/css'>
 
     <style>
-        @font-face {
-            font-family: '8bitO';
-            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
-        }
-
-        * {
-            font-family: '8bitO';
-        }
-
-        body {
-            background: black;
-            color: white;
-            overflow: hidden;
-        }
-
-        canvas {
-            display: inline;
-            border: 2px solid white;
-            position: absolute;
-        }
-
-        #coord {
-            color: gold;
-        }
-
-        #solve {
-            color: #00aeba;
-            height: 4em;
-            overflow: hidden;
-        }
-
-        #mainscreen {
-            align-self: center;
-            top: 1px;
-            left: 1px;
-            width: 600px;
-            height: 600px;
-        }
-
-        #tilechoice {
-            z-index: 10;
-            top: 1px;
-            left: 613px;
-            width: 256px;
-            height: 256px;
-        }
-
-        #spritecanvas {
-            top: 613px;
-            left: 1px;
 
 
-        }
-
-        #displayData {
-            position: absolute;
-            border: 2px solid gold;
-            width: 256px;
-            height: 256px;
-            top: 266px;
-            left: 613px;
-            color: gold;
-            padding: 12px;
-            z-index: 100;
-            
-            color: white;
-            border: 2px solid white;
-            background: rgba(0,0,0,0.5);
-        }
-
-        #btn {
-            display: inline-block;
-            border: 1px solid gold;
-            width: 3em;
-            padding: 4px;
-            margin: 4px;
-            align-content: center;
-            color: white;
-        }
-
-        #btn:hover {
-            color: black;
-            background: gold;
-        }
-
-        #lbtn {
-            display: inline-block;
-            border: 1px solid gold;
-            width: 12px;
-            padding: 4px;
-            margin: 4px;
-            align-content: center;
-            color: white;
-        }
-
-        #lbtn:hover {
-            color: black;
-            background: gold;
-        }
-
-        .bigData {
-            font-size: 29px;
-        }
-        
-        #layerFrame{
-            border: 1px dotted gold;
-            width: auto;
-            float:left;
-            padding: 4px;
-            margin: 8px;
-        }
     </style>
 </head>
 <script src="/common/js/draggable_element.js"></script>
 
+<script>
 
+
+</script>
 
 <body>
 
@@ -138,6 +33,8 @@
     <canvas id="spritecanvas"></canvas>
     <script src="/games/common/drawing.js"></script>
     <script src="/games/common/_Math.js"></script>
+    <!--EXAMPLES::-->
+    <script src="pics.js"></script> 
 
     <script>
         const canvas = document.getElementById("mainscreen");
@@ -147,43 +44,62 @@
 
     <script src="grid.js"></script>
     <script src="gridEditor.js"></script>
-    <script src="mapData.js"></script>
+
 
 
     <div id="displayData">
-<!--        <span id="infotitle">LAYER<span id="info"></span> <a id="layerData" class="bigData">[0]</a></span><a id='lbtn' onclick='grid.layerUP()'>-->
         <center>
-        <div id='layerFrame'    >
-            <span id="infotitle">LAYER<span id="info"></span><br></span><a id='lbtn' onclick='grid.layerDOWN()'>
-            <center>-</center>
-         <a id="layerData" class="bigData">[0]</a></a><a id='lbtn' onclick='grid.layerUP()'>
-            <center>+</center>
-        </a>
-        </div>
-        </center>
-            
-        
-        <span id="info">CELL: </span> <a id="cellData">[x,y]</a>
-        
-<!--        <br><br><span id="infotitle">-=[ SPRITE:</span>-->
-        <br><span id="info">SPRITE: </span> <span id="spriteData">[x,y]</span>
-<br><span id="info">ACTION: </span> <a id="stateData">DRAW</a>
-<br><span id="info">ACTION: </span> <a id="stateData">DRAW</a>
-        <br><hr>
-        <center>
-        
-<!--        <sprite>-=[ TOOLBAR</sprite>-->
-        <a id='btn' onclick='gridEditor.undoTile()'>
-            <center>UNDO</center>
-        </a>
-        <a id='btn' onclick='gridEditor.fillLayer()'>
-            <center>FILL</center>
-        </a>
-        <a id='btn' onclick='gridEditor.clear()'>
-            <center>CLEAR</center>
-        </a>
+            <div id='layerFrame'>
+<!--                <hr>-->
 
-</center>
+                <a id='lbtn' onclick='mapData.init()'>
+                    <center>N</center>
+                </a>
+
+                <a id='lbtn' onclick='drawPic()'>
+                    <center>Ex</center>
+                </a>
+
+                <a id='lbtn' onclick='gridEditor.clear()'>
+                    <center>C</center>
+                </a>
+
+                <hr>
+
+                <span id="infotitle">ACTIVE LAYER<span id="info"></span><br></span><a id='lbtn' onclick='grid.layerDOWN()'>
+                    <center>-</center>
+                    <a id="layerData" class="bigData">[0]</a>
+                </a><a id='lbtn' onclick='grid.layerUP()'>
+                    <center>+</center>
+                </a>
+            </div>
+        </center>
+
+
+        <span id="info">CELL: </span> <a id="cellData">[x,y]</a>
+
+        <!--        <br><br><span id="infotitle">-=[ SPRITE:</span>-->
+        <br><span id="info">SPRITE: </span> <span id="spriteData">[x,y]</span>
+        <br><span id="info">HINT: </span> <a id="stateData"> ExAMPLE</a>
+        <br><span id="info">ACTION: </span> <a id="stateData">DRAW</a>
+        <hr>
+        <div id="toggleSolo"><a id="viewbtn" onclick="mapData.toggleRenderType()"> VIEW MODE</a></div>
+        <center>
+            <div id="but2">
+                <!--        <sprite>-=[ TOOLBAR</sprite>-->
+                <center>
+                    <a id='btn' onclick='gridEditor.eraseTile()'>
+                        <center>ERASE</center>
+                    </a>
+                    <a id='btn' onclick='gridEditor.fillLayer()'>
+                        <center>FILL</center>
+                    </a>
+                    <a id='btn' onclick='gridEditor.clear()'>
+                        <center>CLEAR</center>
+                    </a>
+                </center>
+            </div>
+        </center>
         <script>
             dragElement(document.getElementById("displayData"));
         </script>
@@ -203,6 +119,19 @@
     <script>
         const sanvas = document.getElementById("spritecanvas");
         const stx = sanvas.getContext("2d");
+
+        function loadImage(path) {
+            let image = new Image();
+            image.src = path;
+            image.onload = function() {
+                stx.drawImage(this, 0, 0, this.width, this.height, 0, 0, sanvas.width, sanvas.height, );
+            };
+            return image;
+        }
+
+        // let spritesheet = loadImage(`/games/tileparty/img/Voirol.png`)
+        let spritesheet = loadImage(`/games/tileparty/img/spritesheetAlpha2.png`);
+
         sanvas.width = spritesheet.width;
         sanvas.height = spritesheet.height;
 
@@ -242,4 +171,5 @@
         dragElement(tanvas);
         dragElement(sanvas);
     </script>
+    <script src="mapData.js"></script>
 </body></html>

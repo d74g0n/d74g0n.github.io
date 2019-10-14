@@ -18,6 +18,7 @@ let grid = {
         }
         
         grid.layerReadout();
+        mapData.redraw();
     },
     layerDOWN: function (){
         grid.layer--;
@@ -25,6 +26,7 @@ let grid = {
             grid.layer = 0;
         }
        grid.layerReadout();
+        mapData.redraw();
     },
     layerReadout: function(){
          document.getElementById("layerData").innerHTML = `[${grid.layer}]`;

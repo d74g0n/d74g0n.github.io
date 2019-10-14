@@ -1,23 +1,30 @@
-function loadImage(path) {
-    let image = new Image();
-    image.src = path;
-    image.onload = function () {
-        stx.drawImage(this, 0, 0, this.width, this.height, 0, 0, sanvas.width, sanvas.height, );
-    };
-    return image;
-}
-
-// let spritesheet = loadImage(`/games/tileparty/img/Voirol.png`)
-let spritesheet = loadImage(`/games/tileparty/img/spritesheetAlpha2.png`);
 // let spritesheet = loadImage(`/games/tileparty/img/spritesheetAlpha.png`)
 // let spritesheet = loadImage(`/games/tileparty/img/bricks.png`)
 
 
 let mapData = {
+    RenderisSolo: false,
+    toggleRenderType: function (){
+      mapData.RenderisSolo = !mapData.RenderisSolo;
+        mapData.redraw();
+        let bip = document.getElementById("viewbtn");
+        
+        if (mapData.RenderisSolo){
+            bip.innerHTML = `SOLO VIEW`;
+            bip.style.border = `3px solid skyblue`;
+            bip.style.color = 'red';
+        }else{
+             bip.innerHTML = `FULL VIEW`;
+             bip.style.border = `3px solid gold`;
+            bip.style.color = 'white';
+        }
+    
+    },
     init: function () {
         mapData.map = mapData.createDataMap(3, 10, 10);
-        console.log(mapData.map);
-        setTimeout(mapData.redraw,500);
+        grid.log(mapData.map);
+//        grid.testPattern();
+        setTimeout(mapData.redraw, 10);
     },
     createDataMap: function (zm = 2, ym = 10, xm = 10) {
         let tmpMap = [];
@@ -26,17 +33,16 @@ let mapData = {
             for (y = 0; y < ym; y++) {
                 let tmpcolls = [];
                 for (x = 0; x < xm; x++) {
-                //                    tmpcolls[x] = `<z${z},y${y},x${x}>`;
                     if (z < 1) {
                         // grass tile data.
                         tmpcolls[x] = {
-                            x: 1,
-                            y: 2,
+                            x: 47,
+                            y: 0,
                         };
                     } else {
                         // clear tile data.
                         tmpcolls[x] = {
-                            x: 40,
+                            x: 47,
                             y: 0,
                         };
                     }
@@ -65,13 +71,25 @@ let mapData = {
         }
     },
     drawMapData: function () {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        for (let l = 0; l < mapData.map.length; l++) {
-            // this will do layers.
-            let layer = mapData.map[l];
-            mapData.processLayer(layer, l);
-            console.log(`[draw][layer][${l}]`);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        if (mapData.RenderisSolo) {
+            
+            let l = grid.layer;
+            let layer = mapData.map[l];
+                mapData.processLayer(layer, l);
+                grid.log(`[SOLO][layer][${l}]`);
+            
+            
+            
+            
+        } else {
+            for (let l = 0; l < mapData.map.length; l++) {
+                // this will do layers.
+                let layer = mapData.map[l];
+                mapData.processLayer(layer, l);
+                grid.log(`[draw][layer][${l}]`);
+            }
         }
     },
     drawTile: function (spos, dpos) {
