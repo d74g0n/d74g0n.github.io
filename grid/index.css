@@ -7,9 +7,15 @@
             font-family: '8bitO';
         }
 
+        #hiddencopyhelper {
+            color: lime;
+            background: red;
+            visibility: hidden;
+        }
+
         body {
             background: black;
-            background: rgba(55,55,55,0.8);
+            background: rgba(55, 55, 55, 0.8);
             color: white;
             overflow: hidden;
         }
@@ -83,6 +89,7 @@
             padding-left: 10px;
             padding-right: 10px;
         }
+
         #viewbtn:hover {
             border: 3px solid gold;
             color: black;

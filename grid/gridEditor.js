@@ -78,8 +78,9 @@ let gridEditor = {
         gridEditor.updateInfoScreen();
     },
     exportMap: function () {
-        console.log(mapData.map);
+//        console.log(mapData.map);
         console.log(JSON.stringify(mapData.map));
+        return `"${JSON.stringify(mapData.map)}"`;
     },
     importMap: function (jsonmap) {
         mapData.map = JSON.parse(jsonmap);

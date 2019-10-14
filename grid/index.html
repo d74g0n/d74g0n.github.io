@@ -21,10 +21,29 @@
 </head>
 <script src="/common/js/draggable_element.js"></script>
 
+<!--
+<div id="hiddencopyhelper">
+</div>
+-->
+    
+    <input type="text" value="Hello World" id="hiddencopyhelper">
+    
 <script>
-
-
+    // HOOKINTO THINGS IM TOO TIRED!:  GIVE HTML BUTTON BASICALLY.
+    function copyHelper() {
+        /* Get the text field */
+        var copyText = document.getElementById("hiddencopyhelper");
+        copyText.value = gridEditor.exportMap().toString();
+        /* Select the text field */
+        copyText.select();
+//        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+        /* Alert the copied text */
+//        alert("Copied the text: " + copyText.value);
+    }
 </script>
+
 
 <body>
 
@@ -34,7 +53,7 @@
     <script src="/games/common/drawing.js"></script>
     <script src="/games/common/_Math.js"></script>
     <!--EXAMPLES::-->
-    <script src="pics.js"></script> 
+    <script src="pics.js"></script>
 
     <script>
         const canvas = document.getElementById("mainscreen");
@@ -50,7 +69,7 @@
     <div id="displayData">
         <center>
             <div id='layerFrame'>
-<!--                <hr>-->
+                <!--                <hr>-->
 
                 <a id='lbtn' onclick='mapData.init()'>
                     <center>N</center>
