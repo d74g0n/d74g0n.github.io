@@ -3,27 +3,28 @@
 
 
 let mapData = {
+    isDebug: false,
     RenderisSolo: false,
-    toggleRenderType: function (){
-      mapData.RenderisSolo = !mapData.RenderisSolo;
+    toggleRenderType: function () {
+        mapData.RenderisSolo = !mapData.RenderisSolo;
         mapData.redraw();
         let bip = document.getElementById("viewbtn");
-        
-        if (mapData.RenderisSolo){
+
+        if (mapData.RenderisSolo) {
             bip.innerHTML = `SOLO VIEW`;
             bip.style.border = `3px solid skyblue`;
             bip.style.color = 'red';
-        }else{
-             bip.innerHTML = `FULL VIEW`;
-             bip.style.border = `3px solid gold`;
+        } else {
+            bip.innerHTML = `FULL VIEW`;
+            bip.style.border = `3px solid gold`;
             bip.style.color = 'white';
         }
-    
+
     },
     init: function () {
         mapData.map = mapData.createDataMap(3, 10, 10);
         grid.log(mapData.map);
-//        grid.testPattern();
+        //        grid.testPattern();
         setTimeout(mapData.redraw, 10);
     },
     createDataMap: function (zm = 2, ym = 10, xm = 10) {
@@ -58,7 +59,10 @@ let mapData = {
     },
     setMapData: function (z = 0, y, x, valobj) {
         mapData.map[z][y][x] = valobj;
-        console.log(`set Tile : [z${z},y${y},x${x}]`);
+        if (mapData.isDebug) {
+            //        console.log(`set Tile : [z${z},y${y},x${x}]`);
+            grid.log(`set Tile : [z${z},y${y},x${x}]`);
+        }
     },
     processLayer: function (layer, l) {
         for (let yp = 0; yp < layer.length; yp++) {
@@ -74,15 +78,15 @@ let mapData = {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         if (mapData.RenderisSolo) {
-            
+
             let l = grid.layer;
             let layer = mapData.map[l];
-                mapData.processLayer(layer, l);
-                grid.log(`[SOLO][layer][${l}]`);
-            
-            
-            
-            
+            mapData.processLayer(layer, l);
+            grid.log(`[SOLO][layer][${l}]`);
+
+
+
+
         } else {
             for (let l = 0; l < mapData.map.length; l++) {
                 // this will do layers.

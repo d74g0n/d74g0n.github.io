@@ -2,10 +2,10 @@
 <html>
 
 <head>
-    <title>32x32 Map Maker</title>
+    <title>32x32 Tile Painter</title>
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
-    <meta name="description" content="I AM d74g0n!">
-    <meta name="keywords" content="d74g0n">
+    <meta name="description" content="I AM d74g0n! Making Stuff, javascript, Tile, grid, map, creator, system, free">
+    <meta name="keywords" content="d74g0n, javascript, Tile, grid, map, creator, system, free">
     <meta name="robots" content="noarchive" />
     <meta charset="UTF-8">
     <meta name="author" content="d74g0n">
@@ -21,35 +21,36 @@
 </head>
 <script src="/common/js/draggable_element.js"></script>
 
-<!--
-<div id="hiddencopyhelper">
-</div>
--->
-    
-    <input type="text" value="Hello World" id="hiddencopyhelper">
-    
+
+<input type="text" value="Hello World" id="hiddencopyhelper">
+
 <script>
+    const copyToClipboard = str => {
+        const el = document.createElement('textarea');
+        el.value = str;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+    };
+
+
     // HOOKINTO THINGS IM TOO TIRED!:  GIVE HTML BUTTON BASICALLY.
-    function copyHelper() {
-        /* Get the text field */
-        var copyText = document.getElementById("hiddencopyhelper");
-        copyText.value = gridEditor.exportMap().toString();
-        /* Select the text field */
-        copyText.select();
-//        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-        /* Copy the text inside the text field */
-        document.execCommand("copy");
-        /* Alert the copied text */
-//        alert("Copied the text: " + copyText.value);
-    }
+//    function copyHelper() {
+        
+        
+//        copyToClipboard(`"${gridEditor.exportMap()}"`);
+
+//    }
+
 </script>
 
 
 <body>
 
-    <canvas id="tilechoice"></canvas>
-    <canvas id="mainscreen"></canvas>
-    <canvas id="spritecanvas"></canvas>
+    <canvas id="tilechoice" onmouseover="gridEditor.hintMSG(`This is your current Sprite Selection`)"></canvas>
+    <canvas id="mainscreen" onmouseover="gridEditor.hintMSG(`This Canvas is for Placing Tiles`)"></canvas>
+    <canvas id="spritecanvas" onmouseover="gridEditor.hintMSG(`This SpirteSheet is your Paint.  Select a Tile to place`)"></canvas>
     <script src="/games/common/drawing.js"></script>
     <script src="/games/common/_Math.js"></script>
     <!--EXAMPLES::-->
@@ -59,6 +60,7 @@
         const canvas = document.getElementById("mainscreen");
         const ctx = canvas.getContext("2d");
         ctx.imageSmoothingEnabled = false;
+
     </script>
 
     <script src="grid.js"></script>
@@ -70,25 +72,24 @@
         <center>
             <div id='layerFrame'>
                 <!--                <hr>-->
-
-                <a id='lbtn' onclick='mapData.init()'>
+                <a id='lbtn' onclick='mapData.init()' onmouseover="gridEditor.hintMSG(`NEW CANVAS`)">
                     <center>N</center>
                 </a>
 
-                <a id='lbtn' onclick='drawPic()'>
+                <a id='lbtn' onclick='drawPic()' onmouseover="gridEditor.hintMSG(`LOAD EXAMPLE LAYERS (use ACTIVE LAYER to adjust Example number)`)">
                     <center>Ex</center>
                 </a>
 
-                <a id='lbtn' onclick='gridEditor.clear()'>
+                <a id='lbtn' onclick='gridEditor.copyData()' onmouseover="gridEditor.hintMSG(`COPY ART DATA TO CLIPBOARD`)">
                     <center>C</center>
                 </a>
 
                 <hr>
 
-                <span id="infotitle">ACTIVE LAYER<span id="info"></span><br></span><a id='lbtn' onclick='grid.layerDOWN()'>
+                <span id="infotitle"> ACTIVE LAYER<span id="info"></span><br></span><a id='lbtn' onclick='grid.layerDOWN()'>
                     <center>-</center>
-                    <a id="layerData" class="bigData">[0]</a>
-                </a><a id='lbtn' onclick='grid.layerUP()'>
+                </a>
+                <a id="layerData" class="bigData">[0]</a><a id='lbtn' onclick='grid.layerUP()'>
                     <center>+</center>
                 </a>
             </div>
@@ -96,32 +97,35 @@
 
 
         <span id="info">CELL: </span> <a id="cellData">[x,y]</a>
-
-        <!--        <br><br><span id="infotitle">-=[ SPRITE:</span>-->
         <br><span id="info">SPRITE: </span> <span id="spriteData">[x,y]</span>
-        <br><span id="info">HINT: </span> <a id="stateData"> ExAMPLE</a>
+        <!--        <br><span id="info">HINT: </span> <a id="hintData">ExAMPLE</a>-->
         <br><span id="info">ACTION: </span> <a id="stateData">DRAW</a>
         <hr>
-        <div id="toggleSolo"><a id="viewbtn" onclick="mapData.toggleRenderType()"> VIEW MODE</a></div>
+        <div id="toggleSolo"><a id="viewbtn" onclick="mapData.toggleRenderType()" onmouseover="gridEditor.hintMSG(`TOGGLE SINGLE LAYER VIEW / COMPOSITE VIEW`)"> VIEW MODE</a></div>
         <center>
-            <div id="but2">
-                <!--        <sprite>-=[ TOOLBAR</sprite>-->
-                <center>
-                    <a id='btn' onclick='gridEditor.eraseTile()'>
-                        <center>ERASE</center>
-                    </a>
-                    <a id='btn' onclick='gridEditor.fillLayer()'>
-                        <center>FILL</center>
-                    </a>
-                    <a id='btn' onclick='gridEditor.clear()'>
-                        <center>CLEAR</center>
-                    </a>
-                </center>
-            </div>
-        </center>
-        <script>
-            dragElement(document.getElementById("displayData"));
-        </script>
+
+            <center>
+                <br>
+                <h5>TOOLBAR</h5>
+                <div id="ToolbuttonsA">
+                    <center>
+                        <a id='btn' onclick='gridEditor.eraseTile()' onmouseover="gridEditor.hintMSG(`SELECT ERASER TILE`)">
+                            <center>ERASE</center>
+                        </a>
+                        <a id='btn' onclick='gridEditor.fillLayer()' onmouseover="gridEditor.hintMSG(`FILL LAYER with CURRENT TILE`)">
+                            <center>FILL</center>
+                        </a>
+                        <a id='btn' onclick='gridEditor.clear()' onmouseover="gridEditor.hintMSG(`CLEAR LAYER`)">
+                            <center>CLEAR</center>
+                        </a>
+                    </center>
+                </div>
+            </center>
+            <script>
+                dragElement(document.getElementById("displayData"));
+
+            </script>
+            <br><span id="info"> </span> <a id="hintData">MOUSEOVER FOR HINTS</a>
     </div>
 
 
@@ -131,6 +135,7 @@
         tanvas.height = 128;
         tanvas.width = 128;
         ttx.imageSmoothingEnabled = false;
+
     </script>
 
     <script src="myTile.js"></script>
@@ -175,7 +180,7 @@
             stx.clearRect(0, 0, sanvas.width, sanvas.height);
             myTile.draw();
 
-            console.log(`sanvas[${Math.floor(pos.x/pos.scale)},${Math.floor(pos.y/pos.scale)}]`);
+            //            console.log(`sanvas[${Math.floor(pos.x/pos.scale)},${Math.floor(pos.y/pos.scale)}]`);
 
             stx.drawImage(spritesheet, 0, 0);
 
@@ -191,6 +196,9 @@
 
         dragElement(tanvas);
         dragElement(sanvas);
+
     </script>
     <script src="mapData.js"></script>
-</body></html>
+</body>
+
+</html>

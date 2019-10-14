@@ -18,39 +18,45 @@ let gridEditor = {
         //        mapData.map = gridEditor.undoMap;
         //        mapData.redraw();
 
-//        function drawUndoMapData() {
-//            ctx.clearRect(0, 0, canvas.width, canvas.height);
-//            for (let l = 0; l < gridEditor.undoMap.length; l++) {
-//                // this will do layers.
-//                let layer = gridEditor.undoMap[l];
-//                mapData.processLayer(layer, l);
-//                console.log(`[draw][layer][${l}]`);
-//
-//            }
-//        
-//        }
-//        
-//       drawUndoMapData();
+        //        function drawUndoMapData() {
+        //            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //            for (let l = 0; l < gridEditor.undoMap.length; l++) {
+        //                // this will do layers.
+        //                let layer = gridEditor.undoMap[l];
+        //                mapData.processLayer(layer, l);
+        //                console.log(`[draw][layer][${l}]`);
+        //
+        //            }
+        //        
+        //        }
+        //        
+        //       drawUndoMapData();
 
-//    },
-//    DrawSpriteTiles: function () {
-//        for (y = 0; y < (canvas.height / grid.scale); y++) {
-//            for (x = 0; x < (canvas.width / grid.scale); x++) {
-//                ctx.drawImage(spritesheet, x * 32, y * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
-//            }
-//        }
+        //    },
+        //    DrawSpriteTiles: function () {
+        //        for (y = 0; y < (canvas.height / grid.scale); y++) {
+        //            for (x = 0; x < (canvas.width / grid.scale); x++) {
+        //                ctx.drawImage(spritesheet, x * 32, y * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
+        //            }
+        //        }
     },
     grassFill: function () {
-        gridEditor.fillLayer({x: 1, y: 2});
+        gridEditor.fillLayer({
+            x: 1,
+            y: 2
+        });
     },
     clear: function () {
-        gridEditor.fillLayer({x: 47, y: 0});
+        gridEditor.fillLayer({
+            x: 47,
+            y: 0
+        });
     },
     fillLayer: function (spos = {
         x: myTile.x,
         y: myTile.y
     }) {
-//        gridEditor.undoMap = mapData.map;
+        //        gridEditor.undoMap = mapData.map;
         for (y = 0; y < (canvas.height / grid.scale); y++) {
             for (x = 0; x < (canvas.width / grid.scale); x++) {
                 mapData.map[grid.layer][y][x] = spos;
@@ -78,17 +84,26 @@ let gridEditor = {
         gridEditor.updateInfoScreen();
     },
     exportMap: function () {
-//        console.log(mapData.map);
+        //        console.log(mapData.map);
         console.log(JSON.stringify(mapData.map));
         return `"${JSON.stringify(mapData.map)}"`;
     },
     importMap: function (jsonmap) {
         mapData.map = JSON.parse(jsonmap);
     },
-    updateInfoScreen: function(){
-      document.getElementById("spriteData").innerHTML = `[${myTile.x},${myTile.y}]`;  
+    updateInfoScreen: function () {
+        document.getElementById("spriteData").innerHTML = `[${myTile.x},${myTile.y}]`;
     },
-    toggleViewMode: function (){
-        
+    toggleViewMode: function () {
+
+    },
+    hintMSG: function (msg) {
+        document.getElementById("hintData").innerHTML = msg;
+    },
+    copyData: function () {
+        copyToClipboard(gridEditor.exportMap());
+        alert('Data Copied - console.log carbon copy CTRL-I in chrome');
     },
 }
+
+console.log(`gridEditor.js`);

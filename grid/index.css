@@ -26,18 +26,6 @@
             position: absolute;
         }
 
-        /*
-        #coord {
-            color: gold;
-        }
-
-        #solve {
-            color: #00aeba;
-            height: 4em;
-            overflow: hidden;
-        }
-*/
-
         #mainscreen {
             align-self: center;
             top: 1px;
@@ -58,24 +46,22 @@
         #spritecanvas {
             top: 613px;
             left: 1px;
-
-
         }
 
         #displayData {
             position: absolute;
             border: 2px solid gold;
             width: 256px;
-            height: 256px;
-            top: 296px;
+            height: 287px;
+            top: 290px;
             left: 613px;
             color: gold;
             padding: 12px;
             z-index: 100;
-
             color: white;
             border: 2px solid white;
             background: rgba(0, 0, 0, 0.5);
+            
         }
 
         #toggleSolo {
@@ -141,6 +127,7 @@
             border-radius: 5px;
             width: 2em;
             overflow: hidden;
+            
         }
 
         #layerFrame {
@@ -152,12 +139,13 @@
             margin-right: 4px;
         }
 
-        #but2 {
+        #ToolbuttonsA {
             border: 1px dotted gold;
             /*            width: auto;*/
-            float: left;
+            /*            float: left;*/
             padding: 4px;
             margin: 8px;
+            width: auto;
         }
 
         hr {
@@ -166,4 +154,18 @@
             height: 1px;
             border: none;
             border-top: 1px dotted lime;
+        }
+
+        h5 {
+            padding: 0;
+            margin: 0;
+            line-height: 5px;
+            margin-top: -12px;
+            color: yellow;
+        }
+
+        #layerData {
+            padding: 0;
+            margin: 0;
+            margin-left: -6px;
         }

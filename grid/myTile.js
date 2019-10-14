@@ -25,3 +25,5 @@ let myTile = {
 }
 
 setTimeout(myTile.redraw,500);
+
+console.log(`myTile.js`);
