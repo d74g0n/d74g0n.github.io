@@ -15,30 +15,7 @@ let gridEditor = {
     },
     undoTile: function () {
         console.log(`undo Tile attempted`);
-        //        mapData.map = gridEditor.undoMap;
-        //        mapData.redraw();
 
-        //        function drawUndoMapData() {
-        //            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        //            for (let l = 0; l < gridEditor.undoMap.length; l++) {
-        //                // this will do layers.
-        //                let layer = gridEditor.undoMap[l];
-        //                mapData.processLayer(layer, l);
-        //                console.log(`[draw][layer][${l}]`);
-        //
-        //            }
-        //        
-        //        }
-        //        
-        //       drawUndoMapData();
-
-        //    },
-        //    DrawSpriteTiles: function () {
-        //        for (y = 0; y < (canvas.height / grid.scale); y++) {
-        //            for (x = 0; x < (canvas.width / grid.scale); x++) {
-        //                ctx.drawImage(spritesheet, x * 32, y * 32, 32, 32, x * grid.scale, y * grid.scale, grid.scale, grid.scale);
-        //            }
-        //        }
     },
     grassFill: function () {
         gridEditor.fillLayer({

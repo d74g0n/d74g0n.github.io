@@ -22,7 +22,7 @@ let mapData = {
 
     },
     init: function () {
-        mapData.map = mapData.createDataMap(3, 10, 10);
+        mapData.map = mapData.createDataMap(4, 10, 10);
         grid.log(mapData.map);
         //        grid.testPattern();
         setTimeout(mapData.redraw, 10);
