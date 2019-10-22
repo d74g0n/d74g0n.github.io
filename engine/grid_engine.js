@@ -544,9 +544,6 @@ let Engine = {
     init: function (settings = Engine.settings) {
         //pass settings into engine init;
         Engine.setup();
-//        game.ctx.font = '24px monospace';
-//        game.ctx.fillStyle = 'white';
-//        game.ctx.fillText(`CLICKME`, (game.canvas.width / 2) - 45, game.canvas.height / 2);
         Engine.run.loop();
     },
 }
