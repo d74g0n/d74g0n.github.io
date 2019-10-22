@@ -18,7 +18,6 @@ let game = {
     lastFrameTime: 0,
 }
 
-
 let Engine = {
     v: `0.000.003`,
     isVerbose: true,
@@ -200,7 +199,7 @@ let Engine = {
                     for (x = 0; x <= maxX.x; x++) {
                         DrawCount++;
                         game.ctx.font = '8px monospace';
-//                        game.ctx.strokeStyle = 'lime';
+                        //                        game.ctx.strokeStyle = 'lime';
                         game.ctx.fillStyle = 'white';
                         game.ctx.fillText(`M`, Engine.s32(x) + 1, Engine.s32(y) + 8);
                         game.ctx.fillText(`${y+Engine.viewport.y},${x+Engine.viewport.x}`, Engine.s32(x) + 8, Engine.s32(y) + 12);
@@ -239,6 +238,22 @@ let Engine = {
                 console.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
             },
 
+            dmap: function () {
+//  https://dmitripavlutin.com/7-tips-to-handle-undefined-in-javascript/
+
+                
+                // so many w/h tiles on screen...
+                // if negatives exist draw edgesquare;
+                // check length. if length too short deal with it.
+                if (typeof game.map[y] === 'undefined') {
+
+                }
+
+                if (typeof game.map[y][x] === 'undefined') {
+
+                }
+
+            }
 
             spritesheet: function (index = 0) {
                 let iW = game.canvas.width / game.scale;
@@ -261,8 +276,6 @@ let Engine = {
 
             },
 
-
-
             fillSquare: function (x, y, scale) {
                 game.ctx.fillRect(x, y, scale, scale);
             },
@@ -283,7 +296,6 @@ let Engine = {
                 game.ctx.fill();
                 game.ctx.closePath();
             },
-
 
             tile: function (pos = {
                 x: 0,
@@ -402,6 +414,7 @@ let Engine = {
             y: y
         };
     },
+
     s32: function (num) {
         //scales up by 32.
         return num * 32;
@@ -473,7 +486,7 @@ let Engine = {
         Engine.setupFullScreenCanvas();
         game.ctx.font = '24px monospace';
         game.ctx.fillStyle = 'white';
-        game.ctx.fillText(`CLICKME`, (game.canvas.width / 2)-45, game.canvas.height / 2);
+        game.ctx.fillText(`CLICKME`, (game.canvas.width / 2) - 45, game.canvas.height / 2);
     },
 
     init: function (settings = Engine.settings) {
