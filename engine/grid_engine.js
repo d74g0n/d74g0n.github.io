@@ -17,19 +17,10 @@ let game = {
     framesLastSecond: 0,
     lastFrameTime: 0,
 }
-// put these EVENTS somewhere appropriate::
-window.onresize = function () {
-    Engine.resizeCanvas();
-    //    Engine.renderer.draw.testPattern(game.scale, `rgba(55,55,55,0.8)`, `rgba(155,155,155,0.8)`);
-}
 
-window.onload = function () {
-    Engine.init();
-    //    Engine.renderer.draw.testPattern(32, `rgba(55,55,55,0.8)`, `rgba(155,155,155,0.8)`);
-}
 
 let Engine = {
-    v: `0.000.002`,
+    v: `0.000.003`,
     isVerbose: true,
     log: function (msg) {
         if (Engine.isVerbose) {
@@ -38,15 +29,14 @@ let Engine = {
     },
 
     state: {
-        players: [],
-        mapobjects: [],
+        //        players: [],
+        //        mapobjects: [],
         map: [[], []],
-        // HUD: [],
     },
 
     run: {
+        isActive: false,
         fps: function () {
-            //            game.ctx.fillStyle = '#ff0000';
             game.ctx.fillStyle = '#ffffff';
             game.ctx.fillText(`FPS: ${game.framesLastSecond}`, 10, 20);
         },
@@ -59,29 +49,69 @@ let Engine = {
                 }
             },
         },
-        loop: function () {
+        loop: function (ev) {
             if (game.ctx == null) {
                 return;
             }
 
-            
-            
-            
-            
+            function Experimental(ev) {
+                let Hx = Math.floor(ev.offsetX / game.scale);
+                let Hy = Math.floor(ev.offsetY / game.scale);
+
+                console.log(`[VP][offset${Engine.viewport.offsetx}][${Engine.viewport.x},${Engine.viewport.y}]`);
+
+                function lookRight(vel = 5) {
+
+                    Engine.viewport.offsetx += vel;
+
+                    if (Engine.viewport.offsetx >= game.scale) {
+                        Engine.viewport.offsetx -= game.scale;
+                        Engine.viewport.x += 1;
+                    }
+
+
+                }
+
+                function lookLeft(vel = 5) {
+                    Engine.viewport.offsetx -= 5;
+                    if (Engine.viewport.offsetx <= (game.scale * -1)) {
+                        Engine.viewport.offsetx += game.scale;
+                        Engine.viewport.x -= 1;
+                    }
+
+                }
+                lookLeft(5);
+
+                Engine.viewport.update();
+                Engine.renderer.clear();
+                Engine.renderer.draw.testPattern(32, `rgba(55,55,55,0.5)`, `rgba(255,55,255,0.5)`);
+                Engine.renderer.draw.numSprite();
+
+                Engine.renderer.draw.CameraSafeArea();
+                Engine.renderer.draw.numGrid();
+                Engine.renderer.draw.circle(Hx, Hy);
+
+            }
+
+            Experimental(ev);
 
             if (Engine.run.isActive) {
                 Engine.run.fps();
                 requestAnimationFrame(Engine.run.loop);
             }
         },
-
-
     },
 
     viewport: {
+        isVerbose: true,
+        log: function (msg) {
+            if (Engine.viewport.isVerbose) {
+                Engine.log(`[viewport]${msg}`);
+            }
+        },
         //TopLeft
-        x: 0,
-        y: 0,
+        x: -1,
+        y: -1,
 
         //width of canvas in tiles
         w: null,
@@ -90,45 +120,17 @@ let Engine = {
         offsetx: 0,
         offsety: 0,
 
-        calcMoves: function () {
-
-//            if (Engine.viewport.offsetx >= game.map.s) {
-//                Engine.viewport.offsetx -= game.map.s;
-//                Engine.viewport.x += 1;
-//            }
-//            if (Engine.viewport.offsetx <= (game.map.s) * -1) {
-//                Engine.viewport.offsetx += (game.map.s) * -1;
-//                Engine.viewport.x -= 1;
-//            }
-//            if (Engine.viewport.offsety >= game.map.s) {
-//                Engine.viewport.offsety += game.map.s;
-//                Engine.viewport.y += 1;
-//            }
-//            if (Engine.viewport.offsety <= (game.map.s) * -1) {
-//                Engine.viewport.offsety -= game.map.s;
-//                Engine.viewport.y -= 1;
-//            }
-
-//                        if (Engine.viewport.x < (game.map[0][0].length* -1)){
-//                            Engine.viewport.x = (game.map[0][0].length* -1);
-//                        }
-//                        
-//                        if (Engine.viewport.y<(game.map.length* -1)){
-//                            Engine.viewport.y = (game.map.length* -1);
-//                        }
-                        
-
-
-        },
-        isVerbose: true,
-        log: function (msg) {
-            if (Engine.viewport.isVerbose) {
-                Engine.log(`[viewport]${msg}`);
-            }
-        },
         update: function () {
             Engine.viewport.w = Math.floor(game.canvas.width / game.tile.w);
             Engine.viewport.h = Math.floor(game.canvas.height / game.tile.h);
+
+            //            if (Engine.viewport.offsetx >= game.scale) {
+            //                Engine.viewport.offsetx -= game.scale;
+            //                Engine.viewport.x += 1;
+            //            }
+
+            //            console.log(`ox${Engine.viewport.offsetx}-x${Engine.viewport.x}`);
+
         },
         getDimensions: function () {
             Engine.viewport.update();
@@ -145,42 +147,6 @@ let Engine = {
             };
         },
 
-    },
-
-    controller: {
-
-        keysDown: { // -=-=-=-= https://youtu.be/xsNdwyuuSzo?t=90
-            37: false,
-            38: false,
-            39: false,
-            40: false,
-        },
-
-
-
-
-
-
-        //        controls: {},
-        //        state: {
-        //            up: false,
-        //            down: false,
-        //            left: false,
-        //            right: false,
-        //            space: false,
-        //            shift: false,
-        //        },
-        //        keydown: function (ev) {
-        //            //router:: this scare?
-        //            this.keylogic(ev, false);
-        //        },
-        //        keyup: function (ev) {
-        //            //router  this scare!
-        //            this.keylogic(ev, true);
-        //        },
-        //        keylogic: function (ev, isUP = false) {
-        //
-        //        },
     },
 
     preloader: {
@@ -220,11 +186,60 @@ let Engine = {
         sprite: [],
         canvaslist: [],
         ctxlist: [],
-
+        highlightTile: function (x, y) {
+            drawSquare(x * game.scale, y * game.scale, game.scale);
+        },
         clear: function () {
             game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
         },
         draw: {
+            numGrid: function () {
+                let maxX = Engine.viewport.getDimensions()
+                let DrawCount = 0;
+                for (y = 0; y <= maxX.y; y++) {
+                    for (x = 0; x <= maxX.x; x++) {
+                        DrawCount++;
+                        game.ctx.font = '8px monospace';
+//                        game.ctx.strokeStyle = 'lime';
+                        game.ctx.fillStyle = 'white';
+                        game.ctx.fillText(`M`, Engine.s32(x) + 1, Engine.s32(y) + 8);
+                        game.ctx.fillText(`${y+Engine.viewport.y},${x+Engine.viewport.x}`, Engine.s32(x) + 8, Engine.s32(y) + 12);
+                    }
+                }
+                console.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
+            },
+            numSprite: function () {
+                let maxX = Engine.viewport.getDimensions()
+                let DrawCount = 0;
+                for (y = 0; y <= maxX.y; y++) {
+                    for (x = 0; x <= maxX.x; x++) {
+                        //                        game.ctx.fillStyle = 'rgba(255,55,66,0.8)';
+                        DrawCount++;
+                        //                        
+                        Engine.renderer.draw.itile(0, {
+                                x: x,
+                                y: y
+                            },
+                            //                            x: x,
+                            //                            y: y                        }, {
+                            {
+                                x: x - Engine.viewport.x,
+                                y: y - Engine.viewport.y
+                            }, 1);
+
+                        game.ctx.font = '8px monospace';
+                        game.ctx.fillStyle = 'red';
+                        game.ctx.fillText(`G`, Engine.s32(x) + 1, Engine.s32(y) + 26);
+                        game.ctx.fillText(`${y},${x}`, Engine.s32(x) + 8, Engine.s32(y) + 22);
+
+                        //                        game.ctx.fillText(`${y+Engine.viewport.y},${x+Engine.viewport.x}`, Engine.s32(x) + 6, Engine.s32(y) + 12);
+
+                    }
+                }
+                console.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
+            },
+
+
             spritesheet: function (index = 0) {
                 let iW = game.canvas.width / game.scale;
                 let iH = game.canvas.height / game.scale;
@@ -245,48 +260,68 @@ let Engine = {
                 }
 
             },
-            tile: function (pos={x:0,y:0,offx:Engine.viewport.x,offy:Engine.viewport.y}, size = 1) {
+
+
+
+            fillSquare: function (x, y, scale) {
+                game.ctx.fillRect(x, y, scale, scale);
+            },
+
+            strokeSquare: function (x, y, scale) {
+                game.ctx.Rect(x, y, scale, scale);
+            },
+
+            Fillrect: function (x, y, w, h) {
+                game.ctx.fillRect(x, y, w, h);
+            },
+
+            circle: function (x, y) {
+                game.ctx.fillStyle = 'rgba(200,200,0,0.7)';
+                game.ctx.beginPath();
+                game.ctx.arc(Engine.s32(x) + game.scale / 2, Engine.s32(y) + game.scale / 2, game.scale / 2, 0, 2 * Math.PI);
+                //                game.ctx.stroke();
+                game.ctx.fill();
+                game.ctx.closePath();
+            },
+
+
+            tile: function (pos = {
+                x: 0,
+                y: 0,
+                offx: Engine.viewport.x,
+                offy: Engine.viewport.y
+            }, size = 1) {
                 game.ctx.fillRect((pos.x * game.tile.w * size) + pos.offx, (pos.y * game.tile.h * size) + pos.offy, game.tile.w * size, game.tile.h * size);
             },
-            itile: function (spriteindex = 0, Spos, Dpos, size = 1) {
+            itile: function (spriteindex = 0, Spos = {
+                y: 2,
+                x: 1
+            }, Dpos = {
+                x: 0,
+                y: 0,
+                offx: 0,
+                offy: 0,
+            }, size = 1) {
                 if (Dpos.offx == undefined) {
                     Dpos.offx = 0;
-                    Dpos.offy = 0
+                    Dpos.offy = 0;
                 };
-                game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) + Dpos.offx, (Dpos.y * game.tile.h) + Dpos.offy, game.tile.w * size, game.tile.h * size);
+                game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) - Dpos.offx - Engine.viewport.offsetx, (Dpos.y * game.tile.h) - Dpos.offy - Engine.viewport.offsety, game.tile.w * size, game.tile.h * size);
 
             },
-            view: function (map = Engine.state.map) {
 
-                let xTileIndex = Engine.viewport.x;
-                let yTileIndex = Engine.viewport.y;
-
-                let RenderHeight = game.canvas.height / game.scale;
-                let RenderWidth = game.canvas.width / game.scale;
-
-
-
-
-                for (y = yTileIndex; y <= RenderHeight + 1; y++) {
-                    for (x = xTileIndex; x <= RenderWidth + 1; x++) {
-                        Engine.renderer.draw.itile(0, Engine.state.map[y + (yTileIndex * -1)][x + (xTileIndex * -1)], {
-                            x: x,
-                            y: y,
-                            offx: Engine.viewport.offsetx,
-                            offy: Engine.viewport.offsety,
-                        }, 1);
-                    }
-                }
-
-            },
             map: function (map = Engine.state.map) {
                 let iW = game.canvas.width / game.scale;
                 let iH = game.canvas.height / game.scale;
 
                 for (let y = Engine.viewport.y; y < iH + Engine.viewport.h + Engine.s32(Engine.viewport.y); y++) {
+                    if (Engine.state.map[y] == undefined) {
+                        console.log(`Y map ran out`);
+                        return false;
+                    }
                     for (let x = Engine.viewport.x; x < iW + Engine.viewport.w + Engine.s32(Engine.viewport.x); x++) {
 
-                        if (Engine.state.map[y][x] == null) {
+                        if (Engine.state.map[y][x] == undefined) {
                             console.log(`map ran out`);
                             break;
                         } else {
@@ -328,8 +363,8 @@ let Engine = {
                         Engine.renderer.draw.tile({
                             x: x,
                             y: y,
-                            offx: Engine.viewport.offsetx,
-                            offy: Engine.viewport.offsety,
+                            offx: 0,
+                            offy: 0,
                         }, 1);
                         colourToggle = !colourToggle;
                     }
@@ -337,10 +372,6 @@ let Engine = {
                         colourToggle = !colourToggle;
                     }
                 }
-
-                //DEBUGGING
-                Engine.renderer.draw.CameraSafeArea(scale);
-
             },
         },
 
@@ -440,6 +471,9 @@ let Engine = {
     setup: function () {
         Engine.preloader.init();
         Engine.setupFullScreenCanvas();
+        game.ctx.font = '24px monospace';
+        game.ctx.fillStyle = 'white';
+        game.ctx.fillText(`CLICKME`, (game.canvas.width / 2)-45, game.canvas.height / 2);
     },
 
     init: function (settings = Engine.settings) {
@@ -480,42 +514,14 @@ function grassMap(len = 50) {
     return tempy;
 }
 
-initMap();
+
+// Make map to view::
+//initMap();
+grassMap(30);
 
 
+// put these EVENTS somewhere appropriate::
+window.onresize = Engine.resizeCanvas;
+window.onload = Engine.init;
 
-
-
-
-//grassMap(300);
-document.body.onclick = function () {
-    console.log(Engine.viewport.offsetx);
-    Engine.viewport.offsetx += 10;
-    Engine.viewport.offsety += 10;
-    Engine.viewport.calcMoves();
-    Engine.renderer.clear();
-    //    Engine.renderer.draw.view();
-    Engine.renderer.draw.spritesheet();
-    console.log(`ofset[${Engine.viewport.offsetx},${Engine.viewport.offsety}]`);
-//    console.log(`mod[${Engine.viewport.offsetx%32},${Engine.viewport.offsety%32}]`);
-}
-
-
-
-
-
-
-
-
-
-//NOTES:
-
-//                Engine.renderer.draw.spritesheet(0);
-//Engine.renderer.draw.tile({x:0,y:0});
-//                Engine.renderer.draw.itile(0, {
-//                    x: 4,
-//                    y: 3
-//                }, {
-//                    x: 1,
-//                    y: 1
-//                }, 1);
+document.body.onclick = Engine.run.loop; // DEBUGGER
