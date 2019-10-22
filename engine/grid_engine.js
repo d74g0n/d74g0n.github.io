@@ -12,29 +12,114 @@ let game = {
         h: 100,
         s: 32,
     },
-    currentSecond: 0,
-    frameCount: 0,
-    framesLastSecond: 0,
-    lastFrameTime: 0,
+
 }
 
 let Engine = {
-    v: `0.000.003`,
+    v: `0.000.004`,
     isVerbose: true,
     log: function (msg) {
         if (Engine.isVerbose) {
             console.log(`[E]${msg}`);
         }
     },
-
     state: {
         //        players: [],
         //        mapobjects: [],
         map: [[], []],
     },
 
+    control: {
+        state: {
+            left: false,
+            right: false,
+            up: false,
+            down: false,
+            space: false,
+            shift: false,
+        },
+        isVerbose: true,
+        log: function (msg) {
+            if (Engine.control.isVerbose) {
+                console.log(`[Control]=>[ ${msg} ]`);
+            }
+        },
+        init: function () {
+            Engine.control.enable();
+        },
+        disable: function () {
+            window.onkeydown = undefined;
+            window.onkeyup = undefined;
+        },
+        enable: function () {
+            window.onkeydown = Engine.control.keydown;
+            window.onkeyup = Engine.control.keyup;
+        },
+        keydown: function (ev) {
+            //            console.log(ev);
+            return Engine.control.processKey(ev, true);
+        },
+        keyup: function (ev) {
+            return Engine.control.processKey(ev, false);
+        },
+        processKey: function (ev, isDown) {
+            //set get to isDown value.
+
+
+            switch (ev.keyCode) {
+                case 65:
+                    console.log(`A Pressed`);
+                    Engine.control.state.left = isDown;
+                    break;
+                case 83:
+                    console.log(`S Pressed`);
+                    Engine.control.state.down = isDown;
+                    break;
+                case 87:
+                    console.log(`W Pressed`);
+                    Engine.control.state.up = isDown;
+                    break;
+                case 68:
+                    console.log(`D Pressed`);
+                    Engine.control.state.right = isDown;
+                    break;
+                case 32:
+                    console.log(`SpaceBar?`);
+                    break;
+            }
+
+
+            //
+            //            } else if (ev.keyCode == 32 && !ev.shiftKey) {
+            //
+            //            } else if (ev.keyCode == 32 && ev.shiftKey) {}
+            //
+
+
+
+
+
+
+            Engine.control.state.down = isDown;
+        },
+        processControlState: function () {
+            //apply forces from control state.
+
+            if (Engine.control.state.left) {
+                Engine.viewport.vx += 1;
+            }
+
+            if (Engine.control.state.right) {
+                Engine.viewport.vx -= 1;
+            }
+
+
+        },
+
+    },
+
     run: {
-        isActive: false,
+        isActive: true,
         fps: function () {
             game.ctx.fillStyle = '#ffffff';
             game.ctx.fillText(`FPS: ${game.framesLastSecond}`, 10, 20);
@@ -49,46 +134,43 @@ let Engine = {
             },
         },
         loop: function (ev) {
-            if (game.ctx == null) {
-                return;
-            }
 
             function Experimental(ev) {
-                let Hx = Math.floor(ev.offsetX / game.scale);
-                let Hy = Math.floor(ev.offsetY / game.scale);
+//                let Hx = Math.floor(ev.clientX / game.scale);
+//                let Hy = Math.floor(ev.clientY / game.scale);
+//                console.log(`[VP][offset${Engine.viewport.offsetx}][${Engine.viewport.x},${Engine.viewport.y}]`);
 
-                console.log(`[VP][offset${Engine.viewport.offsetx}][${Engine.viewport.x},${Engine.viewport.y}]`);
-
-                function lookRight(vel = 5) {
-
-                    Engine.viewport.offsetx += vel;
-
-                    if (Engine.viewport.offsetx >= game.scale) {
-                        Engine.viewport.offsetx -= game.scale;
-                        Engine.viewport.x += 1;
+                function processVelocity(vel=Engine.viewport.vx/32) {
+                    Engine.viewport.offsetx -= vel;
+                    if (Engine.viewport.offsetx <= (game.scale * -1) || Engine.viewport.offsetx >= game.scale) {
+                        if (Engine.viewport.offsetx < 0) {
+                            Engine.viewport.offsetx += game.scale;
+                            Engine.viewport.x -= 1;
+                        } else {
+                            Engine.viewport.offsetx -= game.scale;
+                            Engine.viewport.x += 1;
+                        }
                     }
-
-
                 }
+                
+                function friction(){
 
-                function lookLeft(vel = 5) {
-                    Engine.viewport.offsetx -= 5;
-                    if (Engine.viewport.offsetx <= (game.scale * -1)) {
-                        Engine.viewport.offsetx += game.scale;
-                        Engine.viewport.x -= 1;
-                    }
-
+                    Engine.control.vx -= (Engine.control.vx * 0.9) * -1 ;
                 }
-                lookLeft(5);
-
+                
+                processVelocity();
+                friction();
+                
+                //                lookLeft(5);
+                Engine.control.processControlState();
                 Engine.viewport.update();
                 Engine.renderer.clear();
                 Engine.renderer.draw.testPattern(32, `rgba(55,55,55,0.5)`, `rgba(255,55,255,0.5)`);
-                Engine.renderer.draw.numSprite();
+                //                Engine.renderer.draw.numSprite();
 
                 Engine.renderer.draw.CameraSafeArea();
                 Engine.renderer.draw.numGrid();
-                Engine.renderer.draw.circle(Hx, Hy);
+//                Engine.renderer.draw.circle(Hx, Hy);
 
             }
 
@@ -111,6 +193,10 @@ let Engine = {
         //TopLeft
         x: -1,
         y: -1,
+
+        // move velocity
+        vx: 0,
+        vy: 0,
 
         //width of canvas in tiles
         w: null,
@@ -147,7 +233,6 @@ let Engine = {
         },
 
     },
-
     preloader: {
         settings: {
             levelid: `undefined`,
@@ -185,26 +270,34 @@ let Engine = {
         sprite: [],
         canvaslist: [],
         ctxlist: [],
-        highlightTile: function (x, y) {
-            drawSquare(x * game.scale, y * game.scale, game.scale);
+        stat: {
+            tilesDrawn: undefined,
         },
+
         clear: function () {
             game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
         },
         draw: {
             numGrid: function () {
+                //draws all the numbers on the grid - DEBUGGER LEVEL
                 let maxX = Engine.viewport.getDimensions()
                 let DrawCount = 0;
                 for (y = 0; y <= maxX.y; y++) {
                     for (x = 0; x <= maxX.x; x++) {
                         DrawCount++;
+                        // numbers the mapindex coordinates
                         game.ctx.font = '8px monospace';
-                        //                        game.ctx.strokeStyle = 'lime';
                         game.ctx.fillStyle = 'white';
                         game.ctx.fillText(`M`, Engine.s32(x) + 1, Engine.s32(y) + 8);
                         game.ctx.fillText(`${y+Engine.viewport.y},${x+Engine.viewport.x}`, Engine.s32(x) + 8, Engine.s32(y) + 12);
+                        // numbers the Grid.  The Immovable DRAWTILES.
+                        game.ctx.fillStyle = 'red';
+                        game.ctx.fillText(`G`, Engine.s32(x) + 1, Engine.s32(y) + 26);
+                        game.ctx.fillText(`${y},${x}`, Engine.s32(x) + 8, Engine.s32(y) + 22);
+
                     }
                 }
+                Engine.renderer.stat.tilesDrawn = DrawCount;
                 console.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
             },
             numSprite: function () {
@@ -212,9 +305,7 @@ let Engine = {
                 let DrawCount = 0;
                 for (y = 0; y <= maxX.y; y++) {
                     for (x = 0; x <= maxX.x; x++) {
-                        //                        game.ctx.fillStyle = 'rgba(255,55,66,0.8)';
                         DrawCount++;
-                        //                        
                         Engine.renderer.draw.itile(0, {
                                 x: x,
                                 y: y
@@ -225,23 +316,15 @@ let Engine = {
                                 x: x - Engine.viewport.x,
                                 y: y - Engine.viewport.y
                             }, 1);
-
-                        game.ctx.font = '8px monospace';
-                        game.ctx.fillStyle = 'red';
-                        game.ctx.fillText(`G`, Engine.s32(x) + 1, Engine.s32(y) + 26);
-                        game.ctx.fillText(`${y},${x}`, Engine.s32(x) + 8, Engine.s32(y) + 22);
-
-                        //                        game.ctx.fillText(`${y+Engine.viewport.y},${x+Engine.viewport.x}`, Engine.s32(x) + 6, Engine.s32(y) + 12);
-
                     }
                 }
                 console.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
             },
 
             dmap: function () {
-//  https://dmitripavlutin.com/7-tips-to-handle-undefined-in-javascript/
+                //  https://dmitripavlutin.com/7-tips-to-handle-undefined-in-javascript/
 
-                
+
                 // so many w/h tiles on screen...
                 // if negatives exist draw edgesquare;
                 // check length. if length too short deal with it.
@@ -253,7 +336,7 @@ let Engine = {
 
                 }
 
-            }
+            },
 
             spritesheet: function (index = 0) {
                 let iW = game.canvas.width / game.scale;
@@ -292,7 +375,6 @@ let Engine = {
                 game.ctx.fillStyle = 'rgba(200,200,0,0.7)';
                 game.ctx.beginPath();
                 game.ctx.arc(Engine.s32(x) + game.scale / 2, Engine.s32(y) + game.scale / 2, game.scale / 2, 0, 2 * Math.PI);
-                //                game.ctx.stroke();
                 game.ctx.fill();
                 game.ctx.closePath();
             },
@@ -393,28 +475,13 @@ let Engine = {
 
     }, //eof renderer
 
-    _M: {
-        rnd_bool: function () {
-            return Math.random() >= 0.5;
-        },
-        rnd_range: function (min, max) {
-            return Math.floor(Math.random() * (max - min)) + min;
-        },
-        rnd_hex: function () {
-            return `#${(0x1000000 | (Math.floor(Math.random()*16777215))).toString(16).substring(1).toUpperCase()}`;
-        },
-        rnd_rgb: function (min, max) {
-            return `rgb(${Engine._M.rnd_range(min,max)},${Engine._M.rnd_range(min,max)},${Engine._M.rnd_range(min,max)})`;
-        }
-    },
-
+    //system fun
     posObj: function (x, y) {
         return {
             x: x,
             y: y
         };
     },
-
     s32: function (num) {
         //scales up by 32.
         return num * 32;
@@ -422,35 +489,22 @@ let Engine = {
     inflate: function (num) {
         return Engine.s32(num);
     },
-
-    getMapTileData: function (pos) {
-        return Engine.state.map[pos.y][[pos.x]];
-    },
-    getTilesWide: function () {
-        return (game.canvas.width / game.tile.w);
-    },
-    getFullTilesWide: function () {
-        return Math.floor(game.canvas.width / game.tile.w);
-    },
-    getTilesHigh: function () {
-        return (game.canvas.height / game.tile.h);
-    },
-    getFullTilesHigh: function () {
-        return Math.floor(game.canvas.height / game.tile.h);
-    },
-    getCenter: function () {
-        return Engine.viewport.getCenterTile();
+    get: {
+        centerTile: function () {
+            return Engine.viewport.getCenterTile();
+        },
+        tilesWide: function () {
+            return (game.canvas.width / game.tile.w);
+        },
+        tilesHigh: function () {
+            return (game.canvas.width / game.tile.w);
+        },
+        mapTileData: function (x, y) {
+            // do undefined checks here? probably:
+            return Engine.state.map[pos.y][pos.x];
+        },
     },
 
-    isOnMobile: function () {
-        if (game.canvas.width < game.canvas.height) {
-            // console.log('Portrait Detected');
-            return true;
-        } else {
-            // console.log('Horizontal Detected');
-            return false;
-        }
-    },
     //-=-=-=-=    
     resizeCanvas: function () {
         game.canvas.width = (window.innerWidth);
@@ -484,14 +538,16 @@ let Engine = {
     setup: function () {
         Engine.preloader.init();
         Engine.setupFullScreenCanvas();
-        game.ctx.font = '24px monospace';
-        game.ctx.fillStyle = 'white';
-        game.ctx.fillText(`CLICKME`, (game.canvas.width / 2) - 45, game.canvas.height / 2);
+        Engine.control.init();
     },
 
     init: function (settings = Engine.settings) {
         //pass settings into engine init;
         Engine.setup();
+//        game.ctx.font = '24px monospace';
+//        game.ctx.fillStyle = 'white';
+//        game.ctx.fillText(`CLICKME`, (game.canvas.width / 2) - 45, game.canvas.height / 2);
+        Engine.run.loop();
     },
 }
 
@@ -536,5 +592,9 @@ grassMap(30);
 // put these EVENTS somewhere appropriate::
 window.onresize = Engine.resizeCanvas;
 window.onload = Engine.init;
+
+
+
+
 
 document.body.onclick = Engine.run.loop; // DEBUGGER

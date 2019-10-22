@@ -1,3 +1,16 @@
+    //    currentSecond: 0,
+    //    frameCount: 0,
+    //    framesLastSecond: 0,
+    //    lastFrameTime: 0,
+
+
+        highlightTile: function (x, y) {
+            drawSquare(x * game.scale, y * game.scale, game.scale);
+        },
+
+            if (game.ctx == null) {
+                return;
+            }
 //
 //    controller: {
 //
@@ -209,3 +222,52 @@
             //                Engine.viewport.offsety += game.scale;
             //                Engine.viewport.y--;
             //            }
+
+
+
+    _M: {
+        rnd_bool: function () {
+            return Math.random() >= 0.5;
+        },
+        rnd_range: function (min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        },
+        rnd_hex: function () {
+            return `#${(0x1000000 | (Math.floor(Math.random()*16777215))).toString(16).substring(1).toUpperCase()}`;
+        },
+        rnd_rgb: function (min, max) {
+            return `rgb(${Engine._M.rnd_range(min,max)},${Engine._M.rnd_range(min,max)},${Engine._M.rnd_range(min,max)})`;
+        }
+    },
+        
+        
+        
+        
+        
+            isOnMobile: function () {
+        if (game.canvas.width < game.canvas.height) {
+            // console.log('Portrait Detected');
+            return true;
+        } else {
+            // console.log('Horizontal Detected');
+            return false;
+        }
+    },
+        
+        
+        
+        //    getMapTileData: function (pos) {
+//        return Engine.state.map[pos.y][[pos.x]];
+//    },
+//    getTilesWide: function () {
+//        return (game.canvas.width / game.tile.w);
+//    },
+//    getFullTilesWide: function () {
+//        return Math.floor(game.canvas.width / game.tile.w);
+//    },
+//    getTilesHigh: function () {
+//        return (game.canvas.height / game.tile.h);
+//    },
+//    getFullTilesHigh: function () {
+//        return Math.floor(game.canvas.height / game.tile.h);
+//    },
