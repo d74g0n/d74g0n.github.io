@@ -12,12 +12,27 @@ let game = {
         h: 100,
         s: 32,
     },
+    //    currentSecond: 0,
+    //    frameCount: 0,
+    //    framesLastSecond: 0,
+    lastFrameTime: false,
+    fps: undefined,
+    delta: undefined,
 
+    frame: 0,
+    frameLimit: 1000,
+    incrementFrame: function () {
+        game.frame++;
+        if (game.frame == frameLimit) {
+            game.frame = 0;
+        }
+        return;
+    }
 }
 
 let Engine = {
     v: `0.000.004`,
-    isVerbose: true,
+    isVerbose: false,
     log: function (msg) {
         if (Engine.isVerbose) {
             console.log(`[E]${msg}`);
@@ -29,6 +44,38 @@ let Engine = {
         map: [[], []],
     },
 
+    click: {
+        isVerbose: true,
+        log: function (msg) {
+            if (Engine.click.isVerbose) {
+                console.log(`[click]${msg}`);
+            }
+        },
+        isClickable: false,
+        lastClick: {
+            x: undefined,
+            y: undefined
+        },
+        enable: function () {
+            Engine.click.isClickable = true;
+            window.onclick = Engine.click.clicked;
+        },
+        disable: function () {
+            Engine.click.isClickable = false;
+            window.onclick = undefined;
+        },
+        clicked: function (ev) {
+            Engine.click.lastClick.x = Math.floor(ev.clientX / game.tile.w);
+            Engine.click.lastClick.y = Math.floor(ev.clientY / game.tile.h);
+            Engine.click.HighlightTile(Engine.click.lastClick.x, Engine.click.lastClick.y);
+        },
+        HighlightTile: function (ev) {
+            Engine.click.log(`[VP][click.highlightTile][offset[${Engine.viewport.offsetx},${Engine.viewport.offsety}][x,y[${Engine.viewport.x},${Engine.viewport.y}]][velocity[${Engine.viewport.vx},${Engine.viewport.vy}]`);
+
+            Engine.click.log(`[VP][click.clicked][coord[${Engine.click.lastClick.x},${Engine.click.lastClick.y}]]`);
+        }
+    },
+
     control: {
         state: {
             left: false,
@@ -38,7 +85,7 @@ let Engine = {
             space: false,
             shift: false,
         },
-        isVerbose: true,
+        isVerbose: false,
         log: function (msg) {
             if (Engine.control.isVerbose) {
                 console.log(`[Control]=>[ ${msg} ]`);
@@ -56,63 +103,68 @@ let Engine = {
             window.onkeyup = Engine.control.keyup;
         },
         keydown: function (ev) {
-            //            console.log(ev);
             return Engine.control.processKey(ev, true);
         },
         keyup: function (ev) {
             return Engine.control.processKey(ev, false);
         },
         processKey: function (ev, isDown) {
-            //set get to isDown value.
-
 
             switch (ev.keyCode) {
                 case 65:
-                    console.log(`A Pressed`);
+                    Engine.control.log(`A Pressed`);
                     Engine.control.state.left = isDown;
                     break;
                 case 83:
-                    console.log(`S Pressed`);
+                    Engine.control.log(`S Pressed`);
                     Engine.control.state.down = isDown;
                     break;
                 case 87:
-                    console.log(`W Pressed`);
+                    Engine.control.log(`W Pressed`);
                     Engine.control.state.up = isDown;
                     break;
                 case 68:
-                    console.log(`D Pressed`);
+                    Engine.control.log(`D Pressed`);
                     Engine.control.state.right = isDown;
                     break;
                 case 32:
-                    console.log(`SpaceBar?`);
+                    Engine.control.log(`SpaceBar?`);
+                    Engine.control.state.space = isDown;
                     break;
             }
 
-
-            //
-            //            } else if (ev.keyCode == 32 && !ev.shiftKey) {
-            //
-            //            } else if (ev.keyCode == 32 && ev.shiftKey) {}
-            //
-
-
-
-
-
-
-            Engine.control.state.down = isDown;
         },
         processControlState: function () {
             //apply forces from control state.
 
+            let step = 0.49;
+
             if (Engine.control.state.left) {
-                Engine.viewport.vx += 1;
+                Engine.viewport.vx += step;
             }
 
             if (Engine.control.state.right) {
-                Engine.viewport.vx -= 1;
+                Engine.viewport.vx -= step;
             }
 
+            if (Engine.control.state.up) {
+                Engine.viewport.vy += step;
+            }
+
+            if (Engine.control.state.down) {
+                Engine.viewport.vy -= step;
+            }
+
+            if (Engine.control.state.space) {
+                Engine.viewport.vx = 0;
+                Engine.viewport.vy = 0;
+            }
+
+            //            Engine.viewport.vy = Math.round(Engine.viewport.vy);
+            //            Engine.viewport.vx = Math.round(Engine.viewport.vx);
+
+            Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy);
+            Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx);
 
         },
 
@@ -121,12 +173,20 @@ let Engine = {
     run: {
         isActive: true,
         fps: function () {
-            game.ctx.fillStyle = '#ffffff';
-            game.ctx.fillText(`FPS: ${game.framesLastSecond}`, 10, 20);
+            if (!game.lastFrameTime) {
+                game.lastFrameTime = performance.now();
+                game.fps = 0;
+                return;
+            }
+            game.delta = (performance.now() - game.lastFrameTime) / 1000;
+            game.lastFrameTime = performance.now();
+            game.fps = 1 / game.delta;
+            game.ctx.fillStyle = 'lime';
+            game.ctx.fillText(`FPS: ${Math.floor(game.fps)}`, 10, 20);
         },
         speed: {
             factor: function (modu) {
-                if (Engine.frame % modu == 0) {
+                if (game.frame % modu == 0) {
                     return true;
                 } else {
                     return false;
@@ -135,45 +195,44 @@ let Engine = {
         },
         loop: function (ev) {
 
+            // how I WIP a runloop:
             function Experimental(ev) {
-//                let Hx = Math.floor(ev.clientX / game.scale);
-//                let Hy = Math.floor(ev.clientY / game.scale);
-//                console.log(`[VP][offset${Engine.viewport.offsetx}][${Engine.viewport.x},${Engine.viewport.y}]`);
 
-                function processVelocity(vel=Engine.viewport.vx/32) {
-                    Engine.viewport.offsetx -= vel;
-                    if (Engine.viewport.offsetx <= (game.scale * -1) || Engine.viewport.offsetx >= game.scale) {
-                        if (Engine.viewport.offsetx < 0) {
-                            Engine.viewport.offsetx += game.scale;
-                            Engine.viewport.x -= 1;
-                        } else {
-                            Engine.viewport.offsetx -= game.scale;
-                            Engine.viewport.x += 1;
-                        }
-                    }
+                function processVelocity() {
+                    //                    Engine.viewport.vx = Math.round(Engine.viewport.vx);
+                    //                    Engine.viewport.vy = Math.round(Engine.viewport.vy);
+                    Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx);
+                    Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy);
+                    Engine.viewport.offsetx -= Math.round(Engine.viewport.vx);
+                    Engine.viewport.offsety -= Math.round(Engine.viewport.vy);
                 }
-                
-                function friction(){
-
-                    Engine.control.vx -= (Engine.control.vx * 0.9) * -1 ;
-                }
-                
                 processVelocity();
-                friction();
-                
-                //                lookLeft(5);
-                Engine.control.processControlState();
+
+                if (Engine.run.speed.factor(20)) {
+                    Engine.control.processControlState();
+                }
+
                 Engine.viewport.update();
+
                 Engine.renderer.clear();
-                Engine.renderer.draw.testPattern(32, `rgba(55,55,55,0.5)`, `rgba(255,55,255,0.5)`);
-                //                Engine.renderer.draw.numSprite();
+
+                //                Engine.renderer.draw.testPattern(32, `rgba(55,355,55,0.2)`, `rgba(255,155,255,0.5)`);
+
+                Engine.renderer.draw.dmap();
 
                 Engine.renderer.draw.CameraSafeArea();
-                Engine.renderer.draw.numGrid();
-//                Engine.renderer.draw.circle(Hx, Hy);
+                //                                Engine.renderer.draw.numGrid();
+
+                if (typeof Engine.click.lastClick.x === undefined || typeof Engine.click.lastClick.y === undefined) {
+
+                } else {
+                    Engine.renderer.draw.circle(Engine.click.lastClick.x, Engine.click.lastClick.y);
+                }
+
+
+
 
             }
-
             Experimental(ev);
 
             if (Engine.run.isActive) {
@@ -182,7 +241,6 @@ let Engine = {
             }
         },
     },
-
     viewport: {
         isVerbose: true,
         log: function (msg) {
@@ -191,8 +249,10 @@ let Engine = {
             }
         },
         //TopLeft
-        x: -1,
-        y: -1,
+        x: 0,
+        y: 0,
+        offsetx: 0,
+        offsety: 0,
 
         // move velocity
         vx: 0,
@@ -202,22 +262,53 @@ let Engine = {
         w: null,
         h: null,
 
-        offsetx: 0,
-        offsety: 0,
-
         update: function () {
             Engine.viewport.w = Math.floor(game.canvas.width / game.tile.w);
             Engine.viewport.h = Math.floor(game.canvas.height / game.tile.h);
 
-            //            if (Engine.viewport.offsetx >= game.scale) {
-            //                Engine.viewport.offsetx -= game.scale;
-            //                Engine.viewport.x += 1;
-            //            }
 
-            //            console.log(`ox${Engine.viewport.offsetx}-x${Engine.viewport.x}`);
+            if (Engine.viewport.offsetx <= (game.scale * -1) || Engine.viewport.offsetx >= game.scale) {
+                if (Engine.viewport.offsetx < 0) {
+                    Engine.viewport.offsetx -= (game.scale * -1);
+                    Engine.viewport.x -= 1;
+                } else {
+                    Engine.viewport.offsetx -= game.scale;
+                    Engine.viewport.x += 1;
+                }
+            }
+            if (Engine.viewport.offsety <= (game.scale * -1) || Engine.viewport.offsety >= game.scale) {
+                if (Engine.viewport.offsety < 0) {
+                    Engine.viewport.offsety -= (game.scale * -1);
+                    Engine.viewport.y -= 1;
+                } else {
+                    Engine.viewport.offsety -= game.scale;
+                    Engine.viewport.y += 1;
+                }
+            }
+
+
+            function limitVelocities(maxVel = 2) {
+                if (Engine.viewport.vx >= maxVel || Engine.viewport.vx <= (-maxVel)) {
+                    Engine.viewport.vx *= 0.9;
+                }
+
+                if (Engine.viewport.vy >= maxVel || Engine.viewport.vy <= (-maxVel)) {
+                    Engine.viewport.vy *= 0.9;
+                }
+            }
+            limitVelocities();
+
+            function applyFriction() {
+                Engine.viewport.vy *= 0.995;
+                Engine.viewport.vx *= 0.995;
+                Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy,5);
+                Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx,5);
+            }
+            applyFriction();
 
         },
         getDimensions: function () {
+
             Engine.viewport.update();
             return {
                 x: Engine.viewport.w,
@@ -246,7 +337,7 @@ let Engine = {
         log: function (msg) {
             if (Engine.preloader.isVerbose) {
                 //            if (true) {
-                console.log(`[preloader][${msg}]`);
+                Engine.log(`[preloader][${msg}]`);
             } else {
                 return Engine.preloader.isVerbose;
             }
@@ -278,6 +369,12 @@ let Engine = {
             game.ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
         },
         draw: {
+            isVerbose: true,
+            log: function (msg) {
+                if (Engine.renderer.draw.isVerbose) {
+                    Engine.log(`[draw]${msg}`)
+                }
+            },
             numGrid: function () {
                 //draws all the numbers on the grid - DEBUGGER LEVEL
                 let maxX = Engine.viewport.getDimensions()
@@ -294,11 +391,10 @@ let Engine = {
                         game.ctx.fillStyle = 'red';
                         game.ctx.fillText(`G`, Engine.s32(x) + 1, Engine.s32(y) + 26);
                         game.ctx.fillText(`${y},${x}`, Engine.s32(x) + 8, Engine.s32(y) + 22);
-
                     }
                 }
                 Engine.renderer.stat.tilesDrawn = DrawCount;
-                console.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
+                Engine.renderer.draw.log(`[.numGrid][drawn:[${DrawCount}][${x}*${y}]]`);
             },
             numSprite: function () {
                 let maxX = Engine.viewport.getDimensions()
@@ -307,37 +403,61 @@ let Engine = {
                     for (x = 0; x <= maxX.x; x++) {
                         DrawCount++;
                         Engine.renderer.draw.itile(0, {
-                                x: x,
-                                y: y
-                            },
-                            //                            x: x,
-                            //                            y: y                        }, {
-                            {
-                                x: x - Engine.viewport.x,
-                                y: y - Engine.viewport.y
-                            }, 1);
+                            x: x,
+                            y: y
+                        }, {
+                            x: x - Engine.viewport.x,
+                            y: y - Engine.viewport.y
+                        }, 1);
                     }
                 }
+                Engine.renderer.stat.tilesDrawn = DrawCount;
                 console.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
             },
-
             dmap: function () {
-                //  https://dmitripavlutin.com/7-tips-to-handle-undefined-in-javascript/
+                let maxX = Engine.viewport.getDimensions()
+                let DrawCount = 0;
+                for (y = -2; y <= maxX.y + 2; y++) {
+                    for (x = -2; x <= maxX.x + 2; x++) {
+
+                        if (typeof Engine.state.map[y + Engine.viewport.y] === 'undefined') {
+                            game.ctx.font = `8px monospace`;
+                            game.ctx.fillStyle = 'yellow';
+                            //                                                        game.ctx.fillStyle = 'red';
+                            game.ctx.fillText(`EMPTY`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 10 - Engine.viewport.offsety);
+                            game.ctx.fillText(`TILE`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 20 - Engine.viewport.offsety);
+
+                        } else {
 
 
-                // so many w/h tiles on screen...
-                // if negatives exist draw edgesquare;
-                // check length. if length too short deal with it.
-                if (typeof game.map[y] === 'undefined') {
 
+
+
+                            if (typeof Engine.state.map[y + Engine.viewport.y][x + Engine.viewport.x] === 'undefined') {
+                                //draw blank;            
+                                game.ctx.font = `8px monospace`;
+                                game.ctx.fillStyle = 'yellow';
+                                //                                                        game.ctx.fillStyle = 'red';
+                                game.ctx.fillText(`EMPTY`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 10 - Engine.viewport.offsety);
+                                game.ctx.fillText(`TILE`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 20 - Engine.viewport.offsety);
+
+
+                            } else {
+                                DrawCount++;
+                                Engine.renderer.draw.itile(0, Engine.state.map[y + Engine.viewport.y][x + Engine.viewport.x], {
+                                    x: x,
+                                    y: y,
+                                }, 1);
+
+
+
+                            }
+                        }
+                    }
                 }
-
-                if (typeof game.map[y][x] === 'undefined') {
-
-                }
-
+                Engine.renderer.stat.tilesDrawn = DrawCount;
+                Engine.log(`Tiles Numbered: [${DrawCount}][${x}*${y}]`);
             },
-
             spritesheet: function (index = 0) {
                 let iW = game.canvas.width / game.scale;
                 let iH = game.canvas.height / game.scale;
@@ -371,10 +491,10 @@ let Engine = {
                 game.ctx.fillRect(x, y, w, h);
             },
 
-            circle: function (x, y) {
-                game.ctx.fillStyle = 'rgba(200,200,0,0.7)';
+            circle: function (x, y, col = 'rgba(200,200,0,0.7)', r = game.scale / 2) {
+                game.ctx.fillStyle = col;
                 game.ctx.beginPath();
-                game.ctx.arc(Engine.s32(x) + game.scale / 2, Engine.s32(y) + game.scale / 2, game.scale / 2, 0, 2 * Math.PI);
+                game.ctx.arc(Engine.s32(x) + game.scale / 2, Engine.s32(y) + game.scale / 2, r, 0, 2 * Math.PI);
                 game.ctx.fill();
                 game.ctx.closePath();
             },
@@ -403,38 +523,18 @@ let Engine = {
                 game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) - Dpos.offx - Engine.viewport.offsetx, (Dpos.y * game.tile.h) - Dpos.offy - Engine.viewport.offsety, game.tile.w * size, game.tile.h * size);
 
             },
-
-            map: function (map = Engine.state.map) {
-                let iW = game.canvas.width / game.scale;
-                let iH = game.canvas.height / game.scale;
-
-                for (let y = Engine.viewport.y; y < iH + Engine.viewport.h + Engine.s32(Engine.viewport.y); y++) {
-                    if (Engine.state.map[y] == undefined) {
-                        console.log(`Y map ran out`);
-                        return false;
-                    }
-                    for (let x = Engine.viewport.x; x < iW + Engine.viewport.w + Engine.s32(Engine.viewport.x); x++) {
-
-                        if (Engine.state.map[y][x] == undefined) {
-                            console.log(`map ran out`);
-                            break;
-                        } else {
-                            Engine.renderer.draw.itile(0, Engine.state.map[y][x], {
-                                x: x,
-                                y: y,
-                                offx: Engine.viewport.offsetx,
-                                offy: Engine.viewport.offsety,
-                            }, 1);
-                        }
-                    }
-                }
-
-            },
             CameraSafeArea: function (scale = game.tile.w) {
-                game.ctx.fillStyle = 'rgba(0,0,255,0.9)';
+                game.ctx.fillStyle = 'rgba(0,0,0,0.7)';
                 //center::
-                game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 2, scale * 2);
 
+                if (Engine.viewport.w % 2 == 0) {
+                    game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 2, scale * 2);
+
+                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x + 0.5, Engine.viewport.getCenterTile().y + 0.5, 'rgba(255,255,255,0.2)', 32);
+                } else {
+                    game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
+                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x, Engine.viewport.getCenterTile().y, 'rgba(255,255,255,0.2)', 16);
+                }
                 game.ctx.fillStyle = 'rgba(0,255,155,0.7)';
                 game.ctx.fillRect(1 * scale, 1 * scale, scale * 1, scale * 1);
 
@@ -442,6 +542,31 @@ let Engine = {
                 game.ctx.fillRect(1 * scale, (pos.y - 2) * scale, scale * 1, scale * 1);
                 game.ctx.fillRect((pos.x - 2) * scale, 1 * scale, scale * 1, scale * 1);
                 game.ctx.fillRect((pos.x - 2) * scale, (pos.y - 2) * scale, scale * 1, scale * 1);
+
+
+
+
+                function squares(padding = 10, color = 'white') {
+                    game.ctx.beginPath();
+                    game.ctx.strokeStyle = color;
+                    game.ctx.strokeWidth = 2;
+                    //bot-midtile-left
+                    game.ctx.moveTo((1 * scale) + (scale / 2) - padding, (((pos.y - 2) * scale) + scale / 2) + padding);
+                    //bot-midtile-right
+                    game.ctx.lineTo(((pos.x - 1) * scale) - (scale / 2) + padding, (((pos.y - 2) * scale) + scale / 2) + padding);
+
+
+                    game.ctx.lineTo(((pos.x - 1) * scale) - (scale / 2) + padding, (2 * scale) - (scale / 2) - padding);
+                    game.ctx.lineTo(((1) * scale) + (scale / 2) - padding, (2 * scale) - (scale / 2) - padding);
+                    game.ctx.closePath();
+                    game.ctx.stroke();
+
+                }
+                squares(-100, 'blue');
+                squares(10, 'red');
+                squares(0);
+
+
             },
             testPattern: function (scale = '32', colA = 'red', colB = 'white') {
                 let iW = game.canvas.width / scale;
@@ -476,6 +601,14 @@ let Engine = {
     }, //eof renderer
 
     //system fun
+
+    _Math: {
+        polish: function (val, len = 3) {
+            let temp = val.toFixed(len);
+            return Number(temp);
+        },
+    },
+
     posObj: function (x, y) {
         return {
             x: x,
@@ -490,6 +623,9 @@ let Engine = {
         return Engine.s32(num);
     },
     get: {
+        frame: function () {
+            return game.frame;
+        },
         centerTile: function () {
             return Engine.viewport.getCenterTile();
         },
@@ -504,13 +640,11 @@ let Engine = {
             return Engine.state.map[pos.y][pos.x];
         },
     },
-
     //-=-=-=-=    
     resizeCanvas: function () {
         game.canvas.width = (window.innerWidth);
         game.canvas.height = (window.innerHeight);
     },
-
     setupFullScreenCanvas: function () {
         //make canvas and style it appropriately:
         _el.create('canvas').insertAfter(document.getElementById("anchor"));
@@ -534,21 +668,20 @@ let Engine = {
         Engine.renderer.canvaslist.push(_el.temp_el);
         Engine.renderer.ctxlist.push(_el.temp_el.getContext('2d'));
     },
-
     setup: function () {
         Engine.preloader.init();
         Engine.setupFullScreenCanvas();
         Engine.control.init();
     },
-
     init: function (settings = Engine.settings) {
         //pass settings into engine init;
         Engine.setup();
+        Engine.click.enable();
         Engine.run.loop();
     },
 }
 
-function initMap(len = 50) {
+function initMap(len = 10) {
     let tempy = [];
     for (let y = 0; y < len; y++) {
         let tempx = [];
@@ -580,18 +713,13 @@ function grassMap(len = 50) {
     return tempy;
 }
 
-
 // Make map to view::
-//initMap();
-grassMap(30);
-
-
+initMap();
+//grassMap(300);
 // put these EVENTS somewhere appropriate::
 window.onresize = Engine.resizeCanvas;
 window.onload = Engine.init;
-
-
-
-
-
-document.body.onclick = Engine.run.loop; // DEBUGGER
+if (!Engine.run.isActive) {
+    document.onclick = Engine.run.loop;
+}
+//document.body.onclick = Engine.run.loop; // DEBUGGER

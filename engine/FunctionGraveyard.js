@@ -1,7 +1,13 @@
-    //    currentSecond: 0,
-    //    frameCount: 0,
-    //    framesLastSecond: 0,
-    //    lastFrameTime: 0,
+
+                function HighlightByEvent(ev) {
+                    //                let Hx = Math.floor(ev.clientX / game.scale);
+                    //                let Hy = Math.floor(ev.clientY / game.scale);
+                    //                console.log(`[VP][offset${Engine.viewport.offsetx}][${Engine.viewport.x},${Engine.viewport.y}]`);               
+                    //                Engine.renderer.draw.circle(Hx, Hy);
+
+
+                }
+
 
 
         highlightTile: function (x, y) {
@@ -10,44 +16,7 @@
 
             if (game.ctx == null) {
                 return;
-            }
-//
-//    controller: {
-//
-//        keysDown: { // -=-=-=-= https://youtu.be/xsNdwyuuSzo?t=90
-//            37: false,
-//            38: false,
-//            39: false,
-//            40: false,
-//        },
-//
-//
-//
-//
-//
-//
-//        //        controls: {},
-//        //        state: {
-//        //            up: false,
-//        //            down: false,
-//        //            left: false,
-//        //            right: false,
-//        //            space: false,
-//        //            shift: false,
-//        //        },
-//        //        keydown: function (ev) {
-//        //            //router:: this scare?
-//        //            this.keylogic(ev, false);
-//        //        },
-//        //        keyup: function (ev) {
-//        //            //router  this scare!
-//        //            this.keylogic(ev, true);
-//        //        },
-//        //        keylogic: function (ev, isUP = false) {
-//        //
-//        //        },
-//    },
-//        
+    
 //        
 //        
 //
