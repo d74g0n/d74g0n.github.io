@@ -78,17 +78,22 @@ let Engine = {
 
         },
         boundClickMap: function () {
-            //            if (Engine.click.lastClick.x - Engine.viewport.x < 0){
+            // Keep click on map tile.
             if (Engine.click.lastClick.x + Engine.viewport.x < 0) {
                 //left
-                Engine.click.lastClick.x = Engine.get.centerTile().x- Engine.viewport.x;
-                console.log(`it dox`);
+                Engine.click.lastClick.x = Engine.viewport.x*-1;
             }
-            //            if (Engine.click.lastClick.y - Engine.viewport.y< 0){
             if (Engine.click.lastClick.y + Engine.viewport.y < 0) {
                 //top
-                Engine.click.lastClick.y = Engine.get.centerTile().y- Engine.viewport.y;
-                console.log(`it doy`);
+                Engine.click.lastClick.y = Engine.viewport.y*-1;
+            }
+            if (Engine.click.lastClick.x + Engine.viewport.x >= Engine.state.map[0].length-1) {
+                //right
+                Engine.click.lastClick.x = (Engine.state.map.length-1)-Engine.viewport.x;
+            }
+            if (Engine.click.lastClick.y + Engine.viewport.y >= Engine.state.map.length-1) {
+                //bottom
+                Engine.click.lastClick.y = (Engine.state.map.length-1)-Engine.viewport.y;
             }
         }
     },
@@ -165,11 +170,11 @@ let Engine = {
             }
 
             if (Engine.control.state.up) {
-                Engine.viewport.vy += step;
+                Engine.viewport.vy -= step;
             }
 
             if (Engine.control.state.down) {
-                Engine.viewport.vy -= step;
+                Engine.viewport.vy += step;
             }
 
             if (Engine.control.state.space) {
@@ -252,7 +257,7 @@ let Engine = {
             Experimental(ev);
 
             if (Engine.run.isActive) {
-                Engine.run.fps();
+//                Engine.run.fps();
                 requestAnimationFrame(Engine.run.loop);
             }
         },
