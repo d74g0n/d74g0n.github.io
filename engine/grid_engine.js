@@ -52,6 +52,7 @@ let Engine = {
             }
         },
         isClickable: false,
+        isPanning: true,
         lastClick: {
             x: undefined,
             y: undefined
@@ -63,16 +64,32 @@ let Engine = {
         disable: function () {
             Engine.click.isClickable = false;
             window.onclick = undefined;
+            Engine.click.isPanning = false;
         },
+        update: function () {
+            Engine.click.boundClickMap();
+},
         clicked: function (ev) {
             Engine.click.lastClick.x = Math.floor(ev.clientX / game.tile.w);
             Engine.click.lastClick.y = Math.floor(ev.clientY / game.tile.h);
-            Engine.click.HighlightTile(Engine.click.lastClick.x, Engine.click.lastClick.y);
-        },
-        HighlightTile: function (ev) {
-            Engine.click.log(`[VP][click.highlightTile][offset[${Engine.viewport.offsetx},${Engine.viewport.offsety}][x,y[${Engine.viewport.x},${Engine.viewport.y}]][velocity[${Engine.viewport.vx},${Engine.viewport.vy}]`);
+            Engine.click.isPanning = true;
 
-            Engine.click.log(`[VP][click.clicked][coord[${Engine.click.lastClick.x},${Engine.click.lastClick.y}]]`);
+            
+
+        },
+        boundClickMap: function () {
+            //            if (Engine.click.lastClick.x - Engine.viewport.x < 0){
+            if (Engine.click.lastClick.x + Engine.viewport.x < 0) {
+                //left
+                Engine.click.lastClick.x = Engine.get.centerTile().x- Engine.viewport.x;
+                console.log(`it dox`);
+            }
+            //            if (Engine.click.lastClick.y - Engine.viewport.y< 0){
+            if (Engine.click.lastClick.y + Engine.viewport.y < 0) {
+                //top
+                Engine.click.lastClick.y = Engine.get.centerTile().y- Engine.viewport.y;
+                console.log(`it doy`);
+            }
         }
     },
 
@@ -137,7 +154,7 @@ let Engine = {
         processControlState: function () {
             //apply forces from control state.
 
-            let step = 0.49;
+            let step = 0.49; // MOVE UP
 
             if (Engine.control.state.left) {
                 Engine.viewport.vx += step;
@@ -159,9 +176,6 @@ let Engine = {
                 Engine.viewport.vx = 0;
                 Engine.viewport.vy = 0;
             }
-
-            //            Engine.viewport.vy = Math.round(Engine.viewport.vy);
-            //            Engine.viewport.vx = Math.round(Engine.viewport.vx);
 
             Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy);
             Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx);
@@ -213,15 +227,17 @@ let Engine = {
                 }
 
                 Engine.viewport.update();
-
-                Engine.renderer.clear();
-
+                Engine.click.update();
+                
+                if (Engine.run.speed.factor(60)) {
+                    Engine.renderer.clear();
+                }
                 //                Engine.renderer.draw.testPattern(32, `rgba(55,355,55,0.2)`, `rgba(255,155,255,0.5)`);
 
                 Engine.renderer.draw.dmap();
 
-                Engine.renderer.draw.CameraSafeArea();
-                //                                Engine.renderer.draw.numGrid();
+                //                Engine.renderer.draw.CameraSafeArea();
+//                                                Engine.renderer.draw.numGrid();
 
                 if (typeof Engine.click.lastClick.x === undefined || typeof Engine.click.lastClick.y === undefined) {
 
@@ -270,19 +286,23 @@ let Engine = {
             if (Engine.viewport.offsetx <= (game.scale * -1) || Engine.viewport.offsetx >= game.scale) {
                 if (Engine.viewport.offsetx < 0) {
                     Engine.viewport.offsetx -= (game.scale * -1);
+                    Engine.click.lastClick.x++;
                     Engine.viewport.x -= 1;
                 } else {
                     Engine.viewport.offsetx -= game.scale;
+                    Engine.click.lastClick.x--;
                     Engine.viewport.x += 1;
                 }
             }
             if (Engine.viewport.offsety <= (game.scale * -1) || Engine.viewport.offsety >= game.scale) {
                 if (Engine.viewport.offsety < 0) {
                     Engine.viewport.offsety -= (game.scale * -1);
-                    Engine.viewport.y -= 1;
+                    Engine.click.lastClick.y--;
+                    Engine.viewport.y += 1;
                 } else {
                     Engine.viewport.offsety -= game.scale;
-                    Engine.viewport.y += 1;
+                    Engine.click.lastClick.y++;
+                    Engine.viewport.y -= 1;
                 }
             }
 
@@ -301,10 +321,63 @@ let Engine = {
             function applyFriction() {
                 Engine.viewport.vy *= 0.995;
                 Engine.viewport.vx *= 0.995;
-                Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy,5);
-                Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx,5);
+                Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy, 5);
+                Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx, 5);
             }
             applyFriction();
+
+
+            function clicktargetpan() {
+                let stepchop = 0.001;
+                //                console.log(Engine.get.centerTile().x - Engine.click.lastClick.x)
+
+                if (Engine.get.centerTile().x > Engine.click.lastClick.x) {
+                    //center is larger:
+                    let delta = (Engine.get.centerTile().x - Engine.click.lastClick.x) * game.scale;
+                    Engine.viewport.vx += delta * stepchop;
+                }
+                if (Engine.get.centerTile().x < Engine.click.lastClick.x) {
+                    //target is larger 
+                    let delta = (Engine.click.lastClick.x - Engine.get.centerTile().x) * game.scale;
+                    Engine.viewport.vx -= delta * stepchop;
+                }
+
+                if ((Engine.get.centerTile().x == Engine.click.lastClick.x)) {
+                    Engine.viewport.vx = 0;
+                }
+
+
+
+
+                if (Engine.get.centerTile().y > Engine.click.lastClick.y) {
+                    //center is larger:
+                    let delta = (Engine.get.centerTile().y - Engine.click.lastClick.y) * game.scale;
+                    Engine.viewport.vy -= delta * stepchop;
+                }
+                if (Engine.get.centerTile().y < Engine.click.lastClick.y) {
+                    //target is larger 
+                    let delta = (Engine.click.lastClick.y - Engine.get.centerTile().y) * game.scale;
+                    Engine.viewport.vy += delta * stepchop;
+                }
+
+                if ((Engine.get.centerTile().y == Engine.click.lastClick.y)) {
+                    Engine.viewport.vy = 0;
+                    Engine.click.isPanning = false;
+                }
+
+
+
+
+
+
+
+            }
+
+            //            if (Engine.click.isPanning) {
+            clicktargetpan();
+            //            }
+
+
 
         },
         getDimensions: function () {
@@ -316,10 +389,12 @@ let Engine = {
             };
 
         },
+        CenterTileAdjustX: 0,
+        CenterTileAdjustY: 0,
         getCenterTile: function () {
             return {
-                x: Math.floor(((game.canvas.width / game.tile.w) / 2) - 0.5),
-                y: Math.floor(((game.canvas.height / game.tile.h) / 2) - 0.5),
+                x: Math.floor(((game.canvas.width / game.tile.w) / 2) - 0.5) + Engine.viewport.CenterTileAdjustX,
+                y: Math.floor(((game.canvas.height / game.tile.h) / 2) - 0.5) + Engine.viewport.CenterTileAdjustY,
             };
         },
 
@@ -417,40 +492,34 @@ let Engine = {
             dmap: function () {
                 let maxX = Engine.viewport.getDimensions()
                 let DrawCount = 0;
+
+                function EmptyTile(color = 'yellow') {
+                    game.ctx.font = `8px monospace`;
+                    game.ctx.fillStyle = color;
+                    //                                                        game.ctx.fillStyle = 'red';
+                    game.ctx.fillText(`EMPTY`, Engine.s32(x) + 4 - Engine.viewport.offsetx, Engine.s32(y) + 10 + Engine.viewport.offsety);
+                    game.ctx.fillText(`TILE`, Engine.s32(x) + 10 - Engine.viewport.offsetx, Engine.s32(y) + 26 + Engine.viewport.offsety);
+                }
+
+
                 for (y = -2; y <= maxX.y + 2; y++) {
                     for (x = -2; x <= maxX.x + 2; x++) {
 
                         if (typeof Engine.state.map[y + Engine.viewport.y] === 'undefined') {
-                            game.ctx.font = `8px monospace`;
-                            game.ctx.fillStyle = 'yellow';
-                            //                                                        game.ctx.fillStyle = 'red';
-                            game.ctx.fillText(`EMPTY`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 10 - Engine.viewport.offsety);
-                            game.ctx.fillText(`TILE`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 20 - Engine.viewport.offsety);
+                            //no Data on Y axis::
+                            //                            EmptyTile('grey');
 
                         } else {
-
-
-
-
-
                             if (typeof Engine.state.map[y + Engine.viewport.y][x + Engine.viewport.x] === 'undefined') {
-                                //draw blank;            
-                                game.ctx.font = `8px monospace`;
-                                game.ctx.fillStyle = 'yellow';
-                                //                                                        game.ctx.fillStyle = 'red';
-                                game.ctx.fillText(`EMPTY`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 10 - Engine.viewport.offsety);
-                                game.ctx.fillText(`TILE`, Engine.s32(x) + 16 - Engine.viewport.offsetx, Engine.s32(y) + 20 - Engine.viewport.offsety);
-
-
+                                //Data on Y axis BUT NO data on X axis::
+                                //                                EmptyTile('grey');
                             } else {
+                                // if Tile Exists::
                                 DrawCount++;
                                 Engine.renderer.draw.itile(0, Engine.state.map[y + Engine.viewport.y][x + Engine.viewport.x], {
                                     x: x,
                                     y: y,
                                 }, 1);
-
-
-
                             }
                         }
                     }
@@ -491,10 +560,12 @@ let Engine = {
                 game.ctx.fillRect(x, y, w, h);
             },
 
-            circle: function (x, y, col = 'rgba(200,200,0,0.7)', r = game.scale / 2) {
+            //            circle: function (x, y, col = 'rgba(200,200,0,0.7)', r = game.scale / 2) {
+            circle: function (x, y, col = 'rgba(200,20,200,0.7)', r = game.scale / 2) {
                 game.ctx.fillStyle = col;
                 game.ctx.beginPath();
-                game.ctx.arc(Engine.s32(x) + game.scale / 2, Engine.s32(y) + game.scale / 2, r, 0, 2 * Math.PI);
+                //                game.ctx.arc(Engine.s32(x) + game.scale / 2, Engine.s32(y) + game.scale / 2, r, 0, 2 * Math.PI);
+                game.ctx.arc(Engine.s32(x) + (game.scale / 2) - Engine.viewport.offsetx, Engine.s32(y) + (game.scale / 2) + Engine.viewport.offsety, r, 0, 2 * Math.PI);
                 game.ctx.fill();
                 game.ctx.closePath();
             },
@@ -508,8 +579,8 @@ let Engine = {
                 game.ctx.fillRect((pos.x * game.tile.w * size) + pos.offx, (pos.y * game.tile.h * size) + pos.offy, game.tile.w * size, game.tile.h * size);
             },
             itile: function (spriteindex = 0, Spos = {
-                y: 2,
-                x: 1
+                y: 0,
+                x: 0
             }, Dpos = {
                 x: 0,
                 y: 0,
@@ -520,20 +591,19 @@ let Engine = {
                     Dpos.offx = 0;
                     Dpos.offy = 0;
                 };
-                game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) - Dpos.offx - Engine.viewport.offsetx, (Dpos.y * game.tile.h) - Dpos.offy - Engine.viewport.offsety, game.tile.w * size, game.tile.h * size);
-
+                game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) - Dpos.offx - Engine.viewport.offsetx, (Dpos.y * game.tile.h) - Dpos.offy + Engine.viewport.offsety, game.tile.w * size, game.tile.h * size);
             },
             CameraSafeArea: function (scale = game.tile.w) {
                 game.ctx.fillStyle = 'rgba(0,0,0,0.7)';
                 //center::
-
                 if (Engine.viewport.w % 2 == 0) {
-                    game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 2, scale * 2);
+                    game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
 
-                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x + 0.5, Engine.viewport.getCenterTile().y + 0.5, 'rgba(255,255,255,0.2)', 32);
+                    //                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x + 0.5, Engine.viewport.getCenterTile().y + 0.5, 'rgba(255,255,255,0.2)', 16);
+                    //                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x, Engine.viewport.getCenterTile().y, 'rgba(255,255,255,0.2)', 16);
                 } else {
                     game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
-                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x, Engine.viewport.getCenterTile().y, 'rgba(255,255,255,0.2)', 16);
+                    //                    Engine.renderesdwr.draw.circle(Engine.viewport.getCenterTile().x, Engine.viewport.getCenterTile().y, 'rgba(255,255,255,0.2)', 16);
                 }
                 game.ctx.fillStyle = 'rgba(0,255,155,0.7)';
                 game.ctx.fillRect(1 * scale, 1 * scale, scale * 1, scale * 1);
@@ -543,10 +613,8 @@ let Engine = {
                 game.ctx.fillRect((pos.x - 2) * scale, 1 * scale, scale * 1, scale * 1);
                 game.ctx.fillRect((pos.x - 2) * scale, (pos.y - 2) * scale, scale * 1, scale * 1);
 
-
-
-
                 function squares(padding = 10, color = 'white') {
+                    // CAMERA SAFE LINES
                     game.ctx.beginPath();
                     game.ctx.strokeStyle = color;
                     game.ctx.strokeWidth = 2;
@@ -554,17 +622,14 @@ let Engine = {
                     game.ctx.moveTo((1 * scale) + (scale / 2) - padding, (((pos.y - 2) * scale) + scale / 2) + padding);
                     //bot-midtile-right
                     game.ctx.lineTo(((pos.x - 1) * scale) - (scale / 2) + padding, (((pos.y - 2) * scale) + scale / 2) + padding);
-
-
                     game.ctx.lineTo(((pos.x - 1) * scale) - (scale / 2) + padding, (2 * scale) - (scale / 2) - padding);
                     game.ctx.lineTo(((1) * scale) + (scale / 2) - padding, (2 * scale) - (scale / 2) - padding);
                     game.ctx.closePath();
                     game.ctx.stroke();
-
                 }
-                squares(-100, 'blue');
-                squares(10, 'red');
-                squares(0);
+                //                squares(-160, 'blue');
+                squares(16, 'red');
+                squares(-16);
 
 
             },
@@ -697,7 +762,7 @@ function initMap(len = 10) {
     return tempy;
 }
 
-function grassMap(len = 50) {
+function grassMap(len = 10) {
     let tempy = [];
     for (let y = 0; y < len; y++) {
         let tempx = [];
@@ -714,8 +779,8 @@ function grassMap(len = 50) {
 }
 
 // Make map to view::
-initMap();
-//grassMap(300);
+//initMap();
+grassMap(20);
 // put these EVENTS somewhere appropriate::
 window.onresize = Engine.resizeCanvas;
 window.onload = Engine.init;
