@@ -17,6 +17,13 @@
             if (game.ctx == null) {
                 return;
     
+                
+                //if (!Engine.run.isActive) {
+//    document.onclick = Engine.run.loop;
+//}
+//document.body.onclick = Engine.run.loop; // DEBUGGER
+                
+                
 //        
 //        
 //

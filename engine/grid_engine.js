@@ -68,33 +68,39 @@ let Engine = {
         },
         update: function () {
             Engine.click.boundClickMap();
-},
+        },
         clicked: function (ev) {
             Engine.click.lastClick.x = Math.floor(ev.clientX / game.tile.w);
             Engine.click.lastClick.y = Math.floor(ev.clientY / game.tile.h);
             Engine.click.isPanning = true;
 
-            
+
 
         },
         boundClickMap: function () {
+            //USE THIS LOGIC FOR GETCENTER.--control mapbounds
+
+
             // Keep click on map tile.
             if (Engine.click.lastClick.x + Engine.viewport.x < 0) {
                 //left
-                Engine.click.lastClick.x = Engine.viewport.x*-1;
+                Engine.click.lastClick.x = Engine.viewport.x * -1;
             }
             if (Engine.click.lastClick.y + Engine.viewport.y < 0) {
                 //top
-                Engine.click.lastClick.y = Engine.viewport.y*-1;
+                Engine.click.lastClick.y = Engine.viewport.y * -1;
             }
-            if (Engine.click.lastClick.x + Engine.viewport.x >= Engine.state.map[0].length-1) {
+            if (Engine.click.lastClick.x + Engine.viewport.x >= Engine.state.map[0].length - 1) {
                 //right
-                Engine.click.lastClick.x = (Engine.state.map.length-1)-Engine.viewport.x;
+                Engine.click.lastClick.x = (Engine.state.map.length - 1) - Engine.viewport.x;
             }
-            if (Engine.click.lastClick.y + Engine.viewport.y >= Engine.state.map.length-1) {
+            if (Engine.click.lastClick.y + Engine.viewport.y >= Engine.state.map.length - 1) {
                 //bottom
-                Engine.click.lastClick.y = (Engine.state.map.length-1)-Engine.viewport.y;
+                Engine.click.lastClick.y = (Engine.state.map.length - 1) - Engine.viewport.y;
             }
+
+
+
         }
     },
 
@@ -231,9 +237,40 @@ let Engine = {
                     Engine.control.processControlState();
                 }
 
+                function BoundCenterTile() {
+                    // Keep CENTERTILE on map tile. WORKINGISH!
+                    if (Engine.get.centerTile().x + Engine.viewport.x-1 < 0) {
+                        //left
+//                       Engine.viewport.x =  -Math.ceil(((Engine.get.tilesWide()-1)/2));
+                       Engine.viewport.x++; //WIP WIP WIP MOVING CIRCLE
+                        Engine.viewport.offsetx = -31;
+                    }
+                    
+                    
+                    
+                    if (Engine.get.centerTile().y + Engine.viewport.y < 0) {
+                        //top
+                        Engine.get.centerTile().y = Engine.viewport.y * -1;
+                    }
+                    if (Engine.get.centerTile().x + Engine.viewport.x >= Engine.state.map[0].length - 1) {
+                        //right
+                        Engine.get.centerTile().x = (Engine.state.map.length - 1) - Engine.viewport.x;
+                    }
+                    if (Engine.get.centerTile().y + Engine.viewport.y >= Engine.state.map.length - 1) {
+                        //bottom
+                        Engine.get.centerTile().y = (Engine.state.map.length - 1) - Engine.viewport.y;
+                    }
+                }
+                
+
+
                 Engine.viewport.update();
                 Engine.click.update();
-                
+
+BoundCenterTile();
+
+
+
                 if (Engine.run.speed.factor(60)) {
                     Engine.renderer.clear();
                 }
@@ -241,8 +278,8 @@ let Engine = {
 
                 Engine.renderer.draw.dmap();
 
-                //                Engine.renderer.draw.CameraSafeArea();
-//                                                Engine.renderer.draw.numGrid();
+                Engine.renderer.draw.CameraSafeArea();
+                //                                                Engine.renderer.draw.numGrid();
 
                 if (typeof Engine.click.lastClick.x === undefined || typeof Engine.click.lastClick.y === undefined) {
 
@@ -257,7 +294,7 @@ let Engine = {
             Experimental(ev);
 
             if (Engine.run.isActive) {
-//                Engine.run.fps();
+                //                Engine.run.fps();
                 requestAnimationFrame(Engine.run.loop);
             }
         },
@@ -506,6 +543,13 @@ let Engine = {
                     game.ctx.fillText(`TILE`, Engine.s32(x) + 10 - Engine.viewport.offsetx, Engine.s32(y) + 26 + Engine.viewport.offsety);
                 }
 
+                function drawSprite() {
+                    Engine.renderer.draw.itile(0, MapEditor.quickSprite.waterdeep, {
+                        x: x,
+                        y: y,
+                    }, 1);
+                }
+
 
                 for (y = -2; y <= maxX.y + 2; y++) {
                     for (x = -2; x <= maxX.x + 2; x++) {
@@ -514,10 +558,13 @@ let Engine = {
                             //no Data on Y axis::
                             //                            EmptyTile('grey');
 
+                            drawSprite();
+
                         } else {
                             if (typeof Engine.state.map[y + Engine.viewport.y][x + Engine.viewport.x] === 'undefined') {
                                 //Data on Y axis BUT NO data on X axis::
                                 //                                EmptyTile('grey');
+                                drawSprite();
                             } else {
                                 // if Tile Exists::
                                 DrawCount++;
@@ -599,7 +646,7 @@ let Engine = {
                 game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) - Dpos.offx - Engine.viewport.offsetx, (Dpos.y * game.tile.h) - Dpos.offy + Engine.viewport.offsety, game.tile.w * size, game.tile.h * size);
             },
             CameraSafeArea: function (scale = game.tile.w) {
-                game.ctx.fillStyle = 'rgba(0,0,0,0.7)';
+                game.ctx.fillStyle = 'rgba(0,100,0,0.2)';
                 //center::
                 if (Engine.viewport.w % 2 == 0) {
                     game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
@@ -745,6 +792,8 @@ let Engine = {
     },
     init: function (settings = Engine.settings) {
         //pass settings into engine init;
+
+        window.onresize = Engine.resizeCanvas;
         Engine.setup();
         Engine.click.enable();
         Engine.run.loop();
@@ -780,6 +829,7 @@ function grassMap(len = 10) {
         tempy[y] = tempx;
     }
     Engine.state.map = tempy;
+    MapEditor.beachALL();
     return tempy;
 }
 
@@ -787,9 +837,8 @@ function grassMap(len = 10) {
 //initMap();
 grassMap(20);
 // put these EVENTS somewhere appropriate::
-window.onresize = Engine.resizeCanvas;
+
 window.onload = Engine.init;
-if (!Engine.run.isActive) {
-    document.onclick = Engine.run.loop;
-}
-//document.body.onclick = Engine.run.loop; // DEBUGGER
+
+
+const _MAP = Engine.state.map;
