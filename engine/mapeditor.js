@@ -39,6 +39,10 @@ let MapEditor = {
         y: 0,
     },
     quickSprite: {
+        player: {
+          x:29,
+            y:21,
+        },
         water: {
             x: 19,
             y: 5,
@@ -131,4 +135,8 @@ let MapEditor = {
     },
 
 
+    createTilePicker: function(){
+    Engine.setupFullScreenCanvas("SpriteCanvas");
+    
+    },
 }

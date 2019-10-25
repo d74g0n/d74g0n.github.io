@@ -1,3 +1,17 @@
+//Notes:
+/*
+- player class being drawn in camera safe.
+
+- map layers do not exist in this state.
+
+- 
+
+
+*/
+
+
+
+
 // Global Settings::
 let game = {
     ctx: null,
@@ -12,9 +26,7 @@ let game = {
         h: 100,
         s: 32,
     },
-    //    currentSecond: 0,
-    //    frameCount: 0,
-    //    framesLastSecond: 0,
+
     lastFrameTime: false,
     fps: undefined,
     delta: undefined,
@@ -23,21 +35,62 @@ let game = {
     frameLimit: 1000,
     incrementFrame: function () {
         game.frame++;
-        if (game.frame == frameLimit) {
+        if (game.frame == game.frameLimit) {
             game.frame = 0;
         }
-        return;
+        return game.frame;
     }
 }
 
 let Engine = {
     v: `0.000.004`,
     isVerbose: false,
+    playerLoaded: false,
+
+    show: {
+        FPS: false,
+        CAMERASAFE: true,
+    },
+
+    preloader: {
+        settings: {
+            levelid: `undefined`,
+            spritesheet: `/games/tileparty/img/spritesheetAlpha.png`, // NOTICE
+            playersheet: `/games/tileparty/img/ffwizard.png`, // NOTICE
+        },
+        init: function (settings = Engine.preloader.settings) {
+            Engine.preloader.loadSpriteSheet(settings.spritesheet);
+            Engine.preloader.loadSpriteSheet(settings.playersheet);
+        },
+        isVerbose: true,
+        log: function (msg) {
+            if (Engine.preloader.isVerbose) {
+                Engine.log(`[preloader][${msg}]`);
+            } else {
+                return Engine.preloader.isVerbose;
+            }
+        },
+        loadImage: function (path) {
+            let image = new Image();
+            image.src = path;
+            image.onload = function (verbage = Engine.isVerbose) {
+                if (verbage) {
+                    Engine.preloader.log(`[preloader.loadimage][${path}][LOADED]`);
+                }
+            };
+            return image;
+        },
+        loadSpriteSheet: function (path) {
+            Engine.renderer.sprite.push(Engine.preloader.loadImage(path));
+        },
+    },
+
     log: function (msg) {
         if (Engine.isVerbose) {
             console.log(`[E]${msg}`);
         }
     },
+
     state: {
         //        players: [],
         //        mapobjects: [],
@@ -70,9 +123,9 @@ let Engine = {
             Engine.click.boundClickMap();
         },
         clicked: function (ev) {
-            Engine.click.lastClick.x = Math.floor(ev.clientX / game.tile.w);
-            Engine.click.lastClick.y = Math.floor(ev.clientY / game.tile.h);
-            Engine.click.isPanning = true;
+            //            Engine.click.lastClick.x = Math.floor(ev.clientX / game.tile.w);
+            //            Engine.click.lastClick.y = Math.floor(ev.clientY / game.tile.h);
+            //            Engine.click.isPanning = true;
 
 
 
@@ -113,7 +166,7 @@ let Engine = {
             space: false,
             shift: false,
         },
-        isVerbose: false,
+        isVerbose: true,
         log: function (msg) {
             if (Engine.control.isVerbose) {
                 console.log(`[Control]=>[ ${msg} ]`);
@@ -220,85 +273,50 @@ let Engine = {
         },
         loop: function (ev) {
 
-            // how I WIP a runloop:
+
             function Experimental(ev) {
 
-                function processVelocity() {
-                    //                    Engine.viewport.vx = Math.round(Engine.viewport.vx);
-                    //                    Engine.viewport.vy = Math.round(Engine.viewport.vy);
-                    Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx);
-                    Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy);
-                    Engine.viewport.offsetx -= Math.round(Engine.viewport.vx);
-                    Engine.viewport.offsety -= Math.round(Engine.viewport.vy);
-                }
-                processVelocity();
+                Engine.viewport.processVelocity();
 
                 if (Engine.run.speed.factor(20)) {
                     Engine.control.processControlState();
                 }
 
-                function BoundCenterTile() {
-                    // Keep CENTERTILE on map tile. WORKINGISH!
-                    if (Engine.get.centerTile().x + Engine.viewport.x-1 < 0) {
-                        //left
-//                       Engine.viewport.x =  -Math.ceil(((Engine.get.tilesWide()-1)/2));
-                       Engine.viewport.x++; //WIP WIP WIP MOVING CIRCLE
-                        Engine.viewport.offsetx = -31;
-                    }
-                    
-                    
-                    
-                    if (Engine.get.centerTile().y + Engine.viewport.y < 0) {
-                        //top
-                        Engine.get.centerTile().y = Engine.viewport.y * -1;
-                    }
-                    if (Engine.get.centerTile().x + Engine.viewport.x >= Engine.state.map[0].length - 1) {
-                        //right
-                        Engine.get.centerTile().x = (Engine.state.map.length - 1) - Engine.viewport.x;
-                    }
-                    if (Engine.get.centerTile().y + Engine.viewport.y >= Engine.state.map.length - 1) {
-                        //bottom
-                        Engine.get.centerTile().y = (Engine.state.map.length - 1) - Engine.viewport.y;
-                    }
-                }
-                
-
-
                 Engine.viewport.update();
                 Engine.click.update();
+                Engine.viewport.boundToMap();
 
-BoundCenterTile();
-
-
-
-                if (Engine.run.speed.factor(60)) {
-                    Engine.renderer.clear();
-                }
-                //                Engine.renderer.draw.testPattern(32, `rgba(55,355,55,0.2)`, `rgba(255,155,255,0.5)`);
+                // if (Engine.run.speed.factor(60)) {
+                // Engine.renderer.clear();
+                // }
+                // Engine.renderer.draw.testPattern(32, `rgba(55,355,55,0.2)`, `rgba(255,155,255,0.5)`);
 
                 Engine.renderer.draw.dmap();
 
-                Engine.renderer.draw.CameraSafeArea();
-                //                                                Engine.renderer.draw.numGrid();
-
-                if (typeof Engine.click.lastClick.x === undefined || typeof Engine.click.lastClick.y === undefined) {
-
-                } else {
-                    Engine.renderer.draw.circle(Engine.click.lastClick.x, Engine.click.lastClick.y);
+                if (Engine.show.CAMERASAFE) {
+                    Engine.renderer.draw.CameraSafeArea();
                 }
 
+                // Engine.renderer.draw.numGrid();
 
-
+                //                if (typeof Engine.click.lastClick.x === undefined || typeof Engine.click.lastClick.y === undefined) {
+                //
+                //                } else {
+                //                    Engine.renderer.draw.circle(Engine.click.lastClick.x, Engine.click.lastClick.y);
+                //                }
 
             }
             Experimental(ev);
 
             if (Engine.run.isActive) {
-                //                Engine.run.fps();
+                if (Engine.show.FPS) {
+                    Engine.run.fps();
+                }
                 requestAnimationFrame(Engine.run.loop);
             }
         },
     },
+
     viewport: {
         isVerbose: true,
         log: function (msg) {
@@ -319,6 +337,38 @@ BoundCenterTile();
         //width of canvas in tiles
         w: null,
         h: null,
+
+        processVelocity: function () {
+            //maybe redundant?
+            Engine.viewport.vx = Engine._Math.polish(Engine.viewport.vx);
+            Engine.viewport.vy = Engine._Math.polish(Engine.viewport.vy);
+            Engine.viewport.offsetx -= Math.round(Engine.viewport.vx);
+            Engine.viewport.offsety -= Math.round(Engine.viewport.vy);
+        },
+
+        boundToMap: function () {
+            // Keep CENTERTILE on map tile. WORKINGISH!
+            if (Engine.get.centerTile().x + Engine.viewport.x - 1 < 0) {
+                //left
+                Engine.viewport.x++; //WIP WIP WIP MOVING CIRCLE
+                Engine.viewport.offsetx = -31;
+            }
+            if (Engine.get.centerTile().y + Engine.viewport.y - 1 < 0) {
+                //top
+                Engine.viewport.y++;
+                Engine.viewport.offsety = 31;
+            }
+            if (Engine.get.centerTile().x + Engine.viewport.x >= Engine.state.map[0].length - 1) {
+                //right
+                Engine.viewport.x--; //WIP WIP WIP MOVING CIRCLE
+                Engine.viewport.offsetx = 31;
+            }
+            if (Engine.get.centerTile().y + Engine.viewport.y >= Engine.state.map.length - 1) {
+                //bottom
+                Engine.viewport.y--;
+                Engine.viewport.offsety = -31;
+            }
+        },
 
         update: function () {
             Engine.viewport.w = Math.floor(game.canvas.width / game.tile.w);
@@ -372,7 +422,6 @@ BoundCenterTile();
             function clicktargetpan() {
                 let stepchop = 0.001;
                 //                console.log(Engine.get.centerTile().x - Engine.click.lastClick.x)
-
                 if (Engine.get.centerTile().x > Engine.click.lastClick.x) {
                     //center is larger:
                     let delta = (Engine.get.centerTile().x - Engine.click.lastClick.x) * game.scale;
@@ -387,10 +436,6 @@ BoundCenterTile();
                 if ((Engine.get.centerTile().x == Engine.click.lastClick.x)) {
                     Engine.viewport.vx = 0;
                 }
-
-
-
-
                 if (Engine.get.centerTile().y > Engine.click.lastClick.y) {
                     //center is larger:
                     let delta = (Engine.get.centerTile().y - Engine.click.lastClick.y) * game.scale;
@@ -406,21 +451,9 @@ BoundCenterTile();
                     Engine.viewport.vy = 0;
                     Engine.click.isPanning = false;
                 }
-
-
-
-
-
-
-
             }
 
-            //            if (Engine.click.isPanning) {
-            clicktargetpan();
-            //            }
-
-
-
+            //            clicktargetpan();
         },
         getDimensions: function () {
 
@@ -440,38 +473,6 @@ BoundCenterTile();
             };
         },
 
-    },
-    preloader: {
-        settings: {
-            levelid: `undefined`,
-            spritesheet: `/games/tileparty/img/spritesheetAlpha.png`, // NOTICE
-        },
-        init: function (settings = Engine.preloader.settings) {
-            //hookinto renderer lists
-            Engine.renderer.sprite.push(Engine.preloader.loadSpriteSheet(settings.spritesheet));
-        },
-        isVerbose: true,
-        log: function (msg) {
-            if (Engine.preloader.isVerbose) {
-                //            if (true) {
-                Engine.log(`[preloader][${msg}]`);
-            } else {
-                return Engine.preloader.isVerbose;
-            }
-        },
-        loadImage: function (path) {
-            let image = new Image();
-            image.src = path;
-            image.onload = function (verbage = Engine.isVerbose) {
-                if (verbage) {
-                    Engine.preloader.log(`[preloader.loadimage][${path}][LOADED]`);
-                }
-            };
-            return image;
-        },
-        loadSpriteSheet: function (path) {
-            Engine.renderer.sprite.push(Engine.preloader.loadImage(path));
-        },
     },
 
     renderer: {
@@ -550,20 +551,15 @@ BoundCenterTile();
                     }, 1);
                 }
 
-
                 for (y = -2; y <= maxX.y + 2; y++) {
                     for (x = -2; x <= maxX.x + 2; x++) {
 
                         if (typeof Engine.state.map[y + Engine.viewport.y] === 'undefined') {
                             //no Data on Y axis::
-                            //                            EmptyTile('grey');
-
                             drawSprite();
-
                         } else {
                             if (typeof Engine.state.map[y + Engine.viewport.y][x + Engine.viewport.x] === 'undefined') {
                                 //Data on Y axis BUT NO data on X axis::
-                                //                                EmptyTile('grey');
                                 drawSprite();
                             } else {
                                 // if Tile Exists::
@@ -612,11 +608,9 @@ BoundCenterTile();
                 game.ctx.fillRect(x, y, w, h);
             },
 
-            //            circle: function (x, y, col = 'rgba(200,200,0,0.7)', r = game.scale / 2) {
             circle: function (x, y, col = 'rgba(200,20,200,0.7)', r = game.scale / 2) {
                 game.ctx.fillStyle = col;
                 game.ctx.beginPath();
-                //                game.ctx.arc(Engine.s32(x) + game.scale / 2, Engine.s32(y) + game.scale / 2, r, 0, 2 * Math.PI);
                 game.ctx.arc(Engine.s32(x) + (game.scale / 2) - Engine.viewport.offsetx, Engine.s32(y) + (game.scale / 2) + Engine.viewport.offsety, r, 0, 2 * Math.PI);
                 game.ctx.fill();
                 game.ctx.closePath();
@@ -648,15 +642,19 @@ BoundCenterTile();
             CameraSafeArea: function (scale = game.tile.w) {
                 game.ctx.fillStyle = 'rgba(0,100,0,0.2)';
                 //center::
-                if (Engine.viewport.w % 2 == 0) {
-                    game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
 
-                    //                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x + 0.5, Engine.viewport.getCenterTile().y + 0.5, 'rgba(255,255,255,0.2)', 16);
-                    //                    Engine.renderer.draw.circle(Engine.viewport.getCenterTile().x, Engine.viewport.getCenterTile().y, 'rgba(255,255,255,0.2)', 16);
-                } else {
-                    game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
-                    //                    Engine.renderesdwr.draw.circle(Engine.viewport.getCenterTile().x, Engine.viewport.getCenterTile().y, 'rgba(255,255,255,0.2)', 16);
-                }
+                game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
+
+                Engine.renderer.draw.itile(1, {
+                    x: 0,
+                    y: 0
+                }, {
+                    x: Engine.viewport.getCenterTile().x,
+                    y: Engine.viewport.getCenterTile().y,
+                    offy: Engine.viewport.offsety,
+                    offx: -Engine.viewport.offsetx,
+                }, 1);
+
                 game.ctx.fillStyle = 'rgba(0,255,155,0.7)';
                 game.ctx.fillRect(1 * scale, 1 * scale, scale * 1, scale * 1);
 
@@ -718,14 +716,12 @@ BoundCenterTile();
     }, //eof renderer
 
     //system fun
-
     _Math: {
         polish: function (val, len = 3) {
             let temp = val.toFixed(len);
             return Number(temp);
         },
     },
-
     posObj: function (x, y) {
         return {
             x: x,
@@ -762,14 +758,14 @@ BoundCenterTile();
         game.canvas.width = (window.innerWidth);
         game.canvas.height = (window.innerHeight);
     },
-    setupFullScreenCanvas: function () {
+    setupFullScreenCanvas: function (id = "maincanvas") {
         //make canvas and style it appropriately:
         _el.create('canvas').insertAfter(document.getElementById("anchor"));
         _el.style("width", "100%");
         _el.style("height", "100%");
         _el.style("border", "none");
         _el.style("left", "0px");
-        _el.temp_el.id = "maincanvas";
+        _el.temp_el.id = id;
         game.canvas = _el.temp_el;
         game.ctx = _el.temp_el.getContext('2d');
 
@@ -784,15 +780,17 @@ BoundCenterTile();
         game.ctx.font = "bold 10pt monospace";
         Engine.renderer.canvaslist.push(_el.temp_el);
         Engine.renderer.ctxlist.push(_el.temp_el.getContext('2d'));
+
+        _el.temp_el = undefined;
     },
     setup: function () {
-        Engine.preloader.init();
-        Engine.setupFullScreenCanvas();
+
+        Engine.setupFullScreenCanvas("maincanvas");
         Engine.control.init();
     },
     init: function (settings = Engine.settings) {
         //pass settings into engine init;
-
+        Engine.preloader.init();
         window.onresize = Engine.resizeCanvas;
         Engine.setup();
         Engine.click.enable();
@@ -833,12 +831,10 @@ function grassMap(len = 10) {
     return tempy;
 }
 
-// Make map to view::
-//initMap();
-grassMap(20);
-// put these EVENTS somewhere appropriate::
 
+//initMap();
+grassMap(100);
 window.onload = Engine.init;
 
 
-const _MAP = Engine.state.map;
+//const _MAP = Engine.state.map;
