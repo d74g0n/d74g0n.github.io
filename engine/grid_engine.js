@@ -6,7 +6,10 @@
 
 - maybe keep grid odd for centering
 
+- percentage offset of 32.
 
+
+-draw everything off camera first;
 */
 
 
@@ -46,6 +49,63 @@ let Engine = {
     v: `0.000.005`,
     isVerbose: false,
     playerLoaded: false,
+
+    timers: {
+        flipper: {
+            isON: true,
+            f2: false,
+            f5: false,
+            f10: false,
+            f20: false,
+            f30: false,
+            f60: false,
+            f100: false,
+            f500: false,
+            update: function () {
+
+                if (Engine.timers.flipper.isON) {
+
+                    let ET = Engine.timers.flipper;
+                    let SF = Engine.run.speed.factor;
+
+
+                    if (SF(2)) {
+                        ET.f2 = !ET.f2;
+                    }
+
+                    if (SF(5)) {
+                        ET.f5 = !ET.f5;
+                    }
+
+                    if (SF(10)) {
+                        ET.f10 = !ET.f10;
+                    }
+
+                    if (SF(20)) {
+                        ET.f20 = !ET.f20;
+                    }
+
+                    if (SF(30)) {
+                        ET.f30 = !ET.f30;
+                    }
+
+                    if (SF(60)) {
+                        ET.f60 = !ET.f60;
+                    }
+
+                    if (SF(100)) {
+                        ET.f100 = !ET.f100;
+                    }
+
+                    if (SF(500)) {
+                        ET.f500 = !ET.f500;
+                    }
+
+                }
+
+            }
+        },
+    },
 
     show: {
         FPS: false,
@@ -273,6 +333,7 @@ let Engine = {
         },
         loop: function (ev) {
             //            game.frame++;
+            Engine.timers.flipper.update();
 
             function Experimental(ev) {
 
@@ -601,17 +662,17 @@ let Engine = {
 
             },
 
-            fillSquare: function (x, y, scale) {
-                game.ctx.fillRect(x, y, scale, scale);
-            },
-
-            strokeSquare: function (x, y, scale) {
-                game.ctx.Rect(x, y, scale, scale);
-            },
-
-            Fillrect: function (x, y, w, h) {
-                game.ctx.fillRect(x, y, w, h);
-            },
+            //            fillSquare: function (x, y, scale) {
+            //                game.ctx.fillRect(x, y, scale, scale);
+            //            },
+            //
+            //            strokeSquare: function (x, y, scale) {
+            //                game.ctx.Rect(x, y, scale, scale);
+            //            },
+            //
+            //            Fillrect: function (x, y, w, h) {
+            //                game.ctx.fillRect(x, y, w, h);
+            //            },
 
             circle: function (x, y, col = 'rgba(200,20,200,0.7)', r = game.scale / 2) {
                 game.ctx.fillStyle = col;
@@ -644,7 +705,6 @@ let Engine = {
                 };
                 game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) - Dpos.offx - Engine.viewport.offsetx, (Dpos.y * game.tile.h) - Dpos.offy + Engine.viewport.offsety, game.tile.w * size, game.tile.h * size);
             },
-            ANI_adding: true,
             CameraSafeArea: function (scale = game.tile.w) {
                 game.ctx.fillStyle = 'rgba(0,100,0,0.2)';
                 //center::
@@ -653,33 +713,13 @@ let Engine = {
                 game.ctx.font = '8px monospace';
                 game.ctx.fillStyle = 'black';
 
-
+                let xVal = 0;
                 let yVal = 0;
-                //                let isAdding = true;
-
-                if (Engine.run.speed.factor(30)) {
-                    Engine.renderer.ANI_adding = !Engine.renderer.ANI_adding;
-                }
-
-                if (Engine.viewport.vx < 0.1 && Engine.viewport.vx > 0) {
-                    Engine.viewport.vx = 0;
-                }
-
-
-                if (Engine.renderer.ANI_adding) {
+                if (Engine.timers.flipper.f20) {
                     yVal = 0;
                 } else {
                     yVal = 1;
                 }
-
-                let xVal = 0;
-//
-//                if (Engine.viewport.offsety < 0.005) {
-//                    xVal = 1;
-//                }
-//
-
-
 
                 Engine.renderer.draw.itile(1, {
                     x: xVal,
@@ -903,5 +943,3 @@ function grassMap(len = 10) {
 grassMap(10);
 window.onload = Engine.init;
 
-
-//const _MAP = Engine.state.map;
