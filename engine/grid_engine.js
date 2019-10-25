@@ -4,7 +4,7 @@
 
 - map layers do not exist in this state.
 
-- 
+- maybe keep grid odd for centering
 
 
 */
@@ -43,7 +43,7 @@ let game = {
 }
 
 let Engine = {
-    v: `0.000.004`,
+    v: `0.000.005`,
     isVerbose: false,
     playerLoaded: false,
 
@@ -166,7 +166,7 @@ let Engine = {
             space: false,
             shift: false,
         },
-        isVerbose: true,
+        isVerbose: false,
         log: function (msg) {
             if (Engine.control.isVerbose) {
                 console.log(`[Control]=>[ ${msg} ]`);
@@ -272,15 +272,15 @@ let Engine = {
             },
         },
         loop: function (ev) {
-
+            //            game.frame++;
 
             function Experimental(ev) {
 
                 Engine.viewport.processVelocity();
 
-                if (Engine.run.speed.factor(20)) {
-                    Engine.control.processControlState();
-                }
+                //                if (Engine.run.speed.factor(2)) {
+                Engine.control.processControlState();
+                //                }
 
                 Engine.viewport.update();
                 Engine.click.update();
@@ -311,6 +311,10 @@ let Engine = {
             if (Engine.run.isActive) {
                 if (Engine.show.FPS) {
                     Engine.run.fps();
+                }
+                game.frame++;
+                if (game.frame > game.frameLimit) {
+                    game.frame = 1;
                 }
                 requestAnimationFrame(Engine.run.loop);
             }
@@ -348,25 +352,26 @@ let Engine = {
 
         boundToMap: function () {
             // Keep CENTERTILE on map tile. WORKINGISH!
-            if (Engine.get.centerTile().x + Engine.viewport.x - 1 < 0) {
+            if (Engine.get.centerTile().x + Engine.viewport.x <= 0 && Engine.viewport.vx > 0) {
                 //left
-                Engine.viewport.x++; //WIP WIP WIP MOVING CIRCLE
-                Engine.viewport.offsetx = -31;
+                Engine.viewport.offsetx = 0;
+                Engine.viewport.vx = 0;
             }
-            if (Engine.get.centerTile().y + Engine.viewport.y - 1 < 0) {
+            if (Engine.get.centerTile().y + Engine.viewport.y <= 0 && Engine.viewport.vy < 0) {
                 //top
-                Engine.viewport.y++;
-                Engine.viewport.offsety = 31;
+                Engine.viewport.offsety = 0;
+                Engine.viewport.vy = 0;
             }
-            if (Engine.get.centerTile().x + Engine.viewport.x >= Engine.state.map[0].length - 1) {
+
+            if (Engine.get.centerTile().x + Engine.viewport.x >= Engine.state.map[0].length - 1 && Engine.viewport.vx < 0) {
                 //right
-                Engine.viewport.x--; //WIP WIP WIP MOVING CIRCLE
-                Engine.viewport.offsetx = 31;
+                Engine.viewport.offsetx = 0;
+                Engine.viewport.vx = 0;
             }
-            if (Engine.get.centerTile().y + Engine.viewport.y >= Engine.state.map.length - 1) {
+            if (Engine.get.centerTile().y + Engine.viewport.y >= Engine.state.map.length - 1 && Engine.viewport.vy > 0) {
                 //bottom
-                Engine.viewport.y--;
-                Engine.viewport.offsety = -31;
+                Engine.viewport.offsety = 0;
+                Engine.viewport.vy = 0;
             }
         },
 
@@ -639,21 +644,56 @@ let Engine = {
                 };
                 game.ctx.drawImage(Engine.renderer.sprite[spriteindex], Spos.x * game.tile.w, Spos.y * game.tile.h, game.tile.w, game.tile.h, (Dpos.x * game.tile.w) - Dpos.offx - Engine.viewport.offsetx, (Dpos.y * game.tile.h) - Dpos.offy + Engine.viewport.offsety, game.tile.w * size, game.tile.h * size);
             },
+            ANI_adding: true,
             CameraSafeArea: function (scale = game.tile.w) {
                 game.ctx.fillStyle = 'rgba(0,100,0,0.2)';
                 //center::
 
                 game.ctx.fillRect(Engine.viewport.getCenterTile().x * scale, Engine.viewport.getCenterTile().y * scale, scale * 1, scale * 1);
+                game.ctx.font = '8px monospace';
+                game.ctx.fillStyle = 'black';
+
+
+                let yVal = 0;
+                //                let isAdding = true;
+
+                if (Engine.run.speed.factor(30)) {
+                    Engine.renderer.ANI_adding = !Engine.renderer.ANI_adding;
+                }
+
+                if (Engine.viewport.vx < 0.1 && Engine.viewport.vx > 0) {
+                    Engine.viewport.vx = 0;
+                }
+
+
+                if (Engine.renderer.ANI_adding) {
+                    yVal = 0;
+                } else {
+                    yVal = 1;
+                }
+
+                let xVal = 0;
+//
+//                if (Engine.viewport.offsety < 0.005) {
+//                    xVal = 1;
+//                }
+//
+
+
 
                 Engine.renderer.draw.itile(1, {
-                    x: 0,
-                    y: 0
+                    x: xVal,
+                    y: yVal,
                 }, {
                     x: Engine.viewport.getCenterTile().x,
                     y: Engine.viewport.getCenterTile().y,
                     offy: Engine.viewport.offsety,
                     offx: -Engine.viewport.offsetx,
                 }, 1);
+
+                game.ctx.fillText(`${Engine.footIn().x},${Engine.footIn().y}`, Engine.s32(Engine.viewport.getCenterTile().x) + 2, Engine.s32(Engine.viewport.getCenterTile().y) + 7);
+
+                game.ctx.fillText(`${Engine.viewport.offsetx},${Engine.viewport.offsety}`, Engine.s32(Engine.viewport.getCenterTile().x) + 2, Engine.s32(Engine.viewport.getCenterTile().y) + 30);
 
                 game.ctx.fillStyle = 'rgba(0,255,155,0.7)';
                 game.ctx.fillRect(1 * scale, 1 * scale, scale * 1, scale * 1);
@@ -721,6 +761,33 @@ let Engine = {
             let temp = val.toFixed(len);
             return Number(temp);
         },
+    },
+
+    footIn: function () {
+        let x = undefined;
+        let y = undefined;
+
+        let cPOS = Engine.get.centerTile();
+        x = cPOS.x + Engine.viewport.x;
+        y = cPOS.y + Engine.viewport.y;
+
+        //adjust for offset
+        if (Engine.viewport.offsetx > 16) {
+            x++;
+        }
+        if (Engine.viewport.offsetx < -16) {
+            x--;
+        }
+        if (Engine.viewport.offsety > -16) {
+            y--;
+        }
+        if (Engine.viewport.offsety < 16) {
+            y++;
+        }
+        return {
+            x: x,
+            y: y,
+        };
     },
     posObj: function (x, y) {
         return {
@@ -833,7 +900,7 @@ function grassMap(len = 10) {
 
 
 //initMap();
-grassMap(100);
+grassMap(10);
 window.onload = Engine.init;
 
 
