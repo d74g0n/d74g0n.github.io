@@ -91,19 +91,21 @@ function BlinkComputerLights(frame) {
     blink(frame);
 }
 
-function drawRoomBase(Xoffset = 0, Yoffset = 0) {
+function drawRoomBase(Math.floor(Xoffset) = 0, Yoffset = 0) {
     // ceiling::    
     setColor(Pal.ceiling);
-    drawRect(0 + Xoffset, RP.ceiling.top, canvas.width - Xoffset, RP.ceiling.height +
+//    drawRect(0 + Xoffset, RP.ceiling.top, canvas.width - Xoffset, RP.ceiling.height +
+    drawRect(0 + Math.floor(Xoffset), RP.ceiling.top, canvas.width - Math.floor(Xoffset), RP.ceiling.height +
         Yoffset);
 
     //floor:
     setColor(Pal.floor);
-    drawRect(0 + Xoffset, canvas.height - RP.floor.height + (Yoffset * 2), canvas.width - Xoffset, RP.floor.height - (Yoffset * 2));
+//    drawRect(0 + Xoffset, canvas.height - RP.floor.height + (Yoffset * 2), canvas.width - Xoffset, RP.floor.height - (Yoffset * 2));
+    drawRect(0 + Math.floor(Xoffset), canvas.height - RP.floor.height + (Math.floor(Yoffset) * 2), canvas.width - Math.floor(Xoffset), RP.floor.height - (Math.floor(Yoffset) * 2));
 
     //wall::
     setColor(gradientV('rgba(150,150,100,0.9)', 'rgba(70,70,30,1)', 'rgba(0,0,0,0.9)'));
-    drawRect(0 + Xoffset, RP.ceiling.top + RP.ceiling.height + Yoffset, canvas.width - Xoffset, canvas.height - RP.floor.height - RP.ceiling.height + Yoffset);
+    drawRect(0 + Math.floor(Xoffset), RP.ceiling.top + RP.ceiling.height + Math.floor(Yoffset), canvas.width - Math.floor(Xoffset), canvas.height - RP.floor.height - RP.ceiling.height + Math.floor(Yoffset));
 }
 
 function loadImage(path, id) {

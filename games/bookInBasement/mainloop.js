@@ -56,7 +56,7 @@ function mainLoop() {
 }
 
 function firstRenderLayer() {
-    clearCanvas();
+//    clearCanvas();
     drawRoomBase();
     drawPropLayer();
     BlinkComputerLights(frame);
@@ -76,7 +76,8 @@ function firstRenderLayer() {
 //    setTimeout(mainLoop,3000);
 //};
 
-
+ctx.imageSmoothingEnabled = false;
+ctx.antialias = false;
 mainLoop();
 
 console.log(`v ${ver} - ${verName}`);

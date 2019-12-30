@@ -13,6 +13,12 @@
      border: 1px dotted lime;
  }
 
+
+ #menulabel {
+     font-family: 'gaming';
+     color: lime;
+ }
+
  #side_menu {
      position: fixed;
      top: 0;
@@ -119,7 +125,7 @@
      top: 0;
      left: 0;
 
-/*     background: red;*/
+     /*     background: red;*/
      width: 100%;
      height: 100%;
      border: none;

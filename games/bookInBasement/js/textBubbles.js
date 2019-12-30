@@ -7,7 +7,7 @@ const MN = MsgNodes;
 // PERHAPS THIS BECOMES A CLASS FOR CUING INTO CUE ARRAY
 function Textbubble(msg = '01234567891', x = 217, y = 180, direction = `DOWN`) {
 // default x y position is tv speaker atm
-        ctx.save();
+    ctx.save();
     let text2pixelScale = 6;
     let wordleftpadding = 20;
     let bubblerightpadding = 60;
@@ -23,7 +23,9 @@ function Textbubble(msg = '01234567891', x = 217, y = 180, direction = `DOWN`) {
     
     manualBubble(x, y, ((text2pixelScale*msgw)+bubblerightpadding));
     ctx.restore();
+    ctx.save();
     writeText(msg, x+wordleftpadding, y + 4, '12px monospace', Pal.floor, Pal.ceiling, 'top', 'left');
+    ctx.restore();
 }
 
 function manualBubble(x = canvas.width / 2, y = canvas.height / 2, w =128) {
