@@ -14,7 +14,7 @@
 
     <meta property="og:image" content="https://media.giphy.com/media/AYJvIUh0e3N0Q/giphy.gif">
     <meta name="twitter:image" content="https://media.giphy.com/media/AYJvIUh0e3N0Q/giphy.gif">
-    
+
     <link rel="shortcut icon" href="/common/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/datahub/hub.css" />
     <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />
@@ -91,15 +91,7 @@
             let foxtoggler = false;
 
             function loadfox() {
-                //                if (!foxtoggler) {
-                //                    document.getElementById('frameheader').style.visibility = "visible";
-                //                } else {
-                //                    document.getElementById('frameheader').style.visibility = "hidden";
-                //                }
-                //                foxtoggler = !foxtoggler;
                 window.open('http://ustv247.tv/foxnewslive/', '_blank');
-                //                 document.getElementById('view_port').src = "http://ustv247.tv/foxnewslive/";
-
             }
 
             function loadDataFag() {
@@ -126,6 +118,11 @@
             function LoadDocumentaries() {
                 document.getElementById('view_port').src = "/datafag/documentary/index.html";
             }
+            
+            function LoadBTC(){
+                document.getElementById('view_port').src = "/bms/index.html";
+            }
+            
 
             //            BASIC TOOLTIPS SYSTEM
             function hintsystem(selector) {
@@ -190,6 +187,10 @@
                         readout.innerHTML = `Paetron, I hate it, but it works... for now.`;
                         superreadout.innerHTML = "DONATE";
                         break;
+                    case 'BTC':
+                        readout.innerHTML = `CoinPot Wallet System - It Works, I Use it.`;
+                        superreadout.innerHTML = "DONATE";
+                        break;
                     default:
                         console.log(`Case Mismatch/No-Match:${selector}`);
                 }
@@ -197,26 +198,32 @@
 
         </script>
 
-        <span id="menulabel" style="font-size: 12px;"> iHub: </span>
+        <span id="menulabel" style="font-size: 12px;"> iHub </span>
         <a id="menuitem" onmouseover="hintsystem('DATAFAG')" onclick="loadDataFag()">DATAFAG</a>
 
         <a id="menuitem" onmouseover="hintsystem('DATAWALL')" onclick="loadDataWall()">DATAWALL</a>
         <a id="menuitem" onmouseover="hintsystem('BREAKING911')" onclick="loadBreaking()" style="font-size: 18px">BREAKING911</a>
+        <a id="menuitem" onmouseover="hintsystem('BTC')" onclick="LoadBTC()" style="font-size: 26px">BITCOIN</a>
+<!--        <a id="menuitem" onmouseover="hintsystem('BTC')" onclick="loadBTC()" style="font-size: 17px" href="/bms/index.html" target="_blank">BITCOIN</a>-->
         <!--
+            removed because currently down etc..
         <a id="menuitem" onmouseover="hintsystem('QRESEARCH')" onclick="loadQreee()" style="font-size: 20px">QRESEARCH</a>
         <a id="menuitem" onmouseover="hintsystem('QCARDS')" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
         <a id="menuitem" onmouseover="hintsystem('DOCUMENTARIES')" onclick="LoadDocumentaries()" style="font-size: 16px">DOCUMENTARIES</a>
         -->
         <hr>
-        <span id="menulabel" style="font-size: 12px;"> nTab: </span>
-        <a id="menuitem" onmouseover="hintsystem('DATAFAG')" href="/" target="_blank" style="font-size: 28px">DATAFAG</a>
+        <span id="menulabel" style="font-size: 12px;"> nTab </span>
+        <a id="menuitem" onmouseover="hintsystem('DATAFAG')" href="/" target="_blank">DATAFAG</a>
         <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="loadfox()">FOX NEWS</a>
-        <a id="menuitem" onmouseover="hintsystem('QMAP')" href="https://qmap.pub" target="_blank">QMAP</a>
+        <a id="menuitem" onmouseover="hintsystem('QMAP')" href="https://qmap.pub" target="_blank" style="font-size: 33px">QMAP</a>
         <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
         <hr>
-        <a id="menuitem" onmouseover="hintsystem('WG1WGA')" href="https://wg1wga.com/d74g0n" target="_blank">WG1WGA</a>
+        <span id="menulabel" style="font-size: 12px;"> ExTra </span>
+        
         <a id="menuitem" onmouseover="hintsystem('LEARNCHESS')" style="font-size: 17px" href="https://lichess.org/" target="_blank">LEARN CHESS</a>
-        <a id="menuitem" onmouseover="hintsystem('SUPPORT')" style="font-size: 17px" href="https://www.patreon.com/d74g0n" target="_blank">SUPPORT</a>
+        
+        <a id="menuitem" onmouseover="hintsystem('WG1WGA')" href="https://wg1wga.com/d74g0n" target="_blank">WG1WGA</a>
+        <a id="menuitem" onmouseover="hintsystem('SUPPORT')" style="font-size: 27px; color:cornsilk;" href="https://www.patreon.com/d74g0n" target="_blank">DONATE</a>
         <hr>
         <div id="tab" onclick="toggle()"><span>close</span></div>
 
@@ -230,9 +237,8 @@
 
         <!--MOUSEOVERTIPS-->
     </div>
-    <!--SIDEMENU-->
+    <!--ENDSIDEMENU-->
 
-    <!--    <iframe id="view_port" src="/"></iframe>-->
     <iframe id="view_port" src="/pixelart/Q/"></iframe>
 
 
