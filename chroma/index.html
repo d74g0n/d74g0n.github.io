@@ -1,54 +1,57 @@
 <!DOCTYPE html>
-<html lang="">
-
+<html lang="eng">
 <head>
     <meta charset="utf-8">
     <title>chroma key tool</title>
-    <meta name="author" content="Your Name">
+    <meta name="author" content="d74g0n">
     <meta name="description" content="Tool for making color backdrops to key out with OBS">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--	<link rel="stylesheet" href="">-->
-
-    <link rel="shortcut icon" href="/common/img/favicon.png" />
-
-    </script>
-
+    <meta property="og:image" content="https://media.giphy.com/media/ynXkoHywgDgNq/giphy.gif">
+    <meta name="twitter:image" content="https://media.giphy.com/media/ynXkoHywgDgNq/giphy.gif">
+    <link rel="shortcut icon" href="/common/img/favicon.ico" />
     <style>
+        * {
+            user-select: none;
+            color: lime;
+        }
+
         body {
             overflow: hidden;
             width: 100vw;
             height: 100vh;
             background: #FF0000;
         }
-        
+
         .hueslider {
             display: block;
-/*            position: absolute;*/
             border: 2px solid black;
+            border-radius: 15px;
             width: 150px;
             margin: 0;
-            padding: 0;
-            bottom: 500px;
-            left: 0;
-            right: 0;
-            
+            padding: 1em;
         }
-        
+
         #clickhide {
             display: block;
         }
 
+        #centerroutter {
+            background: gold;
+            height: 1000px;
+            width: 1000px;
+        }
+
     </style>
-
 </head>
-
 <body>
     <center>
-        <div class="hueslider" id="controldiv">
-            <center>
-            <input type="range" min="1" max="359" value="0" class="slider" id="rainbowgo"><br>
-            <input type="range" min="1" max="15" value="15" class="slider" id="bright"><br><span id="clickhide">click to hide</span>
-            </center>
+        <div id="centeroutter">
+            <div class="hueslider" id="controldiv">
+                <center>
+                    <input type="range" min="1" max="359" value="0" class="slider" id="rainbowgo"><br>
+                    <input type="range" min="1" max="15" value="15" class="slider" id="bright"><br><span id="clickhide">double click to hide</span>
+                </center>
+            </div>
         </div>
     </center>
 
@@ -112,46 +115,29 @@
             return "#" + (0x1000000 | rgb).toString(16).substring(1).toUpperCase();
         }
 
-
-let isVisible = true;
-
+        let isVisible = true;
         const slider = document.getElementById("rainbowgo");
         const brighter = document.getElementById("bright");
-        const lazyhex = ["00","11","22","33","44","55","66","77","88","99","AA","BB","CC","DD","EE","FF"];
-        
-//        const controldiv = document.getElementById("controldiv");
-//        const clickhide = document.getElementById("clickhide");
+        const lazyhex = ["00", "11", "22", "33", "44", "55", "66", "77", "88", "99", "AA", "BB", "CC", "DD", "EE", "FF"];
 
-        
-//        clickhide.onclick = function (){
-//            
-//            controldiv.style.visibility = "hidden";
-//            
-//        }
-            
-            
-        document.body.onclick = function (){
-            
-            if (isVisible){
+        document.body.ondblclick = function() {
+
+            if (isVisible) {
                 controldiv.style.visibility = "visible";
-            }else{
+            } else {
                 controldiv.style.visibility = "hidden";
             }
-            
+
             isVisible = !isVisible;
         }
-        
+
         brighter.oninput = function() {
             document.body.style.background = stepHue(`0x${lazyhex[this.value]}0000`, slider.value);
-        }        
-        
+        }
+
         slider.oninput = function() {
             document.body.style.background = stepHue(`0x${lazyhex[brighter.value]}0000`, this.value);
         }
 
     </script>
-</body>
-
-
-</html>
-
+</body></html>
