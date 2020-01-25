@@ -12,6 +12,10 @@
     <meta property="og:image" content="index.png">
     <meta name="twitter:image" content="index.png">
     <link rel="shortcut icon" href="/common/img/favicon.ico" />
+    
+    <link rel="shortcut icon" href="/common/img/favicon.png" />
+    <meta property="og:image" content="/common/img/punisher_white.png">
+    <meta name="twitter:image" content="/common/img/punisher_white.png">
 
     <style>
         @font-face {
@@ -25,7 +29,6 @@
 
         body {
             background: black;
-            /*            color: #00aeba;*/
         }
 
         canvas {
@@ -36,7 +39,6 @@
             color: #00aeba;
             height: 4em;
             overflow: hidden;
-            /*            height: 440px;*/
         }
 
         hr {
@@ -49,32 +51,6 @@
 <body>
     <center>
         <canvas id="mainscreen"></canvas>
-        <!--
-
-        <div id="solve">
-            <hr>
-            d74g0ns Solve Steps:
-            <hr><br>
-            a) turn on all corners
-            <br>
-            <br>
-            b1)-even edge count: (all off or 2 on/off)<br> click the 2 edges that are ON.
-            <br>
-            <br>
-            b2)-odd edge count: (1 or 3 edges ON)<br> click one of the ON edges <br> then return to step a.
-            <br>
-            <br>
-            c) solution could now be obvious: <br>
-
-            i) all corners only thing ON: click ON center. <br>
-            ii) only center OFF: click ON Center then 4 edges. <br>
-
-            iii) diagnal pattern exists: click the 2 OFF corners.<br>
-            iv) star pattern exists (double diagnal): click ON the 4 Edges.<br><br>
-            <hr>
-
-        </div>
--->
         <script src="/games/common/drawing.js"></script>
         <script>
             const canvas = document.getElementById("mainscreen");
