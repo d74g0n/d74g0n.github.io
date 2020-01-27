@@ -37,13 +37,14 @@ let Alfred = {
         }
     },
     isTalking: false,
-    voice: 4,
+    voice: 5, //1 is normie -- 5 male 
 }
 const Al = Alfred;
 
 
 // -=-=-=-=-=-=- Settings::
-let isRepeatingYou = false;
+//let isRepeatingYou = false;
+let isRepeatingYou = true;
 // -=-=-=-=-=-=- Parse Speech::
 function ParseSentance(sentance) {
     sentance += ' ';
@@ -125,9 +126,9 @@ function commands(word, nextword) {
         }
 //        msg.voice = voices[Al.voice--];
         //-=-=-=-=-=-=-=-=-=-=-=-=-=- EXPERIEMENTAL
-        Al.voice--;        
+//        Al.voice--;        
         console.log(`Al.voice${Al.voice}`);
-        speak(word);
+//        speak(word);
         DelayisTalkingFalse(1);
     }
 
@@ -189,26 +190,19 @@ let _QLinks = {
 try {
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     var recognition = new SpeechRecognition();
-    //    console.log(recognition);
     recognition.continuous = true;
     listenNow();
-    //    recognition.start(); // NEW NEW
 } catch (e) {
     console.error(e);
 }
 
 function listenNow() {
-    //    speak("ah yes, I can hear you");
     recognition.start();
 }
 
-//document.body.onclick = listenNow();
-
 function StopListening() {
-    //    speak("I will stop listening now");
     recognition.stop();
 }
-
 
 
 function htmlReadouts(msg) {
@@ -323,3 +317,9 @@ function speak(message) {
 
 
 speak("init");
+
+setTimeout(function(){
+    
+    speak("hello everybody");
+    
+},1000);
