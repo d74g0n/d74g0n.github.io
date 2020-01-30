@@ -37,7 +37,7 @@ let Alfred = {
         }
     },
     isTalking: false,
-    voice: 5, //1 is normie -- 5 male 
+    voice: 4, //1 is normie -- 5 male 
 }
 const Al = Alfred;
 
@@ -296,8 +296,9 @@ recognition.onerror = function (event) {
 function speak(message) {
     var msg = new SpeechSynthesisUtterance(message);
     var voices = window.speechSynthesis.getVoices();
-    //    console.log(voices);
+        console.log(voices);
     msg.voice = voices[Al.voice];
+//    msg.voice = voices[0];
     
     Al.isTalking = true;
     window.speechSynthesis.speak(msg);
@@ -320,6 +321,6 @@ speak("init");
 
 setTimeout(function(){
     
-    speak("hello everybody");
+    speak("UU? RR? UU? RR? UU? RR? UU? RR? UU? RR? ");
     
 },1000);

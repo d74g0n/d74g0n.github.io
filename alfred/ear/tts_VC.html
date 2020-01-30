@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>TTS VOICECHANGER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/common/img/punisher_med_white.png" />
+    <meta name="description" content="d74g0n's Javascript TTS Voice Changer">
+    <meta name="keywords" content="javascript, JS, Speech Recognition, Pixel, Code, Programming, visual, visualizer, viewer, d74g0n, art">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <meta property="og:image" content="/common/img/punisher_med_white.png">
+    <meta name="twitter:image" content="/common/img/punisher_med_white.png">
+
+    <style>
+        * {
+            background: black;
+            color: white;
+        }
+
+        #outwrapper {
+            padding-top: 12px;
+            margin: auto;
+            padding: auto;
+        }
+        
+        #output {
+            font-size: 48px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <center>
+        <div id="outwrapper">
+            <center>
+                <span id="output">
+                    CLICK TO START
+                </span>
+            </center>
+        </div>
+    </center>
+
+
+
+    <script src="/alfred/ear/tts_voicechanger.js"></script>
+    <script>
+        document.onclick = function() {
+
+            let VC = new TTS_Voice_Changer(1, document.getElementById("output"));
+
+            setInterval(function() {
+                VC.voicenum++;
+                VC.speak(`example voice ${VC.voicenum}`);
+
+            }, 3000);
+        };
+    </script>
+
+
+
+</body></html>
