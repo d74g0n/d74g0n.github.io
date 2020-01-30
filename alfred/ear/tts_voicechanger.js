@@ -1,38 +1,20 @@
 /*
-Text to speech / spech recognition is one unit.
-official -> https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition
-
-grumpy user notes:
-- https required for mic access 
-- popups have to be allowed before it can be used to open windows by voice command
-- needs help screen by saying help
-
-
-
-debugger notes:
-- redunancy on say
-- has to be mouseclickon body to activate responses since 2018
-- 17 voices to date.
-
-refactor considerations:
-
-break up scripts into components from sense perspective hear>say.
-hear.js - initialize all the components
-speak.js - if initialized speak components. (almost none)
-
-speechprocessor.js - 
-
-
-
+uses tts as voice changer
+-=-=-=-=-=-=-=-
+USAGE:
+document.onclick = function() {
+//    readout.innerHTML = 'begin speaking...';
+    let VC = new TTS_Voice_Changer(5, readout);
+};
 */
 
-
 class TTS_Voice_Changer {
-    constructor(voicenum = 4, element) {
+    constructor(voicenum, element) {
         this.id = 'voice changer';
         this.voicenum = voicenum;
+        this.showConfidence = false;
+        this.voices = window.speechSynthesis.getVoices();
         this.element = element;
-
         this.init();
     }
 
@@ -44,54 +26,43 @@ class TTS_Voice_Changer {
         this.voicenum--;
     }
 
-    listenNow() {
+    listenNow(recognition) {
         recognition.start();
     }
 
-    StopListening() {
+    StopListening(recognition) {
         recognition.stop();
     }
 
-    speak(message) {
-        this.element.innerHTML = message;
-        var msg = new SpeechSynthesisUtterance(message);
-        var voices = window.speechSynthesis.getVoices();
-        console.log(voices);
-        msg.voice = voices[this.voicenum];
-
-        window.speechSynthesis.speak(msg);
-
-        console.log(`${message}`);
-        //    console.log(`click on screen to activate responses`);
-    }
-
     init() {
+        const ME = this;
         try {
             var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             var recognition = new SpeechRecognition();
             recognition.continuous = true;
-            this.listenNow();
+            this.listenNow(recognition);
         } catch (e) {
             console.error(e);
         }
 
-        recognition.onsoundstart = function () {
-            console.log('Some sound is being received');
-        }
+        // for animations and stuff; to trigger when sound starts::
+        //        recognition.onsoundstart = function () {
+        //            console.log('Some sound is being received');
+        //        }
 
         recognition.onstart = function () {
-            console.log('[listening]');
+            console.log('[unmuted]');
         }
 
         recognition.onspeechend = function () {
-            console.log('[sleeping]');
-            setTimeout(this.listenNow, 1000);
+            console.log('[muted]');
+            setTimeout(function(){ME.listenNow(recognition)}, 200);
         }
 
         recognition.onerror = function (event) {
             if (event.error == 'no-speech') {
-                console.log('No speech was detected. Try again.');
-                setTimeout(this.listenNow, 1000);
+                console.log('No speech was detected.');
+                setTimeout(function(){ME.listenNow(recognition)}, 200);
             };
         }
 
@@ -100,19 +71,31 @@ class TTS_Voice_Changer {
             var transcript = event.results[current][0].transcript;
             var confidence = event.results[current][0].confidence;
             console.log('[' + (confidence * 100).toFixed(2) + '%][' + transcript + ']');
-            this.speak(transcript);
+            // 'this' is hijacked by speechrecognition so ME is used.
+            ME.confidence = `  ${(confidence * 100).toFixed(2)}%`;
+            ME.speak(transcript);
         };
 
-        this.speak('TTS has been initialized');
-        console.log(`init complete`);
+        this.recognition = recognition;
+        console.log(`ttsVC v1.0 init complete`);
 
-    } // init end
+    }
 
+    speak(message) {
 
+        if (this.showConfidence) {
+            this.element.innerHTML = message + this.confidence;
+        } else {
+            this.element.innerHTML = message;
+        }
+        var msg = new SpeechSynthesisUtterance(message);
+        this.voices = window.speechSynthesis.getVoices();
+        msg.voice = this.voices[this.voicenum];
+        window.speechSynthesis.speak(msg);
+        
+        console.log(`${message}`);
+    }
 
 
 
 }
-
-
-//let VC = new TTS_Voice_Changer(4);
