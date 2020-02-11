@@ -3,14 +3,14 @@
 
 <head>
     <title>Minimal Window</title>
-    
-        <meta name="author" content="d74g0n">
+
+    <meta name="author" content="d74g0n">
     <meta name="description" content="Minimal Window">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/common/img/favicon.png" />
     <meta property="og:image" content="https://media.giphy.com/media/AYJvIUh0e3N0Q/giphy.gif">
     <meta name="twitter:image" content="https://media.giphy.com/media/AYJvIUh0e3N0Q/giphy.gif">
-    
+
     <style>
         body {
             background: black;
@@ -38,7 +38,6 @@
             line-height: 18px;
             margin: 2px;
         }
-
     </style>
 
 
@@ -57,12 +56,13 @@
             <form>
                 URL: <input type="text" id="urlinput" value="http://d74g0n.github.io/clock/" /><input id="URLbutt" type="button" value="Popout" onclick="popOut()" />
             </form>
+            <input id="sum" type="button" value="SUM" onclick="summit()" />
+            <input id="d74" type="button" value="D74" onclick="d74g0n()" />
         </div>
 
         <script>
-            watchForEnter("chaninput","chanbutt");
-            watchForEnter("urlinput","URLbutt");
-
+            watchForEnter("chaninput", "chanbutt");
+            watchForEnter("urlinput", "URLbutt");
         </script>
     </center>
 
@@ -76,19 +76,27 @@
         }
 
         function popOut() {
-            // this function pulls the data(value) from the inputbox and sends it to the common function.
             let idata = document.getElementById('urlinput').value;
             openMinWindow(idata);
         }
 
         function twitchchan() {
-            // this function pulls the data(value) from the inputbox and sends it to the common function.
             let idata = document.getElementById('chaninput').value;
             prepMinTwitch(idata);
         }
 
+        function summit() {
+            openMinWindow(`https://www.twitch.tv/popout/summit1g/chat?popout=`);
+            prepMinTwitch(`summit1g`);
+        }
 
+
+        function d74g0n() {
+            openMinWindow(`https://www.twitch.tv/popout/d74g0n/chat?popout=`);
+            setTimeout(function() {
+                let vdata = `d74g0n`;
+                prepMinTwitch(vdata);
+            }, 1000);
+        }
     </script>
-</body>
-
-</html>
+</body></html>
