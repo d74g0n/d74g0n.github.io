@@ -15,20 +15,49 @@
             background: rgba(0, 0, 0, 0);
         }
 
-        body {
-            overflow: hidden;
-            width: 99vw;
-            height: 99vh;
-            border: 2px solid green;
-            overflow: hidden;
+        #top,
+        #bottom,
+        #left,
+        #right {
+            background: lime;
+            position: fixed;
         }
 
+        #left,
+        #right {
+            top: 0;
+            bottom: 0;
+            width: 4px;
+        }
+
+        #left {
+            left: 0;
+        }
+
+        #right {
+            right: 0;
+        }
+
+        #top,
+        #bottom {
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        #top {
+            top: 0;
+        }
+
+        #bottom {
+            bottom: 0;
+        }
     </style>
 </head>
 
 <body>
-
-
-</body>
-
-</html>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
+</body></html>

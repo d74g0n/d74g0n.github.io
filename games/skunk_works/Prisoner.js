@@ -66,18 +66,18 @@ class Prisoner {
 
         //unused dudes name:
         this.id = id;
-        this.noisescale = 32/4;
+        this.noisescale = 32 / 4;
         this.noisevol = 2;
         this.noiselast = 0;
         this.isNoisy = true;
 
         this.noise = function () {
             if (this.isNoisy) {
-                
+
                 if (global.framecount % 10 == 0) {
-                this.noiselast = Math.random(this.noisevol).toFixed(4) * this.noisescale;
+                    this.noiselast = Math.random(this.noisevol).toFixed(4) * this.noisescale;
                 }
-                
+
                 return this.noiselast;
             } else {
                 return 0;
@@ -144,8 +144,10 @@ class Prisoner {
                 global.ctx.translate(width, 0);
                 global.ctx.scale(-1, 1);
 
+
                 var rect = global.canvas.getBoundingClientRect();
-                var ix = global.canvas.width - (this.x - rect.left) - global.draw_scale; // + rect.left
+
+                var ix = global.ctx.canvas.width - (this.x) - global.draw_scale;
 
                 this.draw_legs_walk(ix, this.y); // GONNA NEED OTHER LEGS
                 this.draw_shirt(ix, this.y);
