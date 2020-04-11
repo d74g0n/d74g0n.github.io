@@ -141,13 +141,16 @@ class Prisoner {
             global.ctx.save();
 
             if (this.isLeft) {
-                global.ctx.translate(width, 0);
+                //                width = global.canvas.width;
+                global.ctx.translate(global.canvas.width, 0);
+                //                console.log(`width=${width}`);
                 global.ctx.scale(-1, 1);
 
 
                 var rect = global.canvas.getBoundingClientRect();
 
-                var ix = global.ctx.canvas.width - (this.x) - global.draw_scale;
+                //                var ix = global.ctx.canvas.width - (this.x) - global.draw_scale;
+                var ix = global.canvas.width - (this.x + global.draw_scale);
 
                 this.draw_legs_walk(ix, this.y); // GONNA NEED OTHER LEGS
                 this.draw_shirt(ix, this.y);

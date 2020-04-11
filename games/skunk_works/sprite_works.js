@@ -43,7 +43,7 @@ dudes.push(new Prisoner(centerSCR.x, centerSCR.y, 'bob'));
 global.controller = new web_controls(dudes[0]);
 //dudes.push(new Prisoner(1, centerSCR.y, 'dale'));
 //global.controllerB = new web_controls(dudes[1]);
-//dudes.push(new Prisoner(256, centerSCR.y+64, 'jeff'));
+//dudes.push(new Prisoner(256, centerSCR.y + 64, 'jeff'));
 //dudes.push(new Prisoner(662, centerSCR.y+50, 'hammy', true));
 //NOTES: greatest Y value (inverted remember) = drawn last = infront.
 
