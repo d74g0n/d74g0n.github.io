@@ -14,12 +14,12 @@ function drawImageRotated(image, x, y, s, r) {
     ctx.drawImage(image, 0, 0, image.width, image.height, (-scaledw / 2), (-scaledh / 2), scaledw, scaledh);
 }
 
-function rotateCanvas(r=0){
+function rotateCanvas(r = 0) {
     return justRotate(r);
 }
 
-function justRotate(r=0){
-        return ctx.rotate(r * Math.PI / 180);
+function justRotate(r = 0) {
+    return ctx.rotate(r * Math.PI / 180);
 }
 
 function centerDraw(image, s = 1) {
@@ -50,11 +50,12 @@ function drawImage(img, x, y) {
     ctx.drawImage(img, x, y, img.width, img.height);
 }
 
+
 function superdrawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
     ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 }
 
-function roundRect(ctx = ctx, x, y, width, height, radius, fill=true, stroke) {
+function roundRect(ctx = ctx, x, y, width, height, radius, fill = true, stroke) {
     if (typeof stroke == 'undefined') {
         stroke = true;
     }
@@ -99,7 +100,7 @@ function roundRect(ctx = ctx, x, y, width, height, radius, fill=true, stroke) {
     }
 
     ctx.restore();
-    
+
 }
 
 function writeText(string = 'oops', scaleX = canvas.width / 2, scaleY = 170, font = `monospace`, fillStyle = 'red', strokeStyle = 'gold', textBaseline = 'top', textAlign = 'center') {
@@ -156,12 +157,12 @@ function strokeSquare(x, y, scale) {
 
 function strokeRect(x, y, w, h) {
     ctx.strokeRect(x, y, w, h);
-        ctx.stroke();
+    ctx.stroke();
 }
 
-function fillRect(x,y,w,h){
+function fillRect(x, y, w, h) {
     return ctx.fillRect(x, y, w, h);
-//     return drawRect(x, y, w, h);
+    //     return drawRect(x, y, w, h);
 }
 
 function drawRect(x, y, w, h) {
@@ -185,7 +186,7 @@ function fillCicle(x, y, r, color) {
     ctx.fill();
 }
 
-function sSq(x=myTile.x,y=myTile.y, w = grid.scale, color = 'green') {
+function sSq(x = myTile.x, y = myTile.y, w = grid.scale, color = 'green') {
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.strokeStyle = color;
@@ -326,12 +327,10 @@ console.log(`/g/c/drawing.js loaded`);
 
 
 function loadAudio(path) {
-        let newAudio = new Audio(path);
-        newAudio.addEventListener('loadeddata', () => {
-            newAudio.volume = 0.7;
-            console.log(`I have loaded ${path}`);
-        })
+    let newAudio = new Audio(path);
+    newAudio.addEventListener('loadeddata', () => {
+        newAudio.volume = 0.7;
+        console.log(`I have loaded ${path}`);
+    })
     return newAudio;
-    };
-
-
+};

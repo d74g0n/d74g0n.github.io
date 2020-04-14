@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" id="stylesheet" href="/canvas_object/index.css">
+
+    <script src="/games/common/drawing.js"></script>
+
+
+    <title>ropeswing</title>
+</head>
+
+<body>
+    <center>
+        <canvas id="outputCanvas"></canvas>
+        <br>
+        <canvas id="Set_Canvas"></canvas>
+        <script src="set.js"></script>
+    </center>
+    <script>
+
+    </script>
+    <style>
+        canvas {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+    </style>
+    <script>
+        function drawBG() {
+            ctx.globalAlpha = 0.1;
+            drawSet(); // in set.js
+        }
+
+        function linerope(fsine, yoff = 0) {
+
+            ctx.globalAlpha = 1;
+
+            let ropelength = 100;
+
+            let pivot = {
+                x: canvas.width / 2,
+                y: 25,
+            };
+            let char = {
+                x: pivot.x + (fsine * 1.8),
+                y: pivot.y + yoff + 100 - ((Math.pow(fsine, 2)) / 100),
+            };
+
+            ctx.fillStyle = "black";
+            drawline(pivot.x, pivot.y, char.x, char.y);
+
+            ctx.save();
+
+            let charwidth = 10;
+            let charheight = 30;
+
+            ctx.translate(char.x - (charwidth / 2), (char.y - charheight / 3));
+
+            let rotateamount = 250;
+            ctx.rotate(fsine / rotateamount);
+
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(0, 0, charwidth, charheight);
+
+            ctx.restore();
+        }
+        linerope();
+
+        let frame = 0;
+        let swingforce = 90; // 180
+        let swingspeed = 0.05;
+
+        let roplen = 100;
+    </script>
+    <script src="loop.js"> </script>
+</body></html>

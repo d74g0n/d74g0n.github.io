@@ -1,0 +1,12 @@
+imageSmoothing off
+globalAlphas
+
+add character
+add controls
+
+
+
+do bells and whistles last::
+
+add perlin noise grass/clouds
+

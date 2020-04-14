@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--    <link rel="stylesheet" type="text/css" id="stylesheet" href="/canvas_object/index.css">-->
+    <script src="/games/common/drawing.js"></script>
+    <title>mockzone</title>
+</head>
+
+<body>
+    <span>game view:</span>
+    <center><canvas id="outputCanvas"></canvas></center>
+    <br><span>level image buffer:</span>
+    <center><canvas id="Set_Canvas"></canvas></center>
+    <!--setup and 'set'::-->
+    <script src="set.js"></script>
+    <!--    style after canvas's setup  -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: gold;
+        }
+
+        canvas {
+            width: 100%;
+            width: 70%;
+            height: auto;
+            border-radius: 15px;
+        }
+    </style>
+    <script src="mockcode.js"> </script>
+    <!--    <script src=""> </script>-->
+    <script src="loop.js"> </script>
+</body></html>
