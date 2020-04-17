@@ -1,5 +1,5 @@
 class camera {
-    constructor(x = 64, y = 70, w = 512, h = 256, col = 'white') {
+    constructor(w = 512, h = 256, x = 0, y = 0, col = 'white') {
         this.pos = {
             x: x,
             y: y,
@@ -16,6 +16,8 @@ class camera {
 
         this.singleskyrender = true;
         this.rendercenter = false;
+
+        this.target = undefined;
     }
 
     drawDebugFrame() {
@@ -61,34 +63,43 @@ class camera {
         if (this.pos.x <= 0) {
             clog('view-hit: left');
             this.pos.x = 0;
-            this.reflectX();
+            //            this.reflectX();
         }
 
         if (this.pos.x + this.w > buffers.bg.width) {
             clog('view-hit: right');
             this.pos.x = buffers.bg.width - this.w;
-            this.reflectX();
+            //            this.reflectX();
         }
 
         if (this.pos.y <= 0) {
             clog('view-hit: top');
             this.pos.y = 0;
-            this.reflectY();
+            //            this.reflectY();
         }
 
         if (this.pos.y + this.h > buffers.bg.height) {
             clog('view-hit: bottom');
             this.pos.y = buffers.bg.height - this.h;
-            this.reflectY();
+            //            this.reflectY();
         }
 
     }
 
     renderer() {
 
+        //CLEAR::
         build_bgbuffer(); //redraws grass (sky draws once then buffers.sky transfer after)
 
-        gameball.tick();
+
+        //DRAWSTUFF::
+        scene.tick();
+        //        gameball.tick();
+
+
+
+
+
 
         if (this.rendercenter) {
             this.drawcenterview();
@@ -99,9 +110,11 @@ class camera {
     }
 
     chaseBall() {
-        let speed = 4;
-        this.vel.x += gameball.pos.x / 90000;
-        this.vel.y += gameball.pos.y / 90000;
+        let speed = 10;
+        this.vel.x = ((this.pos.x + (this.w / 2) - this.target.pos.x) / speed) * -2;
+        this.vel.y = ((this.pos.y + (this.h / 2) - this.target.pos.y) / speed) * -2;
+        //        this.vel.x = ((this.pos.x + (this.w / 2) - gameball.pos.x) / speed) * -2;
+        //        this.vel.y = ((this.pos.y + (this.h / 2) - gameball.pos.y) / speed) * -2;
     }
 
     tick() {
@@ -113,8 +126,15 @@ class camera {
 
         this.renderer();
         //draw after so it doesn't draw on output::
-        this.drawDebugFrame();
-        this.drawcenterview();
+        //POST transfer bg=>main
+        function postRender(dis) {
+            dbgrid.tick();
+            dis.drawDebugFrame();
+            dis.drawcenterview();
+        }
+        if (isDebugging) {
+            postRender(this);
+        }
     }
 
 

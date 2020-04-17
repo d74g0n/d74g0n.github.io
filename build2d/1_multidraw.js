@@ -1,6 +1,6 @@
 /*SO FAR JUST GRADIENT CRAP*/
 
-function mgradientV(canvas = canvas, ctx = ctx, colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
+function mgradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
     let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
     gradient.addColorStop(0, colorA);
     gradient.addColorStop(.5, colorB);

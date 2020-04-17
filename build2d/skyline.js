@@ -1,80 +1,43 @@
-function background(color) { // TOP HALF ONLY SKYCTX
+function skyBackgroundOrig(color) { // TOP HALF ONLY SKYCTX
+    skyctx.globalAlpha = 0.5;
     skyctx.fillStyle = color;
-    return skyctx.fillRect(0, 0, buffers.sky.width, buffers.sky.height / 2)
+    skyctx.fillRect(0, 0, buffers.sky.width, buffers.sky.height / 2);
+    skyctx.globalAlpha = 1;
 }
 
-//function gradientV(colorA = 'black', colorB = 'blue', colorC = 'skyblue') {
-function gradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
+function skyBackground(color) { // TOP HALF ONLY SKYCTX
+    bgctx.save();
+    bgctx.globalAlpha = 0.5;
+    bgctx.fillStyle = color;
+    bgctx.fillRect(0, 0, buffers.sky.width, buffers.sky.height / 2);
+    bgctx.globalAlpha = 1;
+    bgctx.restore();
+}
+
+function skyGradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
     let gradient = skyctx.createLinearGradient(0, 0, 0, buffers.sky.height);
     gradient.addColorStop(0, colorA);
     gradient.addColorStop(.7, colorB);
     gradient.addColorStop(1, colorC);
     skyctx.fillStyle = gradient;
-    //skyctx.fillRect(10, 10, 200, 100);
     return gradient;
-    //background(gradient);
 }
 
-function gradientH(colorA = 'black', colorB = 'blue', colorC = 'skyblue') {
+function skyGradientH(colorA = 'black', colorB = 'blue', colorC = 'skyblue') {
     let gradient = skyctx.createLinearGradient(0, 0, buffers.sky.width, 0);
     gradient.addColorStop(0, colorA);
     gradient.addColorStop(.7, colorB);
     gradient.addColorStop(1, colorC);
     skyctx.fillStyle = gradient;
-    //skyctx.fillRect(10, 10, 200, 100);
     return gradient;
-    //background(gradient);
 }
-
-
-function horizontalLine(y) {
-    skyctx.beginPath();
-    skyctx.moveTo(0, y);
-    skyctx.lineTo(buffers.sky.width, y);
-    skyctx.stroke();
-}
-
 
 function setColor(color) {
     return skyctx.fillStyle = color;
 }
 
-function setStrokeColor(color) {
-    return skyctx.strokeStyle = color;
-}
-
-function drawSquare(x, y, scale) {
-    skyctx.fillRect(x, y, scale, scale);
-}
-
-function strokeSquare(x, y, scale) {
-    skyctx.Rect(x, y, scale, scale);
-}
-
 function drawRect(x, y, w, h) {
     return skyctx.fillRect(x, y, w, h);
-}
-
-function drawCircle(x, y, r) {
-    skyctx.beginPath();
-    skyctx.arc(x, y, r, 0, 2 * Math.PI);
-    skyctx.stroke();
-}
-
-function fillCircle(x, y, r, color) {
-    skyctx.beginPath();
-    skyctx.arc(x, y, r, 0, 2 * Math.PI);
-    skyctx.fillStyle = color;
-    skyctx.fill();
-}
-
-//function sSq(x, y, color = 'rgba(255,255,255,1)') {
-function sSq(x, y, color = 'green') {
-    skyctx.beginPath();
-    skyctx.lineWidth = 1;
-    skyctx.strokeStyle = color;
-    skyctx.strokeRect(x + 0.5, y + 0.5, global.scale - 1, global.scale - 1);
-    skyctx.stroke();
 }
 
 function RNDBool() {
@@ -94,7 +57,7 @@ let colorscheme = {
 }
 
 let GeoData = {
-    horizonY: buffers.sky.height / 2,
+    horizonY: (buffers.sky.height / 2) - 6,
     top: 1024,
     yoffset: 0,
 };
@@ -175,7 +138,6 @@ function buildingABasic(x, w, h) {
     }
 }
 
-
 function windowLight(val = '50') {
     return `rgba(255,255,${val},1)`;
 }
@@ -198,7 +160,7 @@ function drawcity() {
         buildingABasic(x, w, h - RNDNum(0, h - minBheight));
     }
     //drawbasesky:
-    background(gradientV());
+    skyBackground(skyGradientV());
     let w = 10 + RNDNum(5, 15); // PERLIN WIDTH
     // ALL RND CONVERTS TO PERLIN INPUTS:
     for (let x = (RNDNum(-25, -5)); x < buffers.sky.width; x += w + 1) {
@@ -206,7 +168,7 @@ function drawcity() {
         WIP(x, w);
     }
     ctx.globalAlpha = 0.5;
-    background(gradientV());
+    skyBackground(skyGradientV());
     ctx.globalAlpha = 1;
 
     GD.horizonY += 2;
@@ -217,7 +179,7 @@ function drawcity() {
     }
 
     ctx.globalAlpha = 0.5;
-    background(gradientV());
+    skyBackground(skyGradientV());
     ctx.globalAlpha = 1;
 
     GD.horizonY += 5;
@@ -228,7 +190,8 @@ function drawcity() {
 
     }
     setColor('black');
-    GD.horizonY = Math.floor(buffers.sky.height * 0.7); // reset horizon
+    //    GD.horizonY = Math.floor(buffers.sky.height * 0.7); // reset horizon
+    GD.horizonY = Math.floor((buffers.sky.height / 2) - 6); // reset horizon
 }
 
 

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="/games/common/drawing.js"></script>
+    <!--    <script src="/games/common/drawing.js"></script>-->
     <title>mockzone</title>
 </head>
 
@@ -14,16 +14,22 @@
             <br><span class="debuglabels">buffer.bg.raw</span>
             <center><canvas id="buffer_background" class="debugviews"></canvas></center> <br><span class="debuglabels">buffer.sky.raw</span>
             <center><canvas id="buffer_skybuild" class="debugviews"></canvas></center>
+            <center><canvas id="buffer_viiv" class="debugviews"></canvas></center>
         </div>
     </center>
     <script>
-        const isDebugging = true;
+        let isDebugging = false;
+        let clogging = false;
     </script>
     <script src="0_declarations.js"></script>
+    <script src="class_character.js"></script>
+    <script src="scene.js"></script>
+
     <script src="1_multidraw.js"></script>
     <script src="skyline.js"></script>
     <script src="imagebuilding.js"></script>
     <script src="class_camera.js"></script>
+    <script src="class_grid.js"></script>
     <script src="class_gravity.js"></script>
     <script src="class_ball.js"></script>
     <script src="main_loop.js"></script>
@@ -33,6 +39,7 @@
             margin: 0;
             padding: 0;
             color: gold;
+            background: black;
         }
 
         canvas {
@@ -53,6 +60,10 @@
         .debuglabels {
             color: deeppink;
             visibility: hidden;
+        }
+
+        #buffer_viiv {
+            width: 64px;
         }
     </style>
     <script>

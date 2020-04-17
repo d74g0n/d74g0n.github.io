@@ -18,21 +18,34 @@ function build_bgbuffer() {
     ground();
 
     function sky() {
-        function basicsky() {
-            skyctx.fillStyle = nature_state.sky;
-            skyctx.fillRect(0, 0, buffers.bg.width, buffers.bg.height / 2);
-        }
+        skyBackground(skyGradientV());
+    }
 
+    function solidCity() {
         if (nature_state.buildskyonlyonce) {
             nature_state.buildskyonlyonce = false;
+            skyctx.save();
+            skyctx.globalAlpha = 1;
             drawcity();
+            skyctx.restore();
         }
-
-
         transferSkytoBG();
     }
 
+    function fadeCity() {
+        if (nature_state.buildskyonlyonce) {
+            skyctx.save();
+            skyctx.globalAlpha = 0.5;
+            drawcity();
+            skyctx.restore();
+        }
+    }
+
     sky();
+    //    fadeCity();
+    fadeCity();
+    solidCity();
+
 
 
 }
