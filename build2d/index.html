@@ -9,10 +9,8 @@
 <body>
     <center>
         <div id="playscreen">
-            <span class="debuglabels">final.output</span>
+            <center><canvas id="buffer_background" class="debugviews"></canvas></center>
             <center><canvas id="outputCanvas"></canvas></center>
-            <br><span class="debuglabels">buffer.bg.raw</span>
-            <center><canvas id="buffer_background" class="debugviews"></canvas></center> <br><span class="debuglabels">buffer.sky.raw</span>
             <center><canvas id="buffer_skybuild" class="debugviews"></canvas></center>
             <center><canvas id="buffer_viiv" class="debugviews"></canvas></center>
         </div>
@@ -21,6 +19,7 @@
         let isDebugging = false;
         let clogging = false;
     </script>
+    <script src="perlin.js"></script>
     <script src="0_declarations.js"></script>
     <script src="class_character.js"></script>
     <script src="scene.js"></script>

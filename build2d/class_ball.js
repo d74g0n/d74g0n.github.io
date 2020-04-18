@@ -77,17 +77,7 @@ class ball {
     }
 
     ballGradient() {
-        //borked
-        //        let gradient = viivctx.createLinearGradient(0, 0, 0, 64);
-        //        gradient.transformOrigin = `${this.pos.x}px,${this.pos.y}px`;
-        //        gradient.addColorStop(0, 'red');
-        //        gradient.addColorStop(.8, 'brown');
-        //        gradient.addColorStop(1, 'maroon');
-        //        viivctx.fillStyle = gradient;
-        //        bgctx.fillStyle = gradient;
-        //        viivctx.fillRect(0, 0, 64, 64);
         return 'red';
-        //        return gradient;
     }
 
     update() {
@@ -103,31 +93,35 @@ class ball {
     }
 
     drawSelf() {
-        //        console.log(`drawn-ball`);
-        //        let ballarc = new Path2D();
-        //        ballarc.arc(this.pos.x, this.pos.y, this.r * 10, 0, 2 * Math.PI);
-        //        ballarc.closePath();
-        //        bgctx.strokeStyle = this.ballGradient();
-        //        bgctx.fillStyle = this.ballGradient();
-        bgctx.fillStyle = 'red';
+        ctx.save();
+        //        bgctx.save();
+        bgctx.fillStyle = 'white';
         bgctx.beginPath();
         bgctx.arc(this.pos.x, this.pos.y, this.r * 10, 0, 2 * Math.PI);
-        bgctx.lineWidth = 10;
-        //        bgctx.stroke();
         bgctx.fill();
+        //        bgctx.lineWidth = 0;
+        //        bgctx.strokeStyle = 'transparent';
+        //        bgctx.stroke();
+
         //        bgctx.fill(ballarc, 'evenodd');
-        if (this.isDebugging) {
-            bgctx.fillStyle = 'white';
-            bgctx.fillText(`x:${this.vel.x.toFixed(2)}`, this.pos.x + 35, this.pos.y - 5);
-            bgctx.fillText(`y:${this.vel.y.toFixed(2)}`, this.pos.x + 35, this.pos.y + 20);
-        }
+        //        if (this.isDebugging) {
+        //            bgctx.fillStyle = 'pink';
+        //            bgctx.fillText(`x:${this.vel.x.toFixed(2)}`, this.pos.x + 35, this.pos.y - 5);
+        //            bgctx.fillText(`y:${this.vel.y.toFixed(2)}`, this.pos.x + 35, this.pos.y + 20);
+        //        }
+
+        //        bgctx.fill();
+        bgctx.restore();
+        //        ctx.restore();
     }
 
     tick() {
+        //        bgctx.save();
         this.update();
         this.constrainToLevel();
         this.friction();
         this.drawSelf();
         this.grav.tick(); //wind it up
+        //        bgctx.restore();
     }
 }

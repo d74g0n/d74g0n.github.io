@@ -21,23 +21,29 @@ class camera {
     }
 
     drawDebugFrame() {
+        this.ctx.save();
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = this.col;
         this.ctx.strokeRect(this.pos.x, this.pos.y, this.w, this.h, this.col);
-        this.ctx.stroke();
+        //        this.ctx.stroke();
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText('LIVE CAMERA', this.pos.x + 16, this.pos.y + 32);
+        this.ctx.restore();
     }
 
     drawview() {
+        this.outputctx.save();
         this.outputctx.drawImage(buffers.bg, this.pos.x, this.pos.y, buffers.bg.width, buffers.bg.height, 0, 0, buffers.bg.width, buffers.bg.height);
+        this.outputctx.restore();
     }
 
     drawcenterview() {
         let size = 64;
         let col = 'rgba(150,0,0,.8)';
-
-        //        this.ctx.fillStyle = 'red';
+        this.ctx.save();
         this.ctx.fillStyle = col;
         this.ctx.fillRect(this.pos.x + (this.w / 2) - (size / 2), this.pos.y + (this.h / 2) - (size / 2), size, size);
+        this.ctx.restore();
     }
 
     stop() {
@@ -128,7 +134,7 @@ class camera {
         //draw after so it doesn't draw on output::
         //POST transfer bg=>main
         function postRender(dis) {
-            dbgrid.tick();
+            //            dbgrid.tick();
             dis.drawDebugFrame();
             dis.drawcenterview();
         }

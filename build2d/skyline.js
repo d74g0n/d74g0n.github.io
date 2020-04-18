@@ -1,8 +1,10 @@
 function skyBackgroundOrig(color) { // TOP HALF ONLY SKYCTX
+    skyctx.save();
     skyctx.globalAlpha = 0.5;
     skyctx.fillStyle = color;
     skyctx.fillRect(0, 0, buffers.sky.width, buffers.sky.height / 2);
     skyctx.globalAlpha = 1;
+    skyctx.restore();
 }
 
 function skyBackground(color) { // TOP HALF ONLY SKYCTX

@@ -10,9 +10,21 @@ const skyctx = skybuffer.getContext('2d');
 const viivbuffer =
     document.getElementById('buffer_viiv');
 const viivctx = viivbuffer.getContext('2d');
+
+function contextproperties() {
+
+    ctx.imageSmoothingEnabled = false;
+    bgctx.imageSmoothingEnabled = false;
+    skyctx.imageSmoothingEnabled = false;
+
+}
+contextproperties();
+
+
 let level = {
     h: 512,
     w: 1024,
+    //    w: 4024,
 };
 
 let buffers = {

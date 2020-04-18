@@ -72,8 +72,10 @@ class character {
     }
 
     drawSelf() {
+        bgctx.save();
         bgctx.fillStyle = 'blue';
         bgctx.fillRect(this.pos.x, this.pos.y, this.w, this.h); // dont do fill or it does ball
+        bgctx.restore();
     }
 
     update() {

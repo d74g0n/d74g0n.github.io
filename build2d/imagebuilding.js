@@ -11,9 +11,11 @@ function transferSkytoBG() {
 
 function build_bgbuffer() {
     function ground() {
+        bgctx.save();
         hgrad(buffers.bg, bgctx, "#010", "#050", "#010");
         bgctx.fillRect(0, buffers.bg.height / 2, buffers.bg.width, buffers.bg.height / 2);
         bgctx.font = "30px Tiny";
+        bgctx.restore();
     }
     ground();
 

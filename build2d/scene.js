@@ -9,11 +9,15 @@ let scene = {
     props: [],
     tick: function () {
         //tigger each loaded object to render.
+        mockupZone(); // underprops
+
         if (scene.props.length > 0) {
             for (i = 0; i < scene.props.length; i++) {
                 scene.props[i].tick();
             }
         }
+        //        fieldGrid(); //WIP WIP WIP
+
     },
     add: function (newobj) {
         scene.props.push(newobj);
