@@ -3,6 +3,7 @@
 
 - STADIUM
 
+RIP buildings without skyfade for ico-local
 
 
 imageSmoothing off
