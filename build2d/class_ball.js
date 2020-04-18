@@ -16,7 +16,7 @@ class ball {
         this.grav = undefined;
 
         this.isDebugging = false;
-        this.collision = {
+        this.collision = { //Finish Me!
             didCollide: false,
             target: undefined,
         }
@@ -43,36 +43,30 @@ class ball {
 
     constrainToLevel() { // canvas collisions
         if (this.pos.x <= 0) {
-            //            clog('ball-hit: left');
             this.pos.x = 0;
             this.reflectX();
         }
-
         if (this.pos.x + this.r > buffers.bg.width) {
-            //            clog('ball-hit: right');
             this.pos.x = buffers.bg.width - this.r;
             this.reflectX();
         }
-
         if (this.pos.y <= 0) {
-            //            clog('ball-hit: top');
             this.pos.y = 0;
             this.reflectY();
         }
-        // DONT DELETE
-        //        if (this.pos.y + this.r > buffers.bg.height) {
-        //            clog('ball-hit: bottom');
-        //            this.pos.y = buffers.bg.height - this.r;
-        //            this.reflectY();
-        //        }
-
-        // hit mock bottom
-        if (this.pos.y + this.r > buffers.bg.height - 128) {
-            //            clog('ball-hit: bottom');
-            this.pos.y = buffers.bg.height - 128 - this.r;
-            this.reflectY();
+        if (false) { // hard toggle 
+            // buffer bottom::
+            if (this.pos.y + this.r > buffers.bg.height) {
+                this.pos.y = buffers.bg.height - this.r;
+                this.reflectY();
+            }
+        } else {
+            // hit mock bottom::
+            if (this.pos.y + this.r > buffers.bg.height - 128) {
+                this.pos.y = buffers.bg.height - 128 - this.r;
+                this.reflectY();
+            }
         }
-
     }
 
     ballGradient() {
@@ -98,20 +92,15 @@ class ball {
         bgctx.beginPath();
         bgctx.arc(this.pos.x, this.pos.y, this.r * 10, 0, 2 * Math.PI);
         bgctx.fill();
-        //        bgctx.lineWidth = 0;
-        //        bgctx.strokeStyle = 'transparent';
-        //        bgctx.stroke();
 
-        //        bgctx.fill(ballarc, 'evenodd');
-        //        if (this.isDebugging) {
-        //            bgctx.fillStyle = 'pink';
-        //            bgctx.fillText(`x:${this.vel.x.toFixed(2)}`, this.pos.x + 35, this.pos.y - 5);
-        //            bgctx.fillText(`y:${this.vel.y.toFixed(2)}`, this.pos.x + 35, this.pos.y + 20);
-        //        }
+        if (this.isDebugging) {
+            bgctx.fillStyle = 'gold';
+            bgctx.globalAlpha = 1;
+            bgctx.fillText(`xv:${this.vel.x.toFixed(2)}`, this.pos.x + this.r * 13, this.pos.y - 5);
+            bgctx.fillText(`yv:${this.vel.y.toFixed(2)}`, this.pos.x + this.r * 13, this.pos.y + 6);
+        }
 
-        //        bgctx.fill();
         bgctx.restore();
-        //        ctx.restore();
     }
 
     tick() {

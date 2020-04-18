@@ -1,6 +1,7 @@
 let scene = {
     camera: undefined,
-    isVerbose: false,
+    seed: undefined,
+    isVerbose: true,
     vlog: function (msg) {
         if (scene.isVerbose) {
             console.log(`[scene]=>[ ${msg} ]`);
@@ -16,7 +17,7 @@ let scene = {
                 scene.props[i].tick();
             }
         }
-        //        fieldGrid(); //WIP WIP WIP
+//                fieldGrid(); //WIP WIP WIP
 
     },
     add: function (newobj) {
@@ -26,8 +27,24 @@ let scene = {
     initCamera: function () {
         scene.camera = new camera(512, 256);
         scene.vlog(`initCamera`);
+        return this.camera;
     },
 
+    initSeed: function () {
+      this.seed = this.generateSeed();  
+    },
+    
+    generateSeed: function(){
+        return {x:Math.random().toFixed(2),y:Math.random().toFixed(2),z:Math.random().toFixed(2)};
+    },
+    
+    logSeed: function (){
+        console.log(this.generateSeed());
+    },
+    
+    
+    
+    
     collidable: [],
     collisionLogic: function () {
         if (scene.props.length > 0) {
@@ -45,3 +62,5 @@ let scene = {
         }
     }
 };
+
+

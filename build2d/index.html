@@ -2,12 +2,11 @@
 <html>
 
 <head>
-    <!--    <script src="/games/common/drawing.js"></script>-->
-    <title>mockzone</title>
+    <title>RiverCity</title>
 </head>
 
 <body>
-    <center>
+    <center><br>
         <div id="playscreen">
             <center><canvas id="outputCanvas"></canvas></center>
             <center><canvas id="buffer_background" class="debugviews"></canvas></center>
@@ -17,11 +16,12 @@
         </div>
     </center>
     <script>
+        //settings preinit::
         let isDebugging = false;
         let clogging = true;
     </script>
     <script src="perlin.js"></script>
-    <script src="0_declarations.js"></script>
+    <script src="declarations.js"></script>
     <script src="class_character.js"></script>
     <script src="scene.js"></script>
     <script src="rendercontrol.js"></script>
@@ -31,9 +31,8 @@
     <script src="class_gravity.js"></script>
     <script src="class_ball.js"></script>
     <script src="perlin_building.js"></script>
+    <script src="perlin_river.js"></script>
     <script src="main_loop.js"></script>
-
-
     <style>
         * {
             margin: 0;
@@ -52,7 +51,7 @@
 
         .debugviews {
             visibility: visible;
-            /*            visibility: hidden;*/
+/*                        visibility: hidden;*/
             border: 1px solid red;
             border-radius: 15px;
             background: rgba(255, 255, 0, 1);
@@ -60,7 +59,8 @@
 
         .debuglabels {
             color: deeppink;
-            visibility: hidden;
+            /*            visibility: hidden;*/
+            visibility: visible;
         }
 
         #buffer_viiv,

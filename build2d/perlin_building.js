@@ -1,29 +1,114 @@
-function addPerlBuildingFill(px = 3.14, py = 0.52, pz = 0.10) {
+/*NOTES
+
+hook up SEED
+
+the light offset needs:
+- moved into control nob
+- to be aligned left/reset every floor!!!
+
+- nobup outlines
+- nobup colors
+
+*/
+
+
+let perllightsframe = 0;
+let lightsOffset = 0;
+
+let buildings = {
+    outline: false,
+    fillIncrement: 1.1,
+    lights:{
+        style: 3,
+        offFactor: 0.55,
+        whiteFactor: 0.50,
+        noiseCheck: false,
+        panCheck: true,
+        o: 1,
+        p: 0,
+        speed: 0.1,
+        buildOffsetX: 0,
+        pos: {
+            x: 0,
+            y: 0,
+            z: 0,
+        },
+    },
+}
+
+function lowerOffThreshold(factor = 0.01){
+    buildings.lights.offFactor -= factor;
+    if (buildings.lights.offFactor< 0.20||buildings.lights.offFactor>1){
+         buildings.lights.offFactor = 0.50;
+    }
+}
+
+function getNums(x, y, z = 5.5) {
+    
+ 
+    
+    let dials = {
+        o: buildings.lights.o,
+        p: buildings.lights.p,
+    }
+    let pval = Perl.OctavePerlin(x, y, z, dials.o, dials.p);
+    
+    if (buildings.lights.noiseCheck){
+           return `rgba(${Perl.OctavePerlin(x, y, z, dials.o, dials.p)*255},${Perl.OctavePerlin(x, y, z, dials.o, dials.p)*255},${Perl.OctavePerlin(x, y, z, dials.o, dials.p)*255},1)`;
+    }
+    
+    //style 1
+    if (pval.toFixed(2) == buildings.lights.whiteFactor && buildings.lights.style >= 1) {
+        return `rgba(225,255,255,${Perl.OctavePerlin(x, y, z, dials.o, dials.p)*2})`;
+    }
+
+    //style 2
+    if (pval.toFixed(2) > buildings.lights.offFactor && buildings.lights.style > 1) {
+        return `rgba(255,255,55,${Perl.OctavePerlin(x, y, z, dials.o, dials.p)})`;
+    } 
+    
+    //lights-OFF default:
+    return `rgba(0,0,0,${Perl.OctavePerlin(x, y, z, dials.o, dials.p)})`;
+
+}
+
+
+function addPerlBuildingFill(px = 0, py = 0, pz = 0) {
 
     skyctx.fillStyle = skyBackground(skyGradientV());
     skyctx.fillRect(0, 0, buffers.sky.width, buffers.sky.height / 2)
 
     let bgrise = 2;
-    let increment = 100;
+    let increment = 0.10;
     let newOff = 0;
     skyctx.globalAlpha = 0.5;
     bFillOffSet = newOff;
     for (y = 0; y < 2; y++) {
-        py * 0.2;
+//        py * 0.2;
         for (x = 0; bFillOffSet <= buffers.sky.width; x++) {
-            newOff = perlbuilding(px + (bFillOffSet / increment), py + y, pz, bFillOffSet);
+            newOff = perlbuilding(px + (bFillOffSet * increment), py + y, pz, bFillOffSet,1.7);
             bFillOffSet += newOff + 2;
-            px += 7;
-            py += x + 0.002;
+//            px += 7;
+            
+//            px += buildings.fillIncrement;
+            
+            
+            py += x + 1.102;
         }
         skyctx.globalAlpha += 0.4;
-        //        increment += 0.007;
+//                increment += 0.07;
         bFillOffSet = -10;
 
+        
     }
+    buildings.lights.buildOffsetX = 0;
 }
 
-function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, bnum = 1) {
+function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, perlXoffset = 0.45) {
+    
+    x+= perlXoffset;//WIP
+    
+    
     bgctx.save();
     let ctx = skyctx;
     //        let ctx = bgctx;
@@ -64,7 +149,10 @@ function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, bn
         ctx.strokeStyle = 'white';
         ctx.strokeRect(xleft, base - (zdata.h * scaleh), zdata.w * scalew, zdata.h * scaleh);
     }
-    //    b_outline();
+    
+    if (buildings.outline){
+        b_outline();
+        }
 
     function b_basics() {
         //silloutte::
@@ -80,135 +168,34 @@ function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, bn
     let winbuildorder = Math.floor(windowcanvaswidth / (window.w + window.padding));
     let sidepadding = (building.w - windowcanvaswidth) / winbuildorder + 2;
 
-    function getNums(x, y, z = 5.5) {
 
-        let dials = {
-            o: 1,
-            p: 2,
-        }
-
-        let pval = Perl.OctavePerlin(x, y, z, dials.o, dials.p);
-
-        if (pval.toFixed(2) == 0.50) {
-            return `rgba(225,255,255,${Perl.OctavePerlin(x, y, z, dials.o, dials.p)*2})`;
-        }
-
-        if (pval.toFixed(2) > 0.40) {
-            return `rgba(255,255,55,${Perl.OctavePerlin(x, y, z, dials.o, dials.p)})`;
-        } else {
-            return `rgba(0,0,0,${Perl.OctavePerlin(x, y, z, dials.o, dials.p)})`;
-        }
-
-    }
 
 
     //draw perlin lights::
     for (iy = 2; iy <= building.floors - 2; iy++) {
         for (i = 0; i <= winbuildorder; i++) {
-            ctx.fillStyle = getNums(i + lightsOffset, iy);
+//            ctx.fillStyle = getNums(i + lightsOffset, iy);
+//            ctx.fillStyle = getNums(perlXoffset+i + lightsOffset, iy);
+//            ctx.fillStyle = getNums(buildings.lights.buildOffsetX+i + lightsOffset, iy);
+            
+            // WIP WIP -=-=-=-=- HERE IS WHERE WE NEED TO ABSTRACT SOME XYZ SHIT FOR MOVING THE LIGHTS AROUND
+            ctx.fillStyle = getNums(buildings.lights.buildOffsetX+i + lightsOffset, iy);
             ctx.fillRect(building.l + sidepadding / 2 + (window.padding + window.w) * i, base - (floor.h * iy) - 2, window.w, window.h);
             ctx.fill();
+            
+            perlXoffset+= 0.7;
+           
         }
     }
-
+ buildings.lights.buildOffsetX+= 0.05;
     bgctx.restore();
 
-    lightsOffset += 0.5;
+    // PANNING THE LIGHTS::
+//    lightsOffset += 0.000010;
+    if(buildings.lights.panCheck){
+        lightsOffset += 0.0001;
+    }
+    
     return building.w;
-
-}
-
-
-
-
-function perl_river() {
-    let ctx = bgctx;
-    ctx.save();
-
-    ctx.globalAlpha = 0.8;
-
-    let design = {
-        bgline: '#985',
-        bglinewidth: 3,
-    }
-
-    let Ypos = buffers.bg.height / 2;
-    // first line:
-    ctx.beginPath();
-    ctx.moveTo(0, Ypos);
-    ctx.lineTo(buffers.bg.width, Ypos);
-    ctx.strokeStyle = design.bgline;
-    ctx.lineWidth = design.bglinewidth;
-    ctx.closePath();
-    ctx.stroke();
-
-    //perlwater
-    function rndintense(x = 0, y = 0, z = 0) {
-        let speed = 30;
-        let pv = Perl.OctavePerlin(x, y, z + perlriverframe * speed, 3, 3);
-
-        if (pv > 0.7) {
-            return `#779`;
-        }
-        if (pv > 0.5) {
-            return `#447`;
-        }
-        return `rgba(0,${pv*155},${pv*255},1)`;
-    }
-
-
-
-    function xSteps() {
-        ctx.save();
-        let xcols = 100;
-        blocksize = buffers.bg.width / xcols;
-
-        accuH = blocksize;
-
-        for (x = 0; x <= xcols; x++) {
-            ctx.fillStyle = rndintense(x / 10);
-            ctx.fillRect(blocksize * x, Ypos, blocksize, blocksize / 3);
-            ctx.fill();
-        }
-
-        xcols -= 4;
-        Ypos += blocksize / 3;
-        accuH += Ypos;
-        blocksize = buffers.bg.width / xcols;
-        for (x = 0; x <= xcols; x++) {
-            ctx.fillStyle = rndintense(x / 10);
-            ctx.fillRect(blocksize * x, Ypos, blocksize, blocksize / 2);
-            ctx.fill();
-        }
-        xcols -= 4;
-        Ypos += blocksize / 2;
-        accuH += Ypos * 2;
-        blocksize = buffers.bg.width / xcols;
-        for (x = 0; x <= xcols; x++) {
-            ctx.fillStyle = rndintense(x / 10);
-            ctx.fillRect(blocksize * x, Ypos, blocksize, blocksize / 4);
-            ctx.fill();
-        }
-        ctx.restore();
-    }
-    let blocksize = 0;
-    let accuH = 0;
-    xSteps();
-    ctx.save();
-
-    Ypos += 2;
-
-    // last line:
-    //    Ypos += 8; //line2 like printer::
-    ctx.lineWidth++;
-    ctx.beginPath();
-    ctx.moveTo(0, Ypos + blocksize / 4);
-    //    ctx.moveTo(0, accuH);
-    ctx.strokeStyle = design.bgline;
-    ctx.lineTo(buffers.bg.width, Ypos);
-    ctx.closePath();
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-    ctx.restore();
 
 }

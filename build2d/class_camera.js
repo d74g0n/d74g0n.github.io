@@ -1,5 +1,12 @@
+/*NOTES
+
+-camera-zoomout/in
+
+
+*/
+
 class camera {
-    constructor(w = 512, h = 256, x = 0, y = 0, col = 'white') {
+    constructor(w = 512, h = 256, x = 180, y = 0, col = 'white') {
         this.pos = {
             x: x,
             y: y,
@@ -10,7 +17,7 @@ class camera {
         this.ctx = bgctx;
         this.outputctx = ctx;
         this.vel = {
-            x: -0.1,
+            x: -1,
             y: -0,
         }
 
@@ -18,6 +25,7 @@ class camera {
         this.rendercenter = false;
 
         this.target = undefined;
+        this.isChasing = true;
     }
 
     drawDebugFrame() {
@@ -67,12 +75,14 @@ class camera {
     constrainBufferView() {
         if (this.pos.x <= 0) {
             this.pos.x = 0;
+            this.reflectX();
         }
         if (this.pos.x + this.w > buffers.bg.width) {
             this.pos.x = buffers.bg.width - this.w;
         }
         if (this.pos.y <= 0) {
             this.pos.y = 0;
+            this.reflectX();
         }
         if (this.pos.y + this.h > buffers.bg.height) {
             this.pos.y = buffers.bg.height - this.h;
@@ -103,6 +113,7 @@ class camera {
     }
 
     chaseBall() {
+        
         let speed = 10;
         this.vel.x = ((this.pos.x + (this.w / 2) - this.target.pos.x) / speed) * -2;
         this.vel.y = ((this.pos.y + (this.h / 2) - this.target.pos.y) / speed) * -2;
@@ -112,7 +123,9 @@ class camera {
 
     tick() {
         this.updateForces();
-        this.chaseBall();
+        if (this.isChasing){
+            this.chaseBall();
+        }
         this.constrainBufferView();
 
 

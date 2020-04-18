@@ -15,7 +15,7 @@ function skyBackground(color) { // TOP HALF ONLY SKYCTX
     bgctx.globalAlpha = 1;
     bgctx.restore();
 }
-//
+
 function skyGradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
     let gradient = skyctx.createLinearGradient(0, 0, 0, buffers.sky.height);
     gradient.addColorStop(0, colorA);
@@ -24,9 +24,6 @@ function skyGradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') 
     skyctx.fillStyle = gradient;
     return gradient;
 }
-
-
-
 
 function pFill(tilesfirstrow = 100) {
     //problem here is that is aligns LEFT::
@@ -118,4 +115,38 @@ function vgrad(canvas, ctx, colA, colB, colC) {
     ctx.fillStyle = mgradientV(canvas, ctx, colA, colB, colC);
 }
 
-clog('draw_functions.js');
+function fieldGrid() {
+    bgctx.save();
+    bgctx.strokeStyle = 'green';
+    bgctx.lineWidth = 1;
+
+    bgctx.beginPath();
+    bgctx.moveTo(0, buffers.bg.height / 2);
+    bgctx.lineTo(buffers.bg.width, buffers.bg.height / 2);
+
+    let fillfactor = 15;
+    let size = 80;
+    let midX = (buffers.bg.width / 2);
+    let midY = (buffers.bg.height / 2);
+    let pY = 0;
+
+    let startX = midX - ((fillfactor / 2) * size);
+
+    for (s = 0; s <= fillfactor; s++) {
+
+        if (s < fillfactor) {
+            bgctx.moveTo(startX, midY + pY);
+            bgctx.lineTo(startX + size, midY + pY);
+        }
+
+        bgctx.moveTo(startX, midY + pY);
+        bgctx.lineTo(startX + Math.sin(((s * 0.2) - 0.3) - (fillfactor / 2)) * size, buffers.bg.height);
+        bgctx.stroke();
+        startX += size;
+
+    }
+    bgctx.stroke();
+    bgctx.restore();
+}
+
+
