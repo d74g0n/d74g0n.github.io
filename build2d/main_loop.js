@@ -1,9 +1,10 @@
 
-let view = scene.initCamera();
+//let view = scene.initCamera(1024,512);
+let view = scene.initCamera(512,256);
 let gameball = new ball(300, 100, 5);
 //const dbgrid = new grid(buffers.bg, bgctx);
 
-view.target = {pos: {x: 450,y: 180}};
+//view.target = {pos: {x: 450,y: 180}};
 
 buffers.bg.onclick = function () {
     isDebugging = !isDebugging;
@@ -24,7 +25,7 @@ function main_setup() {
     scene.add(gameball);
     //    scene.add(new character(10, 10));
     //    scene.add(new ball(500, 100, -1));
-    //    view.target = gameball;
+        view.target = gameball;
     //    view.target = scene.props[0];
 
     //    view.tick();
@@ -53,11 +54,12 @@ main_setup();
 
 function mockupZone() { //<=scene.tick()::
 //preRender::
-    perllightsframe += 0.0005;
+//    perllightsframe += 0.0005;
+    perllightsframe += 0.00009;
     river.tick();
     
 // fieldGrid();
-// pFill(100);
+ pFill(100);
 
 }
 

@@ -6,6 +6,7 @@
 */
 
 class camera {
+//    constructor(w = 512, h = 256, x = 180, y = 0, col = 'white') {
     constructor(w = 512, h = 256, x = 180, y = 0, col = 'white') {
         this.pos = {
             x: x,
@@ -21,27 +22,44 @@ class camera {
             y: -0,
         }
 
+        this.zoom = 1;
         this.singleskyrender = true;
         this.rendercenter = false;
 
         this.target = undefined;
         this.isChasing = true;
+        
+        this.reflect = {
+            x: false,
+            y: false,
+        }
     }
 
     drawDebugFrame() {
+        
+        this.zoom+= 0.005; // THIS SHOULDNT BE HERE LOL
+        
         this.ctx.save();
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = this.col;
         this.ctx.strokeRect(this.pos.x, this.pos.y, this.w, this.h, this.col);
-        //        this.ctx.stroke();
         this.ctx.fillStyle = 'white';
         this.ctx.fillText('LIVE CAMERA', this.pos.x + 16, this.pos.y + 32);
         this.ctx.restore();
     }
+    
+    fixAlphaSmear(){
+        buffers.ctx.save();
+        buffers.ctx.fillStyle = "black";
+        buffers.ctx.fillRect(0,0,buffers.output.width,buffers.output.height);
+        buffers.ctx.restore();
+    }
 
     drawview() {
         this.outputctx.save();
-        this.outputctx.drawImage(buffers.bg, this.pos.x, this.pos.y, buffers.bg.width, buffers.bg.height, 0, 0, buffers.bg.width, buffers.bg.height);
+        //if draw image goes off screen-culling::
+        this.fixAlphaSmear();
+        this.outputctx.drawImage(buffers.bg, this.pos.x, this.pos.y, this.w*this.zoom, this.h*this.zoom, 0, 0, buffers.output.width, buffers.output.height);
         this.outputctx.restore();
     }
 
@@ -74,15 +92,22 @@ class camera {
 
     constrainBufferView() {
         if (this.pos.x <= 0) {
+            if (this.reflect.x){
+                this.reflectX();
+            } 
             this.pos.x = 0;
-            this.reflectX();
         }
         if (this.pos.x + this.w > buffers.bg.width) {
+             if (this.reflect.x){
+                this.reflectX();
+            } 
             this.pos.x = buffers.bg.width - this.w;
         }
         if (this.pos.y <= 0) {
+            if (this.reflect.y){
+                this.reflectY();
+            }
             this.pos.y = 0;
-            this.reflectX();
         }
         if (this.pos.y + this.h > buffers.bg.height) {
             this.pos.y = buffers.bg.height - this.h;

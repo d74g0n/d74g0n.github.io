@@ -29,6 +29,7 @@ let level = {
 
 let buffers = {
     output: canvas,
+    ctx: ctx,
     bg: bgbuffer,
     sky: skybuffer,
     viiv: viivbuffer,

@@ -43,6 +43,10 @@ function lowerOffThreshold(factor = 0.01){
     }
 }
 
+//function returnOfRBGA(r = 0, g = 0, b = 0, a = 1) {
+//    return `rgba(${r},${g},${b},${a})`;
+//}
+
 function getNums(x, y, z = 5.5) {
     
  

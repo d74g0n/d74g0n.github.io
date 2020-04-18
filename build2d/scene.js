@@ -24,8 +24,8 @@ let scene = {
         scene.props.push(newobj);
         scene.vlog(`${newobj.id} added!`);
     },
-    initCamera: function () {
-        scene.camera = new camera(512, 256);
+    initCamera: function (w=512,h=256) {
+        scene.camera = new camera(w, h);
         scene.vlog(`initCamera`);
         return this.camera;
     },

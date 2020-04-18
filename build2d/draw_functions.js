@@ -60,15 +60,14 @@ function pFill(tilesfirstrow = 100) {
         (pos.start.y + accumH) <= buffers.bg.height; yy++) {
         accumH += pos.w;
         for (xx = 0; xx <= row; xx++) {
-            let pv = Perl.OctavePerlin(xx / dial.xd, yy / dial.yd, perllightsframe, dial.o, dial.p) * 255;
+            let pv = Perl.OctavePerlin(xx / dial.xd, yy / dial.yd, perllightsframe, dial.o, dial.p) * 155;
 
-            function returnOfRBGA(r = 0, g = 0, b = 0, a = 1) {
-                return `rgba(${r},${g},${b},${a})`;
-            }
+ 
 
 
             //                console.log(pv);
-            bgctx.fillStyle = returnOfRBGA(undefined, undefined, pv);
+//            bgctx.fillStyle = returnOfRBGA(undefined, undefined, pv);
+            bgctx.fillStyle = returnOfRBGA(undefined, pv, undefined);
             //                bgctx.fillStyle = `rgb(55,55,${pv})`;
             //                bgctx.fillStyle = `rgb(55,${pv},${pv/2})`;
             //                bgctx.strokeStyle = `rgb(${pv},${pv},${pv})`;
@@ -77,10 +76,12 @@ function pFill(tilesfirstrow = 100) {
             //checker stroke::
             if (xx % 4 == 0) {
                 //strokebright-highlight::
-                bgctx.strokeStyle = returnOfRBGA(undefined, undefined, pv / 0.9);;
+//                bgctx.strokeStyle = returnOfRBGA(undefined, undefined, pv / 0.9);;
+                bgctx.strokeStyle = returnOfRBGA(0, pv, 1 / 0.9);;
             } else {
                 //strokedark-highlight::
-                bgctx.strokeStyle = returnOfRBGA(undefined, undefined, pv / 1.1);;
+//                bgctx.strokeStyle = returnOfRBGA(undefined, undefined, pv / 1.1);;
+                bgctx.strokeStyle = returnOfRBGA(0, pv, 1 / 1.1);;
             }
             //                bgctx.strokeStyle = `rgb(55,55,${pv})`;
             bgctx.fillRect(pos.start.x + (xx * pos.w), pos.start.y + accumH, pos.w, pos.w);
