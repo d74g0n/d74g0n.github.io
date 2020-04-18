@@ -24,7 +24,7 @@ contextproperties();
 let level = {
     h: 512,
     w: 1024,
-    //    w: 4024,
+    //        w: 4024,
 };
 
 let buffers = {
@@ -42,7 +42,7 @@ function buffer_properties() {
 
     buffers.bg.width = level.w;
     buffers.bg.height = level.h;
-    buffers.bg.style.background = 'red';
+    buffers.bg.style.background = 'transparent';
 
     skybuffer.width = buffers.bg.width;
     skybuffer.height = buffers.bg.height;

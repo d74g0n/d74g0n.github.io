@@ -65,31 +65,18 @@ class camera {
     }
 
     constrainBufferView() {
-        // vel reflections are temp::
         if (this.pos.x <= 0) {
-            clog('view-hit: left');
             this.pos.x = 0;
-            //            this.reflectX();
         }
-
         if (this.pos.x + this.w > buffers.bg.width) {
-            clog('view-hit: right');
             this.pos.x = buffers.bg.width - this.w;
-            //            this.reflectX();
         }
-
         if (this.pos.y <= 0) {
-            clog('view-hit: top');
             this.pos.y = 0;
-            //            this.reflectY();
         }
-
         if (this.pos.y + this.h > buffers.bg.height) {
-            clog('view-hit: bottom');
             this.pos.y = buffers.bg.height - this.h;
-            //            this.reflectY();
         }
-
     }
 
     renderer() {

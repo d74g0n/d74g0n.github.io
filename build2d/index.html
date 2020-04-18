@@ -9,29 +9,30 @@
 <body>
     <center>
         <div id="playscreen">
-            <center><canvas id="buffer_background" class="debugviews"></canvas></center>
             <center><canvas id="outputCanvas"></canvas></center>
+            <center><canvas id="buffer_background" class="debugviews"></canvas></center>
+
             <center><canvas id="buffer_skybuild" class="debugviews"></canvas></center>
             <center><canvas id="buffer_viiv" class="debugviews"></canvas></center>
         </div>
     </center>
     <script>
         let isDebugging = false;
-        let clogging = false;
+        let clogging = true;
     </script>
     <script src="perlin.js"></script>
     <script src="0_declarations.js"></script>
     <script src="class_character.js"></script>
     <script src="scene.js"></script>
-
-    <script src="1_multidraw.js"></script>
-    <script src="skyline.js"></script>
-    <script src="imagebuilding.js"></script>
+    <script src="rendercontrol.js"></script>
+    <script src="draw_functions.js"></script>
     <script src="class_camera.js"></script>
     <script src="class_grid.js"></script>
     <script src="class_gravity.js"></script>
     <script src="class_ball.js"></script>
+    <script src="perlin_building.js"></script>
     <script src="main_loop.js"></script>
+
 
     <style>
         * {
@@ -51,6 +52,7 @@
 
         .debugviews {
             visibility: visible;
+            /*            visibility: hidden;*/
             border: 1px solid red;
             border-radius: 15px;
             background: rgba(255, 255, 0, 1);
@@ -61,8 +63,10 @@
             visibility: hidden;
         }
 
-        #buffer_viiv {
+        #buffer_viiv,
+        #buffer_skybuild {
             width: 64px;
+            visibility: hidden;
         }
     </style>
     <script>

@@ -32,8 +32,7 @@ class ball {
     }
 
     reflectY() {
-        //        this.vel.y = this.vel.y * -1;
-        this.vel.y = this.vel.y * -1.0005;
+        this.vel.y = this.vel.y * -1.00005;
     }
 
     friction() {
@@ -44,19 +43,19 @@ class ball {
 
     constrainToLevel() { // canvas collisions
         if (this.pos.x <= 0) {
-            clog('ball-hit: left');
+            //            clog('ball-hit: left');
             this.pos.x = 0;
             this.reflectX();
         }
 
         if (this.pos.x + this.r > buffers.bg.width) {
-            clog('ball-hit: right');
+            //            clog('ball-hit: right');
             this.pos.x = buffers.bg.width - this.r;
             this.reflectX();
         }
 
         if (this.pos.y <= 0) {
-            clog('ball-hit: top');
+            //            clog('ball-hit: top');
             this.pos.y = 0;
             this.reflectY();
         }
@@ -69,7 +68,7 @@ class ball {
 
         // hit mock bottom
         if (this.pos.y + this.r > buffers.bg.height - 128) {
-            clog('ball-hit: bottom');
+            //            clog('ball-hit: bottom');
             this.pos.y = buffers.bg.height - 128 - this.r;
             this.reflectY();
         }
@@ -116,12 +115,10 @@ class ball {
     }
 
     tick() {
-        //        bgctx.save();
         this.update();
         this.constrainToLevel();
         this.friction();
         this.drawSelf();
         this.grav.tick(); //wind it up
-        //        bgctx.restore();
     }
 }
