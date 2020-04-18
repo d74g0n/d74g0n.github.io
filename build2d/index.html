@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>RiverCity</title>
+    <title>PerlinRiverCityNoise</title>
 </head>
 
 <body>
@@ -20,20 +20,20 @@
         let isDebugging = false;
         let clogging = true;
     </script>
-    <script src="perlin.js"></script>
-    <script src="declarations.js"></script>
-    <script src="class_character.js"></script>
-    <script src="scene.js"></script>
-    <script src="rendercontrol.js"></script>
-    <script src="draw_functions.js"></script>
-    <script src="class_camera.js"></script>
-    <script src="class_grid.js"></script>
-    <script src="class_gravity.js"></script>
-    <script src="class_ball.js"></script>
-    <script src="colour_functions.js"></script>
-    <script src="perlin_building.js"></script>
-    <script src="perlin_river.js"></script>
-    <script src="main_loop.js"></script>
+    <script src="/js/perlin.js"></script>
+    <script src="/js/declarations.js"></script>
+    <script src="/js/class_character.js"></script>
+    <script src="/js/scene.js"></script>
+    <script src="/js/rendercontrol.js"></script>
+    <script src="/js/draw_functions.js"></script>
+    <script src="/class/class_camera.js"></script>
+    <script src="/class/class_grid.js"></script>
+    <script src="/class/class_gravity.js"></script>
+    <script src="/class/class_ball.js"></script>
+    <script src="/js/colour_functions.js"></script>
+    <script src="/js/perlin_building.js"></script>
+    <script src="/js/perlin_river.js"></script>
+    <script src="/js/main_loop.js"></script>
     <style>
         * {
             margin: 0;
@@ -44,13 +44,14 @@
 
         canvas {
             width: 100%;
-            width: 70%;
+/*            width: 70%;*/
             height: auto;
             border-radius: 15px;
             border: 1px solid white;
         }
 
         .debugviews {
+            width: 70%;
             visibility: visible;
 /*                        visibility: hidden;*/
             border: 1px solid red;
@@ -64,10 +65,16 @@
             visibility: visible;
         }
 
-        #buffer_viiv,
+        #buffer_viiv{
+             width: 64px;
+             visibility: hidden;
+        }
         #buffer_skybuild {
             width: 64px;
+            width: auto;
             visibility: hidden;
+            visibility: visible;
+            background-image: transparent;
         }
     </style>
     <script>

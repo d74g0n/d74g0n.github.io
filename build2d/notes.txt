@@ -1,3 +1,10 @@
+
+- add thumb image and html metadata
+
+- STADIUM
+
+
+
 imageSmoothing off
 globalAlphas
 

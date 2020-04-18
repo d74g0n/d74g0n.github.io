@@ -1,10 +1,11 @@
 
 //let view = scene.initCamera(1024,512);
 let view = scene.initCamera(512,256);
-let gameball = new ball(300, 100, 5);
+let gameball = new ball(300, 200, 5);
 //const dbgrid = new grid(buffers.bg, bgctx);
 
 //view.target = {pos: {x: 450,y: 180}};
+
 
 buffers.bg.onclick = function () {
     isDebugging = !isDebugging;
@@ -16,6 +17,8 @@ buffers.output.onclick = function () {
     } else {
         gameball.vel.y -= 5;
     }
+    
+    
 }
 
 function main_setup() {

@@ -108,6 +108,6 @@ class ball {
         this.constrainToLevel();
         this.friction();
         this.drawSelf();
-        this.grav.tick(); //wind it up
+//        this.grav.tick(); //wind it up
     }
 }

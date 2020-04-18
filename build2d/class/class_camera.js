@@ -36,9 +36,7 @@ class camera {
     }
 
     drawDebugFrame() {
-        
-        this.zoom+= 0.005; // THIS SHOULDNT BE HERE LOL
-        
+    
         this.ctx.save();
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = this.col;
@@ -147,6 +145,10 @@ class camera {
     }
 
     tick() {
+        
+        //if zooming::
+//        this.zoom+= 0.005; // THIS SHOULDNT BE HERE LOL
+        
         this.updateForces();
         if (this.isChasing){
             this.chaseBall();
