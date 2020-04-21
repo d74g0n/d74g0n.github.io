@@ -17,15 +17,15 @@ let lightsOffset = 0;
 
 let buildings = {
     outline: false,
-    fillIncrement: 1.1,
+    fillIncrement: 1.5,
     lights:{
-        style: 3,
+        style: 2,
         offFactor: 0.55,
         whiteFactor: 0.50,
         noiseCheck: false,
         panCheck: true,
-        o: 1,
-        p: 0,
+        o: 2,
+        p: 1,
         speed: 0.1,
         buildOffsetX: 0,
         pos: {
@@ -43,13 +43,17 @@ function lowerOffThreshold(factor = 0.01){
     }
 }
 
-//function returnOfRBGA(r = 0, g = 0, b = 0, a = 1) {
-//    return `rgba(${r},${g},${b},${a})`;
-//}
 
 function getNums(x, y, z = 5.5) {
-    
- 
+  
+    //scrolls windows left::
+    x-= river.frame/100;
+    //matrix rain::
+//    y+= river.frame/10;
+    //waterfall::
+//    y+= river.frame;
+    // I dunno::
+//    z+= river.frame/10000;
     
     let dials = {
         o: buildings.lights.o,
@@ -80,7 +84,7 @@ function getNums(x, y, z = 5.5) {
 function addPerlBuildingFill(px = 0, py = 0, pz = 0) {
 
     skyctx.fillStyle = skyBackground(skyGradientV());
-    skyctx.fillRect(0, 0, buffers.sky.width, buffers.sky.height / 2)
+    skyctx.fillRect(0, 0, buffers.sky.width, Math.floor(buffers.sky.height / 2));
 
     let bgrise = 2;
     let increment = 0.10;
@@ -92,11 +96,7 @@ function addPerlBuildingFill(px = 0, py = 0, pz = 0) {
         for (x = 0; bFillOffSet <= buffers.sky.width; x++) {
             newOff = perlbuilding(px + (bFillOffSet * increment), py + y, pz, bFillOffSet,1.7);
             bFillOffSet += newOff + 2;
-//            px += 7;
-            
-//            px += buildings.fillIncrement;
-            
-            
+
             py += x + 1.102;
         }
         skyctx.globalAlpha += 0.4;
@@ -108,10 +108,10 @@ function addPerlBuildingFill(px = 0, py = 0, pz = 0) {
     buildings.lights.buildOffsetX = 0;
 }
 
-function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, perlXoffset = 0.45) {
+function perlbuilding(x = 0, y = 0, z = 1, xleft = 2, perlXoffset = 0.45) {
     
-    x+= perlXoffset;//WIP
-    
+//    x+= perlXoffset;//WIP
+//    z+= river.frame; //WIP
     
     bgctx.save();
     let ctx = skyctx;
@@ -119,10 +119,16 @@ function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, pe
     let base = buffers.bg.height / 2;
     let scalew = 64;
     let scaleh = scalew * 3.5;
-    let zdata = {
-        w: Perl.OctavePerlin(x, y, 1, 4, 3),
-        h: Perl.OctavePerlin(x, y, 1.8, 4, 3),
+//    let zdata = {
+//        w: Perl.OctavePerlin(x, y, 1.02+river.frame/10000, 1, 1),
+//        h: Perl.OctavePerlin(x, y, 1+river.frame/10000, 1, 1),
+//    }
+    
+    let zdata = { // hook to seed shit.
+        w: Perl.OctavePerlin(x, y, 1.58, 4, 3),
+        h: Perl.OctavePerlin(x, y, 1, 4, 3),
     }
+
     let cols = {
         base: '#000',
     }
@@ -151,7 +157,8 @@ function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, pe
     function b_outline() {
         ctx.lineWidth = 1;
         ctx.strokeStyle = 'white';
-        ctx.strokeRect(xleft, base - (zdata.h * scaleh), zdata.w * scalew, zdata.h * scaleh);
+//        ctx.strokeRect(xleft, base - (zdata.h * scaleh), zdata.w * scalew, zdata.h * scaleh);
+        ctx.strokeRect(Math.floor(xleft), Math.floor(base - (zdata.h * scaleh)), Math.floor(zdata.w * scalew), Math.floor(zdata.h * scaleh));
     }
     
     if (buildings.outline){
@@ -161,10 +168,10 @@ function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, pe
     function b_basics() {
         //silloutte::
         ctx.fillStyle = cols.base;
-        ctx.fillRect(xleft, base - (zdata.h * scaleh), zdata.w * scalew, zdata.h * scaleh);
+        ctx.fillRect(Math.floor(xleft), Math.floor(base - (zdata.h * scaleh)), Math.floor(zdata.w * scalew), Math.floor(zdata.h * scaleh));
         //entrance floor::
         ctx.fillStyle = 'black';
-        ctx.fillRect(xleft - window.padding, bottop, building.w + window.padding * 2, floor.h);
+        ctx.fillRect(Math.floor(xleft - window.padding), Math.floor(bottop), Math.floor(building.w + window.padding * 2), Math.floor(floor.h));
     }
     b_basics();
 
@@ -178,24 +185,18 @@ function perlbuilding(x = Math.random(), y = Math.random(), z = 1, xleft = 2, pe
     //draw perlin lights::
     for (iy = 2; iy <= building.floors - 2; iy++) {
         for (i = 0; i <= winbuildorder; i++) {
-//            ctx.fillStyle = getNums(i + lightsOffset, iy);
-//            ctx.fillStyle = getNums(perlXoffset+i + lightsOffset, iy);
-//            ctx.fillStyle = getNums(buildings.lights.buildOffsetX+i + lightsOffset, iy);
-            
-            // WIP WIP -=-=-=-=- HERE IS WHERE WE NEED TO ABSTRACT SOME XYZ SHIT FOR MOVING THE LIGHTS AROUND
             ctx.fillStyle = getNums(buildings.lights.buildOffsetX+i + lightsOffset, iy);
-            ctx.fillRect(building.l + sidepadding / 2 + (window.padding + window.w) * i, base - (floor.h * iy) - 2, window.w, window.h);
-            ctx.fill();
+            ctx.fillRect(Math.floor(building.l + sidepadding / 2 + (window.padding + window.w) * i), Math.floor(base - (floor.h * iy) - 2), Math.floor(window.w), Math.floor(window.h));
+//            ctx.fill();
             
             perlXoffset+= 0.7;
-           
         }
     }
  buildings.lights.buildOffsetX+= 0.05;
     bgctx.restore();
 
     // PANNING THE LIGHTS::
-//    lightsOffset += 0.000010;
+    lightsOffset += 0.000010;
     if(buildings.lights.panCheck){
         lightsOffset += 0.0001;
     }

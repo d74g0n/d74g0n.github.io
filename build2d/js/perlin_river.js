@@ -14,10 +14,9 @@ let river = {
     },
     incrementframe: function(){
 //      river.frame+= 0.0005;
-      river.frame+= 0.5;
+      river.frame+= 0.05;
     },
 }
-
 
 function rndintense(x = 0, y = 0, z = 0) {
     let pv = Perl.OctavePerlin(x, y, z + river.frame * river.speed, river.o, river.p);
@@ -59,7 +58,7 @@ function perlin_river() {
 
         for (x = 0; x <= xcols; x++) {
             ctx.fillStyle = rndintense(x / 10);
-            ctx.fillRect(blocksize * x, Ypos, blocksize, blocksize / 3);
+            ctx.fillRect(blocksize * x, Ypos, blocksize, (blocksize / 3)+2);
             ctx.fill();
         }
 
@@ -69,7 +68,7 @@ function perlin_river() {
         blocksize = buffers.bg.width / xcols;
         for (x = 0; x <= xcols; x++) {
             ctx.fillStyle = rndintense(x / 10);
-            ctx.fillRect(blocksize * x, Ypos, blocksize, blocksize / 2);
+            ctx.fillRect(blocksize * x, Ypos, blocksize, (blocksize / 2)+2);
             ctx.fill();
         }
         xcols -= 4;
@@ -78,7 +77,7 @@ function perlin_river() {
         blocksize = buffers.bg.width / xcols;
         for (x = 0; x <= xcols; x++) {
             ctx.fillStyle = rndintense(x / 10);
-            ctx.fillRect(blocksize * x, Ypos, blocksize, blocksize / 4);
+            ctx.fillRect(blocksize * x, Ypos, blocksize, (blocksize / 4)+2);
             ctx.fill();
         }
         ctx.restore();

@@ -2,7 +2,7 @@
 function ground(gsa = "#010", gsb = "#050", gsc = "#010") {
     bgctx.save();
     hgrad(buffers.bg, bgctx, gsa, gsb, gsc);
-    bgctx.fillRect(0, buffers.bg.height / 2, buffers.bg.width, buffers.bg.height / 2);
+    bgctx.fillRect(0, Math.floor(buffers.bg.height / 2), Math.floor(buffers.bg.width), Math.floor(buffers.bg.height / 2));
     bgctx.font = "30px Tiny";
     bgctx.restore();
 }
@@ -11,7 +11,7 @@ function skyBackground(color) { // TOP HALF ONLY SKYCTX
     bgctx.save();
     bgctx.globalAlpha = 0.5;
     bgctx.fillStyle = color;
-    bgctx.fillRect(0, 0, buffers.sky.width, buffers.sky.height / 2);
+    bgctx.fillRect(0, 0, Math.floor(buffers.sky.width), Math.floor(buffers.sky.height / 2));
     bgctx.globalAlpha = 1;
     bgctx.restore();
 }
@@ -84,8 +84,8 @@ function pFill(tilesfirstrow = 100) {
                 bgctx.strokeStyle = returnOfRBGA(0, pv, 1 / 1.1);;
             }
             //                bgctx.strokeStyle = `rgb(55,55,${pv})`;
-            bgctx.fillRect(pos.start.x + (xx * pos.w), pos.start.y + accumH, pos.w, pos.w);
-            bgctx.strokeRect(pos.start.x + (xx * pos.w), pos.start.y + accumH, pos.w, pos.w);
+            bgctx.fillRect(Math.floor(pos.start.x + (xx * pos.w)), Math.floor(pos.start.y + accumH), Math.floor(pos.w), Math.floor(pos.w));
+            bgctx.strokeRect(Math.floor(pos.start.x + (xx * pos.w)), Math.floor(pos.start.y + accumH), Math.floor(pos.w), Math.floor(pos.w));
         }
         row -= pos.reduction;
         pos.w = buffers.bg.width / row;

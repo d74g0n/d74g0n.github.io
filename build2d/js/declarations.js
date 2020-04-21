@@ -1,5 +1,6 @@
 const canvas = document.getElementById('outputCanvas');
-const ctx = canvas.getContext('2d');
+//const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d', { alpha: false });
 
 const bgbuffer = document.getElementById('buffer_background');
 const bgctx = bgbuffer.getContext('2d');

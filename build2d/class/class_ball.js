@@ -87,6 +87,7 @@ class ball {
 
     drawSelf() {
         ctx.save();
+        bgctx.globalAlpha = 1;
         //        bgctx.save();
         bgctx.fillStyle = 'white';
         bgctx.beginPath();

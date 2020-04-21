@@ -1,8 +1,8 @@
-let frame = 0;
-let swingforce = 90; // 180
-let swingspeed = 0.05;
+//let frame = 0;
+//let swingforce = 90; // 180
+//let swingspeed = 0.05;
 
-let roplen = 100;
+//let roplen = 100;
 
 function loop() {
     frame += swingspeed;
