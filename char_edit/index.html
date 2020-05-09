@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>PerlinRiverCityNoise</title>
+    <title>CharEdit</title>
 <!--    https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas-->
 </head>
 
@@ -10,18 +10,17 @@
     <center><br>
         <div id="playscreen">
             <center><canvas id="outputCanvas"></canvas></center>
-            <center><canvas id="buffer_background" class="debugviews"></canvas></center>
-
-            <center><canvas id="buffer_skybuild" class="debugviews"></canvas></center>
-            <center><canvas id="buffer_viiv" class="debugviews"></canvas></center>
+            <center><canvas id="char_edit"></canvas></center>
+<!--            <center><canvas id="spritesheet" class="debugviews"></canvas></center>-->
         </div>
     </center>
     <script>
         //settings preinit::
-        let isDebugging = false;
-        let clogging = true;
+//        let isDebugging = false;
+//        let clogging = true;
     </script>
-    <script src="js/perlin.js"></script>
+    <script src="edit_char.js"></script>
+<!--
     <script src="js/declarations.js"></script>
     <script src="class/class_character.js"></script>
     <script src="class/class_floor.js"></script>
@@ -36,6 +35,7 @@
     <script src="js/perlin_building.js"></script>
     <script src="js/perlin_river.js"></script>
     <script src="js/main_loop.js"></script>
+-->
     <style>
         * {
             margin: 0;
@@ -45,40 +45,19 @@
         }
 
         canvas {
-            width: 100%;
-/*            width: 70%;*/
+            width: auto;
+/*            width: 32px;*/
             height: auto;
-            border-radius: 15px;
+            background: white;
+/*            border-radius: 15px;*/
             border: 1px solid white;
         }
-
-        .debugviews {
-            width: 70%;
-            visibility: visible;
-/*                        visibility: hidden;*/
-            border: 1px solid red;
-            border-radius: 15px;
-            background: rgba(255, 255, 0, 1);
+        
+        #char_edit{
+            width: 32px;
         }
 
-        .debuglabels {
-            color: deeppink;
-            /*            visibility: hidden;*/
-/*            visibility: visible;*/
-            visibility: hidden;
-        }
 
-        #buffer_viiv{
-             width: 64px;
-             visibility: hidden;
-        }
-        #buffer_skybuild {
-            width: 64px;
-            width: auto;
-            visibility: hidden;
-/*            visibility: visible;*/
-            background-image: transparent;
-        }
     </style>
     <script>
     </script>

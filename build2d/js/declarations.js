@@ -21,7 +21,10 @@ function contextproperties() {
 }
 contextproperties();
 
-
+let bgsky = {
+    isAnimated: true,
+    aniModo: 10,
+}
 
 
 let level = {

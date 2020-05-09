@@ -1,0 +1,15 @@
+* {
+    margin: auto;
+    padding: auto;
+    background: black;
+    color: white;
+}
+
+img {
+/*    border: 2px solid red;*/
+}
+
+canvas {
+    border: 1px solid gold;
+    
+}

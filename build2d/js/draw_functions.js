@@ -104,6 +104,14 @@ function mgradientV(colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
     return gradient;
 }
 
+function mgradientHP(canvas, ctx, colorA = '#100077', colorB = 'skyblue', colorC = 'black') {
+    let gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradient.addColorStop(.1, colorA);
+    gradient.addColorStop(.5, colorB);
+    gradient.addColorStop(.9, colorA);
+    return gradient;
+}
+
 function mgradientH(canvas = canvas, ctx = ctx, colorA = 'black', colorB = 'blue', colorC = 'skyblue') {
     let gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
     gradient.addColorStop(0, colorA);

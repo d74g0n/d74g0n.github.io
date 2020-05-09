@@ -1,10 +1,3 @@
-/*NOTES
-
--camera-zoomout/in
-
-
-*/
-
 class camera {
 //    constructor(w = 512, h = 256, x = 180, y = 0, col = 'white') {
     constructor(w = 512, h = 256, x = 180, y = 0, col = 'white') {
@@ -21,14 +14,12 @@ class camera {
             x: -1,
             y: -0,
         }
-
         this.zoom = 1;
+        this.zoomSpeed = 0.005;
         this.singleskyrender = true;
         this.rendercenter = false;
-
         this.target = undefined;
         this.isChasing = true;
-        
         this.reflect = {
             x: false,
             y: false,
@@ -36,7 +27,6 @@ class camera {
     }
 
     drawDebugFrame() {
-    
         this.ctx.save();
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = this.col;
@@ -55,8 +45,9 @@ class camera {
 
     drawview() {
         this.outputctx.save();
-        //if draw image goes off screen-culling::
+        //if draw image goes off screen then clearundercanvas-culling:: (stops blur)
         this.fixAlphaSmear();
+        //draw the bg buffer to main canvas
         this.outputctx.drawImage(buffers.bg, this.pos.x, this.pos.y, this.w*this.zoom, this.h*this.zoom, 0, 0, buffers.output.width, buffers.output.height);
         this.outputctx.restore();
     }
@@ -113,41 +104,35 @@ class camera {
     }
 
     renderer() {
-
         //CLEAR::
         build_bgbuffer(); //redraws grass (sky draws once then buffers.sky transfer after)
-
-
         //DRAWSTUFF::
         scene.tick();
-        //        gameball.tick();
-
-
-
-
-
-
+        // gameball.tick();
         if (this.rendercenter) {
             this.drawcenterview();
         }
-
         this.drawview();
-
     }
 
     chaseBall() {
-        
         let speed = 10;
         this.vel.x = ((this.pos.x + (this.w / 2) - this.target.pos.x) / speed) * -2;
         this.vel.y = ((this.pos.y + (this.h / 2) - this.target.pos.y) / speed) * -2;
-        //        this.vel.x = ((this.pos.x + (this.w / 2) - gameball.pos.x) / speed) * -2;
-        //        this.vel.y = ((this.pos.y + (this.h / 2) - gameball.pos.y) / speed) * -2;
+    }
+    
+    zoomIn(){
+        this.zoom-= 0.005;
+    }
+    
+    zoomOut(){
+        this.zoom+= 0.005;
     }
 
     tick() {
-        
-        //if zooming::
-//        this.zoom+= 0.005; // THIS SHOULDNT BE HERE LOL
+
+//        this.zoomIn();
+//        this.zoomOut();
         
         this.updateForces();
         if (this.isChasing){
@@ -161,7 +146,7 @@ class camera {
         //draw after so it doesn't draw on output::
         //POST transfer bg=>main
         function postRender(dis) {
-            //            dbgrid.tick();
+//                        dbgrid.tick();
             dis.drawDebugFrame();
             dis.drawcenterview();
         }

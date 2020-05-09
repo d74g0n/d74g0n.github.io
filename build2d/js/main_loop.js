@@ -2,6 +2,9 @@
 //let view = scene.initCamera(1024,512);
 let view = scene.initCamera(512,256);
 let gameball = new ball(300, 200, 0);
+//let court = new Floor((buffers.bg.width/2)-200,300,400,180,'#961');
+    let court = new Floor((buffers.bg.width/2)-200,300,400,180,mgradientHP(buffers.bg, bgctx, `#251`, `#970`));
+    
 //const dbgrid = new grid(buffers.bg, bgctx);
 
 //view.target = {pos: {x: 450,y: 180}};
@@ -30,6 +33,9 @@ function main_setup() {
     //    scene.add(new ball(500, 100, -1));
         view.target = gameball;
     //    view.target = scene.props[0];
+    
+    
+
 
     //    view.tick();
     addPerlBuildingFill(0, 0, 0 + river.frame);
@@ -39,14 +45,24 @@ function main_setup() {
 
 let frame = {main: 0};
 
+function updateBuffersSky(){
+       if (frame.main % bgsky.aniModo == 0) {
+           addPerlBuildingFill(0, 0, 0 + (river.frame));
+       }
+}
+
+
 function main_run_loop() {
     frame.main++;
     //update buffers.sky::
-    if (frame.main % 10 == 0) {
-        addPerlBuildingFill(0, 0, 0 + (river.frame));
-//        lowerOffThreshold(0.005);
-    }
+    // (ANIMATE LIGHTS)::
+    if (bgsky.isAnimated){
+    updateBuffersSky();
+        }
+
+
     transferSkytoBG(); 
+    
     view.tick();
     // camera render.
     requestAnimationFrame(main_run_loop);
@@ -59,7 +75,9 @@ function mockupZone() { //<=scene.tick()sent::
 //preRender::
 //    perllightsframe += 0.0005;
     perllightsframe += 0.00009;
-    river.tick();
+//    river.tick();
+    
+    court.tick();
     
 // fieldGrid();
 // pFill(100); // cull to screen visible.

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PerlinRiverCityNoise</title>
+<!--    https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas-->
+</head>
+
+<body>
+    <center><br>
+        <div id="playscreen">
+            <center><canvas id="outputCanvas"></canvas></center>
+<!--
+            <center><canvas id="buffer_background" class="debugviews"></canvas></center>
+
+            <center><canvas id="buffer_skybuild" class="debugviews"></canvas></center>
+            <center><canvas id="buffer_viiv" class="debugviews"></canvas></center>
+-->
+        </div>
+    </center>
+    <script>
+        //settings preinit::
+        let isDebugging = false;
+        let clogging = true;
+    </script>
+    <script src="buffers_draw.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: gold;
+            background: black;
+        }
+
+        canvas {
+            width: 100%;
+/*            width: 70%;*/
+            height: auto;
+            border-radius: 15px;
+            border: 1px solid white;
+        }
+
+    </style>
+    <script>
+    </script>
+    <!--    <script src=""> </script>-->
+</body></html>
