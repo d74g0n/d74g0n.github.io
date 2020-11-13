@@ -8,7 +8,7 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
     <meta name="description" content="d74g0n's DataHub ties all data related to The Great Awakening into one location, Enjoy The Show!">
     <meta name="keywords" content="datafag, qmap, streaming, news, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures, memewar">
-    <meta name="robots" content="noarchive" />
+    <!--    <meta name="robots" content="noarchive" />-->
     <meta charset="UTF-8">
     <meta name="author" content="d74g0n">
 
@@ -53,7 +53,6 @@
         color: blanchedalmond;
         font-family: monospace;
     }
-
 </style>
 
 
@@ -77,7 +76,6 @@
         console.log(`${-difference}px`);
         console.log(isSideOpen);
     }
-
 </script>
 
 <body>
@@ -118,11 +116,11 @@
             function LoadDocumentaries() {
                 document.getElementById('view_port').src = "/datafag/documentary/index.html";
             }
-            
-            function LoadBTC(){
+
+            function LoadBTC() {
                 document.getElementById('view_port').src = "/bms/index.html";
             }
-            
+
 
             //            BASIC TOOLTIPS SYSTEM
             function hintsystem(selector) {
@@ -195,7 +193,6 @@
                         console.log(`Case Mismatch/No-Match:${selector}`);
                 }
             }
-
         </script>
 
         <span id="menulabel" style="font-size: 12px;"> iHub </span>
@@ -204,26 +201,25 @@
         <a id="menuitem" onmouseover="hintsystem('DATAWALL')" onclick="loadDataWall()">DATAWALL</a>
         <a id="menuitem" onmouseover="hintsystem('BREAKING911')" onclick="loadBreaking()" style="font-size: 18px">BREAKING911</a>
         <a id="menuitem" onmouseover="hintsystem('BTC')" onclick="LoadBTC()" style="font-size: 26px">BITCOIN</a>
-<!--        <a id="menuitem" onmouseover="hintsystem('BTC')" onclick="loadBTC()" style="font-size: 17px" href="/bms/index.html" target="_blank">BITCOIN</a>-->
-        <!--
-            removed because currently down etc..
-        <a id="menuitem" onmouseover="hintsystem('QRESEARCH')" onclick="loadQreee()" style="font-size: 20px">QRESEARCH</a>
-        <a id="menuitem" onmouseover="hintsystem('QCARDS')" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>
+        <!--        <a id="menuitem" onmouseover="hintsystem('BTC')" onclick="loadBTC()" style="font-size: 17px" href="/bms/index.html" target="_blank">BITCOIN</a>-->
+        <!--            removed because currently down etc..-->
+        <!--        <a id="menuitem" onmouseover="hintsystem('QRESEARCH')" onclick="loadQreee()" style="font-size: 20px">QRESEARCH</a>-->
+        <!--        <a id="menuitem" onmouseover="hintsystem('QCARDS')" onclick="LoadCards()" style="font-size: 30px">QCARDS</a>-->
         <a id="menuitem" onmouseover="hintsystem('DOCUMENTARIES')" onclick="LoadDocumentaries()" style="font-size: 16px">DOCUMENTARIES</a>
-        -->
+
         <hr>
         <span id="menulabel" style="font-size: 12px;"> nTab </span>
         <a id="menuitem" onmouseover="hintsystem('DATAFAG')" href="/" target="_blank">DATAFAG</a>
         <a id="menuitem" onmouseover="hintsystem('FOX')" target="_blank" onclick="loadfox()">FOX NEWS</a>
         <a id="menuitem" onmouseover="hintsystem('QMAP')" href="https://qmap.pub" target="_blank" style="font-size: 33px">QMAP</a>
-        <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>
+        <!--        <a id="menuitem" onmouseover="hintsystem('VOAT')" href="https://voat.co/v/QRV/" target="_blank">VOAT/v/QRV</a>-->
         <hr>
         <span id="menulabel" style="font-size: 12px;"> ExTra </span>
-        
+
         <a id="menuitem" onmouseover="hintsystem('LEARNCHESS')" style="font-size: 17px" href="https://lichess.org/" target="_blank">LEARN CHESS</a>
-        
-        <a id="menuitem" onmouseover="hintsystem('WG1WGA')" href="https://wg1wga.com/d74g0n" target="_blank">WG1WGA</a>
-        <a id="menuitem" onmouseover="hintsystem('SUPPORT')" style="font-size: 27px; color:cornsilk;" href="https://www.patreon.com/d74g0n" target="_blank">DONATE</a>
+
+        <a id="menuitem" onmouseover="hintsystem('WG1WGA')" href="https://wego.social/d74g0n" target="_blank">WG1WGA</a>
+        <a id="menuitem" onmouseover="hintsystem('SUPPORT')" style="font-size: 14px; color:cornsilk;" href="https://www.patreon.com/d74g0n" target="_blank">Become a patreon!</a>
         <hr>
         <div id="tab" onclick="toggle()"><span>close</span></div>
 
@@ -242,6 +238,4 @@
     <iframe id="view_port" src="/pixelart/Q/"></iframe>
 
 
-</body>
-
-</html>
+</body></html>

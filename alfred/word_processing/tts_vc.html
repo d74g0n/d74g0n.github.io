@@ -1,0 +1,326 @@
+<html>
+<head>
+    <title>TTS VOICECHANGER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/common/img/punisher_med_white.png" />
+    <meta name="description" content="d74g0n's Javascript TTS Voice Changer">
+    <meta name="keywords" content="javascript, JS, Speech Recognition, Pixel, Code, Programming, visual, visualizer, viewer, d74g0n, art">
+    <meta name="robots" content="noarchive" />
+    <meta charset="UTF-8">
+    <meta name="author" content="d74g0n">
+    <meta property="og:image" content="/common/img/punisher_med_white.png">
+    <meta name="twitter:image" content="/common/img/punisher_med_white.png">
+
+    <!--   notes:  need to click to show/hide voice select slider?? make 100% local file />-->
+    <style>
+        @font-face {
+            font-family: '8bitOperatorPlus-Regular';
+            src: url('/common/fonts/8bitOperatorPlus-Regular.ttf');
+        }
+
+        * {
+            font-family: '8bitOperatorPlus-Regular';
+            background: transparent;
+            background: black;
+            color: lime;
+            user-select: none;
+        }
+
+        #outwrapper {
+            padding-top: 12px;
+            margin: auto;
+            padding: auto;
+        }
+
+        #output {
+            margin-top: 164px;
+            font-size: 48px;
+            line-height: 90px;
+            -webkit-animation: textcolorer 10s linear infinite;
+            -moz-animation: textcolorer 10s linear infinite;
+            -ms-animation: textcolorer 10s linear infinite;
+            animation: textcolorer 10s linear infinite;
+            text-shadow: 0px -1px 10px purple;
+            transition: 1s;
+        }
+
+        #voicecontrols {
+            visibility: visible;
+            /*            visibility: hidden;*/
+        }
+
+        #confidence_display {
+            /*               display: none;*/
+            position: fixed;
+            right: 20px;
+            top: 4px;
+            margin: 0px;
+            padding: 0px;
+            color: rgba(255, 55, 255, 0.1);
+
+            -webkit-animation: textcolorer 10s linear infinite;
+            -moz-animation: textcolorer 10s linear infinite;
+            -ms-animation: textcolorer 10s linear infinite;
+            animation: textcolorer 10s linear infinite;
+
+        }
+
+        @-webkit-keyframes textcolorer {
+            0% {
+                color: rgba(0, 0, 0, 0);
+            }
+
+            5% {
+                color: rgba(0, 0, 0, 0.1);
+            }
+
+            25% {
+                color: rgba(0, 55, 50, 0.5);
+            }
+
+            50% {
+                color: rgba(255, 55, 255, 0.7);
+            }
+
+            85% {
+                color: rgba(255, 255, 50, 0.8);
+            }
+
+            95% {
+                color: rgba(0, 0, 0, 0.1);
+            }
+
+            100% {
+                color: rgba(0, 0, 0, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div id="outwrapper">
+            <center>
+                <div id="voicecontrols">
+                    <span id="voicenumber">
+                        Voice
+                    </span>
+                    <input type="range" min="1" max="17" value="1" class="slider" id="voiceslider">
+                    <hr>
+                </div>
+
+                <span id="output">
+                    select voice
+                </span>
+            </center>
+        </div>
+    </center>
+    <span id="confidence_display">98%</span>
+
+    <script src="word_processing_slave.js"></script>
+
+
+    <script id="/alfred/ear/tts_voicechanger.js">
+        /*
+uses tts as voice changer
+-=-=-=-=-=-=-=-
+USAGE:
+document.onclick = function() {
+//    readout.innerHTML = 'begin speaking...';
+    let VC = new TTS_Voice_Changer(5, readout);
+};
+*/
+
+        class TTS_Voice_Changer {
+            constructor(voicenum, element) {
+                this.id = 'voice changer';
+                this.voicenum = voicenum;
+                this.showConfidence = false;
+                this.voices = window.speechSynthesis.getVoices();
+                this.element = element;
+                this.init();
+            }
+
+            nextVoice() {
+                this.voicenum++;
+            }
+
+            lastVoice() {
+                this.voicenum--;
+            }
+
+            listenNow(recognition) {
+                recognition.start();
+            }
+
+            StopListening(recognition) {
+                recognition.stop();
+            }
+
+            init() {
+                const ME = this;
+                try {
+                    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    var recognition = new SpeechRecognition();
+                    recognition.continuous = true;
+                    this.listenNow(recognition);
+                } catch (e) {
+                    console.error(e);
+                }
+
+                // for animations and stuff; to trigger when sound starts::
+                //        recognition.onsoundstart = function () {
+                //            console.log('Some sound is being received');
+                //        }
+
+                recognition.onstart = function() {
+                    console.log('[started]');
+                }
+
+                recognition.onspeechend = function() {
+                    console.log('[onspeechend]');
+                    setTimeout(function() {
+                        ME.listenNow(recognition)
+                    }, 1000);
+                }
+
+                recognition.onerror = function(event) {
+                    if (event.error == 'no-speech') {
+                        console.log('No speech was detected.');
+                        setTimeout(function() {
+                            ME.listenNow(recognition)
+                        }, 1000);
+                    };
+                }
+
+                recognition.onresult = function(event) {
+                    var current = event.resultIndex;
+                    var transcript = event.results[current][0].transcript;
+                    var confidence = event.results[current][0].confidence;
+                    console.log('[' + (confidence * 100).toFixed(2) + '%][' + transcript + ']');
+                    // 'this' is hijacked by speechrecognition so ME is used.
+                    ME.confidence = `  ${(confidence * 100).toFixed(2)}%`;
+                    displayConfidence(ME.confidence);
+                    ME.speak(transcript);
+
+                    wordPro(transcript, confidence);
+
+
+                };
+
+                this.recognition = recognition;
+                console.log(`ttsVC v1.0 init complete`);
+
+            }
+
+            speak(message) {
+
+                if (this.showConfidence) {
+                    this.element.innerHTML = message + this.confidence;
+                } else {
+                    this.element.innerHTML = message;
+                }
+                var msg = new SpeechSynthesisUtterance(message);
+                this.voices = window.speechSynthesis.getVoices();
+                msg.voice = this.voices[this.voicenum];
+                window.speechSynthesis.speak(msg);
+
+                console.log(`${message}`);
+            }
+
+
+
+        }
+    </script>
+
+
+
+
+
+    <script id="stupid_click_tracker_ooph">
+        // declarations basically::
+        //confidence output::
+        const readout2 = document.getElementById("confidence_display");
+
+        function displayConfidence(msg) {
+            readout2.textContent = msg;
+        }
+        let voicecontrolsdiv = document.getElementById("voicecontrols");
+        const outputd = document.getElementById("output");
+
+
+        //NEW::
+        let init = 0;
+
+        function toggleElmDisplay(elm) {
+            //            console.log(`in:${elm.style['visibility']}`);
+
+            if (init == 0) {
+                elm.style['visibility'] = 'visible';
+                init++
+            } else {
+                if (elm.style['visibility'] == 'visible') {
+                    elm.style['visibility'] = 'hidden';
+                } else {
+                    elm.style['visibility'] = 'visible';
+                }
+            }
+
+            //            console.log(`out: ${elm.style['visibility']}`);
+
+            //                        visibility: visible;
+            //            visibility: hidden;
+
+
+        }
+
+        outputd.onclick = function() {
+            //            toggleElmDisplay(voicecontrolsdiv);
+            toggleElmDisplay(document.getElementById("voicecontrols"));
+        }
+
+        voicecontrolsdiv.onclick = function() {
+            //            toggleElmDisplay(voicecontrolsdiv);
+            toggleElmDisplay(document.getElementById("voicecontrols"));
+        }
+
+
+
+
+
+        const readout = document.getElementById("output");
+        var sliderElm = document.getElementById("voicenumber");
+        var slider = document.getElementById("voiceslider");
+
+        // max refactor land::
+        let clicktracker = 0;
+        document.onclick = function() {
+
+            if (clicktracker == 0) {
+                readout.innerHTML = 'begin speaking...';
+                window.VC = new TTS_Voice_Changer(5, readout);
+            }
+
+            if (clicktracker == 1) {
+                window.VC.StopListening(window.VC.recognition);
+            }
+
+            if (clicktracker == 2) {
+                window.VC.listenNow(window.VC.recognition);
+                clicktracker = 1;
+            } else {
+                clicktracker++;
+            }
+
+        };
+
+        slider.onchange = function() {
+            console.log(`changed`);
+            sliderElm.innerHTML = slider.value;
+            window.VC.voicenum = slider.value;
+        }
+    </script>
+
+
+
+</body></html>

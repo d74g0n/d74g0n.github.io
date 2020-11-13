@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>noise viewer</title>
+    <meta name="author" content="d74g0n">
+    <meta name="description" content="fugoff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <link rel="icon" type="image/x-icon" href="" />
+    <style>
+        body {
+            background: black;
+        }
+
+        canvas {
+            border: 2px solid grey;
+            height: auto;
+            width: 800px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="mainscreen"></canvas>
+    </center>
+    <script>
+        const canvas = document.getElementById("mainscreen");
+        const ctx = canvas.getContext("2d");
+        ctx.imageSmoothingEnabled = false;
+        canvas.width = 640;
+        canvas.height = 640;
+    </script>
+    <script type="text/javascript" src="color_lib_browser.js"></script>
+    <script type="text/javascript" src="/common/js/perlin.js"></script>
+    <script type="text/javascript" src="/noiseviewer/noiseviewer.js"></script>
+
+</body></html>

@@ -1,0 +1,63 @@
+<html>
+
+<style>
+    * {
+        background: transparent;
+        /*        background: black;*/
+        margin: auto;
+        padding: auto;
+        align-content: center;
+    }
+
+    #wrapper {
+        padding-top: 15px;
+        width: 500px;
+        margin: auto;
+        padding: auto;
+        border: 2px solid grey;
+        border-radius: 14px;
+    }
+
+    .tv {
+        width: 428px;
+        height: 242px;
+    }
+</style>
+
+<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+
+<div id="wrapper">
+    <div class="tv" id="d74g0n"></div><br>
+    <div class="tv" id="zslayer2244z"></div><br>
+    <div class="tv" id="xfixer117x"></div><br>
+</div>
+
+<script type="text/javascript">
+    var options = {
+        width: 426,
+        height: 240,
+        channel: "d74g0n",
+    };
+    var player = new Twitch.Player("d74g0n", options);
+    player.setVolume(0.5);
+</script>
+
+<script type="text/javascript">
+    options = {
+        width: 426,
+        height: 240,
+        channel: "zslayer2244z",
+    };
+    var player2 = new Twitch.Player("zslayer2244z", options);
+    player2.setVolume(0.5);
+</script>
+
+<script type="text/javascript">
+    options = {
+        width: 426,
+        height: 240,
+        channel: "xfixer117x",
+    };
+    var player2 = new Twitch.Player("xfixer117x", options);
+    player2.setVolume(0.5);
+</script></html>

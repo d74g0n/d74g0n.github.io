@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>Example Title</title>
+    <meta name="author" content="Your Name">
+    <meta name="description" content="Example description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <!--    <link rel="icon" type="image/x-icon" href="" />-->
+</head>
+
+<body>
+
+    <!--
+    <p>WebGL animation by clearing the drawing buffer with solid
+        color and applying scissor test.</p>
+    <button id="animation-onoff">
+        Press here to
+        <strong>[verb goes here]</strong>
+        the animation</button>
+-->
+    <canvas id="glcanvas">Your browser does not seem to support
+        HTML5 canvas.</canvas>
+
+
+    <!--
+    <script type="x-shader/x-vertex" id="vertex-shader">
+        #version 100
+        void main() {
+            gl_Position = vec4(0.0, 0.0, 0.0, 1.0);
+            gl_PointSize = 564.0;
+        }
+    </script>
+-->
+
+    <!--
+    <script type="x-shader/x-fragment" id="fragment-shader">
+        #version 100
+        void main() {
+            gl_FragColor = vec4(0.18, 0.54, 0.84, 1.0);
+        }
+    </script>
+-->
+
+    <!--
+    <script type="x-shader/x-fragment" id="fragment-shader">
+        #version 100
+        precision mediump float;
+        void main() {
+          vec2 fragmentPosition = 2.0*gl_PointCoord - 1.0;
+          float distance = length(fragmentPosition);
+          float distanceSqrd = distance * distance;
+          gl_FragColor = vec4(
+            0.2/distanceSqrd,
+            0.1/distanceSqrd,
+            0.0, 1.0 );
+        }
+</script>
+-->
+    <!--    <script type="text/javascript" src="index.js"></script>-->
+    <script src="gl_matrix.js"></script>
+    <script src="tba.js"></script>
+    <!--    <script type="text/javascript" src="shader.js"></script>-->
+
+    <!--
+        < script type = "text/javascript"
+        src = "index.js" > < /script> <
+            script type = "text/javascript"
+        src = "ani1.js" > < /script> <
+            script type = "text/javascript"
+        src = "shader.js" > < /script>
+        -->
+
+
+</body></html>

@@ -51,18 +51,22 @@ class TTS_Voice_Changer {
         //        }
 
         recognition.onstart = function () {
-            console.log('[unmuted]');
+            console.log('[started]');
         }
 
         recognition.onspeechend = function () {
-            console.log('[muted]');
-            setTimeout(function(){ME.listenNow(recognition)}, 200);
+            console.log('[onspeechend]');
+            setTimeout(function () {
+                ME.listenNow(recognition)
+            }, 1000);
         }
 
         recognition.onerror = function (event) {
             if (event.error == 'no-speech') {
                 console.log('No speech was detected.');
-                setTimeout(function(){ME.listenNow(recognition)}, 200);
+                setTimeout(function () {
+                    ME.listenNow(recognition)
+                }, 1000);
             };
         }
 
@@ -73,6 +77,7 @@ class TTS_Voice_Changer {
             console.log('[' + (confidence * 100).toFixed(2) + '%][' + transcript + ']');
             // 'this' is hijacked by speechrecognition so ME is used.
             ME.confidence = `  ${(confidence * 100).toFixed(2)}%`;
+            displayConfidence(ME.confidence);
             ME.speak(transcript);
         };
 
@@ -92,7 +97,7 @@ class TTS_Voice_Changer {
         this.voices = window.speechSynthesis.getVoices();
         msg.voice = this.voices[this.voicenum];
         window.speechSynthesis.speak(msg);
-        
+
         console.log(`${message}`);
     }
 

@@ -124,11 +124,11 @@ let Perl = {
         return (val / 1) * percentageOf;
     },
     noise: function (x = 0, y = 0, z = 0) {
-//        console.log(x + " : " + _PL.percentage(_PL.perlin(x, y, z)));
+        //        console.log(x + " : " + _PL.percentage(_PL.perlin(x, y, z)));
         return _PL.percentage(_PL.perlin(x, y, z));
     },
     floorNoise: function (x = 0, y = 0, z = 0) {
-//        console.log(x + " : " + Math.floor(_PL.percentage(_PL.perlin(x, y, z))));
+        //        console.log(x + " : " + Math.floor(_PL.percentage(_PL.perlin(x, y, z))));
         return Math.floor(_PL.percentage(_PL.perlin(x, y, z)));
     },
     init: function () {
@@ -139,6 +139,7 @@ let Perl = {
 Perl.init();
 //global._PL = Perl;
 
-
-
-
+if (Window) {
+    Window.PL = _PL;
+    console.log(`perlin noise attached to window`);
+}

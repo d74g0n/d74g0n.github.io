@@ -120,10 +120,9 @@ function perlbuilding(x = 0, y = 0, z = 1, xleft = 2, perlXoffset = 0.45) {
     let scalew = 64;
     let scaleh = scalew * 3.5;
 //    let zdata = {
-//        w: Perl.OctavePerlin(x, y, 1.02+river.frame/10000, 1, 1),
-//        h: Perl.OctavePerlin(x, y, 1+river.frame/10000, 1, 1),
-//    }
-    
+        //        w: Perl.OctavePerlin(x, y, 1.02 + river.frame / 10000, 1, 1),
+        //        h: Perl.OctavePerlin(x, y, 1 + river.frame / 10000, 1, 1),
+        //    }    
     let zdata = { // hook to seed shit.
         w: Perl.OctavePerlin(x, y, 1.58, 4, 3),
         h: Perl.OctavePerlin(x, y, 1, 4, 3),
