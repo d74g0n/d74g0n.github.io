@@ -2,35 +2,47 @@
 
 <style>
     * {
-        background: transparent;
-        /*        background: black;*/
+        background: black;
         margin: auto;
-        padding: auto;
         align-content: center;
     }
 
     #wrapper {
-        padding-top: 15px;
-        width: 500px;
-        margin: auto;
-        padding: auto;
-        border: 2px solid grey;
-        border-radius: 14px;
+        /*        width: 428px;*/
+        width: 430px;
+        /*        height: 628px;*/
+
+        border: 2px solid white;
+        border-radius: 10px;
+        margin-bottom: 2px;
     }
 
     .tv {
         width: 428px;
         height: 242px;
+
     }
 
+    #d74g0n {
+        visibility: hidden;
+        position: absolute;
+    }
 </style>
 
 <script src="https://player.twitch.tv/js/embed/v1.js"></script>
 
+<!--<iframe src="https://player.twitch.tv/d74g0n?parent=d74g0n.github.io" height="242" width="428" frameborder="none" scrolling="false" allowfullscreen="true">-->
+<!--</iframe>-->
+
+<!--<iframe src="https://player.twitch.tv/?<channel, video, or collection>&parent=streamernews.example.com" height="<height>" width="<width>" frameborder="<frameborder>" scrolling="<scrolling>" allowfullscreen="<allowfullscreen>">-->
+<!--</iframe>-->
+
+
+
 <div id="wrapper">
-    <div class="tv" id="d74g0n"></div><br>
-    <div class="tv" id="zslayer2244z"></div><br>
-    <div class="tv" id="xfixer117x"></div><br>
+    <div class="tv" id="d74g0n"></div>
+    <div class="tv" id="zslayer2244z"></div>
+    <div class="tv" id="xfixer117x"></div>
 </div>
 
 <script type="text/javascript">
@@ -38,11 +50,11 @@
         width: 426,
         height: 240,
         channel: "d74g0n",
+        //        parent: "d74g0n.github.io",
         parent: "d74g0n.github.io",
     };
     var player = new Twitch.Player("d74g0n", options);
     player.setVolume(0.5);
-
 </script>
 
 <script type="text/javascript">
@@ -54,7 +66,6 @@
     };
     var player2 = new Twitch.Player("zslayer2244z", options);
     player2.setVolume(0.5);
-
 </script>
 
 <script type="text/javascript">
@@ -66,7 +77,4 @@
     };
     var player2 = new Twitch.Player("xfixer117x", options);
     player2.setVolume(0.5);
-
-</script>
-
-</html>
+</script></html>
