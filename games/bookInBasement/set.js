@@ -91,16 +91,16 @@ function BlinkComputerLights(frame) {
     blink(frame);
 }
 
-function drawRoomBase(Math.floor(Xoffset) = 0, Yoffset = 0) {
+function drawRoomBase(Xoffset = 0, Yoffset = 0) {
     // ceiling::    
     setColor(Pal.ceiling);
-//    drawRect(0 + Xoffset, RP.ceiling.top, canvas.width - Xoffset, RP.ceiling.height +
+    //    drawRect(0 + Xoffset, RP.ceiling.top, canvas.width - Xoffset, RP.ceiling.height +
     drawRect(0 + Math.floor(Xoffset), RP.ceiling.top, canvas.width - Math.floor(Xoffset), RP.ceiling.height +
         Yoffset);
 
     //floor:
     setColor(Pal.floor);
-//    drawRect(0 + Xoffset, canvas.height - RP.floor.height + (Yoffset * 2), canvas.width - Xoffset, RP.floor.height - (Yoffset * 2));
+    //    drawRect(0 + Xoffset, canvas.height - RP.floor.height + (Yoffset * 2), canvas.width - Xoffset, RP.floor.height - (Yoffset * 2));
     drawRect(0 + Math.floor(Xoffset), canvas.height - RP.floor.height + (Math.floor(Yoffset) * 2), canvas.width - Math.floor(Xoffset), RP.floor.height - (Math.floor(Yoffset) * 2));
 
     //wall::

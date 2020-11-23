@@ -1,4 +1,0 @@
-Make system like pyxeledit water down
-'film strip creator' / viewer'
-
-canvas paint frames view gif like animation of frames while painting.
