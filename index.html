@@ -11,6 +11,8 @@
             background-color: #222;
             overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none; /* Prevent text highlighting on double clicks */
+            -webkit-user-select: none;
         }
         canvas {
             display: block;
@@ -40,6 +42,7 @@
             flex-direction: column;
             gap: 10px;
             min-width: 200px;
+            pointer-events: none; /* Let clicks pass through to body/canvas */
         }
         h1 { margin: 0; color: #ffcc00; }
         p { font-size: 1.2rem; line-height: 1.6; }
@@ -61,7 +64,7 @@
 
     <div id="start-screen">
         <h1>d74g0n Cannon</h1>
-        <p>Press <strong>SPACEBAR</strong> to launch!</p>
+        <p>Press <strong>SPACEBAR</strong> or <strong>CLICK / TAP</strong> to launch!</p>
         <p>Hit Orbs to gain lift.</p>
     </div>
 
@@ -90,11 +93,11 @@
     // Game Constants
     const GRAVITY = 0.15;
     const GROUND_FRICTION = 0.96;
-    const AIR_RESISTANCE = 0.98; 
+    const AIR_RESISTANCE = 0.998; 
     const BASE_POWER = 25;
     const LIFT_POWER = 15; 
     const SPEED_BOOST = 2; 
-    const COLUMN_WIDTH = 80; 
+    const COLUMN_WIDTH = 100; 
     
     // Game State
     let gameState = 'START'; 
@@ -179,16 +182,30 @@
         }
     }
 
-    window.addEventListener('keydown', (e) => {
-        if (e.code === 'Space') {
-            e.preventDefault(); 
-            if (gameState === 'START' || gameState === 'ENDED') {
-                resetGame();
-            } else if (gameState === 'AIMING') {
-                fireCannon();
-            }
+    // --- INPUT HANDLING START ---
+    
+    function handleInput(e) {
+        // If it's a keyboard event, only allow Spacebar
+        if (e.type === 'keydown' && e.code !== 'Space') return;
+
+        // Prevent default scrolling/highlighting behavior
+        if(e.cancelable) e.preventDefault(); 
+
+        // Logic
+        if (gameState === 'START' || gameState === 'ENDED') {
+            resetGame();
+        } else if (gameState === 'AIMING') {
+            fireCannon();
         }
-    });
+    }
+
+    // Add listeners for Keyboard, Mouse, and Touch
+    window.addEventListener('keydown', handleInput);
+    window.addEventListener('mousedown', handleInput);
+    // 'passive: false' allows us to use preventDefault() to stop scrolling on mobile
+    window.addEventListener('touchstart', handleInput, { passive: false });
+
+    // --- INPUT HANDLING END ---
 
     function fireCannon() {
         gameState = 'FLYING';
@@ -229,7 +246,7 @@
                     startScreen.querySelector('p').innerHTML = 
                         `Items: <span class="stat-items">${itemsCollected}</span><br>` +
                         `Max Height: <span class="stat-height">${maxAltitude}m</span><br><br>` +
-                        `Press <strong>SPACEBAR</strong> to try again`;
+                        `Press <strong>SPACE</strong> or <strong>TAP</strong> to try again`;
                 }
             }
 
@@ -285,27 +302,21 @@
         
         // 1. Calculate Distance-based Color (Hue Shift)
         // Base Sky Blue is roughly HSL(197, 71%, 73%)
-        // We rotate the hue based on score (distance). 
-        // Example: Shift 60 degrees every 1000m.
         const baseHue = 197; 
         const hueShiftRate = 60; // Degrees per 1000m
         const distanceHue = (baseHue + (score / 1000) * hueShiftRate) % 360;
         
         // 2. Calculate Height-based Darkness (Fade to Black)
-        // Get current altitude in meters
         const altitude = Math.max(0, (height - 20 - ball.y) / 10);
         const spaceThreshold = 1000; // Meters where it becomes pitch black
         
         // Calculate how "dark" it should be (0 = normal sky, 1 = total black)
-        // We clamp it between 0 and 1.
         const darknessRatio = Math.min(altitude / spaceThreshold, 1);
         
-        // Standard Sky Lightness is ~73%. We scale this down to 0% based on darknessRatio.
+        // Standard Sky Lightness is ~73%
         const baseLightness = 73; 
         const currentLightness = baseLightness * (1 - darknessRatio);
         
-        // Apply color
-        // Note: Saturation (71%) stays constant unless you want that to fade too.
         ctx.fillStyle = `hsl(${distanceHue}, 71%, ${currentLightness}%)`;
         ctx.fillRect(0, 0, width, height);
         // --------------------------------
