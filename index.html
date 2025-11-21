@@ -1,311 +1,381 @@
-<!--THIS IS FOX AT THE TOP VERSION-->
-<!--
-TADO LIST:
-- refine TOPNAV shiz.
-
-- remove styling from list item generation.
-- add display/ fontsize options etc.
-bonus: do without JQuery.
--->
-
-<html class="style-red">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Datafag</title>
-    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="datafag monitors the human collective through The Great Awakening, Enjoy The Show!">
-    <meta name="keywords" content="datafag, qmap, streaming, news, patriots, white rabbit, Qanon, anonymous, chan, english, imageboard, image board, d74g0n, planefag, meme, meme scraper, thegreatawakening, the great awakening, herd chatter, chatter monitor, MAGA, TRUMP, WWG1WGA, Where we go one we go all, educational, obamagate, pizzagate, releasethecures, release the cures">
-    <meta name="robots" content="noarchive" />
     <meta charset="UTF-8">
-    <meta name="author" content="d74g0n">
-    <!--FB-->
-    <!--
-open graph shutdown!?
-    <meta property="og:title" content="d74g0n's datafag">
-    <meta property="og:image" content="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
-    <meta property="og:description" content="datafag monitors the human collective through The Great Awakening, Enjoy The Show!">
--->
-
-    <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="/datafag/css/css_topmenu.css" />
-
-    <link rel="stylesheet" type="text/css" href="/datafag/css/newslogo.css" />
-    <!--LAST ADD-->
-
-    <link rel="stylesheet" type="text/css" href="/datafag/css/jumpmenu.css" />
-    <link rel="stylesheet" type="text/css" href="/datafag/css/spash_tile.css" />
-    <link rel="stylesheet" type="text/css" href="/datafag/css/css_scrollbars.css" />
-    <link id="themelink" rel="stylesheet" type="text/css" href="/datafag/themes/theme_matrix.css" />
-    <!--    <link id="themelink" rel="stylesheet" type="text/css" href="/datafag/css/theme_light.css" />-->
-
-    <link rel="stylesheet" type="text/css" href="/datafag/css/css_effects.css" />
-<!--    <link rel="stylesheet" type="text/css" href="/datafag/msm/msm.css" />-->
-    <link rel="shortcut icon" href="/common/img/favicon.png" />
-    <!-- <script src="./reflinkzilch.js"></script>	 -->
-
-    <script>
-        // THEME RELATED CODE:
-        let tog = 0;
-        const theme = [
-            '/datafag/themes/theme_matrix.css',
-//            '/datafag/css/github_datafag.css',
-            '/datafag/themes/theme_blue.css',
-            '/datafag/themes/theme_legoBr.css',
-            '/datafag/themes/theme_red.css',
-            '/datafag/themes/theme_green.css',
-            '/datafag/themes/theme_light.css'
-        ];
-
-        function toggleTheme() {
-            tog++;
-            if (theme.length == tog) {
-                tog = 0;
-            }
-            console.log(tog);
-            themeFlipper(tog);
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cannon Lift - Space Fade</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        function themeFlipper(themeindex) {
-            return document.getElementById('themelink').setAttribute('href', theme[themeindex]);
+        canvas {
+            display: block;
         }
-
-    </script>
+        #ui-layer {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            pointer-events: none;
+            text-shadow: 2px 2px 0 #000;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        #items-board { color: #00FF00; }
+        #start-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px 40px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 200px;
+        }
+        h1 { margin: 0; color: #ffcc00; }
+        p { font-size: 1.2rem; line-height: 1.6; }
+        .hidden { display: none !important; }
+        
+        /* Stat Colors */
+        .stat-items { color: #00FF00; font-weight: bold; }
+        .stat-height { color: #00BFFF; font-weight: bold; }
+    </style>
 </head>
-<!--JUMP MENU-->
-<div id="menu_jumpto">
-    <div id="jumptotop" onclick="jumptotop()">
-        <span>top</span>
-    </div>
-    <hr id="jumpdivider">
-    <div id="jumptobottom" onclick="jumptobottom()">
-        <span>bottom</span>
-    </div>
-</div>
-
-<script src="./datafag/jumpmenu.js"></script>
-<!--JUMP MENU END-->
-<!--MSN FRAME-->
-<!--<div id="frameheader">
-    <iframe id="frame" width="560" height="315" src="//ok.ru/videoembed/1385337593428?nochat=1&autoplay=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
-</div>
-   
-    <script src="/datafag/toggle_vis.js"></script>
-    <script src="/common/js/draggable_element.js"></script>
-    <script>
-    dragElement(document.getElementById("frameheader"));
-    </script>-->
-<!--MSN FRAME END-->
-
-<!--D74G0N NEWS LOGO-->
-<div id="herdnews">
-    <img src="/datafag/img/herdnews.png" />
-</div>
-
-<!--D74G0N NEWS LOGO END-->
-
 <body>
 
+    <div id="ui-layer">
+        <div id="score-board">Distance: 0m</div>
+        <div id="speed-board">Speed: 0</div>
+        <div id="height-board">Height: 0m</div>
+        <div id="items-board">Items: 0</div> 
+    </div>
 
+    <div id="start-screen">
+        <h1>Sky Cannon</h1>
+        <p>Press <strong>SPACEBAR</strong> to launch!</p>
+        <p>Hit Green Orbs to gain lift.</p>
+    </div>
 
-    <div id="screenwrap">
+    <canvas id="gameCanvas"></canvas>
 
-        <div id="topnav" , class="navbar">
-            <ul id="navbarul" , class="navbarul">
-                <!--  <li><a href="https://wg1wga.com/d74g0n" , class="toplinks" , target="_blank"> WG1WGA </a></li>-->
-                <li><a href="https://qmap.pub/" , class="toplinks" , target="_blank"> QMAP </a></li>
-                <li onclick="toggleTheme()" class="toplinks"> THEME </li>
-                <!--                <li onclick="toggle_MSN_vis()" class="toplinks"> MSM </li>-->
-                <!--                <li><a href="http://159.203.4.98:3333" , class="toplinks" , target="_blank"> DataClock </a></li>-->
-                <li><a href="/datafag/clock/" , class="toplinks" , target="_blank"> DataClock </a></li>
-            </ul>
-        </div> <!-- topnav -->
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const startScreen = document.getElementById('start-screen');
+    
+    const scoreBoard = document.getElementById('score-board');
+    const speedBoard = document.getElementById('speed-board');
+    const heightBoard = document.getElementById('height-board');
+    const itemsBoard = document.getElementById('items-board');
 
+    let width, height;
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
+    // Game Constants
+    const GRAVITY = 0.15;
+    const GROUND_FRICTION = 0.96;
+    const AIR_RESISTANCE = 1.0; 
+    const BASE_POWER = 25;
+    const LIFT_POWER = 15; 
+    const SPEED_BOOST = 2; 
+    const COLUMN_WIDTH = 80; 
+    
+    // Game State
+    let gameState = 'START'; 
+    let cameraOffset = 0;
+    let cameraY = 0; 
+    
+    // Stats
+    let score = 0; // Distance
+    let itemsCollected = 0;
+    let maxAltitude = 0;
 
-        <ul id="messages">
-            <div id="datarecord_splash">
-                <li style="list-style:none">
-                    <div id="picbox" class="sunburst">
-                        <center>
-                            <h2 id="spash_toptext"> Once a d74g0n made an Argus </h2>
-                            <br><img id="splash_image" , style="visibility: visible" , "width:50%" , src="https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif">
-                        </center>
-                    </div>
+    let cannon = { x: 100, y: 0, angle: 45, angleDir: 1 };
+    let ball = { x: 0, y: 0, vx: 0, vy: 0, radius: 10, rotation: 0 };
+    let items = [];
+    let nextItemX = 0;
 
+    function resetGame() {
+        gameState = 'AIMING';
+        startScreen.classList.add('hidden');
+        
+        cannon.y = height - 50;
+        cannon.angle = 45;
+        
+        ball.x = cannon.x;
+        ball.y = cannon.y;
+        ball.vx = 0;
+        ball.vy = 0;
+        ball.radius = 10;
+        
+        cameraOffset = 0;
+        cameraY = 0;
+        
+        // Reset Stats
+        score = 0;
+        itemsCollected = 0;
+        maxAltitude = 0;
+        
+        items = [];
+        nextItemX = 400; 
+        generateItems(2000); 
+    }
 
-                    <center>
-                        <div id="maintext">
-                            <h2 id="spash_undertext"> What Woke The ArgUs? </h2>
-                            <h2 id="search_terms"><br> QAnon, TheGreatAwakening, ObamaGate, WeThePeople, ReleaseTheCures, BigPharm,<br> WWG1WGA, DrainTheSwamp, DeepState, SethRich, Pedofiles, SaveTheChildren </h2> <br>
-                            <h3 style="color:bisque"> Service Simply Monitors Twitter Chatter <br> * For Educational Purposes Only * </h3><br>
-                            <div class="splash_Q_frame">
-                                <a id="splash_Q" href="https://qmap.pub/" target="_blank">Q</a></div>
+    function generateItems(uptoX) {
+        while (nextItemX < uptoX) {
+            
+            let screenTop = ball.y - (height * 0.5);
+            let spawnMinY = screenTop; 
+            let spawnMaxY = screenTop + (height / 3);
 
-                        </div>
-                    </center>
-                </li>
-            </div>
-        </ul>
-
-        <input type="checkbox" id="RDCheck" />
-        <script>
-            function movetoBottom() {
-                return window.scrollTo(0, document.body.scrollHeight);
+            if (spawnMaxY > height - 100) {
+                spawnMaxY = height - 150;
+                spawnMinY = height - 400;
             }
 
-        </script>
-        <span id="RDCheck_label">Filter</span>
+            let count = Math.floor(Math.random() * 4); 
+            if (count === 0 && Math.random() > 0.2) count = 1; 
 
-        <div id='rate_tracker_window'>
-            <h3 id='time_text'>Average Chatter Rate</h3>
-            <script>
-                const randompic = ["http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large", "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large"];
-                const timeelm = document.getElementById('time_text');
+            let spawnedInThisColumn = [];
 
-            </script>
-        </div>
+            for (let i = 0; i < count; i++) {
+                let candidateY = spawnMinY + Math.random() * (spawnMaxY - spawnMinY);
 
-
-
-    </div> <!-- screenwrap -->
-
-    <!--construction WIP SIDEARM-->
-    <div class='sidearm' id='sidearm' onclick="sideactivate()" ondrop="">
-        <span>QuickList</span>
-        <hr>
-        <script>
-            //            script building side menu system
-            let sideisHidden = true;
-
-            function sideactivate() {
-                let side = document.getElementById('sidearm');
-
-                if (sideisHidden) {
-                    side.style.left = '-2px';
-                    side.style.height = '124px';
-
-                } else {
-                    side.style.left = '-102px';
-                    side.style.height = '34px';
+                let touching = false;
+                for (let existingY of spawnedInThisColumn) {
+                    if (Math.abs(candidateY - existingY) < 40) {
+                        touching = true;
+                        break;
+                    }
                 }
 
-                sideisHidden = !sideisHidden;
-
-                console.log('sidetoggle!');
+                if (!touching) {
+                    items.push({
+                        x: nextItemX,
+                        y: candidateY,
+                        radius: 15 + (Math.random() * 5),
+                        active: true
+                    });
+                    spawnedInThisColumn.push(candidateY);
+                }
             }
+            nextItemX += COLUMN_WIDTH + (ball.radius*3) + (Math.random() * 40);
+        }
+    }
 
-        </script>
-    </div>
-    <!--end sidearm-->
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+            e.preventDefault(); 
+            if (gameState === 'START' || gameState === 'ENDED') {
+                resetGame();
+            } else if (gameState === 'AIMING') {
+                fireCannon();
+            }
+        }
+    });
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.2.0/socket.io.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="/datafag/clownfilter.js"></script>
-    <script src="/datafag/redundancycheck.js"></script>
+    function fireCannon() {
+        gameState = 'FLYING';
+        let rad = -cannon.angle * (Math.PI / 180);
+        let barrelLen = 60; 
+        ball.x = cannon.x + Math.cos(rad) * barrelLen;
+        ball.y = cannon.y + Math.sin(rad) * barrelLen;
+        ball.vx = Math.cos(rad) * BASE_POWER;
+        ball.vy = Math.sin(rad) * BASE_POWER;
+    }
 
-
-    <script>
-        let isDUMPING = false;
-
-        function STARTDUMP() {
-            return isDUMPING = true;
+    function update() {
+        if (gameState === 'AIMING') {
+            cannon.angle += cannon.angleDir * 1.5;
+            if (cannon.angle > 80 || cannon.angle < 20) cannon.angleDir *= -1;
+            ball.x = cannon.x;
+            ball.y = cannon.y;
         }
 
-        function STOPDUMP() {
-            return isDUMPING = false;
+        if (gameState === 'FLYING') {
+            ball.vy += GRAVITY;
+            ball.vx *= AIR_RESISTANCE; 
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+            ball.rotation += ball.vx * 0.05;
+
+            // Ground Collision
+            if (ball.y + ball.radius >= height - 20) {
+                ball.y = height - 20 - ball.radius;
+                ball.vy = -ball.vy * 0.5; 
+                ball.vx *= GROUND_FRICTION; 
+
+                if (Math.abs(ball.vx) < 0.1 && Math.abs(ball.vy) < 0.5) {
+                    gameState = 'ENDED';
+                    startScreen.classList.remove('hidden');
+                    
+                    startScreen.querySelector('h1').innerText = `Dist: ${Math.floor(score)}m`;
+                    startScreen.querySelector('p').innerHTML = 
+                        `Items: <span class="stat-items">${itemsCollected}</span><br>` +
+                        `Max Height: <span class="stat-height">${maxAltitude}m</span><br><br>` +
+                        `Press <strong>SPACEBAR</strong> to try again`;
+                }
+            }
+
+            // Item Collision
+            for (let i = 0; i < items.length; i++) {
+                let item = items[i];
+                if (!item.active) continue;
+                let dx = ball.x - item.x;
+                let dy = ball.y - item.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+
+                if (distance < ball.radius + item.radius) {
+                    item.active = false; 
+                    itemsCollected++;
+                    ball.radius += 1;
+                    ball.vy = -LIFT_POWER; 
+                    ball.vx += SPEED_BOOST; 
+                    if(ball.vx > 30) ball.vx = 30;
+                }
+            }
+
+            // Camera
+            if (ball.x > cameraOffset + width * 0.2) {
+                cameraOffset = ball.x - width * 0.2;
+            }
+            cameraY = Math.min(0, ball.y - height * 0.5);
+
+            generateItems(cameraOffset + width * 2);
+            items = items.filter(item => item.x > cameraOffset - 100);
+            score = Math.max(score, (ball.x - 100) / 10);
+            
+            // Track Max Altitude
+            let currentHeight = Math.floor((height - 20 - ball.y) / 10);
+            if (currentHeight < 0) currentHeight = 0;
+            
+            if (currentHeight > maxAltitude) {
+                maxAltitude = currentHeight;
+            }
         }
 
-        //-=-=-=-=-=-=-=-
+        // UI Updates
+        scoreBoard.innerText = `Distance: ${Math.floor(score)}m`;
+        speedBoard.innerText = `Speed: ${Math.abs(Math.floor(ball.vx * 10))}`;
+        
+        let currentHeight = Math.floor((height - 20 - ball.y) / 10);
+        heightBoard.innerText = `Height: ${currentHeight > 0 ? currentHeight : 0}m`;
+        
+        itemsBoard.innerText = `Items: ${itemsCollected}`;
+    }
 
-        var socket = io.connect('http://159.203.4.98:5001'); //datafagclock(norm)
-        //        var socket = io.connect('http://159.203.4.98:5000'); //dragoneye2
+    function draw() {
+        // --- DYNAMIC BACKGROUND LOGIC ---
+        
+        // 1. Calculate Distance-based Color (Hue Shift)
+        // Base Sky Blue is roughly HSL(197, 71%, 73%)
+        // We rotate the hue based on score (distance). 
+        // Example: Shift 60 degrees every 1000m.
+        const baseHue = 197; 
+        const hueShiftRate = 60; // Degrees per 1000m
+        const distanceHue = (baseHue + (score / 1000) * hueShiftRate) % 360;
+        
+        // 2. Calculate Height-based Darkness (Fade to Black)
+        // Get current altitude in meters
+        const altitude = Math.max(0, (height - 20 - ball.y) / 10);
+        const spaceThreshold = 1000; // Meters where it becomes pitch black
+        
+        // Calculate how "dark" it should be (0 = normal sky, 1 = total black)
+        // We clamp it between 0 and 1.
+        const darknessRatio = Math.min(altitude / spaceThreshold, 1);
+        
+        // Standard Sky Lightness is ~73%. We scale this down to 0% based on darknessRatio.
+        const baseLightness = 73; 
+        const currentLightness = baseLightness * (1 - darknessRatio);
+        
+        // Apply color
+        // Note: Saturation (71%) stays constant unless you want that to fade too.
+        ctx.fillStyle = `hsl(${distanceHue}, 71%, ${currentLightness}%)`;
+        ctx.fillRect(0, 0, width, height);
+        // --------------------------------
 
-        //        var socket = io.connect('http://159.203.4.98:3333');
+        ctx.save();
+        ctx.translate(-cameraOffset, -cameraY);
 
-        socket.on('connect', function() {
-            console.log('connected');
-        });
-
-        socket.on('chat message', function(msg) { //tweet recieved from .js in msg dataform.
-
-            if (isDUMPING) {
-                return console.log(msg);
+        // Items
+        for (let item of items) {
+            if (item.active) {
+                ctx.beginPath();
+                ctx.fillStyle = '#FFFF00';
+                ctx.arc(item.x, item.y, item.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#000000';
+                ctx.lineWidth = 2;
+                ctx.stroke();
             }
+        }
 
+        // Ground
+        ctx.fillStyle = '#654321';
+        ctx.fillRect(cameraOffset - 100, height - 20, width + 200, height); 
+        ctx.fillStyle = '#228B22';
+        ctx.fillRect(cameraOffset - 100, height - 25, width + 200, 5);
 
-            colorpass = msg.textcolor;
-            textpass = msg.text;
-            profilepic = msg.profilepic;
-            mediaurl = msg.media_url;
-            realname = msg.realname;
-            screenname = msg.name;
-            //            colorpass = 'yellowgreen';
+        // Cannon
+        ctx.fillStyle = '#444';
+        ctx.beginPath();
+        ctx.arc(cannon.x, cannon.y, 20, 0, Math.PI * 2);
+        ctx.fill();
 
-            //            colorpass = 'red';
+        ctx.save();
+        ctx.translate(cannon.x, cannon.y);
+        ctx.rotate(-cannon.angle * Math.PI / 180);
+        ctx.fillStyle = '#333';
+        ctx.fillRect(0, -10, 60, 20);
+        ctx.restore();
 
+        // Ball
+        if (gameState !== 'START') {
+            ctx.save();
+            ctx.translate(ball.x, ball.y);
+            ctx.rotate(ball.rotation);
+            ctx.beginPath();
+            ctx.fillStyle = '#FF4500';
+            ctx.arc(0, 0, ball.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.fillStyle = 'white';
+            ctx.fillRect(-5, -5, 10, 10);
+            ctx.restore();
+        }
 
-            locat = msg.locat;
-            desc = msg.desc;
+        ctx.fillStyle = 'white';
+        ctx.fillRect(cannon.x, height-25, 2, 25);
 
-            rturl = msg.rt_url;
+        ctx.restore();
+    }
 
+    function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
 
+    loop();
 
-
-            bgpass = msg.color;
-
-
-            if (!msg.rt_url) {
-                rturl = "-=- ";
-            };
-
-
-            if (!msg.media_url) { // missing media icon.
-                // mediaurl = "https://i.imgur.com/Ewjo1lg.png";
-                // mediaurl = "https://media.giphy.com/media/1hMjJIF3yeZpkVVgwz/giphy.gif";
-                // mediaurl = "http://pbs.twimg.com/tweet_video_thumb/D-f5pRVWwAEmZPq.jpg:large";
-                //                mediaurl = "http://pbs.twimg.com/media/D_Z-wp-X4AABrJo.jpg:large";
-                mediaurl = "http://pbs.twimg.com/media/D_fijE7XYAAWKyu.jpg:large";
-            };
-
-            // ******************** BUILDING THINGS SECTION **************************
-
-            hrefperson = "https://twitter.com/" + msg.name; // user_id '<a href=' reference.
-            hrefbuild = "https://twitter.com/" + msg.name + "/status/" + msg.id; // tweet '<a href=' reference.
-
-
-            //console.log("HERHEHERHERHE - ?: " + (isIteminArray(msg, msglist)));
-
-            if (!isIteminArray(msg, msglist)) {
-
-                colorpass = '#' + colorpass;
-                colorpass = 'white';
-
-                addtoarray(msg);
-
-                $('#messages').prepend(('<div id="datarecord"><li>\n\
-                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
-                            <div id="media"><center><img src="' + mediaurl + '" download></center></div>\n\
-                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color: white' + '", "background:' + bgpass + ', "text-decoration:none"><h1> ' + textpass + ' </h1></a></div>\n\
-                            </li></div>'));
-
-
-            } else if (!document.getElementById("RDCheck").checked) {
-
-
-                $('#messages').prepend(('<div id="datarecord", style="border-color: yellow", "color:' + colorpass + '"><li>\n\
-                            <div id="timestamp"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:#' + bgpass + ', "text-decoration:none"> ' + msg.time + ' </a></div>\n\
-                            <div id="media"><img src="' + mediaurl + '" download></div>\n\
-                            <div id="maintext"><a href="' + hrefbuild + '", target="_blank", style="color:' + colorpass + '", "background:' + bgpass + ', "text-decoration:none"> ' + textpass + ' </a></div>\n\
-                            </li></div>'));
-
-            }
-
-        });
-
-    </script>
-
+</script>
 </body>
-
 </html>
